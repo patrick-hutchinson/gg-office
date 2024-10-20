@@ -1,0 +1,11 @@
+.imageview {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 5px;
+}
+.imageview .project {
+}
+.imageview .project img {
+  width: 100%;
+  height: auto;
+}

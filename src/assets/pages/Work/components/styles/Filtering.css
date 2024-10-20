@@ -1,0 +1,9 @@
+ul.filtering {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filter.active {
+  text-decoration: underline;
+}

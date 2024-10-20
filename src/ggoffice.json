@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "name": "Project 01",
+      "thumbnail": "/assets/images/project-01.jpg",
+      "filters": ["Brand Identity", "Logo", "Motion Design"],
+      "year": 2024
+    },
+    {
+      "name": "Project 02",
+      "thumbnail": "/assets/images/project-02.jpg",
+      "filters": ["Brand Identity", "Logo", "Motion Design"],
+      "year": 2024
+    },
+    {
+      "name": "Project 02",
+      "thumbnail": "/assets/images/project-03.jpg",
+      "filters": ["Brand Identity", "Logo", "Motion Design"],
+      "year": 2024
+    },
+    {
+      "name": "Project 02",
+      "thumbnail": "/assets/images/project-05.jpg",
+      "filters": ["Brand Identity", "Logo", "Motion Design"],
+      "year": 2024
+    },
+    {
+      "name": "Project 02",
+      "thumbnail": "/assets/images/project-06.jpg",
+      "filters": ["Brand Identity", "Logo", "Motion Design"],
+      "year": 2024
+    },
+    {
+      "name": "Project 02",
+      "thumbnail": "/assets/images/project-07.jpg",
+      "filters": ["Brand Identity", "Logo", "Motion Design"],
+      "year": 2024
+    },
+    {
+      "name": "Project 02",
+      "thumbnail": "/assets/images/project-08.jpg",
+      "filters": ["Brand Identity", "Logo", "Motion Design"],
+      "year": 2024
+    }
+  ]
+}

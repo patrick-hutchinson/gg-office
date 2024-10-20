@@ -1,0 +1,28 @@
+.project-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+ul.listview li.project {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  border-bottom: 1px solid #fff;
+}
+ul.listview li.project:hover {
+  /* background-color: #333; */
+}
+
+ul.listview ul.categories {
+  display: flex;
+  flex-direction: row;
+}
+
+ul.listview ul.categories li.category {
+  margin-right: 5px;
+}
+
+.imagepreview img {
+  width: 100%;
+  height: auto;
+}

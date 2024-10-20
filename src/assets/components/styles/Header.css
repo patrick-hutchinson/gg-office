@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 0px;
+  position: sticky;
+  top: 0;
+}
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.navigation li {
+  margin-right: 30px;
+}
