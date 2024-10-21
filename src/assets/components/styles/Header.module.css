@@ -2,15 +2,22 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 5px 0px;
   position: sticky;
   top: 0;
+  padding: 10px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .navigation {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: var(--font-size-300);
 }
 .navigation li {
   margin-right: 30px;
+}
+
+header p {
+  font-size: var(--font-size-100);
 }

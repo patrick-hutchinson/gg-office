@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
-import "./styles/Work.css";
+import styles from "./styles/Work.module.css";
 
 import ImageView from "./components/ImageView";
 import ListView from "./components/ListView";
@@ -33,7 +33,7 @@ export default function Work({ data }) {
 
   let SelectView = () => {
     return (
-      <ul>
+      <ul className={`${styles.viewwrapper}`}>
         <li onClick={(e) => handleView(e.currentTarget.textContent)}>Image View</li>
         <li onClick={(e) => handleView(e.currentTarget.textContent)}>List View</li>
       </ul>

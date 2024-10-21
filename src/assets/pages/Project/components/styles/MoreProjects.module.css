@@ -1,0 +1,16 @@
+.moreprojects-wrapper {
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+.moreprojects-wrapper a {
+  height: 100%;
+  width: auto;
+}
+.moreprojects-wrapper img {
+  height: 100%;
+  width: auto;
+  margin-right: var(--margin);
+}

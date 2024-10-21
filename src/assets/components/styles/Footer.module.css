@@ -1,9 +1,8 @@
-ul.filtering {
+footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
-.filter.active {
-  text-decoration: underline;
+.copyright {
+  font-size: var(--font-size-100);
 }

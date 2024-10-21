@@ -6,6 +6,7 @@ import "./App.css";
 
 import Layout from "./assets/components/Layout";
 import Work from "./assets/pages/Work/Work";
+import Project from "./assets/pages/Project/Project";
 import About from "./assets/pages/About";
 import Research from "./assets/pages/Research";
 import Contact from "./assets/pages/Contact";
@@ -49,6 +50,7 @@ function App() {
         <Route element={<Layout />}>
           <Route index></Route>
           <Route path="work" element={<Work data={data.projects} />}></Route>
+          <Route path="work/:id" element={<Project data={data.projects} />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="research" element={<Research />}></Route>
           <Route path="contact" element={<Contact />}></Route>

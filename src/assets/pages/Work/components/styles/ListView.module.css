@@ -1,0 +1,44 @@
+.projectwrapper {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+ul.listview li.project,
+ul.infotitles {
+  display: grid;
+  /* flex-direction: row; */
+  grid-template-columns: 3fr 2fr 30px;
+  margin-bottom: 10px;
+
+  border-bottom: 1px solid #fff;
+  font-size: var(--font-size-100);
+}
+
+ul.listview li.project:hover {
+  /* background-color: #333; */
+}
+
+ul.listview li.project .name {
+  font-size: var(--font-size-300);
+}
+
+ul.listview ul.categories {
+  display: flex;
+  flex-direction: row;
+}
+
+ul.listview .year,
+ul.infotitles .year {
+  text-align: right;
+}
+
+ul.listview ul.categories li.category {
+  margin-right: 5px;
+}
+
+.imagepreview img {
+  width: 100%;
+  height: auto;
+}

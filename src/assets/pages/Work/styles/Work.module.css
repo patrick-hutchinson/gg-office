@@ -1,0 +1,8 @@
+.viewwrapper {
+  display: flex;
+  flex-direction: row;
+  font-size: var(--font-size-100);
+}
+.viewwrapper li {
+  margin-right: 20px;
+}

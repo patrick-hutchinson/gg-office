@@ -1,0 +1,19 @@
+ul.filtering {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+}
+
+.filter {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.filter:hover,
+.filter.active {
+  text-decoration: underline;
+}
+
+.toggleOptions {
+  font-size: var(--font-size-100);
+}

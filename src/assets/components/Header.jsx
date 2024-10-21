@@ -3,13 +3,13 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
-import "./styles/Header.css";
+import styles from "./styles/Header.module.css";
 
 export default function Header() {
   return (
     <header>
       <nav>
-        <ul className="navigation">
+        <ul className={`${styles.navigation}`}>
           <Link to="/">
             <li>GG–OFFICE</li>
           </Link>
@@ -28,7 +28,7 @@ export default function Header() {
           </Link>
         </ul>
       </nav>
-      <p className="tagline">Independent graphic and motion agency based in Sicily</p>
+      <p>Independent graphic and motion agency based in Sicily</p>
     </header>
   );
 }

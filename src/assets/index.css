@@ -38,17 +38,35 @@ body {
   font-family: Founders;
   background: #000;
   color: #fff;
+  font-size: var(--font-size-200);
+  /* padding: 10px; */
+  box-sizing: border-box;
+}
+
+main {
+  margin: 10px;
+}
+
+h1 {
+  font-size: var(--font-size-400);
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-  --small-font-size: 14px;
-  --medium-font-size: 28px;
-  --large-font-size: 40px;
+  --font-size-100: 14px;
+  --font-size-200: 18px;
+  --font-size-300: 24px;
+  --font-size-400: 105px;
 
-  --small-line-height: 14px;
-  --medium-line-height: 28px;
-  --large-line-height: 35px;
+  --line-height-100: 14px;
+  --line-height-200: 18px;
+  --line-height-300: 24px;
+  --line-height-300: 105px;
+
   --text-color: #fff;
+
+  --margin: 10px;
 }
 
 ul {
@@ -68,4 +86,12 @@ a {
 }
 a:visited {
   color: var(--text-color);
+}
+
+button {
+  background: transparent;
+  border: 0;
+  color: var(--text-color);
+  padding: 0;
+  margin: 0;
 }

@@ -1,0 +1,25 @@
+.projectInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.projectInfo-specifics {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.categories-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+.categories {
+  display: flex;
+  flex-direction: row;
+}
+.description {
+  margin-top: calc(var(--font-size-400) / 1.5);
+}
+
+.category {
+}

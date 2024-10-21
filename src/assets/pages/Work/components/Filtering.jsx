@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./styles/Filtering.css";
+import styles from "./styles/Filtering.module.css";
 
 export default function Filtering({ setSelectedFilters, filterArray }) {
   let [showFiltering, SetShowFiltering] = useState(false);
@@ -43,12 +43,16 @@ export default function Filtering({ setSelectedFilters, filterArray }) {
 
   return (
     <>
-      <button onClick={toggleShowFiltering}>More Options</button>
+      <button className={`${styles.toggleOptions}`} onClick={toggleShowFiltering}>
+        {showFiltering ? "Less Options" : "More Options"}
+      </button>
       {showFiltering && (
-        <ul className="filtering">
-          <li onClick={(e) => handleAllFilter(e)}>All</li>
+        <ul className={`${styles.filtering}`}>
+          <li className={`${styles.filter}`} onClick={(e) => handleAllFilter(e)}>
+            All
+          </li>
           {filterArray.map((filter, index) => (
-            <li className="filter" key={index} onClick={(e) => handleFiltering(e, filter)}>
+            <li className={`${styles.filter}`} key={index} onClick={(e) => handleFiltering(e, filter)}>
               {filter}
             </li>
           ))}
