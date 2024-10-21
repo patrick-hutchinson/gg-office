@@ -11,14 +11,12 @@ export default function Credits({ project }) {
       <h1>Credits</h1>
       <div className={styles.credits}>
         {project.credits &&
-          project.credits.map((credit, index) =>
-            credit ? (
-              <div key={index}>
-                <div>{credit.key}</div>
-                <div>{credit.value}</div>
-              </div>
-            ) : null
-          )}
+          Object.entries(project.credits).map(([key, value], index) => (
+            <div key={index}>
+              <div>{key}</div>
+              <div>{value.join(", ")}</div> {/* Assuming `value` is an array */}
+            </div>
+          ))}
       </div>
     </div>
   );

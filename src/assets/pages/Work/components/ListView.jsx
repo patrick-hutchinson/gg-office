@@ -1,14 +1,15 @@
 import React from "react";
 
 import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./styles/ListView.module.css";
 
-export default function ListView({ data, selectedFilters }) {
+export default function ListView({ work, selectedFilters }) {
   // Helper function to determine if a project should be rendered
-  const projectMatchesFilter = (project) => project.category.some((category) => selectedFilters.includes(category));
+  const projectMatchesFilter = (project) => project.categories.some((category) => selectedFilters.includes(category));
 
-  if (!data) return null; // Early return if there's no data
+  if (!work) return null; // Early return if there's no data
 
   return (
     <div className={`${styles.projectwrapper}`}>
@@ -18,23 +19,27 @@ export default function ListView({ data, selectedFilters }) {
           <li className={`${styles.category}`}>Category</li>
           <li className={`${styles.year}`}>Year</li>
         </ul>
-        {data.map((project, index) => {
+        {work.map((project, index) => {
           if (!projectMatchesFilter(project)) return null; // Early return if project should not render
 
           return (
-            <li className={`${styles.project}`} key={index}>
-              <div className={`${styles.name}`}>{project.name}</div>
+            <Link to={`/work/${project.slug.current}`} key={index}>
+              {/* <img src="/assets/images/placeholder.jpg" alt="project" /> */}
 
-              <ul className={`${styles.categories}`}>
-                {project.category.map((category, categoryIndex) => (
-                  <li className={`${styles.category}`} key={categoryIndex}>
-                    {category}
-                  </li>
-                ))}
-              </ul>
+              <li className={`${styles.project}`} key={index}>
+                <div className={`${styles.name}`}>{project.name}</div>
 
-              <div className={`${styles.year}`}>{project.year}</div>
-            </li>
+                <ul className={`${styles.categories}`}>
+                  {project.categories.map((category, categoryIndex) => (
+                    <li className={`${styles.category}`} key={categoryIndex}>
+                      {category}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className={`${styles.year}`}>{project.year}</div>
+              </li>
+            </Link>
           );
         })}
       </ul>

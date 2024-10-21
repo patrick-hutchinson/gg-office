@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 import styles from "./styles/MoreProjects.module.css";
 
-export default function MoreProjects({ data }) {
+export default function MoreProjects({ work }) {
   let ProjectList = (
     <div className={styles["moreprojects-wrapper"]}>
-      {data.map((project) => {
+      {work.map((project) => {
         return (
           <Link to={`/work/${project.name}`}>
             <img src="/assets/images/placeholder.jpg" />

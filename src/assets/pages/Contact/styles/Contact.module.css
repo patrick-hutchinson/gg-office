@@ -1,0 +1,7 @@
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--margin);
+
+  font-size: var(--font-size-300);
+}

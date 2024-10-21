@@ -6,7 +6,28 @@ import ImageView from "./components/ImageView";
 import ListView from "./components/ListView";
 import Filtering from "./components/Filtering";
 
-export default function Work({ data }) {
+import sanityClient from "/src/client.js";
+
+export default function Work() {
+  let [work, setWork] = useState();
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `*[_type=="project"]{
+    name,
+    coverimage,
+    year,
+    description,
+    imagegallery,
+    categories,
+    credits,
+    slug
+}`
+      )
+      .then((data) => setWork(data))
+      .catch(console.error);
+  }, []);
+
   let filterArray = [
     "Art Direction",
     "Brand Identity",
@@ -48,8 +69,8 @@ export default function Work({ data }) {
     <main>
       <SelectView />
       <Filtering filterArray={filterArray} setSelectedFilters={setSelectedFilters} />
-      {view === "Image View" && <ImageView selectedFilters={selectedFilters} data={data} />}
-      {view === "List View" && <ListView selectedFilters={selectedFilters} data={data} />}
+      {view === "Image View" && <ImageView selectedFilters={selectedFilters} work={work} />}
+      {view === "List View" && <ListView selectedFilters={selectedFilters} work={work} />}
     </main>
   );
 }

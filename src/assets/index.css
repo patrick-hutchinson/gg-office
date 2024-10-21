@@ -43,16 +43,6 @@ body {
   box-sizing: border-box;
 }
 
-main {
-  margin: 10px;
-}
-
-h1 {
-  font-size: var(--font-size-400);
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   --font-size-100: 14px;
   --font-size-200: 18px;
@@ -67,6 +57,25 @@ h1 {
   --text-color: #fff;
 
   --margin: 10px;
+}
+
+main {
+  margin: 10px;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: var(--font-size-400);
+  margin: 0;
+  padding: 0;
+}
+h3 {
+  font-size: var(--font-size-100);
+  font-weight: normal;
+  margin: 6px 0px;
 }
 
 ul {
