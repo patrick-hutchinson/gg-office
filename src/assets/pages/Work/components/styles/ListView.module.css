@@ -42,3 +42,49 @@ ul.listview ul.categories li.category {
   width: 100%;
   height: auto;
 }
+
+.project {
+  position: relative;
+  margin-right: 30px;
+  transition: color 0.3s ease-in-out;
+}
+/* glow */
+.project::before {
+  content: "";
+  background: linear-gradient(45deg, #002bff, #ff00c8, #8601be);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height: calc(100% - 4px);
+  filter: blur(8px);
+  /* -webkit-filter: blur(8px); */
+  animation: glowing 5s linear infinite;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+  transform: scaleY(0); /* Add translateZ(0) to force repaint */
+  transform-origin: center;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.project:hover::before {
+  opacity: 1;
+  transform: scaleY(1); /* Ensure it's also applied on hover */
+}
+.project:hover {
+  color: #000;
+}

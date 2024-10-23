@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles/Filtering.module.css";
 
-export default function Filtering({ setSelectedFilters, filterArray }) {
-  let [showFiltering, SetShowFiltering] = useState(false);
+export default function Filtering({ filterArray, selectedFilters, setSelectedFilters, showFiltering }) {
   let [allSelected, setAllSelected] = useState(true); // Track if "All" is selected
-
-  // Toggle the filtering display
-  function toggleShowFiltering(e) {
-    e.preventDefault();
-    SetShowFiltering(!showFiltering);
-  }
 
   // Handle clicking "All"
   function handleAllFilter(e) {
@@ -42,22 +35,24 @@ export default function Filtering({ setSelectedFilters, filterArray }) {
   }
 
   return (
-    <>
-      <button className={`${styles.toggleOptions}`} onClick={toggleShowFiltering}>
-        {showFiltering ? "Less Options" : "More Options"}
-      </button>
+    <div className={styles["filtering-wrapper"]}>
       {showFiltering && (
         <ul className={`${styles.filtering}`}>
-          <li className={`${styles.filter}`} onClick={(e) => handleAllFilter(e)}>
+          <li className={`${styles.filter} button ${allSelected ? "active" : ""}`} onClick={(e) => handleAllFilter(e)}>
             All
           </li>
           {filterArray.map((filter, index) => (
-            <li className={`${styles.filter}`} key={index} onClick={(e) => handleFiltering(e, filter)}>
+            <li
+              className={`${styles.filter} button ${selectedFilters.includes(filter) && !allSelected ? "active" : ""}`}
+              key={index}
+              onClick={(e) => handleFiltering(e, filter)}
+            >
               {filter}
+              {/* {index !== filterArray.length - 1 ? "," : ""} */}
             </li>
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }

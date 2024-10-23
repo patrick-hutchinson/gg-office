@@ -1,19 +1,25 @@
 ul.filtering {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
 }
 
-.filter {
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.filter:hover,
-.filter.active {
-  text-decoration: underline;
+.filtering-wrapper {
+  position: sticky;
+  top: 40px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 5;
+  /* padding: 10px 0px; */
 }
 
 .toggleOptions {
   font-size: var(--font-size-100);
+}
+
+.filter::after {
+  content: ",\00A0\00A0"; /* Add a comma followed by a non-breaking space */
+}
+
+.filter:last-child::after {
+  content: ""; /* No comma or space for the last item */
 }

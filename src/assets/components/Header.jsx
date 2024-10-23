@@ -5,27 +5,33 @@ import { Link } from "react-router-dom";
 
 import styles from "./styles/Header.module.css";
 
-export default function Header() {
+export default function Header({ location }) {
+  let buttonRef = useRef(null);
+
+  useEffect(() => {
+    console.log(location, "location");
+  }, [location]);
+
   return (
     <header>
       <nav>
         <ul className={`${styles.navigation}`}>
-          <Link to="/">
-            <li>GG–OFFICE</li>
-          </Link>
+          <li className={`${styles.button} button ${location.includes("gg–office") ? "active" : ""}`}>
+            <Link to="/">GG–OFFICE</Link>
+          </li>
 
-          <Link to="/work">
-            <li>Work</li>
-          </Link>
-          <Link to="/about">
-            <li>About</li>
-          </Link>
-          <Link to="/research">
-            <li>Research</li>
-          </Link>
-          <Link to="/contact">
-            <li>Contact</li>
-          </Link>
+          <li className={`${styles.button} button ${location.includes("work") ? "active" : ""}`}>
+            <Link to="/work">Work</Link>
+          </li>
+          <li className={`${styles.button} button ${location.includes("about") ? "active" : ""}`}>
+            <Link to="/about">About</Link>
+          </li>
+          <li className={`${styles.button} button ${location.includes("research") ? "active" : ""}`}>
+            <Link to="/research">Research</Link>
+          </li>
+          <li className={`${styles.button} button ${location.includes("contact") ? "active" : ""}`}>
+            <Link to="/contact">Contact</Link>
+          </li>
         </ul>
       </nav>
       <p>Independent graphic and motion agency based in Sicily</p>

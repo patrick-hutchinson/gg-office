@@ -12,14 +12,20 @@ import Research from "./assets/pages/Research/Research";
 import Contact from "./assets/pages/Contact/Contact";
 
 function App() {
-  // Fetch and Initialize Data
+  const [showOpeningPage, setShowOpeningPage] = React.useState(() => {
+    const hasSeenOpeningPage = localStorage.getItem("hasSeenOpeningPage");
+    return !hasSeenOpeningPage;
+  });
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route index></Route>
-          <Route path="work" element={<Work />}></Route>
+        <Route element={<Layout showOpeningPage={showOpeningPage} setShowOpeningPage={setShowOpeningPage} />}>
+          <Route index element={<Work />}></Route>
+          <Route
+            path="work"
+            element={<Work setShowOpeningPage={setShowOpeningPage} showOpeningPage={showOpeningPage} />}
+          ></Route>
           <Route path="work/:slug" element={<Project />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="research" element={<Research />}></Route>

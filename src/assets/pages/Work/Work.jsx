@@ -7,6 +7,7 @@ import ListView from "./components/ListView";
 import Filtering from "./components/Filtering";
 
 import sanityClient from "/src/client.js";
+import GGOFFICE from "../GGOFFICE/GGOFFICE";
 
 export default function Work() {
   let [work, setWork] = useState();
@@ -42,22 +43,42 @@ export default function Work() {
     "Website",
   ];
 
+  let [showFiltering, SetShowFiltering] = useState(false);
+
   let [selectedFilters, setSelectedFilters] = useState(filterArray);
 
   let [view, setView] = useState("Image View");
 
-  // Handle the filter received from Filtering.jsx
-
-  function handleView(selectedView) {
-    setView(selectedView);
+  function toggleShowFiltering(e) {
+    e.preventDefault();
+    SetShowFiltering(!showFiltering);
   }
 
-  let SelectView = () => {
+  // Handle the filter received from Filtering.jsx
+
+  function handleView(target) {
+    setView(target.textContent);
+    console.log(target, "t");
+    target.classList.add("active");
+  }
+
+  let ToggleView = () => {
     return (
       <ul className={`${styles.viewwrapper}`}>
-        <li onClick={(e) => handleView(e.currentTarget.textContent)}>Image View</li>
-        <li onClick={(e) => handleView(e.currentTarget.textContent)}>List View</li>
+        <li className={`button ${view === "Image View" ? "active" : ""}`} onClick={(e) => handleView(e.currentTarget)}>
+          Image View
+        </li>
+        <li className={`button ${view === "List View" ? "active" : ""}`} onClick={(e) => handleView(e.currentTarget)}>
+          List View
+        </li>
       </ul>
+    );
+  };
+  let ToggleFiltering = () => {
+    return (
+      <button className={`${styles.toggleOptions} button`} onClick={toggleShowFiltering}>
+        {showFiltering ? "Less Options" : "More Options"}
+      </button>
     );
   };
 
@@ -66,11 +87,23 @@ export default function Work() {
   }, [selectedFilters]);
 
   return (
-    <main>
-      <SelectView />
-      <Filtering filterArray={filterArray} setSelectedFilters={setSelectedFilters} />
-      {view === "Image View" && <ImageView selectedFilters={selectedFilters} work={work} />}
-      {view === "List View" && <ListView selectedFilters={selectedFilters} work={work} />}
-    </main>
+    <>
+      <main>
+        <div className={`${styles["options-wrapper"]}`}>
+          <ToggleView />
+          <ToggleFiltering />
+        </div>
+
+        <Filtering
+          filterArray={filterArray}
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
+          showFiltering={showFiltering}
+        />
+
+        {view === "Image View" && <ImageView selectedFilters={selectedFilters} work={work} />}
+        {view === "List View" && <ListView selectedFilters={selectedFilters} work={work} />}
+      </main>
+    </>
   );
 }
