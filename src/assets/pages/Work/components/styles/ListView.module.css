@@ -12,7 +12,7 @@ ul.infotitles {
   grid-template-columns: 3fr 2fr 30px;
   margin-bottom: 10px;
 
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid var(--text-color);
   font-size: var(--font-size-100);
 }
 

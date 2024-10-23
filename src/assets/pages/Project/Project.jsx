@@ -26,7 +26,8 @@ export default function Project() {
       imagegallery,
       categories,
       credits,
-      slug
+      slug,
+      gridStructure
   }`
       )
       .then((data) => setWork(data))

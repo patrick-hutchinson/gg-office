@@ -4,8 +4,12 @@ import App from "./App.jsx";
 import "./assets/index.css";
 import "./assets/normalize.css";
 
+import { GlobalStateProvider } from "./assets/context/GlobalStateContext"; // Import the context provider
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <GlobalStateProvider>
+      <App />
+    </GlobalStateProvider>
   </StrictMode>
 );

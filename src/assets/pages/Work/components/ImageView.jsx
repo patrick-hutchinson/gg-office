@@ -18,6 +18,18 @@ export default function ImageView({ work, selectedFilters }) {
 
   if (!work) return null; // Early return if there's no data
 
+  let Categories = ({ project }) => {
+    return (
+      <ul className={`${styles.categories}`}>
+        {project.categories.map((category, categoryIndex) => (
+          <li className={`${styles.category}`} key={categoryIndex}>
+            {category}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className={`${styles.projectwraper}`}>
       <div className={`${styles.imageview}`}>
@@ -27,6 +39,11 @@ export default function ImageView({ work, selectedFilters }) {
           return (
             <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
               <img src={`${urlFor(project.coverimage)}`} alt="project" />
+              <div className={`${styles["project-details"]}`}>
+                <div className="">{project.name}</div>
+                <Categories project={project} />
+                <div className="">{project.year}</div>
+              </div>
             </Link>
           );
         })}

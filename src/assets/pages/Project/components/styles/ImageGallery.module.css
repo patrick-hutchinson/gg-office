@@ -1,0 +1,12 @@
+.imagegallery {
+  width: 100%;
+}
+.galleryRow {
+  display: grid;
+  gap: var(--margin);
+  margin-bottom: var(--margin);
+}
+.galleryRow img {
+  width: 100%;
+  height: auto;
+}
