@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import sanityClient from "/src/client.js";
 import styles from "./styles/About.module.css";
 
 export default function About() {
   const [about, setAbout] = useState();
+  const AlienContainerRef = useRef(null);
 
   useEffect(() => {
     sanityClient
@@ -20,6 +21,53 @@ export default function About() {
       .catch(console.error);
   }, []);
 
+  // Function to position and handle hover effect for a specific alien
+  const positionAlien = (alien) => {
+    // Set the initial random position when the alien is created
+    alien.style.left = `${Math.floor(Math.random() * (window.innerWidth - 300)) + 100}px`;
+    alien.style.top = `${Math.floor(Math.random() * (window.innerHeight - 300)) + 100}px`;
+
+    // Add the hover effect to move the alien on mouseenter
+    alien.addEventListener("mouseenter", () => {
+      const randomLeft = Math.floor(Math.random() * (window.innerWidth - 300)) + 100;
+      const randomTop = Math.floor(Math.random() * (window.innerHeight - 300)) + 100;
+      alien.style.left = `${randomLeft}px`;
+      alien.style.top = `${randomTop}px`;
+    });
+  };
+
+  // Apply positioning to the initial aliens after the page renders
+  useEffect(() => {
+    if (AlienContainerRef.current) {
+      // Get all initial aliens (Enrico and Francesca) and apply positioning
+      const initialAliens = AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]}`);
+      initialAliens.forEach((alien) => {
+        positionAlien(alien);
+      });
+    }
+  }, [about]);
+
+  function handleInternClick(intern) {
+    // Check if the alien with the same intern name already exists
+    const existingAlien = Array.from(
+      AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} span`)
+    ).find((span) => span.textContent === intern);
+
+    // If an alien with the same name exists, return early
+    if (existingAlien) {
+      return;
+    }
+
+    // If not, create the alien wrapper and set its inner HTML
+    const wrapper = document.createElement("div");
+    wrapper.className = `${styles["alien-wrapper"]}`;
+    wrapper.innerHTML = `<div class="${styles.alien}">${about[0].emoji}</div><span>${intern}</span>`;
+
+    // Append to the container and apply positioning/hover effects
+    AlienContainerRef.current.appendChild(wrapper);
+    positionAlien(wrapper);
+  }
+
   // Early return if about data is undefined or empty
   if (!about || about.length === 0) {
     return <p>Loading...</p>;
@@ -31,7 +79,7 @@ export default function About() {
 
     return (
       <section>
-        <h3>Biography</h3>
+        <h5>Biography</h5>
         {bioBlocks.map((block, index) => (
           <div key={index}>
             {block.children.map((child, index) => (
@@ -48,7 +96,7 @@ export default function About() {
 
     return (
       <section>
-        <h3>Services</h3>
+        <h5>Services</h5>
         {services.map((service, index) => (
           <span key={index}>{service}, </span>
         ))}
@@ -61,7 +109,7 @@ export default function About() {
 
     return (
       <section>
-        <h3>Clients</h3>
+        <h5>Clients</h5>
         {clients.map((client, index) => {
           return <span key={index}>{client}, </span>;
         })}
@@ -74,11 +122,11 @@ export default function About() {
 
     return (
       <section>
-        <h3>Interships</h3>
-        {internships.map((internship, index) => {
+        <h5>Interships</h5>
+        {internships.map((intern, index) => {
           return (
-            <span className={`${styles.intern}`} key={index}>
-              {internship},{" "}
+            <span onClick={() => handleInternClick(intern)} className={`${styles.intern}`} key={index}>
+              {intern},{" "}
             </span>
           );
         })}
@@ -88,7 +136,16 @@ export default function About() {
 
   return (
     <main className={`${styles.about}`}>
-      <div className={`${styles["emoji-container"]}`}></div>
+      <div className={`${styles["alien-container"]}`} ref={AlienContainerRef}>
+        <div className={`${styles["alien-wrapper"]}`}>
+          <div className={`${styles.alien}`}>{about[0].emoji}</div>
+          <span>Enrico</span>
+        </div>
+        <div className={`${styles["alien-wrapper"]}`}>
+          <div className={`${styles.alien}`}>{about[0].emoji}</div>
+          <span>Francesca</span>
+        </div>
+      </div>
       <div>
         <Biography />
         <Services />

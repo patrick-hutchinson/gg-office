@@ -6,7 +6,7 @@ import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 
 import "./styles/Layout.css";
 
-import Header from "./Header";
+import Header from "./Header/Header";
 import Footer from "./Footer";
 import GGOFFICE from "../pages/GGOFFICE/GGOFFICE";
 

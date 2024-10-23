@@ -39,18 +39,12 @@ body {
   background: #000;
   color: #fff;
   font-size: var(--font-size-200);
-  /* padding: 10px; */
+
   box-sizing: border-box;
 }
 
 main {
-  margin: 10px;
-}
-
-h1 {
-  font-size: var(--font-size-400);
-  margin: 0;
-  padding: 0;
+  margin: var(--margin);
 }
 
 :root {
@@ -72,7 +66,7 @@ h1 {
 }
 
 main {
-  margin: 10px;
+  margin: var(--margin);
   min-height: calc(100vh - 100px);
 }
 
@@ -173,7 +167,19 @@ button {
   opacity: 1;
   transform: scale(1) translateZ(0); /* Ensure it's also applied on hover */
 }
-.button:hover,
-.button.active {
-  /* color: #000; */
+
+/* Phones in Landscape Mode */
+@media (max-width: 575.98px) {
+}
+
+/* Small Devices (Phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+/* Desktop */
+@media (min-width: 991.98px) {
 }

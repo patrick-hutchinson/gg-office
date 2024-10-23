@@ -1,7 +1,7 @@
 .projectwrapper {
   display: grid;
   grid-template-columns: 2fr 0.5fr;
-  gap: 10px;
+  gap: var(--margin);
   margin-top: 20px;
 }
 
@@ -10,7 +10,7 @@ ul.infotitles {
   display: grid;
   /* flex-direction: row; */
   grid-template-columns: 3fr 2fr 30px;
-  margin-bottom: 10px;
+  margin-bottom: var(--margin);
 
   border-bottom: 1px solid var(--text-color);
   font-size: var(--font-size-100);

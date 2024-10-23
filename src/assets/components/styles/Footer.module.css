@@ -2,7 +2,7 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
+  padding: var(--margin);
 }
 .copyright {
   font-size: var(--font-size-100);

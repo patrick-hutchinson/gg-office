@@ -1,17 +1,13 @@
 import React from "react";
 
 import { useEffect, useState, useRef } from "react";
+
+import styles from "./styles/HeaderDesktop.module.css";
 import { Link } from "react-router-dom";
 
-import styles from "./styles/Header.module.css";
-
-export default function Header({ location }) {
-  useEffect(() => {
-    console.log(location, "location");
-  }, [location]);
-
+export default function HeaderDesktop({ location }) {
   return (
-    <header>
+    <div className={`${styles.headerDesktop}`}>
       <nav>
         <ul className={`${styles.navigation}`}>
           <li className={`${styles.button} button ${location.includes("gg–office") ? "active" : ""}`}>
@@ -33,6 +29,6 @@ export default function Header({ location }) {
         </ul>
       </nav>
       <p>Independent graphic and motion agency based in Sicily</p>
-    </header>
+    </div>
   );
 }

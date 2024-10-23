@@ -29,7 +29,7 @@ export default function Contact() {
   let Email = () => {
     return (
       <section>
-        <h3>Email</h3>
+        <h5>Email</h5>
         <a href={`mailto:${contact[0].email}`}>{contact[0].email}</a>
       </section>
     );
@@ -38,7 +38,7 @@ export default function Contact() {
   let Address = () => {
     return (
       <section>
-        <h3>Address</h3>
+        <h5>Address</h5>
         <div>{contact[0].address}</div>
       </section>
     );
@@ -48,7 +48,7 @@ export default function Contact() {
     const socials = contact[0].socials || [];
     return (
       <section>
-        <h3>Socials</h3>
+        <h5>Socials</h5>
         {socials.map((socialEntry, index) => {
           return (
             <a href={`${socialEntry.url}`} target="_blank" key={index}>
