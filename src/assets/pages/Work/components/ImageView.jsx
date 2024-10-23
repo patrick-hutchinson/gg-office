@@ -9,14 +9,12 @@ import imageUrlBuilder from "@sanity/image-url";
 export default function ImageView({ work, selectedFilters }) {
   const builder = imageUrlBuilder(sanityClient);
 
-  function urlFor(source) {
-    return builder.image(source);
-  }
-
   // Helper function to determine if a project should be rendered
   const projectMatchesFilter = (project) => project.categories.some((category) => selectedFilters.includes(category));
 
   if (!work) return null; // Early return if there's no data
+
+  console.log(work, "ww");
 
   let Categories = ({ project }) => {
     return (
@@ -30,6 +28,26 @@ export default function ImageView({ work, selectedFilters }) {
     );
   };
 
+  function videoSource(source) {
+    let projectID = builder.options.projectId;
+    let dataset = builder.options.dataset;
+
+    const [_prefix, fileId, extension] = source.asset._ref.split("-");
+
+    return `https://cdn.sanity.io/files/${projectID}/${dataset}/${fileId}.${extension}`;
+  }
+
+  function imageSource(source) {
+    let projectID = builder.options.projectId;
+    let dataset = builder.options.dataset;
+
+    const [_prefix, fileId, resolution, extension] = source.asset._ref.split("-");
+
+    return `https://cdn.sanity.io/images/${projectID}/${dataset}/${fileId}-${resolution}.${extension}`;
+  }
+
+  console.log(work, "w");
+
   return (
     <div className={`${styles.projectwraper}`}>
       <div className={`${styles.imageview}`}>
@@ -38,7 +56,14 @@ export default function ImageView({ work, selectedFilters }) {
 
           return (
             <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
-              <img src={`${urlFor(project.coverimage)}`} alt="project" />
+              {project.coverimage && project.coverimage._type === "image" ? (
+                <img src={`${imageSource(project.coverimage)}`} alt="project" />
+              ) : (
+                <video autoPlay loop muted playsInline>
+                  <source src={`${videoSource(project.coverimage)}`} />
+                </video>
+              )}
+
               <div className={`${styles["project-details"]}`}>
                 <div className="">{project.name}</div>
                 <Categories project={project} />

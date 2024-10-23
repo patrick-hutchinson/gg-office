@@ -10,6 +10,7 @@ import styles from "./styles/ListView.module.css";
 export default function ListView({ work, selectedFilters }) {
   let [hoverImage, setHoverImage] = useState(null);
 
+  let previewImageRef = useRef(null);
   const builder = imageUrlBuilder(sanityClient);
 
   function urlFor(source) {
@@ -33,18 +34,24 @@ export default function ListView({ work, selectedFilters }) {
     );
   };
 
-  function handleMouseEnter(project) {
+  function handleMouseEnter(e, project) {
     // console.log(project.coverimage, "coverimage");
     setHoverImage(urlFor(project.coverimage));
+    previewImageRef.current.style.top = `${e.clientY - 100}px`;
+
+    previewImageRef.current.style.display = "unset";
   }
 
-  let ImagePreview = () => {
-    return (
-      <div className={`${styles.imagepreview}`}>
-        <img src={hoverImage}></img>
-      </div>
-    );
-  };
+  function handleMouseLeave(project) {
+    previewImageRef.current.style.display = "none";
+    console.log("ml");
+  }
+
+  let ImagePreview = (
+    <div className={`${styles.imagepreview}`}>
+      <img ref={previewImageRef} src={hoverImage}></img>
+    </div>
+  );
 
   return (
     <div className={`${styles.projectwrapper}`}>
@@ -61,7 +68,12 @@ export default function ListView({ work, selectedFilters }) {
             <Link to={`/work/${project.slug.current}`} key={index}>
               {/* <img src="/assets/images/placeholder.jpg" alt="project" /> */}
 
-              <li className={`${styles.project}`} onMouseEnter={() => handleMouseEnter(project)} key={index}>
+              <li
+                className={`${styles.project}`}
+                onMouseEnter={(e) => handleMouseEnter(e, project)}
+                key={index}
+                onMouseLeave={() => handleMouseLeave()}
+              >
                 <div className={`${styles.name}`}>{project.name}</div>
 
                 <Categories project={project} />
@@ -72,7 +84,7 @@ export default function ListView({ work, selectedFilters }) {
           );
         })}
       </ul>
-      {hoverImage ? <ImagePreview /> : <></>}
+      {hoverImage ? ImagePreview : <></>}
     </div>
   );
 }

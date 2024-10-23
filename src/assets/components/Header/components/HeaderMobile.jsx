@@ -24,20 +24,18 @@ export default function HeaderMobile({ location }) {
 
       {showMenu && (
         <div className={`${styles.expandMenu}`}>
-          <ul>
-            <li className={`${styles.button} button active ${location.includes("work") ? "active" : ""}`}>
-              <Link to="/work">Work</Link>
-            </li>
-            <li className={`${styles.button} button active ${location.includes("about") ? "active" : ""}`}>
-              <Link to="/about">About</Link>
-            </li>
-            <li className={`${styles.button} button active ${location.includes("research") ? "active" : ""}`}>
-              <Link to="/research">Research</Link>
-            </li>
-            <li className={`${styles.button} button active ${location.includes("contact") ? "active" : ""}`}>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
+          <li className={`${styles.button} button active`}>
+            <Link to="/work">Work</Link>
+          </li>
+          <li className={`${styles.button} button active`}>
+            <Link to="/about">About</Link>
+          </li>
+          <li className={`${styles.button} button active`}>
+            <Link to="/research">Research</Link>
+          </li>
+          <li className={`${styles.button} button active`}>
+            <Link to="/contact">Contact</Link>
+          </li>
         </div>
       )}
     </ul>

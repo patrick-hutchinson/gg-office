@@ -7,7 +7,7 @@ export const project = defineType({
   fields: [
     defineField({name: 'name', title: 'Name', type: 'string'}),
 
-    defineField({name: 'coverimage', title: 'Cover Image', type: 'image'}),
+    defineField({name: 'coverimage', title: 'Cover Image', type: 'file'}),
     defineField({name: 'year', title: 'Year', type: 'number'}),
     defineField({name: 'description', title: 'Description', type: 'array', of: [{type: 'block'}]}),
     defineField({
