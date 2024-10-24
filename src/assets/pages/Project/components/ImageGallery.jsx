@@ -52,9 +52,5 @@ export default function ImageGallery({ project }) {
     return <div>No Images have been added to this project yet.</div>;
   };
 
-  project.imagegallery.forEach((image) => {
-    console.log(image._type, "ii");
-  });
-
   return <section className={styles.imagegallery}>{project.imagegallery ? <Images /> : <ErrorMessage />}</section>;
 }

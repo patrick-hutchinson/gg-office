@@ -69,7 +69,7 @@ export const project = defineType({
       type: 'object',
       fields: [
         defineField({
-          name: 'client',
+          name: 'clients',
           title: 'Client/s',
           type: 'array',
           of: [{type: 'string'}],
@@ -78,7 +78,7 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'director',
+          name: 'directors',
           title: 'Director/s',
           type: 'array',
           of: [{type: 'string'}],
@@ -87,7 +87,7 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'creativeDirectors',
+          name: 'creativedirectors',
           title: 'Creative Director/s',
           type: 'array',
           of: [{type: 'string'}],
@@ -96,7 +96,7 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'clientDirectors',
+          name: 'clientdirectors',
           title: 'Client Director/s',
           type: 'array',
           of: [{type: 'string'}],
@@ -105,7 +105,7 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'Designer',
+          name: 'designers',
           title: 'Designer/s',
           type: 'array',
           of: [{type: 'string'}],
@@ -114,7 +114,7 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'Artist3D',
+          name: 'artists3D',
           title: '3D Artist/s',
           type: 'array',
           of: [{type: 'string'}],
@@ -123,7 +123,7 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'photography',
+          name: 'photographers',
           title: 'Photographer/s',
           type: 'array',
           of: [{type: 'string'}],

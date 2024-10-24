@@ -6,18 +6,35 @@ import { Link } from "react-router-dom";
 import styles from "./styles/Credits.module.css";
 
 export default function Credits({ project }) {
+  const creditsMapping = [
+    { key: "directors", title: "Direction" },
+    { key: "creativedirectors", title: "Creative Director" },
+    { key: "clientdirectors", title: "Client Director" },
+    { key: "designers", title: "Designer" },
+    { key: "artists3D", title: "3D Artist" },
+    { key: "photographers", title: "Photography" },
+    { key: "clients", title: "Client" },
+  ];
+
+  console.log(project.credits, "c");
+
   return (
-    <div className={styles["credits-wrapper"]}>
-      <h1>Credits</h1>
-      <div className={styles.credits}>
+    <section className={styles["credits-wrapper"]}>
+      <h2>Credits</h2>
+      <ul className={styles.credits}>
         {project.credits &&
-          Object.entries(project.credits).map(([key, value], index) => (
-            <div key={index}>
-              <div>{key}</div>
-              <div>{value.join(", ")}</div> {/* Assuming `value` is an array */}
-            </div>
-          ))}
-      </div>
-    </div>
+          creditsMapping.map(
+            ({ key, title }) =>
+              project.credits[key] && (
+                <li className={`${styles.credit}`} key={key}>
+                  {title}: <br />
+                  {project.credits[key].join(", ")}
+                  <br />
+                  <br />
+                </li>
+              )
+          )}
+      </ul>
+    </section>
   );
 }

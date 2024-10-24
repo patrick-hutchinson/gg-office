@@ -44,7 +44,7 @@ ul.listview ul.categories li.category {
 
 .project {
   position: relative;
-  margin-right: 30px;
+
   transition: color 0.3s ease-in-out;
 }
 /* glow */
@@ -71,12 +71,15 @@ ul.listview ul.categories li.category {
 @keyframes glowing {
   0% {
     background-position: 0% 50%;
+    transform: translateZ(0.001);
   }
   50% {
     background-position: 100% 50%;
+    transform: translateZ(0);
   }
   100% {
     background-position: 0% 50%;
+    transform: translateZ(0.001);
   }
 }
 
@@ -86,4 +89,63 @@ ul.listview ul.categories li.category {
 }
 .project:hover {
   color: #000;
+}
+
+/* Phones in Landscape Mode */
+@media (max-width: 575.98px) {
+  .projectwrapper {
+    grid-template-columns: 2fr 0fr;
+    gap: 0px;
+  }
+
+  ul.listview ul.categories {
+    display: none;
+  }
+  ul.infotitles .category {
+    display: none;
+  }
+  ul.listview li.project,
+  ul.infotitles {
+    grid-template-columns: 3fr 30px;
+  }
+}
+
+/* Small Devices (Phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .projectwrapper {
+    grid-template-columns: 2fr 0fr;
+    gap: 0px;
+  }
+  ul.listview ul.categories {
+    display: none;
+  }
+  ul.infotitles .category {
+    display: none;
+  }
+  ul.listview li.project,
+  ul.infotitles {
+    grid-template-columns: 3fr 30px;
+  }
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .projectwrapper {
+    grid-template-columns: 2fr 0fr;
+    gap: 0px;
+  }
+  ul.listview ul.categories {
+    display: none;
+  }
+  ul.infotitles .category {
+    display: none;
+  }
+  ul.listview li.project,
+  ul.infotitles {
+    grid-template-columns: 3fr 30px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 991.98px) {
 }

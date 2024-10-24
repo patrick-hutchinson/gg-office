@@ -27,16 +27,30 @@
   padding: var(--margin);
   height: 100%;
   width: 100%;
-  transition: opacity 0.2s cubic-bezier(0.95, 0.01, 0.68, 1);
+  transition: opacity 0.7s ease-in-out;
 }
 .imageview .project:hover .project-details {
   opacity: 1;
-  /* background: linear-gradient(45deg, #002bff, #ff00c8, #8601be); */
-  /* filter: blur(8px); */
+  background: linear-gradient(45deg, #002bff, #ff00c8, #8601be);
+  background-size: 600%;
+  animation: glowing 5s linear infinite;
+  opacity: 0.4;
+  -webkit-backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
-
-.project:hover img {
-  /* filter: blur(8px) grayscale(); */
+@keyframes glowing {
+  0% {
+    background-position: 0% 50%;
+    transform: translateZ(0.1);
+  }
+  50% {
+    background-position: 100% 50%;
+    transform: translateZ(0);
+  }
+  100% {
+    background-position: 0% 50%;
+    transform: translateZ(0.1);
+  }
 }
 
 @media (max-width: 575.98px) {

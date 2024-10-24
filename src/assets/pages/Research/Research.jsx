@@ -3,7 +3,10 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import sanityClient from "/src/client.js";
 
-import imageUrlBuilder from "@sanity/image-url";
+import Rellax from "rellax";
+
+import { getFileSource } from "../../utils/getFileSource";
+import { renderFile } from "../../utils/renderFile";
 
 import styles from "./styles/Research.module.css";
 
@@ -25,23 +28,35 @@ export default function Research() {
     console.log(research, "research");
   }, [research]);
 
-  const builder = imageUrlBuilder(sanityClient);
-
-  function urlFor(source) {
-    return builder.image(source);
-  }
-
   // Early return if about data is undefined or empty
   if (!research || research.length === 0) {
     return <p>Loading...</p>;
   }
 
+  let Media = ({ project }) => {
+    const fileInfo = getFileSource(project);
+    return renderFile(fileInfo);
+  };
+
   let Images = () => {
+    useEffect(() => {
+      new Rellax(".rellax", {
+        speed: -2, // Adjust speed as desired
+        center: false, // Adjust options based on your need
+      });
+    }, []);
+
     return (
-      <div>
-        {research[0].imagegallery.map((image) => {
-          console.log(image, "image");
-          return <img src={urlFor(image)} />;
+      <div className={`${styles["image-container"]}`}>
+        {research[0].imagegallery.map((image, index) => {
+          // Generate a random number between -10 and 10
+          const randomSpeed = Math.floor(Math.random() * 11) - 5;
+
+          return (
+            <div data-rellax-speed={randomSpeed} key={index} className="rellax">
+              <Media project={image} />
+            </div>
+          );
         })}
       </div>
     );

@@ -52,10 +52,16 @@ export default function Project() {
 
   return (
     <main>
-      <Media project={project} className={`${styles.coverImage}`} alt={project.name} />
+      <section>
+        <Media project={project} className={`${styles.coverImage}`} alt={project.name} />
+      </section>
+
       <ProjectInfo project={project} />
-      <ImageGallery project={project} />
+
+      {project.imagegallery && <ImageGallery project={project} />}
+
       <Credits project={project} />
+
       <MoreProjects work={work} />
     </main>
   );

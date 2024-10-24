@@ -7,7 +7,7 @@ import styles from "./styles/ProjectInfo.module.css";
 
 export default function ProjectInfo({ project }) {
   return (
-    <div className={`${styles.projectInfo}`}>
+    <section className={`${styles.projectInfo}`}>
       <h1>{project.name}</h1>
       <div className={`${styles["project-specifics"]}`}>
         <div className={`${styles["categories-wrapper"]}`}>
@@ -26,6 +26,6 @@ export default function ProjectInfo({ project }) {
           description could talk about the creative process, the client, color choices, or reach.
         </p>
       </div>
-    </div>
+    </section>
   );
 }

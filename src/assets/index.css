@@ -10,7 +10,7 @@
 @font-face {
   font-family: "FoundersMedium";
   src: url("/assets/fonts/Founders-Grotesk-Medium.otf");
-  font-weight: bold;
+  font-weight: normal;
   font-style: normal;
   font-display: block;
 }
@@ -48,13 +48,13 @@ main {
 }
 
 :root {
-  --font-size-100: 14px;
+  --font-size-100: 18px;
   --font-size-200: 18px;
   --font-size-300: 24px;
   --font-size-400: 50px;
   --font-size-500: 70px;
 
-  --line-height-100: 14px;
+  --line-height-100: 18px;
   --line-height-200: 18px;
   --line-height-300: 24px;
   --line-height-400: calc(var(--font-size-400) / 1.25);
@@ -72,7 +72,7 @@ main {
 
 section {
   /* margin-bottom: 30px; */
-  margin: 15px 0px;
+  padding: 15px 0px;
 }
 
 h1 {
@@ -153,12 +153,15 @@ button {
 @keyframes glowing {
   0% {
     background-position: 0% 50%;
+    transform: translateZ(0.1);
   }
   50% {
     background-position: 100% 50%;
+    transform: translateZ(0);
   }
   100% {
     background-position: 0% 50%;
+    transform: translateZ(0.1);
   }
 }
 
@@ -170,6 +173,19 @@ button {
 
 /* Phones in Landscape Mode */
 @media (max-width: 575.98px) {
+  :root {
+    --font-size-100: 14px;
+    --font-size-200: 18px;
+    --font-size-300: 24px;
+    --font-size-400: 50px;
+    --font-size-500: 70px;
+
+    --line-height-100: 14px;
+    --line-height-200: 18px;
+    --line-height-300: 24px;
+    --line-height-400: calc(var(--font-size-400) / 1.25);
+    --line-height-500: calc(var(--font-size-500) / 1.25);
+  }
 }
 
 /* Small Devices (Phones, 576px and up) */

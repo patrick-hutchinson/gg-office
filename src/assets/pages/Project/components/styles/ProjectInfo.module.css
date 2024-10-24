@@ -1,6 +1,7 @@
 .projectInfo {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: unset;
 }
 
 .projectInfo-specifics {
@@ -21,5 +22,32 @@
   margin-top: calc(var(--font-size-400) / 1.5);
 }
 
-.category {
+/* Phones in Portriat Mode */
+@media (max-width: 575.98px) {
+  .projectInfo {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .categories {
+    display: unset;
+  }
+}
+
+/* Small Devices (Phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .projectInfo {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .categories {
+    display: unset;
+  }
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+/* Desktop */
+@media (min-width: 991.98px) {
 }

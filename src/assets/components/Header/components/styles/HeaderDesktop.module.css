@@ -9,6 +9,7 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: var(--font-size-300);
+  white-space: nowrap;
 }
 
 header p {

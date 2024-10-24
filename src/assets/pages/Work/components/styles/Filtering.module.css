@@ -22,3 +22,42 @@ ul.filtering {
 .filter:last-child::after {
   content: ""; /* No comma or space for the last item */
 }
+
+@media (max-width: 575.98px) {
+  ul.filtering {
+    display: unset;
+  }
+  ul.filtering li {
+    display: inline;
+  }
+}
+
+/* Small Devices (Phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  ul.filtering {
+    display: unset;
+  }
+  ul.filtering li {
+    display: inline;
+  }
+}
+
+/* Medium Devices (Tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  ul.filtering {
+    display: unset;
+  }
+  ul.filtering li {
+    display: inline;
+  }
+}
+
+/* Desktop */
+@media (min-width: 991.98px) {
+  ul.filtering {
+    display: unset;
+  }
+  ul.filtering li {
+    display: inline;
+  }
+}
