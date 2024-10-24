@@ -16,10 +16,6 @@ ul.infotitles {
   font-size: var(--font-size-100);
 }
 
-ul.listview li.project:hover {
-  /* background-color: #333; */
-}
-
 ul.listview li.project .name {
   font-size: var(--font-size-300);
 }
@@ -38,7 +34,9 @@ ul.listview ul.categories li.category {
   margin-right: 5px;
 }
 
-.imagepreview img {
+.imagepreview img,
+.imagepreview video,
+.imagepreview .media-wrapper {
   width: 100%;
   height: auto;
   position: relative;

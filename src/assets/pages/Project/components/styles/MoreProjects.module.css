@@ -19,7 +19,8 @@
   align-items: center;
 }
 
-.moreprojects img {
+.moreprojects img,
+.moreprojects video {
   width: auto;
   height: auto;
   max-width: 300px;

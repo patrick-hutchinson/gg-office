@@ -61,6 +61,6 @@
 
 @media (min-width: 991.98px) {
   .imageview {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }

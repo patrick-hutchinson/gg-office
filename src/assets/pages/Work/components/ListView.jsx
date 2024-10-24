@@ -7,15 +7,14 @@ import imageUrlBuilder from "@sanity/image-url";
 
 import styles from "./styles/ListView.module.css";
 
+import { getFileSource } from "../../../utils/getFileSource";
+import { renderFile } from "../../../utils/renderFile";
+
 export default function ListView({ work, selectedFilters }) {
-  let [hoverImage, setHoverImage] = useState(null);
+  let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
 
   let previewImageRef = useRef(null);
   const builder = imageUrlBuilder(sanityClient);
-
-  function urlFor(source) {
-    return builder.image(source);
-  }
 
   // Helper function to determine if a project should be rendered
   const projectMatchesFilter = (project) => project.categories.some((category) => selectedFilters.includes(category));
@@ -35,8 +34,11 @@ export default function ListView({ work, selectedFilters }) {
   };
 
   function handleMouseEnter(e, project) {
-    // console.log(project.coverimage, "coverimage");
-    setHoverImage(urlFor(project.coverimage));
+    // Setting HoverIMage state to have a global refrence of link and imagetype, later to be consumed by renderFileElement and Media. You could usually pass the data returned from getFileSourceInfo straight to renderFileElement
+    setHoverImage({
+      src: getFileSource(project.coverimage).src,
+      extension: getFileSource(project.coverimage).extension,
+    });
     previewImageRef.current.style.top = `${e.clientY - 100}px`;
 
     previewImageRef.current.style.display = "unset";
@@ -44,12 +46,17 @@ export default function ListView({ work, selectedFilters }) {
 
   function handleMouseLeave(project) {
     previewImageRef.current.style.display = "none";
-    console.log("ml");
   }
+
+  let Media = () => {
+    return renderFile(hoverImage);
+  };
 
   let ImagePreview = (
     <div className={`${styles.imagepreview}`}>
-      <img ref={previewImageRef} src={hoverImage}></img>
+      <div className={`${styles["media-wrapper"]}`} ref={previewImageRef}>
+        <Media />
+      </div>
     </div>
   );
 
@@ -66,8 +73,6 @@ export default function ListView({ work, selectedFilters }) {
 
           return (
             <Link to={`/work/${project.slug.current}`} key={index}>
-              {/* <img src="/assets/images/placeholder.jpg" alt="project" /> */}
-
               <li
                 className={`${styles.project}`}
                 onMouseEnter={(e) => handleMouseEnter(e, project)}

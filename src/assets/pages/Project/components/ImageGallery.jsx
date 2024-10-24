@@ -8,14 +8,20 @@ import imageUrlBuilder from "@sanity/image-url";
 
 import styles from "./styles/ImageGallery.module.css";
 
-export default function ImageGallery({ project }) {
-  console.log(project, "p");
+import { getFileSource } from "../../../utils/getFileSource";
+import { renderFile } from "../../../utils/renderFile";
 
+export default function ImageGallery({ project }) {
   const builder = imageUrlBuilder(sanityClient);
 
   function urlFor(source) {
     return builder.image(source);
   }
+
+  let Media = ({ project }) => {
+    const fileInfo = getFileSource(project);
+    return renderFile(fileInfo);
+  };
 
   let Images = () => {
     let index = 0; // Initialize the index for slicing images
@@ -33,7 +39,8 @@ export default function ImageGallery({ project }) {
         return (
           <div key={rowIndex} className={styles.galleryRow} style={rowStyles}>
             {rowImages.map((image, imgIndex) => (
-              <img key={imgIndex} src={urlFor(image)} alt="" />
+              // <img key={imgIndex} src={urlFor(image)} alt="" />
+              <Media project={image} key={imgIndex} />
             ))}
           </div>
         );
@@ -44,6 +51,10 @@ export default function ImageGallery({ project }) {
   let ErrorMessage = () => {
     return <div>No Images have been added to this project yet.</div>;
   };
+
+  project.imagegallery.forEach((image) => {
+    console.log(image._type, "ii");
+  });
 
   return <section className={styles.imagegallery}>{project.imagegallery ? <Images /> : <ErrorMessage />}</section>;
 }

@@ -4,7 +4,9 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import sanityClient from "/src/client.js";
-import imageUrlBuilder from "@sanity/image-url";
+
+import { getFileSource } from "../../utils/getFileSource";
+import { renderFile } from "../../utils/renderFile";
 
 import styles from "./styles/Project.module.css";
 
@@ -34,12 +36,6 @@ export default function Project() {
       .catch(console.error);
   }, []);
 
-  const builder = imageUrlBuilder(sanityClient);
-
-  function urlFor(source) {
-    return builder.image(source);
-  }
-
   const { slug } = useParams();
 
   // Early return if data is undefined or empty
@@ -49,11 +45,14 @@ export default function Project() {
 
   const project = work.find((project) => project.slug.current === slug);
 
-  console.log(project, "project");
+  let Media = ({ project }) => {
+    const fileInfo = getFileSource(project.coverimage);
+    return renderFile(fileInfo);
+  };
 
   return (
     <main>
-      <img className={`${styles.coverImage}`} src={`${urlFor(project.coverimage)}`} alt={project.name} />
+      <Media project={project} className={`${styles.coverImage}`} alt={project.name} />
       <ProjectInfo project={project} />
       <ImageGallery project={project} />
       <Credits project={project} />

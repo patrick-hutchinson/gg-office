@@ -13,9 +13,7 @@ import HeaderMobile from "./components/HeaderMobile";
 export default function Header({ location }) {
   const { isMobile } = useContext(GlobalStateContext);
 
-  useEffect(() => {
-    console.log(location, "location");
-  }, [location]);
+  useEffect(() => {}, [location]);
 
   return <header>{isMobile ? <HeaderMobile location={location} /> : <HeaderDesktop location={location} />}</header>;
 }

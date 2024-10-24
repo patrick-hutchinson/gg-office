@@ -6,7 +6,8 @@
   gap: var(--margin);
   margin-bottom: var(--margin);
 }
-.galleryRow img {
+.galleryRow img,
+.galleryRow video {
   width: 100%;
   height: auto;
 }
