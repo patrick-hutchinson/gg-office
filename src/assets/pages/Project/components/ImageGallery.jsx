@@ -12,12 +12,6 @@ import { getFileSource } from "../../../utils/getFileSource";
 import { renderFile } from "../../../utils/renderFile";
 
 export default function ImageGallery({ project }) {
-  const builder = imageUrlBuilder(sanityClient);
-
-  function urlFor(source) {
-    return builder.image(source);
-  }
-
   let Media = ({ project }) => {
     const fileInfo = getFileSource(project);
     return renderFile(fileInfo);
