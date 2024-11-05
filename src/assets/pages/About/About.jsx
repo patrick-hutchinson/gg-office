@@ -121,12 +121,12 @@ export default function About() {
     const internships = about[0].internship || [];
 
     return (
-      <section>
+      <section className="internships">
         <h5>Interships</h5>
         {internships.map((intern, index) => {
           return (
-            <span onClick={() => handleInternClick(intern)} className={`${styles.intern}`} key={index}>
-              {intern},{" "}
+            <span onClick={() => handleInternClick(intern)} className={`${styles.intern} button`} key={index}>
+              {intern},{"\u00A0"}
             </span>
           );
         })}

@@ -13,10 +13,14 @@ export default function GGOFFICE({ setShowOpeningPage }) {
     handleOpeningPageClose();
   });
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+  }, []);
+
   const handleOpeningPageClose = () => {
     window.scrollTo({
-      top: GGOFFICERef.current.offsetHeight + 30, // The vertical scroll position you want to scroll to (800px)
-      behavior: "smooth", // Enables smooth scrolling
+      top: GGOFFICERef.current.offsetHeight + 30,
+      behavior: "smooth",
     });
 
     setTimeout(() => {

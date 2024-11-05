@@ -24,9 +24,10 @@ export default function ListView({ work, selectedFilters }) {
   let Categories = ({ project }) => {
     return (
       <ul className={`${styles.categories}`}>
-        {project.categories.map((category, categoryIndex) => (
-          <li className={`${styles.category}`} key={categoryIndex}>
+        {project.categories.map((category, index) => (
+          <li className={`${styles.category}`} key={index}>
             {category}
+            {index < project.categories.length - 1 && ","}
           </li>
         ))}
       </ul>

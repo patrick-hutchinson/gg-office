@@ -64,8 +64,69 @@ export const project = defineType({
       },
     }),
     defineField({
-      name: 'credits',
-      title: 'Credits',
+      name: 'creditsInhouse',
+      title: 'Credits (GG-OFFICE)',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'directors',
+          title: 'Director/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'creativedirectors',
+          title: 'Creative Director/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'clientdirectors',
+          title: 'Client Director/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'designers',
+          title: 'Designer/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'artists3D',
+          title: '3D Artist/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'photographers',
+          title: 'Photographer/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'creditsClient',
+      title: 'Credits (Client)',
       type: 'object',
       fields: [
         defineField({

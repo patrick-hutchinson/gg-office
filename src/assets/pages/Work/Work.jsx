@@ -7,7 +7,6 @@ import ListView from "./components/ListView";
 import Filtering from "./components/Filtering";
 
 import sanityClient from "/src/client.js";
-import GGOFFICE from "../GGOFFICE/GGOFFICE";
 
 export default function Work() {
   let [work, setWork] = useState();
@@ -58,7 +57,7 @@ export default function Work() {
 
   function handleView(target) {
     setView(target.textContent);
-    console.log(target, "t");
+
     target.classList.add("active");
   }
 
@@ -81,10 +80,6 @@ export default function Work() {
       </button>
     );
   };
-
-  useEffect(() => {
-    console.log(selectedFilters, "selectedFilters");
-  }, [selectedFilters]);
 
   return (
     <>

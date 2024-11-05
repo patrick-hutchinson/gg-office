@@ -14,7 +14,13 @@
   font-style: normal;
   font-display: block;
 }
-
+@font-face {
+  font-family: "DiaTypeRegular";
+  src: url("/assets/fonts/ABCDiatype-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
 * {
   scrollbar-width: none;
   appearance: none;
@@ -34,19 +40,6 @@
   height: 0;
 }
 
-body {
-  font-family: Founders;
-  background: #000;
-  color: #fff;
-  font-size: var(--font-size-200);
-
-  box-sizing: border-box;
-}
-
-main {
-  margin: var(--margin);
-}
-
 :root {
   --font-size-100: 18px;
   --font-size-200: 18px;
@@ -60,9 +53,28 @@ main {
   --line-height-400: calc(var(--font-size-400) / 1.25);
   --line-height-500: calc(var(--font-size-500) / 1.25);
 
+  --font-weight-text: Founders;
+  --font-weight-medium: FoundersMedium;
+
   --text-color: #eaeaea;
 
   --margin: 10px;
+}
+
+html {
+  /* scroll-behavior: smooth; */
+}
+
+body {
+  font-family: var(--font-weight-text);
+  background: #000;
+  color: #fff;
+  font-size: var(--font-size-200);
+
+  box-sizing: border-box;
+  /* will-change: transform;
+  transform: translate3d(0, 0, 0);
+  isolation: isolate; */
 }
 
 main {
@@ -71,7 +83,6 @@ main {
 }
 
 section {
-  /* margin-bottom: 30px; */
   padding: 15px 0px;
 }
 
@@ -134,7 +145,7 @@ button {
   content: "";
   background: linear-gradient(45deg, #002bff, #ff00c8, #8601be);
   position: absolute;
-  top: -2px;
+  top: 4px;
   left: -2px;
   background-size: 600%;
   z-index: -1;

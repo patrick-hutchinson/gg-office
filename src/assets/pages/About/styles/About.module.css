@@ -6,10 +6,7 @@ main.about {
 }
 
 .intern {
-  cursor: pointer;
-}
-.intern:hover {
-  color: #ccc;
+  display: inline-block;
 }
 
 .alien-wrapper {
@@ -19,6 +16,7 @@ main.about {
   text-align: center;
   animation: float 6s ease-in-out infinite;
   transition: left 0.6s ease, top 0.6s ease;
+  z-index: 300;
 }
 .alien-wrapper .alien {
   font-size: 200px;

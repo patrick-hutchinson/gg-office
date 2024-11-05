@@ -27,7 +27,8 @@ export default function Project() {
       description,
       imagegallery,
       categories,
-      credits,
+      creditsInhouse,
+      creditsClient,
       slug,
       gridStructure
   }`
@@ -60,7 +61,7 @@ export default function Project() {
 
       {project.imagegallery && <ImageGallery project={project} />}
 
-      <Credits project={project} />
+      {project.creditsInhouse && project.creditsClient && <Credits project={project} />}
 
       <MoreProjects work={work} />
     </main>

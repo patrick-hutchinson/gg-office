@@ -64,7 +64,7 @@ ul.listview ul.categories li.category {
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   border-radius: 10px;
   opacity: 0;
-  transform: scaleY(0); /* Add translateZ(0) to force repaint */
+
   transform-origin: center;
 }
 
@@ -85,7 +85,6 @@ ul.listview ul.categories li.category {
 
 .project:hover::before {
   opacity: 1;
-  transform: scaleY(1); /* Ensure it's also applied on hover */
 }
 .project:hover {
   color: #000;
