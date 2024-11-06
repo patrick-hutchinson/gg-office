@@ -82,23 +82,21 @@ export default function Work() {
   };
 
   return (
-    <>
-      <main>
-        <div className={`${styles["options-wrapper"]}`}>
-          <ToggleView />
-          <ToggleFiltering />
-        </div>
+    <main>
+      <div className={`${styles["options-wrapper"]}`}>
+        <ToggleView />
+        <ToggleFiltering />
+      </div>
 
-        <Filtering
-          filterArray={filterArray}
-          selectedFilters={selectedFilters}
-          setSelectedFilters={setSelectedFilters}
-          showFiltering={showFiltering}
-        />
+      <Filtering
+        filterArray={filterArray}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+        showFiltering={showFiltering}
+      />
 
-        {view === "Image View" && <ImageView selectedFilters={selectedFilters} work={work} />}
-        {view === "List View" && <ListView selectedFilters={selectedFilters} work={work} />}
-      </main>
-    </>
+      {view === "Image View" && <ImageView selectedFilters={selectedFilters} work={work} />}
+      {view === "List View" && <ListView selectedFilters={selectedFilters} work={work} />}
+    </main>
   );
 }

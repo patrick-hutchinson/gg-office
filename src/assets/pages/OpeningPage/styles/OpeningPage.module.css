@@ -2,8 +2,17 @@
   display: flex;
   flex-direction: row; /* Stack the rows vertically */
   justify-content: space-between; /* Space out the rows */
-  height: calc(100vh - 70px);
+  height: calc(100vh - var(--header-height));
   position: relative;
+  position: fixed;
+  top: 0;
+  transform: translateY(0%);
+  transition: var(--transition-duration) ease;
+  padding: 10px;
+}
+.GGOFFICE-wrapper.animate-out {
+  transform: translateY(-100%);
+  top: 0px;
 }
 .GGOFFICE-column {
   width: calc(100% / 8);

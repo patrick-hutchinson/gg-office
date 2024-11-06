@@ -1,39 +1,18 @@
 import React from "react";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, forwardRef } from "react";
 import { Link } from "react-router-dom";
 
-import styles from "./styles/GGOFFICE.module.css";
+import styles from "./styles/OpeningPage.module.css";
 
-export default function GGOFFICE({ setShowOpeningPage }) {
-  let GGOFFICERef = useRef(null);
+const OpeningPage = forwardRef((props, openingpageRef) => {
   let columnRef = useRef(null);
 
-  window.addEventListener("click", () => {
-    handleOpeningPageClose();
-  });
-
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-  }, []);
-
-  const handleOpeningPageClose = () => {
-    window.scrollTo({
-      top: GGOFFICERef.current.offsetHeight + 30,
-      behavior: "smooth",
-    });
-
-    setTimeout(() => {
-      localStorage.setItem("hasSeenOpeningPage", "true");
-      setShowOpeningPage(false);
-    }, 1000);
-  };
-
-  useEffect(() => {
-    GGOFFICERef.current.querySelectorAll(`.${styles["GGOFFICE-column"]}`).forEach((column, index, array) => {
+    openingpageRef.current.querySelectorAll(`.${styles["GGOFFICE-column"]}`).forEach((column, index, array) => {
       column.addEventListener("mouseenter", (e) => {
-        const rect = GGOFFICERef.current.getBoundingClientRect();
-        const rectHeight = GGOFFICERef.current.offsetHeight;
+        const rect = openingpageRef.current.getBoundingClientRect();
+        const rectHeight = openingpageRef.current.offsetHeight;
         const mouseYInElement = e.clientY - rect.top;
 
         let leftValue = mouseYInElement / rectHeight;
@@ -43,9 +22,10 @@ export default function GGOFFICE({ setShowOpeningPage }) {
       });
     });
   }, []);
+
   return (
     <section>
-      <div className={`${styles["GGOFFICE-wrapper"]}`} ref={GGOFFICERef}>
+      <div className={`${styles["GGOFFICE-wrapper"]}`} ref={openingpageRef}>
         <div className={`${styles["GGOFFICE-column"]}`} ref={columnRef}>
           <img src="/assets/images/GOODGAME/G.png" alt="" />
           <img src="/assets/images/GOODGAME/G.png" alt="" />
@@ -82,4 +62,6 @@ export default function GGOFFICE({ setShowOpeningPage }) {
       </div>
     </section>
   );
-}
+});
+
+export default OpeningPage;
