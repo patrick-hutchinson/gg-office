@@ -60,7 +60,7 @@ ul.listview ul.categories li.category {
   height: calc(100% - 4px);
   filter: blur(8px);
   /* -webkit-filter: blur(8px); */
-  animation: glowing 5s linear infinite;
+  animation: glowing 15s linear infinite;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   border-radius: 10px;
   opacity: 0;

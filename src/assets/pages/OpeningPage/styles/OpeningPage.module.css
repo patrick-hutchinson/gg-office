@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   transform: translateY(0%);
-  transition: var(--transition-duration) ease;
+  transition: var(--opening-transition-duration) ease;
   padding: 10px;
 }
 .GGOFFICE-wrapper.animate-out {
