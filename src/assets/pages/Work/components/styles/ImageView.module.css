@@ -32,6 +32,7 @@
 
   box-shadow: none;
   padding: 20px;
+  overflow: hidden;
 }
 .imageview .project:hover .project-details {
   opacity: 1;
@@ -58,7 +59,23 @@
     radial-gradient(circle farthest-corner at bottom right, rgba(204, 104, 119, 1) 0%, rgba(204, 104, 119, 0) 33%),
     radial-gradient(circle farthest-corner at top right, rgba(155, 221, 240, 1) 0%, rgba(155, 221, 240, 0) 50%),
     radial-gradient(ellipse at bottom center, rgba(254, 43, 0, 1) 0%, rgba(254, 43, 0, 0) 80%);
+
+  border-radius: 10px;
+
+  animation: rotateBackground 5s linear infinite;
 }
+
+/* @keyframes rotateBackground {
+  0% {
+    transform: translate(10px, 0px) scale(1.5);
+  }
+  50% {
+    transform: translate(100px, 20px) scale(1.5);
+  }
+  100% {
+    transform: translate(30px, 60px) scale(1.5);
+  }
+} */
 
 @media (max-width: 575.98px) {
   .imageview {
