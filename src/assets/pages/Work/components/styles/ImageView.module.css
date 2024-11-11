@@ -10,61 +10,71 @@
 .imageview .project video {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: var(--margin);
 }
 
 .imageview .project {
   position: relative;
 }
 
-.project-details {
-  display: flex;
+.project-name,
+.project-categories,
+.project-year {
+  z-index: 100;
+}
+
+.project-details-outer {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0;
+  height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+
+  border-radius: var(--margin);
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: var(--margin);
-  height: 100%;
-  width: 100%;
-  transition: opacity 0.2s ease-in-out;
-
-  box-shadow: none;
-  padding: var(--margin);
-  overflow: hidden;
+  opacity: 0;
 }
-.imageview .project:hover .project-details {
+.imageview .project:hover .project-details-outer {
   opacity: 1;
   background: var(--background-color);
 }
 
-.project-details::before {
+.project-details-inner {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  filter: blur(30px);
+  opacity: 0;
+}
+.project:hover .project-details-inner {
+  opacity: 1;
+}
+.project-details {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  margin: 0;
+  background: conic-gradient(from 0deg, #ff00c8, #002bff, #3cabc0, #8601be);
+  animation: spinBlob 20s linear infinite;
+}
 
-  content: "";
-  inset: 0px;
-  border-radius: 10px;
-  /* mix-blend-mode: hard-light; */
-  /* filter: saturate(1.5) contrast(2); */
-
-  /* filter: contrast(2); */
-  /* background-color: #c5b99e; */
-  background-image: radial-gradient(circle farthest-corner at top left, #bfe000 0%, #e1f36100 50%),
-    radial-gradient(circle farthest-corner at bottom right, #900000 0%, #cc687700 33%),
-    radial-gradient(circle farthest-corner at top right, #3cabc0 0%, #9bddf000 50%),
-    radial-gradient(ellipse at bottom center, #cf0000 0%, #fe2b0000 80%);
-
-  background-image: radial-gradient(circle farthest-corner at top left, #ff00c8 0%, #e1f36100 50%),
-    radial-gradient(circle farthest-corner at bottom right, #002bff 0%, #cc687700 33%),
-    radial-gradient(circle farthest-corner at top right, #3cabc0 0%, #9bddf000 50%),
-    radial-gradient(ellipse at bottom center, #8601be 0%, #fe2b0000 80%);
-
-  border-radius: 10px;
-
-  animation: rotateBackground 5s linear infinite;
+@keyframes spinBlob {
+  0% {
+    transform: rotate(0deg) scale(7);
+  }
+  100% {
+    transform: rotate(1turn) scale(7);
+  }
 }
 
 @media (max-width: 575.98px) {

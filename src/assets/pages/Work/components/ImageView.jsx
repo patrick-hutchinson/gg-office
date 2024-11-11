@@ -14,7 +14,7 @@ export default function ImageView({ work, selectedFilters }) {
 
   let Categories = ({ project }) => {
     return (
-      <ul className={`${styles.categories}`}>
+      <ul className={styles["project-categories"]}>
         {project.categories.map((category, categoryIndex) => (
           <li className={`${styles.category}`} key={categoryIndex}>
             {category}
@@ -38,10 +38,13 @@ export default function ImageView({ work, selectedFilters }) {
           return (
             <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
               <Media project={project} />
-              <div className={`${styles["project-details"]}`}>
-                <div className="button">{project.name}</div>
+              <div className={`${styles["project-details-outer"]}`}>
+                <div className={styles["project-name"]}>{project.name}</div>
                 <Categories project={project} />
-                <div className="">{project.year}</div>
+                <div className={styles["project-year"]}>{project.year}</div>
+                <div className={`${styles["project-details-inner"]}`}>
+                  <div className={`${styles["project-details"]}`}></div>
+                </div>
               </div>
             </Link>
           );
