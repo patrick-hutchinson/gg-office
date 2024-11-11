@@ -6,6 +6,20 @@ import styles from "./styles/HeaderDesktop.module.css";
 import { Link } from "react-router-dom";
 
 export default function HeaderDesktop({ location }) {
+  let [isDarkMode, setIsDarkMode] = React.useState(true);
+
+  function handleThemeSwitch() {
+    var root = document.querySelector(":root");
+    if (isDarkMode) {
+      root.style.setProperty("--text-color", "#000000");
+      root.style.setProperty("--background-color", "#eaeaea");
+      setIsDarkMode(false);
+    } else {
+      root.style.setProperty("--text-color", "#eaeaea");
+      root.style.setProperty("--background-color", "#000000");
+      setIsDarkMode(true);
+    }
+  }
   return (
     <div className={`${styles.headerDesktop}`}>
       <nav>
@@ -28,6 +42,9 @@ export default function HeaderDesktop({ location }) {
           </li>
         </ul>
       </nav>
+      <div className="switchTheme" onClick={handleThemeSwitch}>
+        SWITCH
+      </div>
       <p>Independent graphic and motion agency based in Sicily</p>
     </div>
   );

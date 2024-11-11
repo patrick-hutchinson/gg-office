@@ -4,12 +4,17 @@ header {
   justify-content: space-between;
   position: sticky;
   top: 0;
-  padding: var(--margin);
+
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 5;
-  padding-bottom: 5px;
-  width: 100%;
-  margin: -10px;
-  margin-bottom: 10px;
+
+  width: calc(100% + calc(var(--margin) * 2));
+
+  padding: var(--margin);
+  /* padding-top: var(--margin); */
+  /* padding-bottom: var(--margin); */
+
+  margin: calc(var(--margin) * -1);
+  margin-bottom: var(--margin);
 }

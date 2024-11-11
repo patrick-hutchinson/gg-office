@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: var(--margin);
 
-  margin-top: 20px;
+  margin-top: var(--margin);
 }
 
 .imageview .project img,
@@ -31,12 +31,12 @@
   transition: opacity 0.2s ease-in-out;
 
   box-shadow: none;
-  padding: 20px;
+  padding: var(--margin);
   overflow: hidden;
 }
 .imageview .project:hover .project-details {
   opacity: 1;
-  background: #000;
+  background: var(--background-color);
 }
 
 .project-details::before {
@@ -47,35 +47,25 @@
   content: "";
   inset: 0px;
   border-radius: 10px;
+  /* mix-blend-mode: hard-light; */
+  /* filter: saturate(1.5) contrast(2); */
 
-  mix-blend-mode: hard-light;
-  background-color: #c5b99e;
-  background-image: radial-gradient(
-      circle farthest-corner at top left,
-      rgba(225, 243, 97, 1) 0%,
-      rgba(225, 243, 97, 0) 50%
-    ),
-    radial-gradient(circle farthest-side at top right, rgba(181, 176, 177, 1) 0%, rgba(181, 176, 177, 0) 10%),
-    radial-gradient(circle farthest-corner at bottom right, rgba(204, 104, 119, 1) 0%, rgba(204, 104, 119, 0) 33%),
-    radial-gradient(circle farthest-corner at top right, rgba(155, 221, 240, 1) 0%, rgba(155, 221, 240, 0) 50%),
-    radial-gradient(ellipse at bottom center, rgba(254, 43, 0, 1) 0%, rgba(254, 43, 0, 0) 80%);
+  /* filter: contrast(2); */
+  /* background-color: #c5b99e; */
+  background-image: radial-gradient(circle farthest-corner at top left, #bfe000 0%, #e1f36100 50%),
+    radial-gradient(circle farthest-corner at bottom right, #900000 0%, #cc687700 33%),
+    radial-gradient(circle farthest-corner at top right, #3cabc0 0%, #9bddf000 50%),
+    radial-gradient(ellipse at bottom center, #cf0000 0%, #fe2b0000 80%);
+
+  background-image: radial-gradient(circle farthest-corner at top left, #ff00c8 0%, #e1f36100 50%),
+    radial-gradient(circle farthest-corner at bottom right, #002bff 0%, #cc687700 33%),
+    radial-gradient(circle farthest-corner at top right, #3cabc0 0%, #9bddf000 50%),
+    radial-gradient(ellipse at bottom center, #8601be 0%, #fe2b0000 80%);
 
   border-radius: 10px;
 
   animation: rotateBackground 5s linear infinite;
 }
-
-/* @keyframes rotateBackground {
-  0% {
-    transform: translate(10px, 0px) scale(1.5);
-  }
-  50% {
-    transform: translate(100px, 20px) scale(1.5);
-  }
-  100% {
-    transform: translate(30px, 60px) scale(1.5);
-  }
-} */
 
 @media (max-width: 575.98px) {
   .imageview {

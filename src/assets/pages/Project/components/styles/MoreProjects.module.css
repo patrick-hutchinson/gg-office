@@ -39,9 +39,9 @@
 }
 
 .panButton {
-  background: #000;
+  background: var(--background-color);
   border-radius: 50%;
-  padding: 20px;
+  padding: var(--margin);
 }
 
 @media (max-width: 575.98px) {

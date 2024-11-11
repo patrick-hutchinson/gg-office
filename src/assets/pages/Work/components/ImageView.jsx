@@ -39,7 +39,7 @@ export default function ImageView({ work, selectedFilters }) {
             <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
               <Media project={project} />
               <div className={`${styles["project-details"]}`}>
-                <div className="">{project.name}</div>
+                <div className="button">{project.name}</div>
                 <Categories project={project} />
                 <div className="">{project.year}</div>
               </div>

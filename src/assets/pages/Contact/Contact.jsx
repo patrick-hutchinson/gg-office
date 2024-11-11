@@ -30,7 +30,9 @@ export default function Contact() {
     return (
       <section>
         <h5>Email</h5>
-        <a href={`mailto:${contact[0].email}`}>{contact[0].email}</a>
+        <a href={`mailto:${contact[0].email}`} className="button">
+          {contact[0].email}
+        </a>
       </section>
     );
   };
@@ -51,9 +53,12 @@ export default function Contact() {
         <h5>Socials</h5>
         {socials.map((socialEntry, index) => {
           return (
-            <a href={`${socialEntry.url}`} target="_blank" key={index}>
-              {socialEntry.platform}
-            </a>
+            <>
+              <a href={`${socialEntry.url}`} target="_blank" key={index} className="button">
+                {socialEntry.platform}
+              </a>
+              <br />
+            </>
           );
         })}
       </section>

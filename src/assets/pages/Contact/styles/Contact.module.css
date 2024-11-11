@@ -5,3 +5,7 @@
 
   font-size: var(--font-size-300);
 }
+
+.contact section {
+  margin-bottom: calc(var(--margin) * 2);
+}

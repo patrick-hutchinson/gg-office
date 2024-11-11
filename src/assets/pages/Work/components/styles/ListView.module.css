@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 2fr 0.5fr;
   gap: var(--margin);
-  margin-top: 20px;
+  margin-top: var(--margin);
 }
 
 ul.listview li.project,

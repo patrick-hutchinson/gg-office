@@ -51,10 +51,11 @@
   --font-weight-medium: FoundersMedium;
 
   --text-color: #eaeaea;
+  --background-color: #000000;
 
-  --margin: 10px;
+  --margin: 15px;
 
-  --header-height: 50px;
+  --header-height: 30px;
 
   --opening-transition-duration: 1s;
   --transition-duration: 0.5s;
@@ -62,8 +63,8 @@
 
 body {
   font-family: var(--font-weight-text);
-  background: #000;
-  color: #fff;
+  background: var(--background-color);
+  color: var(--text-color);
   font-size: var(--font-size-200);
 
   box-sizing: border-box;
@@ -74,7 +75,7 @@ body {
   margin: var(--margin);
 }
 #content.animate {
-  transform: translateY(calc(100vh - 40px));
+  transform: translateY(calc(100vh - 55px));
 }
 #content.animate-in {
   transition: var(--opening-transition-duration) ease;
@@ -82,6 +83,7 @@ body {
 }
 
 main {
+  min-height: calc(100vh - 130px);
 }
 
 section {

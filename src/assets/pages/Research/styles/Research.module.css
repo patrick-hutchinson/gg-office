@@ -4,9 +4,9 @@
   position: relative;
   width: 200px;
   height: auto;
-  flex: 1 1 calc(25% - 20px); /* Each image takes 25% of the row minus the gap */
+  flex: 1 1 calc(25% - var(--margin)); /* Each image takes 25% of the row minus the gap */
   margin: 10px; /* Add some space between the images */
-  max-width: calc(25% - 20px); /* Ensure images don’t exceed 25% width */
+  max-width: calc(25% - var(--margin)); /* Ensure images don’t exceed 25% width */
 }
 img,
 video {
@@ -21,16 +21,16 @@ video {
 
 @media (max-width: 575.98px) {
   .image-container div {
-    flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
+    flex: 1 1 calc(50% - var(--margin));
+    max-width: calc(50% - var(--margin));
   }
 }
 
 /* Small Devices (Phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
   .image-container div {
-    flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
+    flex: 1 1 calc(50% - var(--margin));
+    max-width: calc(50% - var(--margin));
   }
 }
 
