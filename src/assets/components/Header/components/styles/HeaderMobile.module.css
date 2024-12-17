@@ -10,12 +10,6 @@
   padding-bottom: 5px;
   width: 100%;
 }
-/* .navigation {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-size: var(--font-size-300);
-} */
 
 .expandMenu {
   position: absolute;
@@ -32,6 +26,7 @@
 
 .expandMenu li {
   font-size: var(--font-size-400);
+  line-height: var(--line-height-400);
 }
 
 /* @keyframes glowing {

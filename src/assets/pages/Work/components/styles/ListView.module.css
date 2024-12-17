@@ -9,25 +9,32 @@ ul.listview li.project,
 ul.infotitles {
   display: grid;
   /* flex-direction: row; */
-  grid-template-columns: 3fr 2fr 30px;
-  margin-bottom: var(--margin);
+  grid-template-columns: 3fr 2fr auto;
+  padding-bottom: calc(var(--margin) / 2);
+  padding-top: calc(var(--margin) / 2);
 
   border-bottom: 1px solid var(--text-color);
   font-size: var(--font-size-100);
+  line-height: var(--line-height-100);
 }
 
 ul.listview li.project .name {
   font-size: var(--font-size-300);
+  line-height: var(--line-height-300);
 }
 
 ul.listview ul.categories {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 ul.listview .year,
 ul.infotitles .year {
   text-align: right;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 ul.listview ul.categories li.category {
@@ -40,6 +47,8 @@ ul.listview ul.categories li.category {
   width: 100%;
   height: auto;
   position: relative;
+  /* border-radius: var(--margin); */
+  /* border-radius: 10px; */
 }
 
 .project {
@@ -52,12 +61,12 @@ ul.listview ul.categories li.category {
   content: "";
   background: linear-gradient(45deg, #002bff, #ff00c8, #8601be);
   position: absolute;
-  top: -2px;
-  left: -2px;
+  /* top: -2px; */
+  /* left: -2px; */
   background-size: 600%;
   z-index: -1;
-  width: calc(100% + 4px);
-  height: calc(100% - 4px);
+  width: calc(100%);
+  height: calc(100%);
   filter: blur(8px);
   /* -webkit-filter: blur(8px); */
   animation: glowing 15s linear infinite;
@@ -86,9 +95,6 @@ ul.listview ul.categories li.category {
 .project:hover::before {
   opacity: 1;
 }
-.project:hover {
-  color: #000;
-}
 
 /* Phones in Landscape Mode */
 @media (max-width: 575.98px) {
@@ -105,7 +111,7 @@ ul.listview ul.categories li.category {
   }
   ul.listview li.project,
   ul.infotitles {
-    grid-template-columns: 3fr 30px;
+    grid-template-columns: 3fr auto;
   }
 }
 
@@ -123,7 +129,7 @@ ul.listview ul.categories li.category {
   }
   ul.listview li.project,
   ul.infotitles {
-    grid-template-columns: 3fr 30px;
+    grid-template-columns: 3fr auto;
   }
 }
 
@@ -141,7 +147,7 @@ ul.listview ul.categories li.category {
   }
   ul.listview li.project,
   ul.infotitles {
-    grid-template-columns: 3fr 30px;
+    grid-template-columns: 3fr auto;
   }
 }
 

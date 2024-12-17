@@ -9,11 +9,13 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: var(--font-size-300);
+  line-height: var(--line-height-300);
   white-space: nowrap;
 }
 
 header p {
   font-size: var(--font-size-100);
+  line-height: var(--line-height-100);
 }
 
 .button {

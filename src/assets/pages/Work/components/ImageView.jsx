@@ -37,7 +37,10 @@ export default function ImageView({ work, selectedFilters }) {
 
           return (
             <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
-              <Media project={project} />
+              <div className={`${styles["project-front"]}`}>
+                <Media project={project} />
+              </div>
+
               <div className={`${styles["project-details-outer"]}`}>
                 <div className={styles["project-name"]}>{project.name}</div>
                 <Categories project={project} />
@@ -45,6 +48,7 @@ export default function ImageView({ work, selectedFilters }) {
                 <div className={`${styles["project-details-inner"]}`}>
                   <div className={`${styles["project-details"]}`}></div>
                 </div>
+                {/* <div className={`${styles["project-details-blackout"]}`}></div> */}
               </div>
             </Link>
           );

@@ -41,9 +41,9 @@
   --font-size-400: 28px;
   --font-size-500: 68px;
 
-  --line-height-100: 16px;
-  --line-height-200: 16px;
-  --line-height-300: 22px;
+  --line-height-100: 18px;
+  --line-height-200: 18px;
+  --line-height-300: 25px;
   --line-height-400: calc(var(--font-size-400) / 1.25);
   --line-height-500: calc(var(--font-size-500) / 1.25);
 
@@ -65,10 +65,14 @@ body {
   font-family: var(--font-weight-text);
   background: var(--background-color);
   color: var(--text-color);
+
   font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
 
   box-sizing: border-box;
   overflow: hidden;
+
+  transition: background 0.3s;
 }
 
 #content {
@@ -87,6 +91,8 @@ main {
 }
 
 section {
+  margin-top: calc(var(--margin) * 2);
+  margin-bottom: calc(var(--margin) * 2);
 }
 
 h1,
@@ -161,9 +167,9 @@ button {
   z-index: -1;
   width: calc(100% + 4px);
   height: calc(100% - 4px);
-  filter: blur(8px);
+  filter: blur(8px) saturate(2);
   /* -webkit-filter: blur(8px); */
-  animation: glowing 5s linear infinite;
+  animation: glowing 20s linear infinite;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   border-radius: 10px;
   opacity: 0;

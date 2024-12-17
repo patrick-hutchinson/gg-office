@@ -13,6 +13,7 @@ ul.filtering {
 
 .toggleOptions {
   font-size: var(--font-size-100);
+  line-height: var(--line-height-100);
 }
 
 .filter::after {
