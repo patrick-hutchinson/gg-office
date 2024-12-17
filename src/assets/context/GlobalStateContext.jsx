@@ -11,8 +11,6 @@ export const GlobalStateProvider = ({ children }) => {
     const handleResize = () => {
       const newIsMobile = window.innerWidth < 768; // Calculate the new value
       setIsMobile(newIsMobile); // Update the state
-      console.log(newIsMobile, "newIsMobile"); // Log the directly calculated value
-      console.log(window.innerWidth);
     };
 
     handleResize(); // Check on initial render

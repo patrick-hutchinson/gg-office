@@ -16,33 +16,11 @@ const OpeningPage = forwardRef((props, containerRef) => {
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
   let columnsRef = useRef([]);
 
-  // useEffect(() => {
-  //   // Cleanup function to remove event listeners
-
-  //   // Add listeners when not mobile
-  //   columnRef.current.forEach((column) => {
-  //     const listener = (e) => {
-  //       const rect = containerRef.current.getBoundingClientRect();
-  //       const rectHeight = containerRef.current.offsetHeight;
-  //       const mouseYInElement = e.clientY - rect.top;
-
-  //       let leftValue = mouseYInElement / rectHeight;
-  //       let rightValue = 1 - leftValue;
-
-  //       column.style["grid-template-rows"] = `${leftValue * 100}% ${rightValue * 100}%`;
-  //     };
-
-  //     column.addEventListener("mouseenter", listener);
-  //     column.listener = listener; // Store reference for cleanup
-  //   });
-  // }, [isMobile]);
-
-  // useGSAP(() => {}, { dependencies });
-
   useGSAP(
     () => {
       if (!isMobile) {
-        return; // Skip animation logic if not on mobile
+        gsap.killTweensOf(columnsRef.current);
+        return;
       }
 
       columnsRef.current.forEach((column, index) => {
@@ -59,54 +37,37 @@ const OpeningPage = forwardRef((props, containerRef) => {
     { scope: containerRef, dependencies: [isMobile] }
   );
 
-  useGSAP(
-    (context, contextSafe) => {
-      if (isMobile) {
-        return; // Skip animation logic if not on mobile
-      }
+  const { contextSafe } = useGSAP();
 
-      const onMouseEnter = contextSafe((e, column) => {
-        console.log(e, "s");
-        const rect = containerRef.current.getBoundingClientRect();
-        const rectHeight = containerRef.current.offsetHeight;
-        const mouseYInElement = e.clientY - rect.top;
+  const handleMouseEnter = contextSafe((e) => {
+    if (isMobile) {
+      return; // Skip animation logic if not on mobile
+    }
 
-        let leftValue = mouseYInElement / rectHeight;
-        let rightValue = 1 - leftValue;
+    const rect = containerRef.current.getBoundingClientRect();
+    const rectHeight = containerRef.current.offsetHeight;
+    const mouseYInElement = e.clientY - rect.top;
 
-        gsap.to(column, {
-          gridTemplateRows: [`${leftValue * 100}% ${rightValue * 100}%`],
-          duration: 0.6,
-          ease: "power1.inOut",
-        });
-      });
+    let leftValue = mouseYInElement / rectHeight;
+    let rightValue = 1 - leftValue;
 
-      // Keep track of cleanup functions
-      const cleanupFunctions = [];
-
-      columnsRef.current.forEach((column) => {
-        const handleMouseEnter = (e) => onMouseEnter(e, column);
-        column.addEventListener("mouseenter", handleMouseEnter);
-
-        // Store the cleanup function
-        cleanupFunctions.push(() => {
-          column.removeEventListener("mouseenter", handleMouseEnter);
-        });
-      });
-
-      // Return a cleanup function that removes all event listeners
-      return () => {
-        cleanupFunctions.forEach((cleanup) => cleanup());
-      };
-    },
-    { scope: containerRef, dependencies: [isMobile] }
-  );
+    gsap.to(e.currentTarget, {
+      gridTemplateRows: [`${leftValue * 100}% ${rightValue * 100}%`],
+      duration: 0.6,
+      ease: "power1.inOut",
+    });
+  });
 
   return (
     <section>
       <div className={styles.wrapper} ref={containerRef}>
         {letters.map((letter, index) => (
-          <div key={index} className={styles.column} ref={(el) => (columnsRef.current[index] = el)}>
+          <div
+            key={index}
+            className={styles.column}
+            ref={(el) => (columnsRef.current[index] = el)}
+            onMouseEnter={(e) => handleMouseEnter(e)}
+          >
             <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
             <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
           </div>
