@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useEffect, useState, useRef, forwardRef, useContext } from "react";
-import { Link } from "react-router-dom";
 
 import styles from "./styles/OpeningPage.module.css";
 
@@ -16,13 +15,13 @@ const OpeningPage = forwardRef((props, containerRef) => {
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
   let columnsRef = useRef([]);
 
+  // Mobile Animation
   useGSAP(
     () => {
       if (!isMobile) {
         gsap.killTweensOf(columnsRef.current);
         return;
       }
-
       columnsRef.current.forEach((column, index) => {
         gsap.to(column, {
           gridTemplateRows: ["10% 90%"],
@@ -37,13 +36,17 @@ const OpeningPage = forwardRef((props, containerRef) => {
     { scope: containerRef, dependencies: [isMobile] }
   );
 
+  useEffect(() => {
+    // Cleanup function
+    return () => {
+      gsap.killTweensOf(columnsRef.current);
+    };
+  }, []);
+
+  // Desktop Animation
   const { contextSafe } = useGSAP();
-
   const handleMouseEnter = contextSafe((e) => {
-    if (isMobile) {
-      return; // Skip animation logic if not on mobile
-    }
-
+    if (isMobile) return; // Skip animation logic if on mobile
     const rect = containerRef.current.getBoundingClientRect();
     const rectHeight = containerRef.current.offsetHeight;
     const mouseYInElement = e.clientY - rect.top;
@@ -66,7 +69,7 @@ const OpeningPage = forwardRef((props, containerRef) => {
             key={index}
             className={styles.column}
             ref={(el) => (columnsRef.current[index] = el)}
-            onMouseEnter={(e) => handleMouseEnter(e)}
+            onMouseEnter={handleMouseEnter}
           >
             <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
             <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
