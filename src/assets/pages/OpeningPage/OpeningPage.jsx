@@ -62,21 +62,14 @@ const OpeningPage = forwardRef((props, containerRef) => {
   });
 
   return (
-    <section>
-      <div className={styles.wrapper} ref={containerRef}>
-        {letters.map((letter, index) => (
-          <div
-            key={index}
-            className={styles.column}
-            ref={(el) => (columnsRef.current[index] = el)}
-            onMouseEnter={handleMouseEnter}
-          >
-            <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
-            <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
-          </div>
-        ))}
-      </div>
-    </section>
+    <div className={styles.wrapper} ref={containerRef}>
+      {letters.map((letter, index) => (
+        <div key={index} className={styles.column} ref={(el) => (columnsRef.current[index] = el)} onMouseEnter={handleMouseEnter}>
+          <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
+          <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
+        </div>
+      ))}
+    </div>
   );
 });
 

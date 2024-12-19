@@ -76,10 +76,10 @@ body {
 }
 
 #content {
-  margin: var(--margin);
+  padding: var(--margin);
 }
 #content.animate {
-  transform: translateY(calc(100vh - 55px));
+  transform: translateY(calc(100vh - 45px));
 }
 #content.animate-in {
   transition: var(--opening-transition-duration) ease;
