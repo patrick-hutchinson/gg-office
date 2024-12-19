@@ -15,5 +15,9 @@ export default function Header({ location }) {
 
   useEffect(() => {}, [location]);
 
-  return <header>{isMobile ? <HeaderMobile location={location} /> : <HeaderDesktop location={location} />}</header>;
+  return (
+    <header className={styles.header}>
+      {isMobile ? <HeaderMobile location={location} /> : <HeaderDesktop location={location} />}
+    </header>
+  );
 }
