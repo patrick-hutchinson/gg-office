@@ -7,7 +7,7 @@ export function renderFile(fileInfo) {
   return imageExtensions.includes(extension) ? (
     <img src={src} alt="Uploaded content" />
   ) : videoExtensions.includes(extension) ? (
-    <video playsInline loop muted poster="false" preload="metadata">
+    <video playsInline loop muted autoPlay>
       <source src={src} type={`video/${extension}`} />
     </video>
   ) : null;
