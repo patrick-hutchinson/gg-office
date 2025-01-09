@@ -8,7 +8,7 @@
 ul.listview li.project,
 ul.infotitles {
   display: grid;
-  /* flex-direction: row; */
+
   grid-template-columns: 3fr 2fr auto;
   padding-bottom: calc(var(--margin) / 2);
   padding-top: calc(var(--margin) / 2);
@@ -27,6 +27,7 @@ ul.listview ul.categories {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
 }
 
 ul.listview .year,
@@ -47,8 +48,6 @@ ul.listview ul.categories li.category {
   width: 100%;
   height: auto;
   position: relative;
-  /* border-radius: var(--margin); */
-  /* border-radius: 10px; */
 }
 
 .project {
@@ -61,20 +60,23 @@ ul.listview ul.categories li.category {
   content: "";
   background: linear-gradient(45deg, #002bff, #ff00c8, #8601be);
   position: absolute;
-  /* top: -2px; */
-  /* left: -2px; */
   background-size: 600%;
   z-index: -1;
   width: calc(100%);
   height: calc(100%);
   filter: blur(8px);
-  /* -webkit-filter: blur(8px); */
   animation: glowing 15s linear infinite;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
   border-radius: 10px;
   opacity: 0;
 
   transform-origin: center;
+}
+
+.project:hover::before {
+  opacity: 1;
 }
 
 @keyframes glowing {
@@ -90,10 +92,6 @@ ul.listview ul.categories li.category {
     background-position: 0% 50%;
     transform: translateZ(0.001);
   }
-}
-
-.project:hover::before {
-  opacity: 1;
 }
 
 /* Phones in Landscape Mode */

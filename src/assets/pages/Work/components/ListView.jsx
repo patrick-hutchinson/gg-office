@@ -14,7 +14,6 @@ export default function ListView({ work, selectedFilters, activeView }) {
   let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
 
   let previewImageRef = useRef(null);
-  const builder = imageUrlBuilder(sanityClient);
 
   // Helper function to determine if a project should be rendered
   const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
@@ -45,7 +44,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
     previewImageRef.current.style.display = "unset";
   }
 
-  function handleMouseLeave(project) {
+  function handleMouseLeave() {
     previewImageRef.current.style.display = "none";
   }
 

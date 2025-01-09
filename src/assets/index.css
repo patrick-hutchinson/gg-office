@@ -145,9 +145,12 @@ a:visited {
 .hidden {
   display: none !important; /* Make the component visible */
 }
-.visible {
-  display: grid !important; /* Make the component visible */
+/* .imageview .visible {
+  display: grid !important;
 }
+.listview .visible{
+  display: flex !important; 
+} */
 
 button {
   background: transparent;
@@ -177,7 +180,9 @@ button {
   filter: blur(8px) saturate(2);
   /* -webkit-filter: blur(8px); */
   animation: glowing 20s linear infinite;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
   border-radius: 10px;
   opacity: 0;
   transform: translateZ(0); /* Add translateZ(0) to force repaint */
@@ -202,7 +207,7 @@ button {
 .button:hover::before,
 .button.active::before {
   opacity: 1;
-  transform: scale(1) translateZ(0); /* Ensure it's also applied on hover */
+  transform: scale(1) translateZ(0);
 }
 
 /* Phones in Landscape Mode */
