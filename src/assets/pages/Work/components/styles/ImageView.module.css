@@ -1,16 +1,5 @@
 :root {
-  --gradient-shadow: linear-gradient(
-    45deg,
-    #002bff,
-    #ff00c8,
-    #8601be,
-    #002bff,
-    #ff00c8,
-    #8601be,
-    #002bff,
-    #ff00c8,
-    #8601be
-  );
+  --gradient-shadow: linear-gradient(45deg, #002bff, #ff00c8, #8601be, #002bff, #ff00c8, #8601be, #002bff, #ff00c8, #8601be);
 }
 
 .imageview {

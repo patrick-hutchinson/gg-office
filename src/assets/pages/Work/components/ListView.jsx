@@ -10,24 +10,24 @@ import styles from "./styles/ListView.module.css";
 import { getFileSource } from "../../../utils/getFileSource";
 import { renderFile } from "../../../utils/renderFile";
 
-export default function ListView({ work, selectedFilters }) {
+export default function ListView({ work, selectedFilters, activeView }) {
   let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
 
   let previewImageRef = useRef(null);
   const builder = imageUrlBuilder(sanityClient);
 
   // Helper function to determine if a project should be rendered
-  const projectMatchesFilter = (project) => project.categories.some((category) => selectedFilters.includes(category));
+  const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
 
-  if (!work) return null; // Early return if there's no data
+  if (!work) return <p>Loading... </p>; // Early return if there's no data
 
   let Categories = ({ project }) => {
     return (
       <ul className={`${styles.categories}`}>
-        {project.categories.map((category, index) => (
+        {project.filtering.map((filter, index) => (
           <li className={`${styles.category}`} key={index}>
-            {category}
-            {index < project.categories.length - 1 && ","}
+            {filter.title}
+            {index < project.filtering.length - 1 && ","}
           </li>
         ))}
       </ul>
@@ -63,7 +63,7 @@ export default function ListView({ work, selectedFilters }) {
 
   return (
     <div className={`${styles.projectwrapper}`}>
-      <ul className={`${styles.listview}`}>
+      <ul className={`${styles.listview} ${activeView === "List View" ? "visible" : "hidden"}`}>
         <ul className={`${styles.infotitles}`}>
           <li className={`${styles.name}`}>Name</li>
           <li className={`${styles.category}`}>Category</li>

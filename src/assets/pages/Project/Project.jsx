@@ -26,7 +26,7 @@ export default function Project() {
       year,
       description,
       imagegallery,
-      categories,
+      filtering[]->{title},
       creditsInhouse,
       creditsClient,
       slug,
@@ -39,14 +39,12 @@ export default function Project() {
 
   const { slug } = useParams();
 
-  // Early return if data is undefined or empty
-  if (!work || work.length === 0) {
-    return <p>Loading...</p>; // Or some other loading state or message
-  }
+  if (!work) return <p>Loading...</p>; // Early return if data is undefined or empty
 
   const project = work.find((project) => project.slug.current === slug);
 
   let Media = ({ project }) => {
+    console.log(project.coverimage.metadata, "coverimage");
     const fileInfo = getFileSource(project.coverimage);
     return renderFile(fileInfo);
   };

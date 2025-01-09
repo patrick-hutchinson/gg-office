@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useEffect, useState, useRef } from "react";
 import styles from "./styles/ImageView.module.css"; // Updated import for CSS modules
 import { Link } from "react-router-dom";
@@ -6,20 +6,22 @@ import { Link } from "react-router-dom";
 import { getFileSource } from "../../../utils/getFileSource";
 import { renderFile } from "../../../utils/renderFile";
 
-export default function ImageView({ work, selectedFilters }) {
+export default function ImageView({ work, selectedFilters, activeView }) {
   // Helper function to determine if a project should be rendered
-  const projectMatchesFilter = (project) => project.categories.some((category) => selectedFilters.includes(category));
+  const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
 
-  if (!work) return null; // Early return if there's no data
+  if (!work) return <p>Loading...</p>; // Early return if there's no data
 
   let Categories = ({ project }) => {
     return (
       <ul className={styles["project-categories"]}>
-        {project.categories.map((category, categoryIndex) => (
-          <li className={`${styles.category}`} key={categoryIndex}>
-            {category}
-          </li>
-        ))}
+        {project.filtering.map((filter, index) => {
+          return (
+            <li className={`${styles.category}`} key={index}>
+              {filter.title}
+            </li>
+          );
+        })}
       </ul>
     );
   };
@@ -31,7 +33,7 @@ export default function ImageView({ work, selectedFilters }) {
 
   return (
     <div className={`${styles.projectwraper}`}>
-      <div className={`${styles.imageview}`}>
+      <div className={`${styles.imageview} ${activeView === "Image View" ? "visible" : "hidden"}`}>
         {work.map((project, index) => {
           if (!projectMatchesFilter(project)) return null; // Early return if project should not render
 

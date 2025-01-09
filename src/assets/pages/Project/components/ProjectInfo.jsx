@@ -12,9 +12,10 @@ export default function ProjectInfo({ project }) {
       <div className={`${styles["project-specifics"]}`}>
         <div className={`${styles["categories-wrapper"]}`}>
           <ul className={`${styles.categories}`}>
-            {project.categories.map((category, categoryIndex) => (
-              <li className={`${styles.category}`} key={categoryIndex}>
-                {category},&nbsp;
+            {project.filtering.map((filter, index) => (
+              <li className={`${styles.category}`} key={index}>
+                {console.log(filter, "filter")}
+                {filter.title},&nbsp;
               </li>
             ))}
           </ul>

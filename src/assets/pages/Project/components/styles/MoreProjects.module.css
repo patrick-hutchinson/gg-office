@@ -39,9 +39,18 @@
 }
 
 .panButton {
+  position: relative;
   background: var(--background-color);
   border-radius: 50%;
-  padding: var(--margin);
+  padding: calc(var(--margin) / 1.5);
+  width: 40px;
+  height: auto;
+}
+.panButton:first-child {
+  left: 20px;
+}
+.panButton:last-child {
+  right: 20px;
 }
 
 @media (max-width: 575.98px) {

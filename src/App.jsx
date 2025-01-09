@@ -22,10 +22,7 @@ function App() {
       <Routes>
         <Route element={<Layout showOpeningPage={showOpeningPage} setShowOpeningPage={setShowOpeningPage} />}>
           <Route index element={<Work />}></Route>
-          <Route
-            path="work"
-            element={<Work setShowOpeningPage={setShowOpeningPage} showOpeningPage={showOpeningPage} />}
-          ></Route>
+          <Route path="work" element={<Work setShowOpeningPage={setShowOpeningPage} showOpeningPage={showOpeningPage} />}></Route>
           <Route path="work/:slug" element={<Project />}></Route>
           <Route path="about" element={<About />}></Route>
           <Route path="research" element={<Research />}></Route>

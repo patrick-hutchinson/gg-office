@@ -38,29 +38,14 @@ export const project = defineType({
         'Define the number of images per row. Example: 2, 3, 1 means first row has 2 images, second row has 3, and third row has 1 image.',
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [
-        {
-          type: 'string',
-        },
-      ],
+      name: 'filtering',
+      title: 'Filtering',
+      type: 'array', // Change to an array so multiple filters can be selected
+      of: [{type: 'reference', to: [{type: 'filters'}]}],
+      validation: (Rule) => Rule.unique().error('Each filter must be unique'),
       options: {
-        list: [
-          {title: 'Art Direction', value: 'Art Direction'},
-          {title: 'Brand Identity', value: 'Brand Identity'},
-          {title: 'Editorial', value: 'Editorial'},
-          {title: 'Illustration', value: 'Illustration'},
-          {title: 'Logo', value: 'Logo'},
-          {title: 'Motion Design', value: 'MotionDesign'},
-          {title: 'Naming', value: 'Naming'},
-          {title: 'Packaging', value: 'Packaging'},
-          {title: 'Poster', value: 'Poster'},
-          {title: 'Typography', value: 'Typography'},
-          {title: 'Website', value: 'Website'},
-        ],
-        layout: 'grid',
+        // Enable multi-select (the default behavior for `array` type)
+        layout: 'tags',
       },
     }),
     defineField({

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles/Filtering.module.css";
 
-export default function Filtering({ filterArray, selectedFilters, setSelectedFilters, showFiltering }) {
+export default function Filtering({ filterArray, selectedFilters, setSelectedFilters }) {
   let [allSelected, setAllSelected] = useState(true); // Track if "All" is selected
 
   // Handle clicking "All"
@@ -36,23 +36,21 @@ export default function Filtering({ filterArray, selectedFilters, setSelectedFil
 
   return (
     <div className={styles["filtering-wrapper"]}>
-      {showFiltering && (
-        <ul className={`${styles.filtering}`}>
-          <li className={`${styles.filter} button ${allSelected ? "active" : ""}`} onClick={(e) => handleAllFilter(e)}>
-            All
+      <ul className={`${styles.filtering}`}>
+        <li className={`${styles.filter} button ${allSelected ? "active" : ""}`} onClick={(e) => handleAllFilter(e)}>
+          All
+        </li>
+        {filterArray.map((filter, index) => (
+          <li
+            className={`${styles.filter} button ${selectedFilters.includes(filter) && !allSelected ? "active" : ""}`}
+            key={index}
+            onClick={(e) => handleFiltering(e, filter)}
+          >
+            {filter}
+            {/* {index !== filterArray.length - 1 ? "," : ""} */}
           </li>
-          {filterArray.map((filter, index) => (
-            <li
-              className={`${styles.filter} button ${selectedFilters.includes(filter) && !allSelected ? "active" : ""}`}
-              key={index}
-              onClick={(e) => handleFiltering(e, filter)}
-            >
-              {filter}
-              {/* {index !== filterArray.length - 1 ? "," : ""} */}
-            </li>
-          ))}
-        </ul>
-      )}
+        ))}
+      </ul>
     </div>
   );
 }

@@ -142,6 +142,13 @@ a:visited {
   color: var(--text-color);
 }
 
+.hidden {
+  display: none !important; /* Make the component visible */
+}
+.visible {
+  display: grid !important; /* Make the component visible */
+}
+
 button {
   background: transparent;
   border: 0;

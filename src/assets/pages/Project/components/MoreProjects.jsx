@@ -44,10 +44,10 @@ export default function MoreProjects({ work }) {
 
       <div className={`${styles["navigation-wrapper"]}`}>
         <div className={`${styles.panButton}`} onClick={() => handlePan("left")}>
-          ←
+          <img src="/assets/images/arrow-left.svg" alt="arrow-left" />
         </div>
         <div className={`${styles.panButton}`} onClick={() => handlePan("right")}>
-          →
+          <img src="/assets/images/arrow-right.svg" alt="arrow-left" />
         </div>
       </div>
     </div>
