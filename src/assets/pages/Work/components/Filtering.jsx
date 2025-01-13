@@ -40,16 +40,18 @@ export default function Filtering({ filterArray, selectedFilters, setSelectedFil
         <li className={`${styles.filter} button ${allSelected ? "active" : ""}`} onClick={(e) => handleAllFilter(e)}>
           All
         </li>
-        {filterArray.map((filter, index) => (
-          <li
-            className={`${styles.filter} button ${selectedFilters.includes(filter) && !allSelected ? "active" : ""}`}
-            key={index}
-            onClick={(e) => handleFiltering(e, filter)}
-          >
-            {filter}
-            {/* {index !== filterArray.length - 1 ? "," : ""} */}
-          </li>
-        ))}
+        {filterArray
+          .slice() // Creates a shallow copy to avoid mutating the original array
+          .sort((a, b) => a.localeCompare(b)) // Sorts the array alphabetically
+          .map((filter, index) => (
+            <li
+              className={`${styles.filter} button ${selectedFilters.includes(filter) && !allSelected ? "active" : ""}`}
+              key={index}
+              onClick={(e) => handleFiltering(e, filter)}
+            >
+              {filter}
+            </li>
+          ))}
       </ul>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import sanityClient from "/src/client.js";
 import styles from "./styles/About.module.css";
+import Loading from "../../components/Loading/Loading";
 
 export default function About() {
   const [about, setAbout] = useState();
@@ -30,7 +31,7 @@ export default function About() {
     // Add the hover effect to move the alien on mouseenter
     alien.addEventListener("mouseenter", () => {
       const randomLeft = Math.floor(Math.random() * (window.innerWidth - 300)) + 100;
-      const randomTop = Math.floor(Math.random() * (window.innerHeight - 300)) + 100;
+      const randomTop = Math.floor(Math.random() * (window.innerHeight - 400)) + 100;
       alien.style.left = `${randomLeft}px`;
       alien.style.top = `${randomTop}px`;
     });
@@ -49,9 +50,9 @@ export default function About() {
 
   function handleInternClick(intern) {
     // Check if the alien with the same intern name already exists
-    const existingAlien = Array.from(
-      AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} span`)
-    ).find((span) => span.textContent === intern);
+    const existingAlien = Array.from(AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} span`)).find(
+      (span) => span.textContent === intern
+    );
 
     // If an alien with the same name exists, return early
     if (existingAlien) {
@@ -69,9 +70,7 @@ export default function About() {
   }
 
   // Early return if about data is undefined or empty
-  if (!about || about.length === 0) {
-    return <p>Loading...</p>;
-  }
+  if (!about) return <Loading />;
 
   // Since about is an array, we access the first item (about[0])
   const Biography = () => {

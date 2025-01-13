@@ -4,7 +4,7 @@ ul.filtering {
 }
 
 .filtering-wrapper {
-  position: sticky;
+  /* position: sticky; */
   top: 40px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);

@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import sanityClient from "/src/client.js";
 
 import Rellax from "rellax";
+import Loading from "../../components/Loading/Loading";
 
 import { getFileSource } from "../../utils/getFileSource";
 import { renderFile } from "../../utils/renderFile";
@@ -29,9 +30,7 @@ export default function Research() {
   }, [research]);
 
   // Early return if about data is undefined or empty
-  if (!research || research.length === 0) {
-    return <p>Loading...</p>;
-  }
+  if (!research) return <Loading />;
 
   let Media = ({ project }) => {
     const fileInfo = getFileSource(project);

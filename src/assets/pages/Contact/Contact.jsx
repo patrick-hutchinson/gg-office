@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import sanityClient from "/src/client.js";
 
 import styles from "./styles/Contact.module.css";
+import Loading from "../../components/Loading/Loading";
 
 export default function Contact() {
   const [contact, setContact] = useState();
@@ -22,9 +23,7 @@ export default function Contact() {
   }, []);
 
   // Early return if about data is undefined or empty
-  if (!contact || contact.length === 0) {
-    return <p>Loading...</p>;
-  }
+  if (!contact) return <Loading />;
 
   let Email = () => {
     return (

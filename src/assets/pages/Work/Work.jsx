@@ -8,6 +8,7 @@ import ListView from "./components/ListView";
 
 import sanityClient from "/src/client.js";
 import ViewOptions from "./components/ViewOptions";
+import Loading from "../../components/Loading/Loading";
 
 export default function Work() {
   let [work, setWork] = useState();
@@ -50,7 +51,7 @@ export default function Work() {
       .catch(console.error);
   }, []);
 
-  if (!work || !selectedFilters || !filters) return <p>Loading...</p>; // Early return if there's no data
+  if (!work || !selectedFilters || !filters) return <Loading />; // Early return if there's no data
 
   return (
     <main>
