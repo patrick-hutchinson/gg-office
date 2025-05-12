@@ -27,7 +27,7 @@ export default function ImageView({ work, selectedFilters, activeView }) {
   };
 
   let Media = ({ project }) => {
-    const fileInfo = getFileSource(project.coverimage);
+    const fileInfo = getFileSource(project.thumbnail);
     return renderFile(fileInfo);
   };
 

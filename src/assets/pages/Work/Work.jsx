@@ -29,7 +29,8 @@ export default function Work() {
     imagegallery,
     filtering[]->{title},
     credits,
-    slug
+    slug,
+    thumbnail
 }`
       )
       .then((data) => setWork(data))
