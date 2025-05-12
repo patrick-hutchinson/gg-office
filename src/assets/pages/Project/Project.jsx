@@ -30,7 +30,8 @@ export default function Project() {
       creditsInhouse,
       creditsClient,
       slug,
-      gridStructure
+      gridStructure,
+      thumbnail
   }`
       )
       .then((data) => setWork(data))
@@ -44,7 +45,6 @@ export default function Project() {
   const project = work.find((project) => project.slug.current === slug);
 
   let Media = ({ project }) => {
-    console.log(project.coverimage.metadata, "coverimage");
     const fileInfo = getFileSource(project.coverimage);
     return renderFile(fileInfo);
   };

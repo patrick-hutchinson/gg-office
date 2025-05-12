@@ -36,7 +36,7 @@ export default function MoreProjects({ work }) {
         {work.map((project, index) => {
           return (
             <Link to={`/work/${project.slug.current}`} key={index}>
-              <Media project={project.coverimage} />
+              {project.thumbnail && <Media project={project.thumbnail} />}
             </Link>
           );
         })}
