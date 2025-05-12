@@ -3,9 +3,12 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
+import { PortableText } from "@portabletext/react";
+
 import styles from "./styles/ProjectInfo.module.css";
 
 export default function ProjectInfo({ project }) {
+  console.log(project.description, "description");
   return (
     <section className={`${styles.projectInfo}`}>
       <h1>{project.name}</h1>
@@ -22,10 +25,11 @@ export default function ProjectInfo({ project }) {
           <div>{project.year}</div>
         </div>
 
-        <p className={`${styles.description}`}>
-          Project description will go here. It is not connected to the backend yet, so this is a demo stand in text. The
-          description could talk about the creative process, the client, color choices, or reach.
-        </p>
+        {project.description && (
+          <div className={styles.description}>
+            <PortableText value={project.description} />
+          </div>
+        )}
       </div>
     </section>
   );

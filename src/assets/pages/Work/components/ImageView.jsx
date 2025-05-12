@@ -39,9 +39,7 @@ export default function ImageView({ work, selectedFilters, activeView }) {
 
           return (
             <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
-              <div className={`${styles["project-front"]}`}>
-                <Media project={project} />
-              </div>
+              <div className={`${styles["project-front"]}`}>{project.thumbnail && <Media project={project} />}</div>
 
               <div className={`${styles["project-details-outer"]}`}>
                 <div className={styles["project-name"]}>{project.name}</div>

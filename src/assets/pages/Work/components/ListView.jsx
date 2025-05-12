@@ -34,6 +34,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
   };
 
   function handleMouseEnter(e, project) {
+    if (!project.thumbnail) return;
     // Setting HoverIMage state to have a global refrence of link and imagetype, later to be consumed by renderFileElement and Media. You could usually pass the data returned from getFileSourceInfo straight to renderFileElement
     setHoverImage({
       src: getFileSource(project.thumbnail).src,
