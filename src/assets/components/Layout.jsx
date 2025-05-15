@@ -1,79 +1,102 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import { Outlet, useLocation } from "react-router-dom";
+
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 
-import openingPageStyles from "/src/assets/pages/OpeningPage/styles/OpeningPage.module.css";
+import { easeInOut, motion } from "framer-motion";
+
 import "./styles/Layout.css";
 import Header from "./Header/Header";
 import Footer from "./Footer";
 import OpeningPage from "../pages/OpeningPage/OpeningPage";
 
-export default function Layout({ showOpeningPage, setShowOpeningPage }) {
-  let location = useLocation();
-  let hasSeenOpeningPage = localStorage.getItem("hasSeenOpeningPage");
+export default function Layout() {
+  const location = useLocation();
+  const lenis = useLenis(); // Access the Lenis instance
 
-  let contentRef = useRef(null);
-  let openingpageRef = useRef(null);
-  let lenis = useLenis(); // Access the Lenis instance
+  const openingRef = useRef(null);
+  const contentRef = useRef(null);
 
-  // Only show the opening page if the user is on the home route
+  let isHome = location.pathname === "/";
+
+  let [showOpening, setShowOpening] = useState(isHome ? true : false);
+
+  const [hasRouteChanged, setHasRouteChanged] = useState(false);
+
   useEffect(() => {
-    if (location.pathname === "/" || location.pathname === "/work") {
-      setShowOpeningPage(!hasSeenOpeningPage);
-    } else {
-      localStorage.setItem("hasSeenOpeningPage", true);
-      setShowOpeningPage(false);
-    }
+    setHasRouteChanged(location.pathname == "/" ? true : false);
   }, [location.pathname]);
 
   useEffect(() => {
-    if (!hasSeenOpeningPage) {
-      contentRef.current.classList.add("animate");
-      if (lenis) {
-        lenis.stop(); // Disable Lenis scroll behavior
-      }
+    console.log(showOpening, "showOpening?");
+  }, [showOpening]);
 
-      document.addEventListener("click", showContent);
-      document.addEventListener("wheel", showContent);
-      window.addEventListener("touchmove", showContent);
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 });
+  }, []); // Always scroll to the top
 
-      return () => {
-        document.removeEventListener("click", showContent);
-        document.removeEventListener("wheel", showContent);
-        window.removeEventListener("touchmove", showContent);
+  useEffect(() => {
+    showOpening && lenis?.stop();
+  }, [lenis]); // Initially stop lenis, if the Opening is visible
 
-        if (lenis) {
-          lenis.start(); // Re-enable Lenis scroll behavior
-        }
-      };
-    }
-  }, [hasSeenOpeningPage, lenis]);
+  const handleAnimationComplete = () => {
+    console.log("handling animation cleanup");
+    showOpening ? lenis?.stop() : lenis?.start();
+  }; // After the animation is complete, handle the lenis state
 
-  const showContent = () => {
-    contentRef.current.classList.add("animate-in");
-    openingpageRef.current.classList.add(openingPageStyles["animate-out"]);
+  const openingVariants = {
+    inView: {
+      transition: { duration: hasRouteChanged ? 1 : 0, easeInOut },
+      transform: "translateY(0)",
+    },
+    outOfView: {
+      transition: { duration: 1, easeInOut },
+      transform: "translateY(calc(-100vh + 45px))",
+    },
+  };
 
-    setTimeout(() => {
-      localStorage.setItem("hasSeenOpeningPage", "true");
-      setShowOpeningPage(false);
-      contentRef.current.classList.remove("animate");
-      contentRef.current.classList.remove("animate-in");
-
-      if (lenis) {
-        lenis.start(); // Enable Lenis again
-      }
-    }, 1200);
+  const contentVariants = {
+    outOfView: {
+      transition: { duration: hasRouteChanged ? 1 : 0, easeInOut },
+      transform: "translateY(calc(100vh - 45px))",
+    },
+    inView: {
+      transition: { duration: 1, easeInOut },
+      transform: "translateY(0)",
+    },
   };
 
   return (
     <ReactLenis root>
-      {showOpeningPage && <OpeningPage ref={openingpageRef} />}
-      <div id="content" ref={contentRef}>
-        <Header location={location.pathname}></Header>
-        <Outlet />
-        <Footer />
-      </div>
+      <motion.div
+        id="container"
+        onClick={() => showOpening && setShowOpening(false)}
+        onWheel={() => showOpening && setShowOpening(false)}
+      >
+        <motion.div
+          id="opening"
+          ref={openingRef}
+          initial={false}
+          animate={showOpening ? "inView" : "outOfView"}
+          variants={openingVariants}
+          onAnimationComplete={() => handleAnimationComplete()}
+        >
+          <OpeningPage openingRef={openingRef} />
+        </motion.div>
+        <motion.div
+          id="content"
+          ref={contentRef}
+          initial={false}
+          animate={showOpening ? "outOfView" : "inView"}
+          variants={contentVariants}
+          onAnimationComplete={() => handleAnimationComplete()}
+        >
+          <Header location={location.pathname} setShowOpening={setShowOpening} />
+          <Outlet />
+          <Footer />
+        </motion.div>
+      </motion.div>
     </ReactLenis>
   );
 }

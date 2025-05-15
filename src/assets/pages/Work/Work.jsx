@@ -9,6 +9,7 @@ import ListView from "./components/ListView";
 import sanityClient from "/src/client.js";
 import ViewOptions from "./components/ViewOptions";
 import Loading from "../../components/Loading/Loading";
+import OpeningPage from "../OpeningPage/OpeningPage";
 
 export default function Work() {
   let [work, setWork] = useState();

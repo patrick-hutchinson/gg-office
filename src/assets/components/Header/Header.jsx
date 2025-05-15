@@ -10,14 +10,18 @@ import styles from "./styles/Header.module.css";
 import HeaderDesktop from "./components/HeaderDesktop";
 import HeaderMobile from "./components/HeaderMobile";
 
-export default function Header({ location }) {
+export default function Header({ location, setShowOpening }) {
   const { isMobile } = useContext(GlobalStateContext);
 
   useEffect(() => {}, [location]);
 
   return (
     <header className={styles.header}>
-      {isMobile ? <HeaderMobile location={location} /> : <HeaderDesktop location={location} />}
+      {isMobile ? (
+        <HeaderMobile location={location} />
+      ) : (
+        <HeaderDesktop location={location} setShowOpening={setShowOpening} />
+      )}
     </header>
   );
 }

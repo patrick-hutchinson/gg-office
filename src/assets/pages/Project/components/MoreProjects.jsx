@@ -35,9 +35,11 @@ export default function MoreProjects({ work }) {
       <div className={styles["moreprojects"]} ref={moreprojectsRef}>
         {work.map((project, index) => {
           return (
-            <Link to={`/work/${project.slug.current}`} key={index}>
-              {project.thumbnail && <Media project={project.thumbnail} />}
-            </Link>
+            project.slug && (
+              <Link to={`/work/${project.slug.current}`} key={index}>
+                {project.thumbnail && <Media project={project.thumbnail} />}
+              </Link>
+            )
           );
         })}
       </div>

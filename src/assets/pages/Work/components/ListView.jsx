@@ -73,20 +73,22 @@ export default function ListView({ work, selectedFilters, activeView }) {
           if (!projectMatchesFilter(project)) return null; // Early return if project should not render
 
           return (
-            <Link to={`/work/${project.slug.current}`} key={index}>
-              <li
-                className={`${styles.project}`}
-                onMouseEnter={(e) => handleMouseEnter(e, project)}
-                key={index}
-                onMouseLeave={() => handleMouseLeave()}
-              >
-                <div className={`${styles.name}`}>{project.name}</div>
+            project.slug && (
+              <Link to={`/work/${project.slug.current}`} key={index}>
+                <li
+                  className={`${styles.project}`}
+                  onMouseEnter={(e) => handleMouseEnter(e, project)}
+                  key={index}
+                  onMouseLeave={() => handleMouseLeave()}
+                >
+                  <div className={`${styles.name}`}>{project.name}</div>
 
-                <Categories project={project} />
+                  <Categories project={project} />
 
-                <div className={`${styles.year}`}>{project.year}</div>
-              </li>
-            </Link>
+                  <div className={`${styles.year}`}>{project.year}</div>
+                </li>
+              </Link>
+            )
           );
         })}
       </ul>

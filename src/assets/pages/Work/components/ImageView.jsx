@@ -38,19 +38,20 @@ export default function ImageView({ work, selectedFilters, activeView }) {
           if (!projectMatchesFilter(project)) return null; // Early return if project should not render
 
           return (
-            <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
-              <div className={`${styles["project-front"]}`}>{project.thumbnail && <Media project={project} />}</div>
+            project.slug && (
+              <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
+                <div className={`${styles["project-front"]}`}>{project.thumbnail && <Media project={project} />}</div>
 
-              <div className={`${styles["project-details-outer"]}`}>
-                <div className={styles["project-name"]}>{project.name}</div>
-                <Categories project={project} />
-                <div className={styles["project-year"]}>{project.year}</div>
-                <div className={`${styles["project-details-inner"]}`}>
-                  <div className={`${styles["project-details"]}`}></div>
+                <div className={`${styles["project-details-outer"]}`}>
+                  <div className={styles["project-name"]}>{project.name}</div>
+                  <Categories project={project} />
+                  <div className={styles["project-year"]}>{project.year}</div>
+                  <div className={`${styles["project-details-inner"]}`}>
+                    <div className={`${styles["project-details"]}`}></div>
+                  </div>
                 </div>
-                {/* <div className={`${styles["project-details-blackout"]}`}></div> */}
-              </div>
-            </Link>
+              </Link>
+            )
           );
         })}
       </div>

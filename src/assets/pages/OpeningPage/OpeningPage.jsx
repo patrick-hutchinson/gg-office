@@ -9,7 +9,7 @@ import { useGSAP } from "@gsap/react";
 
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 
-const OpeningPage = forwardRef((props, containerRef) => {
+const OpeningPage = ({ openingRef }) => {
   const { isMobile } = useContext(GlobalStateContext); // Access isMobile from the context
 
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
@@ -33,7 +33,7 @@ const OpeningPage = forwardRef((props, containerRef) => {
         });
       });
     },
-    { scope: containerRef, dependencies: [isMobile] }
+    { scope: openingRef, dependencies: [isMobile] }
   );
 
   useEffect(() => {
@@ -47,8 +47,8 @@ const OpeningPage = forwardRef((props, containerRef) => {
   const { contextSafe } = useGSAP();
   const handleMouseEnter = contextSafe((e) => {
     if (isMobile) return; // Skip animation logic if on mobile
-    const rect = containerRef.current.getBoundingClientRect();
-    const rectHeight = containerRef.current.offsetHeight;
+    const rect = openingRef.current.getBoundingClientRect();
+    const rectHeight = openingRef.current.offsetHeight;
     const mouseYInElement = e.clientY - rect.top;
 
     let leftValue = mouseYInElement / rectHeight;
@@ -62,15 +62,20 @@ const OpeningPage = forwardRef((props, containerRef) => {
   });
 
   return (
-    <div className={styles.wrapper} ref={containerRef}>
+    <div className={styles.wrapper} ref={openingRef}>
       {letters.map((letter, index) => (
-        <div key={index} className={styles.column} ref={(el) => (columnsRef.current[index] = el)} onMouseEnter={handleMouseEnter}>
+        <div
+          key={index}
+          className={styles.column}
+          ref={(el) => (columnsRef.current[index] = el)}
+          onMouseEnter={handleMouseEnter}
+        >
           <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
           <img src={`/assets/images/GOODGAME/${letter}.png`} alt={letter} />
         </div>
       ))}
     </div>
   );
-});
+};
 
 export default OpeningPage;

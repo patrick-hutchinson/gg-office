@@ -25,7 +25,7 @@ export default function HeaderMobile({ location }) {
       {showMenu && (
         <div className={`${styles.expandMenu}`}>
           <li className={`${styles.button} button active`}>
-            <Link to="/work">Work</Link>
+            <Link to="/">Work</Link>
           </li>
           <li className={`${styles.button} button active`}>
             <Link to="/about">About</Link>

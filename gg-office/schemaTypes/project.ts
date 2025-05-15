@@ -42,7 +42,7 @@ export const project = defineType({
           type: 'number',
           title: 'Number of images in row',
           validation: (Rule) =>
-            Rule.min(1).max(3).error('You can select between 1 and 3 images per row.'),
+            Rule.min(1).max(4).error('You can select between 1 and 4 images per row.'),
         },
       ],
       description:

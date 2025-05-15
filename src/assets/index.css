@@ -76,14 +76,14 @@ body {
 }
 
 #content {
+  position: absolute;
   padding: var(--margin);
 }
-#content.animate {
-  transform: translateY(calc(100vh - 45px));
-}
-#content.animate-in {
-  transition: var(--opening-transition-duration) ease;
-  transform: translateY(0) !important;
+
+#opening {
+  position: absolute;
+  height: "calc(100dvh - 45px)";
+  width: 100%;
 }
 
 main {

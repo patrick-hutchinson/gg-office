@@ -1,11 +1,9 @@
 import React from "react";
 
-import { useEffect, useState, useRef } from "react";
-
 import styles from "./styles/HeaderDesktop.module.css";
 import { Link } from "react-router-dom";
 
-export default function HeaderDesktop({ location }) {
+export default function HeaderDesktop({ location, setShowOpening }) {
   let [isDarkMode, setIsDarkMode] = React.useState(true);
 
   function handleThemeSwitch() {
@@ -24,20 +22,19 @@ export default function HeaderDesktop({ location }) {
     <div className={`${styles.headerDesktop}`}>
       <nav>
         <ul className={`${styles.navigation}`}>
-          <li className={`${styles.button} button ${location.includes("gg–office") ? "active" : ""}`}>
+          <li className={`button`} onClick={() => setShowOpening(true)}>
             <Link to="/">GG–OFFICE</Link>
           </li>
-
-          <li className={`${styles.button} button ${location.includes("work") ? "active" : ""}`}>
-            <Link to="/work">Work</Link>
+          <li className={`button ${location === "/" ? "active" : ""}`} onClick={() => setShowOpening(false)}>
+            <Link to="/">Work</Link>
           </li>
-          <li className={`${styles.button} button ${location.includes("about") ? "active" : ""}`}>
+          <li className={`button ${location.includes("about") ? "active" : ""}`}>
             <Link to="/about">About</Link>
           </li>
-          <li className={`${styles.button} button ${location.includes("research") ? "active" : ""}`}>
+          <li className={`button ${location.includes("research") ? "active" : ""}`}>
             <Link to="/research">Research</Link>
           </li>
-          <li className={`${styles.button} button ${location.includes("contact") ? "active" : ""}`}>
+          <li className={`button ${location.includes("contact") ? "active" : ""}`}>
             <Link to="/contact">Contact</Link>
           </li>
         </ul>
