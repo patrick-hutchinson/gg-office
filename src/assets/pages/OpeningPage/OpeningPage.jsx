@@ -9,7 +9,7 @@ import { useGSAP } from "@gsap/react";
 
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 
-const OpeningPage = ({ openingRef }) => {
+const OpeningPage = forwardRef((props, openingRef) => {
   const { isMobile } = useContext(GlobalStateContext); // Access isMobile from the context
 
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
@@ -76,6 +76,6 @@ const OpeningPage = ({ openingRef }) => {
       ))}
     </div>
   );
-};
+});
 
 export default OpeningPage;

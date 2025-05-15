@@ -76,13 +76,12 @@ export default function Layout() {
       >
         <motion.div
           id="opening"
-          ref={openingRef}
           initial={false}
           animate={showOpening ? "inView" : "outOfView"}
           variants={openingVariants}
           onAnimationComplete={() => handleAnimationComplete()}
         >
-          <OpeningPage openingRef={openingRef} />
+          <OpeningPage ref={openingRef} />
         </motion.div>
         <motion.div
           id="content"
