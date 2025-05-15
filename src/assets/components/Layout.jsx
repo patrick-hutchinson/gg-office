@@ -3,7 +3,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
-
 import { easeInOut, motion } from "framer-motion";
 
 import "./styles/Layout.css";
@@ -40,8 +39,14 @@ export default function Layout() {
     showOpening && lenis?.stop();
   }, [lenis]); // Initially stop lenis, if the Opening is visible
 
+  useEffect(() => {
+    if (showOpening) {
+      console.log("scrollin content to the top!");
+      contentRef.current.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [showOpening]);
+
   const handleAnimationComplete = () => {
-    console.log("handling animation cleanup");
     showOpening ? lenis?.stop() : lenis?.start();
   }; // After the animation is complete, handle the lenis state
 

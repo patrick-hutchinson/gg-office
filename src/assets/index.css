@@ -76,7 +76,7 @@ body {
 }
 
 #content {
-  position: absolute;
+  /* position: absolute; */
   padding: var(--margin);
 }
 
