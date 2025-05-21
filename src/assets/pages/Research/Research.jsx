@@ -7,7 +7,7 @@ import Rellax from "rellax";
 import Loading from "../../components/Loading/Loading";
 
 import { getFileSource } from "../../utils/getFileSource";
-import { renderFile } from "../../utils/renderFile";
+import RenderFile from "../../utils/renderFile";
 
 import styles from "./styles/Research.module.css";
 
@@ -33,8 +33,7 @@ export default function Research() {
   if (!research) return <Loading />;
 
   let Media = ({ project }) => {
-    const fileInfo = getFileSource(project);
-    return renderFile(fileInfo);
+    <RenderFile source={getFileSource(project, { width: 800 })} />;
   };
 
   let Images = () => {

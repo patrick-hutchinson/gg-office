@@ -24,14 +24,6 @@ export default function Layout() {
   const [hasRouteChanged, setHasRouteChanged] = useState(false);
 
   useEffect(() => {
-    setHasRouteChanged(location.pathname == "/" ? true : false);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    console.log(showOpening, "showOpening?");
-  }, [showOpening]);
-
-  useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
   }, []); // Always scroll to the top
 
@@ -40,9 +32,12 @@ export default function Layout() {
   }, [lenis]); // Initially stop lenis, if the Opening is visible
 
   useEffect(() => {
-    if (showOpening) {
-      console.log("scrollin content to the top!");
-      contentRef.current.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    setHasRouteChanged(location.pathname == "/" ? true : false);
+  }, [location.pathname]); // Set the RouteHasChangedVariable
+
+  useEffect(() => {
+    if (showOpening && lenis) {
+      lenis.scrollTo(0, { offset: 0, duration: 0.5, easing: (t) => 1 - Math.pow(1 - t, 3) });
     }
   }, [showOpening]);
 
@@ -73,8 +68,8 @@ export default function Layout() {
   };
 
   return (
-    <ReactLenis root>
-      <motion.div
+    <ReactLenis root smooth={false}>
+      <div
         id="container"
         onClick={() => showOpening && setShowOpening(false)}
         onWheel={() => showOpening && setShowOpening(false)}
@@ -100,7 +95,7 @@ export default function Layout() {
           <Outlet />
           <Footer />
         </motion.div>
-      </motion.div>
+      </div>
     </ReactLenis>
   );
 }

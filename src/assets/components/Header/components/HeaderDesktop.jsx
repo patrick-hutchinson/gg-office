@@ -39,9 +39,9 @@ export default function HeaderDesktop({ location, setShowOpening }) {
           </li>
         </ul>
       </nav>
-      <div className="switchTheme" onClick={handleThemeSwitch}>
+      {/* <div className="switchTheme" onClick={handleThemeSwitch}>
         SWITCH
-      </div>
+      </div> */}
       <p>Independent graphic and motion agency based in Sicily</p>
     </div>
   );

@@ -1,25 +1,26 @@
 import imageUrlBuilder from "@sanity/image-url";
-import sanityClient from "/src/client.js"; // Adjust this based on your file structure
+import sanityClient from "/src/client.js";
 
 const builder = imageUrlBuilder(sanityClient);
 
-export function getFileSource(file) {
-  let projectID = builder.options.projectId;
-  let dataset = builder.options.dataset;
-
+export function getFileSource(file, dimensions) {
   const type = file._type;
 
   if (type === "file") {
     const [_prefix, fileId, extension] = file.asset._ref.split("-");
-    return {
-      src: `https://cdn.sanity.io/files/${projectID}/${dataset}/${fileId}.${extension}`,
-      extension: extension,
-    };
-  } else if (type === "image") {
-    const [_prefix, fileId, resolution, extension] = file.asset._ref.split("-");
-    return {
-      src: `https://cdn.sanity.io/images/${projectID}/${dataset}/${fileId}-${resolution}.${extension}`,
-      extension: extension,
-    };
+    const projectID = builder.options.projectId;
+    const dataset = builder.options.dataset;
+    return `https://cdn.sanity.io/files/${projectID}/${dataset}/${fileId}.${extension}`;
   }
+
+  if (type === "image") {
+    console.log("tye is an image");
+    let image = builder.image(file);
+    if (dimensions?.width) {
+      image = image.width(dimensions.width);
+    }
+    return image.url();
+  }
+
+  return null;
 }

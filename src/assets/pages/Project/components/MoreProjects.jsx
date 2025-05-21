@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./styles/MoreProjects.module.css";
 import { getFileSource } from "../../../utils/getFileSource";
-import { renderFile } from "../../../utils/renderFile";
+import RenderFile from "../../../utils/renderFile";
 
 export default function MoreProjects({ work }) {
   const moreprojectsRef = useRef(null);
@@ -25,11 +25,6 @@ export default function MoreProjects({ work }) {
     }
   }
 
-  let Media = ({ project }) => {
-    const fileInfo = getFileSource(project);
-    return renderFile(fileInfo);
-  };
-
   let ProjectList = (
     <div className={styles["moreprojects-wrapper"]}>
       <div className={styles["moreprojects"]} ref={moreprojectsRef}>
@@ -37,7 +32,7 @@ export default function MoreProjects({ work }) {
           return (
             project.slug && (
               <Link to={`/work/${project.slug.current}`} key={index}>
-                {project.thumbnail && <Media project={project.thumbnail} />}
+                {project.thumbnail && <RenderFile source={getFileSource(project.thumbnail, { width: 800 })} />}
               </Link>
             )
           );

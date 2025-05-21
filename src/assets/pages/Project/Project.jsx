@@ -3,10 +3,10 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
+import RenderFile from "../../utils/renderFile";
 import sanityClient from "/src/client.js";
 
 import { getFileSource } from "../../utils/getFileSource";
-import { renderFile } from "../../utils/renderFile";
 
 import styles from "./styles/Project.module.css";
 
@@ -44,23 +44,12 @@ export default function Project() {
 
   const project = work.find((project) => project.slug.current === slug);
 
-  let Media = ({ project }) => {
-    const fileInfo = getFileSource(project.coverimage);
-    return renderFile(fileInfo);
-  };
-
   return (
     <main>
-      <section>
-        <Media project={project} className={`${styles.coverImage}`} alt={project.name} />
-      </section>
-
+      <RenderFile source={getFileSource(project.coverimage, { width: 800 })} />;
       <ProjectInfo project={project} />
-
       {project.imagegallery && <ImageGallery project={project} />}
-
       {project.creditsInhouse && project.creditsClient && <Credits project={project} />}
-
       <MoreProjects work={work} />
     </main>
   );

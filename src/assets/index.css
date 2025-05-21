@@ -75,15 +75,20 @@ body {
   transition: background 0.3s;
 }
 
-#content {
-  /* position: absolute; */
-  padding: var(--margin);
+#container {
+  /* position: relative; */
+  /* overflow-y: hidden; */
 }
 
 #opening {
   position: absolute;
   height: "calc(100dvh - 45px)";
   width: 100%;
+}
+
+#content {
+  padding: var(--margin);
+  /* overflow: auto; */
 }
 
 main {

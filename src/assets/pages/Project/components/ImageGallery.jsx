@@ -1,22 +1,9 @@
-import React from "react";
-
-import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
-
-import sanityClient from "/src/client.js";
-import imageUrlBuilder from "@sanity/image-url";
-
 import styles from "./styles/ImageGallery.module.css";
 
 import { getFileSource } from "../../../utils/getFileSource";
-import { renderFile } from "../../../utils/renderFile";
+import RenderFile from "../../../utils/renderFile";
 
 export default function ImageGallery({ project }) {
-  let Media = ({ project }) => {
-    const fileInfo = getFileSource(project);
-    return renderFile(fileInfo);
-  };
-
   let Images = () => {
     let index = 0; // Initialize the index for slicing images
 
@@ -32,10 +19,9 @@ export default function ImageGallery({ project }) {
 
         return (
           <div key={rowIndex} className={styles.galleryRow} style={rowStyles}>
-            {rowImages.map((image, imgIndex) => (
-              // <img key={imgIndex} src={urlFor(image)} alt="" />
-              <Media project={image} key={imgIndex} />
-            ))}
+            {rowImages.map((image, imgIndex) => {
+              return <RenderFile source={getFileSource(image, { width: 800 })} key={imgIndex} />;
+            })}
           </div>
         );
       })

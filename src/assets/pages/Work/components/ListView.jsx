@@ -8,7 +8,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import styles from "./styles/ListView.module.css";
 
 import { getFileSource } from "../../../utils/getFileSource";
-import { renderFile } from "../../../utils/renderFile";
+
+import RenderFile from "../../../utils/renderFile";
 
 export default function ListView({ work, selectedFilters, activeView }) {
   let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
@@ -49,14 +50,10 @@ export default function ListView({ work, selectedFilters, activeView }) {
     previewImageRef.current.style.display = "none";
   }
 
-  let Media = () => {
-    return renderFile(hoverImage);
-  };
-
   let ImagePreview = (
     <div className={`${styles.imagepreview}`}>
       <div className={`${styles["media-wrapper"]}`} ref={previewImageRef}>
-        <Media />
+        <RenderFile source={hoverImage} />;
       </div>
     </div>
   );

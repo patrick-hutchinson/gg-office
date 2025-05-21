@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { useEffect, useState, useRef } from "react";
+
 import styles from "./Work.module.css";
 
 import ImageView from "./components/ImageView";
@@ -10,33 +11,15 @@ import sanityClient from "/src/client.js";
 import ViewOptions from "./components/ViewOptions";
 import Loading from "../../components/Loading/Loading";
 import OpeningPage from "../OpeningPage/OpeningPage";
+import { GlobalDataContext } from "../../context/GlobalDataContext";
 
 export default function Work() {
-  let [work, setWork] = useState();
+  const { work } = useContext(GlobalDataContext);
 
   let [activeView, setActiveView] = useState("Image View");
 
   let [filters, setFilters] = useState();
   let [selectedFilters, setSelectedFilters] = useState();
-
-  useEffect(() => {
-    sanityClient
-      .fetch(
-        `*[_type=="project"]{
-    name,
-    coverimage,
-    year,
-    description,
-    imagegallery,
-    filtering[]->{title},
-    credits,
-    slug,
-    thumbnail
-}`
-      )
-      .then((data) => setWork(data))
-      .catch(console.error);
-  }, []);
 
   useEffect(() => {
     sanityClient
@@ -56,7 +39,11 @@ export default function Work() {
   if (!work || !selectedFilters || !filters) return <Loading />; // Early return if there's no data
 
   return (
-    <main>
+    <main
+      onScroll={(e) => {
+        console.log(e, "scroll");
+      }}
+    >
       <ViewOptions
         activeView={activeView}
         setActiveView={setActiveView}

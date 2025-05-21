@@ -4,7 +4,7 @@ import styles from "./styles/ImageView.module.css"; // Updated import for CSS mo
 import { Link } from "react-router-dom";
 
 import { getFileSource } from "../../../utils/getFileSource";
-import { renderFile } from "../../../utils/renderFile";
+import RenderFile from "../../../utils/renderFile";
 
 export default function ImageView({ work, selectedFilters, activeView }) {
   // Helper function to determine if a project should be rendered
@@ -26,11 +26,6 @@ export default function ImageView({ work, selectedFilters, activeView }) {
     );
   };
 
-  let Media = ({ project }) => {
-    const fileInfo = getFileSource(project.thumbnail);
-    return renderFile(fileInfo);
-  };
-
   return (
     <div className={`${styles.projectwraper}`}>
       <div className={`${styles.imageview} ${activeView === "Image View" ? "visible" : "hidden"}`}>
@@ -40,7 +35,9 @@ export default function ImageView({ work, selectedFilters, activeView }) {
           return (
             project.slug && (
               <Link className={styles.project} to={`/work/${project.slug.current}`} key={index}>
-                <div className={`${styles["project-front"]}`}>{project.thumbnail && <Media project={project} />}</div>
+                <div className={`${styles["project-front"]}`}>
+                  {project.thumbnail && <RenderFile source={getFileSource(project.thumbnail, { width: 600 })} />}
+                </div>
 
                 <div className={`${styles["project-details-outer"]}`}>
                   <div className={styles["project-name"]}>{project.name}</div>
