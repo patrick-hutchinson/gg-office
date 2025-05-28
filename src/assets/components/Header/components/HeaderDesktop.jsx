@@ -1,10 +1,10 @@
-import React from "react";
+import { useState } from "react";
 
 import styles from "./styles/HeaderDesktop.module.css";
 import Link from "next/link";
 
 export default function HeaderDesktop({ location, setShowOpening }) {
-  let [isDarkMode, setIsDarkMode] = React.useState(true);
+  let [isDarkMode, setIsDarkMode] = useState(true);
 
   function handleThemeSwitch() {
     var root = document.querySelector(":root");

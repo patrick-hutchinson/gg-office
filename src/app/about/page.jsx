@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 import styles from "./styles/About.module.css";
 import Loading from "../../../src/assets/components/Loading/Loading";

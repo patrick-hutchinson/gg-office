@@ -1,12 +1,10 @@
-import React from "react";
-
-import { useEffect, useState, useRef } from "react";
-
 import styles from "./styles/HeaderMobile.module.css";
 import Link from "next/link";
 
+import { useState } from "react";
+
 export default function HeaderMobile({ location }) {
-  let [showMenu, setShowMenu] = React.useState(false);
+  let [showMenu, setShowMenu] = useState(false);
 
   function expandMenu() {
     setShowMenu(!showMenu);

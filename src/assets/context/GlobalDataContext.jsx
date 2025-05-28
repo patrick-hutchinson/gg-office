@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import sanityClient from "/src/client.js";
 
 export const GlobalDataContext = createContext();

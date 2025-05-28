@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PortableText } from "@portabletext/react";
 
 import styles from "./styles/ProjectInfo.module.css";

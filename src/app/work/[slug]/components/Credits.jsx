@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./styles/Credits.module.css";
 
 export default function Credits({ project }) {

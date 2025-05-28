@@ -1,8 +1,6 @@
 "use client";
 
-import React from "react";
-
-import { useEffect, useState, useRef, forwardRef, useContext } from "react";
+import { useEffect, useRef, forwardRef, useContext } from "react";
 
 import styles from "./styles/OpeningPage.module.css";
 

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+
 import styles from "../Work.module.css";
 
 import Filtering from "./Filtering";

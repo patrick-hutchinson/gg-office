@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import { easeInOut, motion } from "framer-motion";

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useContext } from "react";
+import { useContext } from "react";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 import ImageView from "./work/components/ImageView";
 import ListView from "./work/components/ListView";
