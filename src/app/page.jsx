@@ -2,7 +2,7 @@
 
 import React, { useContext } from "react";
 
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 import ImageView from "./work/components/ImageView";
 import ListView from "./work/components/ListView";
