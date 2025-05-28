@@ -1,3 +1,5 @@
+"use client";
+
 import RenderMedia from "../../../assets/utils/RenderMedia";
 
 import styles from "./styles/Project.module.css";
