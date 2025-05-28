@@ -1,8 +1,9 @@
-import { useContext } from "react";
+"use client";
 
 import styles from "./styles/Contact.module.css";
 import Loading from "../../assets/components/Loading/Loading";
-import GlobalDataContext from "../../assets/context/GlobalDataContext";
+import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
+import React, { useContext } from "react";
 
 export default function Contact() {
   const { contact } = useContext(GlobalDataContext);
@@ -34,16 +35,14 @@ export default function Contact() {
     return (
       <section>
         <h5>Socials</h5>
-        {socials.map((socialEntry, index) => {
-          return (
-            <>
-              <a href={`${socialEntry.url}`} target="_blank" key={index} className="button">
-                {socialEntry.platform}
-              </a>
-              <br />
-            </>
-          );
-        })}
+        {socials.map((socialEntry, index) => (
+          <React.Fragment key={index}>
+            <a href={socialEntry.url} target="_blank" className="button">
+              {socialEntry.platform}
+            </a>
+            <br />
+          </React.Fragment>
+        ))}
       </section>
     );
   };

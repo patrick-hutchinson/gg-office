@@ -109,11 +109,13 @@ export default function About() {
 
     return (
       <section className="internships">
-        <h5>Interships</h5>
+        <h5>Internships</h5>
         {internships.map((intern, index) => {
+          const isLast = index === internships.length - 1;
           return (
             <span onClick={() => handleInternClick(intern)} className={`${styles.intern} button`} key={index}>
-              {intern},{"\u00A0"}
+              {intern}
+              {!isLast && ",\u00A0"}
             </span>
           );
         })}

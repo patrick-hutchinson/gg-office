@@ -171,7 +171,7 @@ thumbnail {
 
   return (
     <GlobalDataContext.Provider
-      value={{ work, contact, filters, research, selectedFilters, setSelectedFilters, isLoading, error }}
+      value={{ work, about, contact, filters, research, selectedFilters, setSelectedFilters, isLoading, error }}
     >
       {children}
     </GlobalDataContext.Provider>

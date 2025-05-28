@@ -33,7 +33,7 @@ export default function Research() {
 
           return (
             <div data-rellax-speed={randomSpeed} key={index} className="rellax">
-              <RenderMedia medium={image} />;
+              <RenderMedia medium={image} />
             </div>
           );
         })}
