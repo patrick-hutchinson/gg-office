@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { GlobalStateContext } from "/src/assets/context/GlobalStateContext";
 
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 
 import styles from "./styles/Header.module.css";
 

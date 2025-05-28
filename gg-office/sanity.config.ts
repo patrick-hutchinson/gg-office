@@ -3,6 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {muxInput} from 'sanity-plugin-mux-input'
+import {thumbnail} from './schemaTypes/types/thumbnail'
 
 export default defineConfig({
   name: 'default',
@@ -14,6 +15,6 @@ export default defineConfig({
   plugins: [structureTool(), visionTool(), muxInput()],
 
   schema: {
-    types: schemaTypes,
+    types: [...schemaTypes, thumbnail],
   },
 })

@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {thumbnail} from './types/thumbnail'
 
 export const project = defineType({
   name: 'project',
@@ -10,14 +11,39 @@ export const project = defineType({
     defineField({
       name: 'thumbnail',
       title: 'Thumbnail',
-      type: 'file',
+      type: 'thumbnail',
       description: 'As seen on home page',
     }),
     defineField({
       name: 'coverimage',
       title: 'Cover Image',
-      type: 'file',
-      description: 'The first image on the project page',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          hidden: ({parent}) => !!parent?.video,
+        }),
+        defineField({
+          name: 'video',
+          title: 'Video',
+          type: 'mux.video',
+          hidden: ({parent}) => !!parent?.image,
+        }),
+      ],
+      preview: {
+        select: {
+          image: 'image',
+          video: 'video',
+        },
+        prepare({image, video}) {
+          return {
+            title: image ? 'Cover Image' : 'Cover Video',
+            media: image || video,
+          }
+        },
+      },
     }),
     defineField({name: 'year', title: 'Year', type: 'number'}),
     defineField({name: 'description', title: 'Description', type: 'array', of: [{type: 'block'}]}),

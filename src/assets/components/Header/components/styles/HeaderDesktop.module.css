@@ -17,7 +17,7 @@
   margin-right: 30px;
 }
 
-header p {
+.headerDesktop p {
   font-size: var(--font-size-100);
   line-height: var(--line-height-100);
 }

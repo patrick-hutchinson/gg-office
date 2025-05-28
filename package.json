@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@mux/blurup": "^1.0.2",
+    "@mux/mux-player-react": "^3.4.0",
+    "@plaiceholder/next": "^3.0.0",
     "@portabletext/react": "^3.2.1",
     "@sanity/asset-utils": "^2.0.6",
     "@sanity/client": "^6.22.2",
@@ -18,11 +20,12 @@
     "@studio-freight/react-lenis": "^0.0.47",
     "framer-motion": "^12.11.3",
     "gsap": "^3.12.5",
+    "next": "^15.3.2",
+    "plaiceholder": "^3.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.27.0",
     "rellax": "^1.12.1",
-    "sanity-plugin-mux-input": "^2.4.0"
+    "sanity-plugin-mux-input": "^2.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
@@ -34,6 +37,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "typescript": "5.8.3",
     "vite": "^5.4.0"
   }
 }

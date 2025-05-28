@@ -14,7 +14,6 @@ export function getFileSource(file, dimensions) {
   }
 
   if (type === "image") {
-    console.log("tye is an image");
     let image = builder.image(file);
     if (dimensions?.width) {
       image = image.width(dimensions.width);

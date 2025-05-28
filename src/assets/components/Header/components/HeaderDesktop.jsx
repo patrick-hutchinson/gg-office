@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./styles/HeaderDesktop.module.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function HeaderDesktop({ location, setShowOpening }) {
   let [isDarkMode, setIsDarkMode] = React.useState(true);
@@ -23,19 +23,19 @@ export default function HeaderDesktop({ location, setShowOpening }) {
       <nav>
         <ul className={`${styles.navigation}`}>
           <li className={`button`} onClick={() => setShowOpening(true)}>
-            <Link to="/">GG–OFFICE</Link>
+            <Link href="/">GG–OFFICE</Link>
           </li>
           <li className={`button ${location === "/" ? "active" : ""}`} onClick={() => setShowOpening(false)}>
-            <Link to="/">Work</Link>
+            <Link href="/">Work</Link>
           </li>
           <li className={`button ${location.includes("about") ? "active" : ""}`}>
-            <Link to="/about">About</Link>
+            <Link href="/about">About</Link>
           </li>
           <li className={`button ${location.includes("research") ? "active" : ""}`}>
-            <Link to="/research">Research</Link>
+            <Link href="/research">Research</Link>
           </li>
           <li className={`button ${location.includes("contact") ? "active" : ""}`}>
-            <Link to="/contact">Contact</Link>
+            <Link href="/contact">Contact</Link>
           </li>
         </ul>
       </nav>

@@ -10,8 +10,10 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "esModuleInterop": true,
+    "plugins": [{"name": "next"}]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["./src", "**/*.ts", "./dist/types/**/*.ts", "./next-env.d.ts"],
   "exclude": ["node_modules"]
 }
