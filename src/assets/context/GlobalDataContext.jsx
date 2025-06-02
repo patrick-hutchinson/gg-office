@@ -55,23 +55,21 @@ export const GlobalDataProvider = ({ children }) => {
     year,
     description,
 imagegallery[]{
-  "type": _type,
-  "url": select(
-    _type == "image" => asset->url,
-    _type == "file" => asset->url
+  "_id": select(
+    defined(image) => image.asset->_id,
+    defined(video) => video.asset->_id
   ),
-  "lqip": select(
-    _type == "image" => asset->metadata.lqip,
-    _type == "file" => null
+  "type": select(
+    defined(image) => "image",
+    defined(video) => "video"
   ),
-  "width": select(
-    _type == "image" => asset->metadata.dimensions.width,
-    _type == "file" => null
-  ),
-  "height": select(
-    _type == "image" => asset->metadata.dimensions.height,
-    _type == "file" => null
-  )
+  "url": image.asset->url,
+  "lqip": image.asset->metadata.lqip,
+  "width": image.asset->metadata.dimensions.width,
+  "height": image.asset->metadata.dimensions.height,
+  "status": video.asset->status,
+  "assetId": video.asset->assetId,
+  "playbackId": video.asset->playbackId
 },
     filtering[]->{title},
     creditsInhouse,

@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles/Filtering.module.css";
 
 export default function Filtering({ filterArray, selectedFilters, setSelectedFilters }) {
   let [allSelected, setAllSelected] = useState(true); // Track if "All" is selected
+
+  useEffect(() => {
+    if (selectedFilters.length === 0) {
+      setAllSelected(true);
+    } else if (selectedFilters.length === filterArray.length) {
+      setAllSelected(true);
+    } else {
+      setAllSelected(false);
+    }
+  }, [selectedFilters]);
 
   // Handle clicking "All"
   function handleAllFilter(e) {
@@ -24,9 +34,7 @@ export default function Filtering({ filterArray, selectedFilters, setSelectedFil
         const updatedFilters = prevSelectedFilters.filter((f) => f !== filter);
 
         // Use ternary for the conditional return
-        return updatedFilters.length === 0
-          ? (setAllSelected(true), filterArray) // If no filters left, set "All" and return all filters
-          : updatedFilters; // Otherwise, return the updated filters
+        return updatedFilters.length === 0 ? filterArray : updatedFilters;
       }
 
       // Otherwise, add the new filter

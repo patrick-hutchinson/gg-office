@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function RenderMedia({ medium }) {
   let [isLoaded, setIsLoaded] = useState(false);
-  console.log(medium, "medium");
+
   let extension;
 
   if (!medium) return; // Handle early return
@@ -30,8 +30,12 @@ export default function RenderMedia({ medium }) {
 
   // Handle Mux Video
   if (medium.type === "video") {
+    if (medium.status !== "ready") {
+      return <p>Video is processing, please wait!</p>;
+    }
+
     return (
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
         {!isLoaded && (
           <Image
             src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}
