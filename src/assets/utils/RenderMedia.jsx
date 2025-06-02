@@ -3,27 +3,24 @@
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
 
-import { getFileSource } from "./getFileSource";
 import { useState } from "react";
 
 export default function RenderMedia({ medium }) {
   let [isLoaded, setIsLoaded] = useState(false);
 
-  let extension;
-
   if (!medium) return; // Handle early return
 
-  if (medium.type == "file") {
-    console.log("triggered type = file");
-    extension = medium.url.split(".").pop().split("?")[0].toLowerCase();
-  }
-  if (medium._type == "file") {
-    console.log("triggered _type = file");
-    extension = getFileSource(medium).split(".").pop().split("?")[0].toLowerCase();
-  }
+  // if (medium.type == "file") {
+  //   console.log("triggered type = file");
+  //   extension = medium.url.split(".").pop().split("?")[0].toLowerCase();
+  // }
+  // if (medium._type == "file") {
+  //   console.log("triggered _type = file");
+  //   extension = getFileSource(medium).split(".").pop().split("?")[0].toLowerCase();
+  // }
 
-  const imageExtensions = ["jpg", "jpeg", "png", "tif", "gif", "bmp", "webp", "svg"];
-  const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm"];
+  // const imageExtensions = ["jpg", "jpeg", "png", "tif", "gif", "bmp", "webp", "svg"];
+  // const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm"];
 
   // Handle Sanity Image
   if (medium.type === "image") {
@@ -81,28 +78,28 @@ export default function RenderMedia({ medium }) {
     );
   }
 
-  // Handle File Image
-  if (medium._type === "file" && imageExtensions.includes(extension)) {
-    console.log("type detected: 'file (image)', type: '_type' ");
-    return <img src={getFileSource(medium)} alt="project image" />;
-  }
+  // // Handle File Image
+  // if (medium._type === "file" && imageExtensions.includes(extension)) {
+  //   console.log("type detected: 'file (image)', type: '_type' ");
+  //   return <img src={getFileSource(medium)} alt="project image" />;
+  // }
 
-  // Handle File Video
-  if (medium._type === "file" && videoExtensions.includes(extension)) {
-    console.log("type detected: 'file (video)', type: '_type' ");
-    return (
-      <video autoPlay loop muted playsInline>
-        <source src={getFileSource(medium)} type={`video/${extension}`} />
-      </video>
-    );
-  }
+  // // Handle File Video
+  // if (medium._type === "file" && videoExtensions.includes(extension)) {
+  //   console.log("type detected: 'file (video)', type: '_type' ");
+  //   return (
+  //     <video autoPlay loop muted playsInline>
+  //       <source src={getFileSource(medium)} type={`video/${extension}`} />
+  //     </video>
+  //   );
+  // }
 
-  if (medium.type === "file" && videoExtensions.includes(extension)) {
-    console.log("type detected: 'file (video)', type: 'type' ");
-    return (
-      <video autoPlay loop muted playsInline>
-        <source src={medium.url} type={`video/${extension}`} />
-      </video>
-    );
-  }
+  // if (medium.type === "file" && videoExtensions.includes(extension)) {
+  //   console.log("type detected: 'file (video)', type: 'type' ");
+  //   return (
+  //     <video autoPlay loop muted playsInline>
+  //       <source src={medium.url} type={`video/${extension}`} />
+  //     </video>
+  //   );
+  // }
 }
