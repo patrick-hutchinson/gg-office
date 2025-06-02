@@ -13,7 +13,7 @@ import Credits from "./components/Credits";
 import MoreProjects from "./components/MoreProjects";
 
 export default function Project({ slug }) {
-  const { work, isLoading } = useContext(GlobalDataContext);
+  const { work } = useContext(GlobalDataContext);
 
   if (!work) return <p>Loading...</p>;
 

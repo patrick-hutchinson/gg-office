@@ -29,7 +29,7 @@ export default function ClientLayout({ children }) {
 
   useEffect(() => {
     showOpening && lenis?.stop();
-  }, [lenis]);
+  }, [lenis, showOpening]);
 
   useEffect(() => {
     setHasRouteChanged(pathname === "/");
@@ -39,7 +39,7 @@ export default function ClientLayout({ children }) {
     if (showOpening && lenis) {
       lenis.scrollTo(0, { offset: 0, duration: 0.5, easing: (t) => 1 - Math.pow(1 - t, 3) });
     }
-  }, [showOpening]);
+  }, [showOpening, lenis]);
 
   const handleAnimationComplete = () => {
     showOpening ? lenis?.stop() : lenis?.start();

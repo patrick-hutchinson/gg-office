@@ -10,6 +10,8 @@ import { useGSAP } from "@gsap/react";
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 
 const OpeningPage = forwardRef((props, openingRef) => {
+  OpeningPage.displayName = "OpeningPage";
+
   const { isMobile } = useContext(GlobalStateContext); // Access isMobile from the context
 
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
@@ -37,9 +39,9 @@ const OpeningPage = forwardRef((props, openingRef) => {
   );
 
   useEffect(() => {
-    // Cleanup function
+    const cleanupTargets = columnsRef.current;
     return () => {
-      gsap.killTweensOf(columnsRef.current);
+      gsap.killTweensOf(cleanupTargets);
     };
   }, []);
 

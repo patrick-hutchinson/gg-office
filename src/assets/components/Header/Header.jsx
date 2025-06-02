@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import { GlobalStateContext } from "/src/assets/context/GlobalStateContext";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 
 import styles from "./styles/Header.module.css";
 

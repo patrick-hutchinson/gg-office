@@ -12,7 +12,7 @@ export default function Filtering({ filterArray, selectedFilters, setSelectedFil
     } else {
       setAllSelected(false);
     }
-  }, [selectedFilters]);
+  }, [selectedFilters, filterArray.length]);
 
   // Handle clicking "All"
   function handleAllFilter(e) {
