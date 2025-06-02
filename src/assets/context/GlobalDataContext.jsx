@@ -39,6 +39,8 @@ export const GlobalDataProvider = ({ children }) => {
     defined(video) => video.asset->playbackId,
     defined(image) => null
   ),
+    "width": select(defined(image) => image.asset->metadata.dimensions.width, true => null),
+  "height": select(defined(image) => image.asset->metadata.dimensions.height, true => null),
   "assetId": select(
     defined(video) => video.asset->assetId,
     defined(image) => null
@@ -88,6 +90,8 @@ thumbnail {
     type == "video" && defined(video.asset) => video.asset->playbackId,
     true => null
   ),
+  "width": select(defined(image) => image.asset->metadata.dimensions.width, true => null),
+  "height": select(defined(image) => image.asset->metadata.dimensions.height, true => null),
   "assetId": select(
     type == "video" && defined(video.asset) => video.asset->assetId,
     true => null

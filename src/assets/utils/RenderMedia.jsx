@@ -10,21 +10,21 @@ export default function RenderMedia({ medium }) {
 
   if (!medium) return; // Handle early return
 
-  // if (medium.type == "file") {
-  //   console.log("triggered type = file");
-  //   extension = medium.url.split(".").pop().split("?")[0].toLowerCase();
-  // }
-  // if (medium._type == "file") {
-  //   console.log("triggered _type = file");
-  //   extension = getFileSource(medium).split(".").pop().split("?")[0].toLowerCase();
-  // }
-
-  // const imageExtensions = ["jpg", "jpeg", "png", "tif", "gif", "bmp", "webp", "svg"];
-  // const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm"];
-
   // Handle Sanity Image
   if (medium.type === "image") {
-    return <Image src={medium.url} alt="image" width="800" height="800" placeholder="blur" blurDataURL={medium.lqip} />;
+    return (
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+        <Image
+          src={medium.url}
+          alt="image"
+          width={medium.width}
+          height={medium.height}
+          placeholder="blur"
+          blurDataURL={medium.lqip}
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+    );
   }
 
   // Handle Mux Video
@@ -77,29 +77,4 @@ export default function RenderMedia({ medium }) {
       </div>
     );
   }
-
-  // // Handle File Image
-  // if (medium._type === "file" && imageExtensions.includes(extension)) {
-  //   console.log("type detected: 'file (image)', type: '_type' ");
-  //   return <img src={getFileSource(medium)} alt="project image" />;
-  // }
-
-  // // Handle File Video
-  // if (medium._type === "file" && videoExtensions.includes(extension)) {
-  //   console.log("type detected: 'file (video)', type: '_type' ");
-  //   return (
-  //     <video autoPlay loop muted playsInline>
-  //       <source src={getFileSource(medium)} type={`video/${extension}`} />
-  //     </video>
-  //   );
-  // }
-
-  // if (medium.type === "file" && videoExtensions.includes(extension)) {
-  //   console.log("type detected: 'file (video)', type: 'type' ");
-  //   return (
-  //     <video autoPlay loop muted playsInline>
-  //       <source src={medium.url} type={`video/${extension}`} />
-  //     </video>
-  //   );
-  // }
 }
