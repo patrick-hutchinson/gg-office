@@ -10,6 +10,8 @@ export default function RenderMedia({ medium }) {
 
   if (!medium) return; // Handle early return
 
+  //Render
+
   // Handle Sanity Image
   if (medium.type === "image") {
     return (
