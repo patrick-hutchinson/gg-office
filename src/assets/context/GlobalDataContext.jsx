@@ -55,21 +55,19 @@ export const GlobalDataProvider = ({ children }) => {
     year,
     description,
 imagegallery[]{
+  "type": select(defined(image) => "image", defined(video) => "video"),
   "_id": select(
     defined(image) => image.asset->_id,
-    defined(video) => video.asset->_id
+    defined(video) => video.asset->_id,
+    true => null
   ),
-  "type": select(
-    defined(image) => "image",
-    defined(video) => "video"
-  ),
-  "url": image.asset->url,
-  "lqip": image.asset->metadata.lqip,
-  "width": image.asset->metadata.dimensions.width,
-  "height": image.asset->metadata.dimensions.height,
-  "status": video.asset->status,
-  "assetId": video.asset->assetId,
-  "playbackId": video.asset->playbackId
+  "url": select(defined(image.asset) => image.asset->url, true => null),
+  "lqip": select(defined(image.asset) => image.asset->metadata.lqip, true => null),
+  "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
+  "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
+  "status": select(defined(video.asset) => video.asset->status, true => null),
+  "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
+  "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null)
 },
     filtering[]->{title},
     creditsInhouse,
