@@ -15,6 +15,7 @@ export default function RenderMedia({ medium }) {
     return (
       <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <Image
+          unoptimized
           src={medium.url}
           alt="image"
           width={medium.width ? medium.width : 800}
@@ -42,6 +43,7 @@ export default function RenderMedia({ medium }) {
             // height="20"
             fill
             alt="placeholder image"
+            unoptimized
             style={{
               position: "absolute",
               top: 0,
