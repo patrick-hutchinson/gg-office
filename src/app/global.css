@@ -97,7 +97,7 @@ body {
 
 #opening {
   position: absolute;
-  height: "calc(100dvh - 45px)";
+  /* height: calc(100dvh - 45px); */
   width: 100%;
 }
 

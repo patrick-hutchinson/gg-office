@@ -9,8 +9,6 @@ export default function ImageView({ work, selectedFilters, activeView }) {
 
   if (!work) return <p>Loading...</p>; // Early return if there's no data
 
-  console.log("new work:", work);
-
   let Categories = ({ project }) => {
     return (
       <ul className={styles["project-categories"]}>

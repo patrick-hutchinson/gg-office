@@ -77,30 +77,31 @@ imagegallery[]{
     slug,
     gridStructure,
 thumbnail {
-  type,
+  "type": type,
   "url": select(
-    type == "image" => image.asset->url,
-    type == "video" => null,
+    type == "image" && defined(image.asset) => image.asset->url,
+    true => null
   ),
   "lqip": select(
-    type == "image" => image.asset->metadata.lqip,
-    type == "video" => null
+    type == "image" && defined(image.asset) => image.asset->metadata.lqip,
+    true => null
   ),
   "playbackId": select(
-    type == "video" => video.asset->playbackId,
-    type == "image" => null
+    type == "video" && defined(video.asset) => video.asset->playbackId,
+    true => null
   ),
   "assetId": select(
-    type == "video" => video.asset->assetId,
-    type == "image" => null
+    type == "video" && defined(video.asset) => video.asset->assetId,
+    true => null
   ),
   "status": select(
-    type == "video" => video.asset->status,
-    type == "image" => null
+    type == "video" && defined(video.asset) => video.asset->status,
+    true => null
   ),
   "_id": select(
-    type == "video" => video.asset->_id,
-    type == "image" => image.asset->_id
+    type == "video" && defined(video.asset) => video.asset->_id,
+    type == "image" && defined(image.asset) => image.asset->_id,
+    true => null
   )
 }
   }`

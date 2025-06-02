@@ -25,7 +25,7 @@ export default function ClientLayout({ children }) {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
-  }, []);
+  }, [isHome]); // This works, but the page is still scrolling down on route change
 
   useEffect(() => {
     showOpening && lenis?.stop();
