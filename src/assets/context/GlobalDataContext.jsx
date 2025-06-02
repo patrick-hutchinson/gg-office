@@ -28,30 +28,30 @@ export const GlobalDataProvider = ({ children }) => {
     defined(video) => "video"
   ),
   "url": select(
-    defined(image) => image.asset->url,
+    defined(image.asset) => image.asset->url,
     defined(video) => null
   ),
   "lqip": select(
-    defined(image) => image.asset->metadata.lqip,
+    defined(image.asset) => image.asset->metadata.lqip,
     defined(video) => null
   ),
   "playbackId": select(
-    defined(video) => video.asset->playbackId,
+    defined(video.asset) => video.asset->playbackId,
     defined(image) => null
   ),
-    "width": select(defined(image) => image.asset->metadata.dimensions.width, true => null),
-  "height": select(defined(image) => image.asset->metadata.dimensions.height, true => null),
+    "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
+  "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
   "assetId": select(
-    defined(video) => video.asset->assetId,
+    defined(video.asset) => video.asset->assetId,
     defined(image) => null
   ),
   "status": select(
-    defined(video) => video.asset->status,
+    defined(video.asset) => video.asset->status,
     defined(image) => null
   ),
   "_id": select(
-    defined(video) => video.asset->_id,
-    defined(image) => image.asset->_id
+    defined(video.asset) => video.asset->_id,
+    defined(image.asset) => image.asset->_id
   )
 },
     year,
@@ -59,8 +59,8 @@ export const GlobalDataProvider = ({ children }) => {
 imagegallery[]{
   "type": select(defined(image) => "image", defined(video) => "video"),
   "_id": select(
-    defined(image) => image.asset->_id,
-    defined(video) => video.asset->_id,
+    defined(image.asset) => image.asset->_id,
+    defined(video.asset) => video.asset->_id,
     true => null
   ),
   "url": select(defined(image.asset) => image.asset->url, true => null),
@@ -90,8 +90,8 @@ thumbnail {
     type == "video" && defined(video.asset) => video.asset->playbackId,
     true => null
   ),
-  "width": select(defined(image) => image.asset->metadata.dimensions.width, true => null),
-  "height": select(defined(image) => image.asset->metadata.dimensions.height, true => null),
+  "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
+  "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
   "assetId": select(
     type == "video" && defined(video.asset) => video.asset->assetId,
     true => null
@@ -110,7 +110,6 @@ thumbnail {
       )
       .then((data) => {
         setWork(data);
-        console.log("fetching the data!");
         setIsLoading(false);
       })
       .catch((e) => setError(e));

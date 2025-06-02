@@ -17,8 +17,8 @@ export default function RenderMedia({ medium }) {
         <Image
           src={medium.url}
           alt="image"
-          width={medium.width}
-          height={medium.height}
+          width={medium.width ? medium.width : 800}
+          height={medium.height ? medium.height : 800}
           placeholder="blur"
           blurDataURL={medium.lqip}
           style={{ objectFit: "cover" }}
@@ -38,8 +38,9 @@ export default function RenderMedia({ medium }) {
         {!isLoaded && (
           <Image
             src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}
-            width="20"
-            height="20"
+            // width="20"
+            // height="20"
+            fill
             alt="placeholder image"
             style={{
               position: "absolute",

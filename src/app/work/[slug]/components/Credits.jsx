@@ -11,8 +11,6 @@ export default function Credits({ project }) {
     { key: "photographers", title: "Photography" },
   ];
 
-  console.log(project.credits, "c");
-
   return (
     <section className={styles["credits-wrapper"]}>
       <h2>Credits</h2>

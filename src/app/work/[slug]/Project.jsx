@@ -20,8 +20,6 @@ export default function Project({ slug }) {
   const project = work.find((project) => project.slug.current === slug);
   if (!project) return <p>Project not found.</p>;
 
-  console.log(project, "project");
-
   return (
     <main>
       <div className={styles["project-container"]}>

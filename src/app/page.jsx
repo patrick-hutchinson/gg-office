@@ -20,11 +20,7 @@ export default function Work() {
   if (!work || !filters || !selectedFilters) return <Loading />;
 
   return (
-    <main
-      onScroll={(e) => {
-        console.log(e, "scroll");
-      }}
-    >
+    <main>
       <ViewOptions
         activeView={activeView}
         setActiveView={setActiveView}
