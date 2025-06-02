@@ -14,9 +14,11 @@ export default function RenderMedia({ medium }) {
   if (!medium) return; // Handle early return
 
   if (medium.type == "file") {
+    console.log("triggered type = file");
     extension = medium.url.split(".").pop().split("?")[0].toLowerCase();
   }
   if (medium._type == "file") {
+    console.log("triggered _type = file");
     extension = getFileSource(medium).split(".").pop().split("?")[0].toLowerCase();
   }
 

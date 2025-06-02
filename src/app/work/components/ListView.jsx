@@ -5,8 +5,6 @@ import Link from "next/link";
 
 import styles from "./styles/ListView.module.css";
 
-import { getFileSource } from "../../../assets/utils/getFileSource";
-
 import RenderMedia from "../../../assets/utils/RenderMedia";
 
 export default function ListView({ work, selectedFilters, activeView }) {

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 
 import styles from "./styles/MoreProjects.module.css";
-import { getFileSource } from "../../../../assets/utils/getFileSource";
+
 import RenderMedia from "../../../../assets/utils/RenderMedia";
 
 export default function MoreProjects({ work }) {
