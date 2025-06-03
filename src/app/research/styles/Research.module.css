@@ -1,8 +1,8 @@
-.image-container div {
+.image-container > div {
   height: auto; /* Maintain the aspect ratio */
   will-change: transform; /* Optimize for performance with the Rellax transform */
   position: relative;
-  width: 200px;
+  width: 800px;
   height: auto;
   flex: 1 1 calc(25% - var(--margin)); /* Each image takes 25% of the row minus the gap */
   margin: 10px; /* Add some space between the images */
@@ -13,6 +13,11 @@
   display: flex;
   flex-wrap: wrap; /* Allows wrapping to a new row */
   justify-content: space-between; /* Evenly spaces the images */
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
 }
 
 @media (max-width: 575.98px) {

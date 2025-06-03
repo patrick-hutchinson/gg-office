@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
+// import "@mux/mux-player/dist/styles.css";
 
 import { useState } from "react";
 
@@ -22,6 +23,7 @@ export default function RenderMedia({ medium }) {
           alt="image"
           width={medium.width ? medium.width : 800}
           height={medium.height ? medium.height : 800}
+          // fill
           placeholder="blur"
           blurDataURL={medium.lqip}
           style={{ objectFit: "cover" }}

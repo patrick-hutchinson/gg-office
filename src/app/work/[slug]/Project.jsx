@@ -1,6 +1,7 @@
 "use client";
 
 import RenderMedia from "../../../assets/utils/RenderMedia";
+import Loading from "../../../assets/components/Loading/Loading";
 
 import styles from "./styles/Project.module.css";
 import { useContext } from "react";
@@ -15,7 +16,7 @@ import MoreProjects from "./components/MoreProjects";
 export default function Project({ slug }) {
   const { work } = useContext(GlobalDataContext);
 
-  if (!work) return <p>Loading...</p>;
+  if (!work) return <Loading />;
 
   const project = work.find((project) => project.slug.current === slug);
   if (!project) return <p>Project not found.</p>;

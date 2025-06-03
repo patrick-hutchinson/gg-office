@@ -6,6 +6,7 @@ import Link from "next/link";
 import styles from "./styles/ListView.module.css";
 
 import RenderMedia from "../../../assets/utils/RenderMedia";
+import Loading from "../../../assets/components/Loading/Loading";
 
 export default function ListView({ work, selectedFilters, activeView }) {
   let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
@@ -15,7 +16,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
   // Helper function to determine if a project should be rendered
   const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
 
-  if (!work) return <p>Loading... </p>; // Early return if there's no data
+  if (!work) return <Loading />; // Early return if there's no data
 
   let Categories = ({ project }) => {
     return (
