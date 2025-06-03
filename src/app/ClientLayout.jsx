@@ -23,6 +23,14 @@ export default function ClientLayout({ children }) {
   const [showOpening, setShowOpening] = useState(isHome);
   const [hasRouteChanged, setHasRouteChanged] = useState(false);
 
+  // Logs
+  if (lenis) {
+    lenis.on("scroll", ({ scroll, limit }) => {
+      // console.log({ scroll, limit });
+      lenis.resize();
+    });
+  }
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
   }, [isHome]); // This works, but the page is still scrolling down on route change
@@ -42,7 +50,11 @@ export default function ClientLayout({ children }) {
   }, [showOpening, lenis]);
 
   const handleAnimationComplete = () => {
-    showOpening ? lenis?.stop() : lenis?.start();
+    if (showOpening) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
   };
 
   const openingVariants = {
@@ -72,7 +84,6 @@ export default function ClientLayout({ children }) {
       <GlobalStateProvider>
         <GlobalDataProvider>
           <div
-            id="container"
             onClick={() => showOpening && setShowOpening(false)}
             onWheel={() => showOpening && setShowOpening(false)}
           >

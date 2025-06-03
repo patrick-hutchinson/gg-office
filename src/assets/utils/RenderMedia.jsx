@@ -41,8 +41,6 @@ export default function RenderMedia({ medium }) {
         {!isLoaded && (
           <Image
             src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}
-            // width="20"
-            // height="20"
             fill
             alt="placeholder image"
             unoptimized
@@ -60,10 +58,6 @@ export default function RenderMedia({ medium }) {
         )}
         <MuxPlayer
           playbackId={medium.playbackId}
-          metadata={{
-            video_title: "Your Video Title",
-            viewer_user_id: "user-id-if-any",
-          }}
           autoPlay={true}
           controls={false}
           loop={true}

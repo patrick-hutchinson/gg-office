@@ -73,7 +73,10 @@
     #8601be
   );
 }
-
+html {
+  overflow: visible;
+  height: 100%;
+}
 body {
   font-family: var(--font-weight-text);
   background: var(--background-color);
@@ -83,27 +86,23 @@ body {
   line-height: var(--line-height-200);
 
   box-sizing: border-box;
-  overflow: hidden;
-
+  overflow: visible; /* Changed from hidden */
+  height: 100%;
   transition: background 0.3s;
   margin: 0;
   padding: 0;
 }
 
-#container {
-  /* position: relative; */
-  /* overflow-y: hidden; */
-}
-
 #opening {
-  position: absolute;
-  /* height: calc(100dvh - 45px); */
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #content {
   padding: var(--margin);
-  /* overflow: auto; */
+  overflow: visible;
 }
 
 main {

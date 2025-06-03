@@ -84,9 +84,16 @@ export default function About() {
     return (
       <section>
         <h5>Services</h5>
-        {services.map((service, index) => (
-          <span key={index}>{service}, </span>
-        ))}
+        {services.map((service, index) => {
+          const isLast = index === services.length - 1;
+
+          return (
+            <span key={index}>
+              {service}
+              {!isLast && ",\u00A0"}{" "}
+            </span>
+          );
+        })}
       </section>
     );
   };
@@ -98,7 +105,13 @@ export default function About() {
       <section>
         <h5>Clients</h5>
         {clients.map((client, index) => {
-          return <span key={index}>{client}, </span>;
+          const isLast = index === clients.length - 1;
+          return (
+            <span key={index}>
+              {client}
+              {!isLast && ",\u00A0"}{" "}
+            </span>
+          );
         })}
       </section>
     );

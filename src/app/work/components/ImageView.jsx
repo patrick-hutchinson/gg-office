@@ -24,31 +24,29 @@ export default function ImageView({ work, selectedFilters, activeView }) {
   };
 
   return (
-    <div className={`${styles.projectwraper}`}>
-      <div className={`${styles.imageview} ${activeView === "Image View" ? "visible" : "hidden"}`}>
-        {work.map((project, index) => {
-          if (!projectMatchesFilter(project)) return null; // Early return if project should not render
+    <div className={`${styles.imageview} ${activeView === "Image View" ? "visible" : "hidden"}`}>
+      {work.map((project, index) => {
+        if (!projectMatchesFilter(project)) return null; // Early return if project should not render
 
-          return (
-            project.slug && (
-              <Link className={styles.project} href={`/work/${project.slug.current}`} key={index}>
-                <div className={`${styles["project-front"]}`}>
-                  {project.thumbnail && <RenderMedia medium={project.thumbnail} />}
-                </div>
+        return (
+          project.slug && (
+            <Link className={styles.project} href={`/work/${project.slug.current}`} key={index}>
+              <div className={`${styles["project-front"]}`}>
+                {project.thumbnail && <RenderMedia medium={project.thumbnail} />}
+              </div>
 
-                <div className={`${styles["project-details-outer"]}`}>
-                  <div className={styles["project-name"]}>{project.name}</div>
-                  <Categories project={project} />
-                  <div className={styles["project-year"]}>{project.year}</div>
-                  <div className={`${styles["project-details-inner"]}`}>
-                    <div className={`${styles["project-details"]}`}></div>
-                  </div>
+              <div className={`${styles["project-details-outer"]}`}>
+                <div className={styles["project-name"]}>{project.name}</div>
+                <Categories project={project} />
+                <div className={styles["project-year"]}>{project.year}</div>
+                <div className={`${styles["project-details-inner"]}`}>
+                  <div className={`${styles["project-details"]}`}></div>
                 </div>
-              </Link>
-            )
-          );
-        })}
-      </div>
+              </div>
+            </Link>
+          )
+        );
+      })}
     </div>
   );
 }
