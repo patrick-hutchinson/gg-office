@@ -201,6 +201,25 @@ button {
   transform-origin: center;
 }
 
+mux-player {
+  --play-button: none;
+  --live-button: none;
+  --seek-backward-button: none;
+  --seek-forward-button: none;
+  --mute-button: none;
+  --captions-button: none;
+  --airplay-button: none;
+  --pip-button: none;
+  /* --fullscreen-button: none; */
+  --cast-button: none;
+  --playback-rate-button: none;
+  --volume-range: none;
+  --time-range: none;
+  --time-display: none;
+  --duration-display: none;
+  --rendition-menu-button: none;
+}
+
 @keyframes glowing {
   0% {
     background-position: 0% 50%;
