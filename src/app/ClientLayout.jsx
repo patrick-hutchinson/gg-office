@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
-import { easeInOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import Header from "../../src/assets/components/Header/Header";
 import Footer from "../../src/assets/components/Footer";
@@ -59,22 +59,22 @@ export default function ClientLayout({ children }) {
 
   const openingVariants = {
     inView: {
-      transition: { duration: hasRouteChanged ? 1 : 0, easeInOut },
+      transition: { duration: hasRouteChanged ? 1 : 0, ease: "easeInOut" },
       transform: "translateY(0)",
     },
     outOfView: {
-      transition: { duration: 1, easeInOut },
+      transition: { duration: 1, ease: "easeInOut" },
       transform: "translateY(calc(-100vh + 45px))",
     },
   };
 
   const contentVariants = {
     outOfView: {
-      transition: { duration: hasRouteChanged ? 1 : 0, easeInOut },
+      transition: { duration: hasRouteChanged ? 1 : 0, ease: "easeInOut" },
       transform: "translateY(calc(100vh - 45px))",
     },
     inView: {
-      transition: { duration: 1, easeInOut },
+      transition: { duration: 1, ease: "easeInOut" },
       transform: "translateY(0)",
     },
   };

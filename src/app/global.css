@@ -57,7 +57,6 @@
 
   --header-height: 30px;
 
-  --opening-transition-duration: 1s;
   --transition-duration: 0.5s;
 
   --gradient-shadow: linear-gradient(
@@ -164,12 +163,6 @@ a:visited {
 .hidden {
   display: none !important; /* Make the component visible */
 }
-/* .imageview .visible {
-  display: grid !important;
-}
-.listview .visible{
-  display: flex !important; 
-} */
 
 button {
   background: transparent;
