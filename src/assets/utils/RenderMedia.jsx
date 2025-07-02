@@ -4,10 +4,14 @@ import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
 // import "@mux/mux-player/dist/styles.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RenderMedia({ medium }) {
   let [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    console.log(isLoaded, "isLoded");
+  }, [isLoaded]);
 
   if (!medium) return; // Handle early return
 
@@ -21,12 +25,12 @@ export default function RenderMedia({ medium }) {
           unoptimized
           src={medium.url}
           alt="image"
-          width={medium.width ? medium.width : 800}
-          height={medium.height ? medium.height : 800}
+          width={100}
+          height={100}
           // fill
           placeholder="blur"
           blurDataURL={medium.lqip}
-          style={{ objectFit: "cover" }}
+          style={{ width: "100%", height: "auto" }}
         />
       </div>
     );
@@ -39,7 +43,7 @@ export default function RenderMedia({ medium }) {
     }
 
     return (
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <div style={{ position: "relative", width: "100%", height: "100%", background: "green" }}>
         {!isLoaded && (
           <Image
             src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}
@@ -64,14 +68,14 @@ export default function RenderMedia({ medium }) {
           controls={false}
           loop={true}
           muted={true}
+          fill
           style={{
             position: "relative",
-            top: 0,
-            left: 0,
             opacity: 1,
             zIndex: 0,
             width: "100%",
             height: "100%",
+            objectFit: "cover",
           }}
           onLoadedMetadata={() => setIsLoaded(true)}
         />

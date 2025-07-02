@@ -11,7 +11,7 @@ import Loading from "../../../assets/components/Loading/Loading";
 export default function ListView({ work, selectedFilters, activeView }) {
   let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
 
-  let previewImageRef = useRef(null);
+  let previewWrapperRef = useRef(null);
 
   // Helper function to determine if a project should be rendered
   const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
@@ -35,20 +35,18 @@ export default function ListView({ work, selectedFilters, activeView }) {
     if (!project.thumbnail) return;
 
     setHoverImage(project.thumbnail);
-    previewImageRef.current.style.top = `${e.clientY - 100}px`;
+    previewWrapperRef.current.style.top = `${e.clientY - 100}px`;
 
-    previewImageRef.current.style.display = "unset";
+    previewWrapperRef.current.style.visibility = "visible";
   }
 
   function handleMouseLeave() {
-    previewImageRef.current.style.display = "none";
+    previewWrapperRef.current.style.visibility = "hidden";
   }
 
   let ImagePreview = (
-    <div className={`${styles.imagepreview}`}>
-      <div className={`${styles["media-wrapper"]}`} ref={previewImageRef}>
-        <RenderMedia medium={hoverImage} />;
-      </div>
+    <div className={`${styles["preview-wrapper"]}`} ref={previewWrapperRef}>
+      <RenderMedia medium={hoverImage} />
     </div>
   );
 
@@ -83,7 +81,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
           );
         })}
       </ul>
-      {hoverImage ? ImagePreview : <></>}
+      {hoverImage ? ImagePreview : <div></div>}
     </div>
   );
 }

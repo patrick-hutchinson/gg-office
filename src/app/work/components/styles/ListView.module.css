@@ -42,17 +42,15 @@ ul.listview ul.categories li.category {
   margin-right: 5px;
 }
 
-.imagepreview img,
-.imagepreview video,
-.imagepreview .media-wrapper {
-  width: 100%;
-  height: auto;
+.preview-wrapper {
   position: relative;
+  width: 100%;
+  height: calc((100vw / 5) * 1.2);
+  background: blue;
 }
 
 .project {
   position: relative;
-
   transition: color 0.3s ease-in-out;
 }
 /* glow */
