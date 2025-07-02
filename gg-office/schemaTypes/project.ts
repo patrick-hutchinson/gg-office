@@ -241,6 +241,7 @@ export const project = defineType({
         source: 'name',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required(),
     }),
   ],
 })
