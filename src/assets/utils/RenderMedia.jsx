@@ -43,7 +43,7 @@ export default function RenderMedia({ medium }) {
     }
 
     return (
-      <div style={{ position: "relative", width: "100%", height: "100%", background: "green" }}>
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
         {!isLoaded && (
           <Image
             src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}

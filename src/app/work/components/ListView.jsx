@@ -45,8 +45,10 @@ export default function ListView({ work, selectedFilters, activeView }) {
   }
 
   let ImagePreview = (
-    <div className={`${styles["preview-wrapper"]}`} ref={previewWrapperRef}>
-      <RenderMedia medium={hoverImage} />
+    <div className={styles["preview-container"]}>
+      <div className={`${styles["preview-wrapper"]}`} ref={previewWrapperRef}>
+        <RenderMedia medium={hoverImage} />
+      </div>
     </div>
   );
 
