@@ -5,6 +5,10 @@
   margin-top: var(--margin);
 }
 
+ul.listview {
+  margin-bottom: 200px;
+}
+
 ul.listview li.project,
 ul.infotitles {
   display: grid;
@@ -24,11 +28,18 @@ ul.listview li.project .name {
 }
 
 ul.listview .categories {
+  display: flex;
+  align-items: center;
+  min-width: 0; /* important in grid layouts */
+}
+ul.listview .categories-inner {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-width: 0; /* important in grid layouts */
+
   padding-right: 20px;
+  /* display: flex; */
+  align-items: center;
 }
 
 ul.listview .year,

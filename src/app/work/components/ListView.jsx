@@ -13,7 +13,9 @@ import { GlobalStateContext } from "../../../assets/context/GlobalStateContext";
 export default function ListView({ work, selectedFilters, activeView }) {
   const { isMobile } = useContext(GlobalStateContext);
   let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
-  const cursorPositionRef = useRef({ left: null, top: null });
+
+  const cursorPositionRef = useRef({ left: 0, top: 0 });
+  const animationFrameRef = useRef(null);
 
   let previewWrapperRef = useRef(null);
 
@@ -25,20 +27,54 @@ export default function ListView({ work, selectedFilters, activeView }) {
   let Categories = ({ project }) => {
     const categoryText = project.filtering.map((f) => f.title).join(", ");
 
-    return <div className={styles.categories}>{categoryText}</div>;
+    return (
+      <div className={styles.categories}>
+        <div className={styles["categories-inner"]}>{categoryText}</div>
+      </div>
+    );
   };
 
   function handleMouseEnter(e, project) {
-    if (!project.thumbnail) return;
-
     setHoverImage(project.thumbnail);
-
-    previewWrapperRef.current.style.visibility = "visible";
   }
 
   function handleMouseLeave() {
-    previewWrapperRef.current.style.visibility = "hidden";
+    setHoverImage(null);
   }
+
+  const handleMouseMove = (e) => {
+    cursorPositionRef.current = { left: e.pageX, top: e.pageY };
+
+    if (!animationFrameRef.current) {
+      animationFrameRef.current = requestAnimationFrame(() => {
+        if (previewWrapperRef.current) {
+          const { left, top } = cursorPositionRef.current;
+          previewWrapperRef.current.style.transform = `translate(${left}px, ${top}px)`;
+        }
+        animationFrameRef.current = null;
+      });
+    }
+  };
+
+  useEffect(() => {
+    function handleScroll() {
+      if (previewWrapperRef.current && cursorPositionRef.current.left !== null) {
+        // Get viewport-relative coordinates by subtracting scroll offsets
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Calculate position relative to viewport
+        const left = cursorPositionRef.current.left - scrollLeft;
+        const top = cursorPositionRef.current.top + scrollTop;
+
+        previewWrapperRef.current.style.transform = `translate(${left}px, ${top}px)`;
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   let ImagePreview = () => (
     <div
@@ -47,8 +83,9 @@ export default function ListView({ work, selectedFilters, activeView }) {
         position: "absolute",
         top: 0,
         left: 0,
-        transform: `translate(0, 0)`, // This will be overwritten on mouse move
+        transform: `translate(${cursorPositionRef.current.left}px, ${cursorPositionRef.current.top}px)`,
         pointerEvents: "none",
+        visibility: hoverImage ? "visible" : "hidden",
       }}
       ref={previewWrapperRef}
     >
@@ -56,22 +93,15 @@ export default function ListView({ work, selectedFilters, activeView }) {
     </div>
   );
 
-  const handleMouseMove = (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-    cursorPositionRef.current = { left: x, top: y };
-
-    if (previewWrapperRef.current) {
-      previewWrapperRef.current.style.transform = `translate(${x}px, ${y}px)`;
-    }
-  };
-
   return (
     <>
       <div
         className={`${styles.projectwrapper}`}
         onMouseMove={(e) => {
           handleMouseMove(e);
+        }}
+        onScroll={(e) => {
+          handleScroll(e);
         }}
       >
         <ul className={`${styles.listview} ${activeView === "List View" ? "visible" : "hidden"}`}>
