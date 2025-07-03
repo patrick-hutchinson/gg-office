@@ -16,8 +16,10 @@ main.about {
   grid-template-rows: 1fr auto;
   text-align: center;
   animation: float 6s ease-in-out infinite;
-  transition: left 0.6s ease, top 0.6s ease;
-  z-index: 300;
+  transition:
+    left 0.6s ease,
+    top 0.6s ease;
+  z-index: 4;
 }
 .alien-wrapper .alien {
   font-size: 200px;
@@ -42,22 +44,25 @@ main.about {
   }
 }
 
-@media (max-width: 575.98px) {
+/* Small Devices (Phones, 576px and up) */
+@media (max-width: 767.98px) {
   main.about {
     grid-template-columns: 1fr;
   }
 
   .alien-wrapper .alien {
     font-size: 120px;
-    height: 130px;
+    height: 160px;
     top: 45px;
   }
-}
 
-/* Small Devices (Phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  main.about {
-    grid-template-columns: 1fr;
+  .alien-container {
+    position: fixed !important;
+    left: 0;
+    top: 100px;
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid blue;
   }
 }
 

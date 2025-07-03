@@ -3,14 +3,6 @@
   flex-direction: row;
   justify-content: space-between;
 
-  /* padding: var(--margin); */
-  /* padding-bottom: 10px; */
-
-  /* margin: -10px; */
-  /* margin-top: 10px; */
-  /* margin-top: 10px; */
-}
-.copyright {
   font-size: var(--font-size-100);
   line-height: var(--line-height-100);
 }

@@ -22,6 +22,11 @@
   justify-content: center; /* Centers content vertically */
   align-items: center; /* Centers content horizontally */
   text-align: center;
+  gap: 30px;
+  top: -10px;
+  left: -10px;
+  background: var(--background-color);
+  background: black;
 }
 
 .expandMenu li {

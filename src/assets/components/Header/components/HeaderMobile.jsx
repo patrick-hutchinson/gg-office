@@ -10,6 +10,10 @@ export default function HeaderMobile({ location }) {
     setShowMenu(!showMenu);
   }
 
+  function handleMenuClick() {
+    setShowMenu(false);
+  }
+
   return (
     <ul className={`${styles.headerMobile}`}>
       <li className={`${styles.button} button ${location.includes("gg–office") ? "active" : ""}`}>
@@ -22,16 +26,36 @@ export default function HeaderMobile({ location }) {
 
       {showMenu && (
         <div className={`${styles.expandMenu}`}>
-          <li className={`${styles.button} button active`}>
+          <li
+            className={`${styles.button} button active`}
+            onClick={() => {
+              handleMenuClick();
+            }}
+          >
             <Link href="/">Work</Link>
           </li>
-          <li className={`${styles.button} button active`}>
+          <li
+            className={`${styles.button} button active`}
+            onClick={() => {
+              handleMenuClick();
+            }}
+          >
             <Link href="/about">About</Link>
           </li>
-          <li className={`${styles.button} button active`}>
+          <li
+            className={`${styles.button} button active`}
+            onClick={() => {
+              handleMenuClick();
+            }}
+          >
             <Link href="/research">Research</Link>
           </li>
-          <li className={`${styles.button} button active`}>
+          <li
+            className={`${styles.button} button active`}
+            onClick={() => {
+              handleMenuClick();
+            }}
+          >
             <Link href="/contact">About</Link>
           </li>
         </div>

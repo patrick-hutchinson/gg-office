@@ -10,3 +10,10 @@
 .contact section {
   margin-bottom: calc(var(--margin) * 2);
 }
+
+@media screen and (max-width: 768px) {
+  .contact {
+    display: inline-block;
+    grid-template-columns: 1fr;
+  }
+}

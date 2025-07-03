@@ -6,20 +6,26 @@ import styles from "./styles/About.module.css";
 import Loading from "../../../src/assets/components/Loading/Loading";
 import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
 
+import { GlobalStateContext } from "../../assets/context/GlobalStateContext";
+
 export default function About() {
+  const { isMobile } = useContext(GlobalStateContext);
+
   const { about } = useContext(GlobalDataContext);
   const AlienContainerRef = useRef(null);
+
+  const offset = isMobile ? { right: 100, left: 10 } : { right: 300, left: 100 };
 
   // Function to position and handle hover effect for a specific alien
   const positionAlien = (alien) => {
     // Set the initial random position when the alien is created
-    alien.style.left = `${Math.floor(Math.random() * (window.innerWidth - 300)) + 100}px`;
-    alien.style.top = `${Math.floor(Math.random() * (window.innerHeight - 300)) + 100}px`;
+    alien.style.left = `${Math.floor(Math.random() * (window.innerWidth - offset.right)) + offset.left}px`;
+    alien.style.top = `${Math.floor(Math.random() * (window.innerHeight - offset.right)) + offset.left}px`;
 
     // Add the hover effect to move the alien on mouseenter
     alien.addEventListener("mouseenter", () => {
-      const randomLeft = Math.floor(Math.random() * (window.innerWidth - 300)) + 100;
-      const randomTop = Math.floor(Math.random() * (window.innerHeight - 400)) + 100;
+      const randomLeft = Math.floor(Math.random() * (window.innerWidth - offset.right)) + offset.left;
+      const randomTop = Math.floor(Math.random() * (window.innerHeight - offset.right)) + offset.left;
       alien.style.left = `${randomLeft}px`;
       alien.style.top = `${randomTop}px`;
     });
@@ -137,7 +143,7 @@ export default function About() {
   };
 
   return (
-    <main className={`${styles.about}`}>
+    <>
       <div className={`${styles["alien-container"]}`} ref={AlienContainerRef}>
         <div className={`${styles["alien-wrapper"]}`}>
           <div className={`${styles.alien}`}>{about[0].emoji}</div>
@@ -148,12 +154,15 @@ export default function About() {
           <span>Francesca</span>
         </div>
       </div>
-      <div>
-        <Biography />
-        <Services />
-        <Clients />
-        <Internships />
-      </div>
-    </main>
+      <main className={`${styles.about}`}>
+        <div />
+        <div>
+          <Biography />
+          <Services />
+          <Clients />
+          <Internships />
+        </div>
+      </main>
+    </>
   );
 }

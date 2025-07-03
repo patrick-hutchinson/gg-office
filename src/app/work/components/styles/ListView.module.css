@@ -1,8 +1,12 @@
 .projectwrapper {
   display: grid;
-  grid-template-columns: 2fr 0.5fr;
+  grid-template-columns: 1fr;
   gap: var(--margin);
   margin-top: var(--margin);
+}
+
+ul.listview {
+  /* margin-bottom: 200px; */
 }
 
 ul.listview li.project,
@@ -42,16 +46,10 @@ ul.listview ul.categories li.category {
   margin-right: 5px;
 }
 
-.preview-container {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
 .preview-wrapper {
-  position: relative;
-  width: 100%;
-  height: calc((100vw / 5) * 1.2);
+  position: absolute;
+  width: 20vw;
+  aspect-ratio: 4 / 5;
 }
 
 .project {
