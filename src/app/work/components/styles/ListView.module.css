@@ -5,15 +5,11 @@
   margin-top: var(--margin);
 }
 
-ul.listview {
-  /* margin-bottom: 200px; */
-}
-
 ul.listview li.project,
 ul.infotitles {
   display: grid;
 
-  grid-template-columns: 3fr 2fr auto;
+  grid-template-columns: 3fr 2fr 40px;
   padding-bottom: calc(var(--margin) / 2);
   padding-top: calc(var(--margin) / 2);
 
@@ -27,11 +23,12 @@ ul.listview li.project .name {
   line-height: var(--line-height-300);
 }
 
-ul.listview ul.categories {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+ul.listview .categories {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0; /* important in grid layouts */
+  padding-right: 20px;
 }
 
 ul.listview .year,
@@ -40,10 +37,6 @@ ul.infotitles .year {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-ul.listview ul.categories li.category {
-  margin-right: 5px;
 }
 
 .preview-wrapper {
@@ -102,12 +95,10 @@ ul.listview ul.categories li.category {
     gap: 0px;
   }
 
-  ul.listview ul.categories {
+  ul.listview .categories {
     display: none;
   }
-  ul.infotitles .category {
-    display: none;
-  }
+
   ul.listview li.project,
   ul.infotitles {
     grid-template-columns: 3fr auto;
@@ -120,12 +111,10 @@ ul.listview ul.categories li.category {
     grid-template-columns: 2fr 0fr;
     gap: 0px;
   }
-  ul.listview ul.categories {
+  ul.listview .categories {
     display: none;
   }
-  ul.infotitles .category {
-    display: none;
-  }
+
   ul.listview li.project,
   ul.infotitles {
     grid-template-columns: 3fr auto;
@@ -138,12 +127,10 @@ ul.listview ul.categories li.category {
     grid-template-columns: 2fr 0fr;
     gap: 0px;
   }
-  ul.listview ul.categories {
+  ul.listview .categories {
     display: none;
   }
-  ul.infotitles .category {
-    display: none;
-  }
+
   ul.listview li.project,
   ul.infotitles {
     grid-template-columns: 3fr auto;

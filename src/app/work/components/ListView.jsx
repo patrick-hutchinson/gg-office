@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import Link from "next/link";
 
 import styles from "./styles/ListView.module.css";
@@ -8,7 +8,10 @@ import styles from "./styles/ListView.module.css";
 import RenderMedia from "../../../assets/utils/RenderMedia";
 import Loading from "../../../assets/components/Loading/Loading";
 
+import { GlobalStateContext } from "../../../assets/context/GlobalStateContext";
+
 export default function ListView({ work, selectedFilters, activeView }) {
+  const { isMobile } = useContext(GlobalStateContext);
   let [hoverImage, setHoverImage] = useState({ src: null, extension: null });
   const cursorPositionRef = useRef({ left: null, top: null });
 
@@ -20,29 +23,15 @@ export default function ListView({ work, selectedFilters, activeView }) {
   if (!work) return <Loading />; // Early return if there's no data
 
   let Categories = ({ project }) => {
-    return (
-      <ul className={`${styles.categories}`}>
-        {project.filtering.map((filter, index) => (
-          <li className={`${styles.category}`} key={index}>
-            {filter.title}
-            {index < project.filtering.length - 1 && ","}
-          </li>
-        ))}
-      </ul>
-    );
+    const categoryText = project.filtering.map((f) => f.title).join(", ");
+
+    return <div className={styles.categories}>{categoryText}</div>;
   };
 
   function handleMouseEnter(e, project) {
     if (!project.thumbnail) return;
 
-    const sameImage =
-      hoverImage?.type === project.thumbnail?.type &&
-      hoverImage?.url === project.thumbnail?.url &&
-      hoverImage?.playbackId === project.thumbnail?.playbackId;
-
-    if (!sameImage) {
-      setHoverImage(project.thumbnail);
-    }
+    setHoverImage(project.thumbnail);
 
     previewWrapperRef.current.style.visibility = "visible";
   }
@@ -115,7 +104,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
           })}
         </ul>
       </div>
-      {hoverImage ? <ImagePreview /> : <div></div>}
+      {!isMobile && <ImagePreview />}
     </>
   );
 }
