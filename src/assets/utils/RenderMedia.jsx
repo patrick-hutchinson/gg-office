@@ -1,15 +1,21 @@
 "use client";
 
+import React from "react";
+
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
 // import "@mux/mux-player/dist/styles.css";
 
 import { useEffect, useState } from "react";
 
-export default function RenderMedia({ medium }) {
+const RenderMedia = React.memo(({ medium }) => {
   let [isLoaded, setIsLoaded] = useState(false);
 
-  if (!medium) return; // Handle early return
+  if (!medium) return null; // Handle early return
+
+  useEffect(() => {
+    console.log("remount!");
+  }, []);
 
   //Render
 
@@ -63,7 +69,9 @@ export default function RenderMedia({ medium }) {
           autoPlay={true}
           controls={false}
           loop={true}
+          preload="auto"
           muted={true}
+          playsInline={true}
           fill
           style={{
             position: "relative",
@@ -78,4 +86,6 @@ export default function RenderMedia({ medium }) {
       </div>
     );
   }
-}
+});
+
+export default RenderMedia;

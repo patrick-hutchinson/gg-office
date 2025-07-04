@@ -14,7 +14,8 @@ import { GlobalStateContext } from "../../../assets/context/GlobalStateContext";
 
 export default function ListView({ work, selectedFilters, activeView }) {
   const { isMobile } = useContext(GlobalStateContext);
-  const [hoverImage, setHoverImage] = useState(null);
+
+  const mediaRefs = useRef({});
 
   const previewWrapperRef = useRef(null);
   const cursorRef = useRef({ x: 0, y: 0 });
@@ -54,15 +55,30 @@ export default function ListView({ work, selectedFilters, activeView }) {
     }
   };
 
-  const handleMouseEnter = (e, project) => {
-    setHoverImage(project.thumbnail);
+  const setMediaRef = (id) => (el) => {
+    if (el) {
+      mediaRefs.current[id] = el;
+    }
+  };
 
-    // Force an immediate update, using latest mouse position
+  const showMedia = (project) => {
+    Object.values(mediaRefs.current).forEach((ref) => {
+      if (ref) ref.style.visibility = "hidden";
+    });
+
+    const el = mediaRefs.current[project.thumbnail._id];
+
+    console.log("project_id:", project.thumbnail._id);
+
+    if (el) el.style.visibility = "visible";
+
     requestAnimationFrame(updatePosition);
   };
 
-  const handleMouseLeave = () => {
-    setHoverImage(null);
+  const hideMedia = () => {
+    Object.values(mediaRefs.current).forEach((ref) => {
+      if (ref) ref.style.visibility = "hidden";
+    });
 
     requestAnimationFrame(updatePosition);
   };
@@ -84,17 +100,29 @@ export default function ListView({ work, selectedFilters, activeView }) {
     return (
       <div
         className={styles["preview-wrapper"]}
+        ref={previewWrapperRef}
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          transform: `translate(0, 0)`,
+          transform: "translate(0, 0)",
           pointerEvents: "none",
-          visibility: hoverImage ? "visible" : "hidden",
         }}
-        ref={previewWrapperRef}
       >
-        <RenderMedia medium={hoverImage} />
+        {work.map((project, index) => (
+          <div
+            key={index}
+            ref={setMediaRef(project.thumbnail._id)}
+            style={{
+              visibility: "hidden",
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          >
+            <RenderMedia medium={project.thumbnail} />
+          </div>
+        ))}
       </div>
     );
   };
@@ -113,11 +141,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
             return (
               project.slug && (
                 <Link href={`/work/${project.slug.current}`} key={index}>
-                  <li
-                    className={styles.project}
-                    onMouseEnter={(e) => handleMouseEnter(e, project)}
-                    onMouseLeave={(e) => handleMouseLeave(e)}
-                  >
+                  <li className={styles.project} onMouseEnter={(e) => showMedia(project)} onMouseLeave={hideMedia}>
                     <div className={styles.name}>{project.name}</div>
                     <Categories project={project} />
                     <div className={styles.year}>{project.year}</div>
