@@ -54,12 +54,17 @@ export default function ListView({ work, selectedFilters, activeView }) {
     }
   };
 
-  const handleMouseEnter = (project) => {
+  const handleMouseEnter = (e, project) => {
     setHoverImage(project.thumbnail);
+
+    // Force an immediate update, using latest mouse position
+    requestAnimationFrame(updatePosition);
   };
 
   const handleMouseLeave = () => {
     setHoverImage(null);
+
+    requestAnimationFrame(updatePosition);
   };
 
   const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
@@ -76,16 +81,14 @@ export default function ListView({ work, selectedFilters, activeView }) {
   };
 
   const ImagePreview = () => {
-    const x = cursorRef.current.x;
-    const y = cursorRef.current.y + scrollYRef.current;
     return (
       <div
         className={styles["preview-wrapper"]}
         style={{
-          position: "absolute", // not fixed!
+          position: "absolute",
           top: 0,
           left: 0,
-          transform: `translate(${x}, ${y})`,
+          transform: `translate(0, 0)`,
           pointerEvents: "none",
           visibility: hoverImage ? "visible" : "hidden",
         }}
@@ -112,8 +115,8 @@ export default function ListView({ work, selectedFilters, activeView }) {
                 <Link href={`/work/${project.slug.current}`} key={index}>
                   <li
                     className={styles.project}
-                    onMouseEnter={() => handleMouseEnter(project)}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={(e) => handleMouseEnter(e, project)}
+                    onMouseLeave={(e) => handleMouseLeave(e)}
                   >
                     <div className={styles.name}>{project.name}</div>
                     <Categories project={project} />
