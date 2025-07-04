@@ -11,15 +11,17 @@ export default function MoreProjects({ work }) {
   const moreprojectsRef = useRef(null);
 
   function handlePan(direction) {
+    const scrollAmount = window.innerWidth * 0.9;
+
     if (direction === "left") {
       moreprojectsRef.current.scrollBy({
-        left: -500,
+        left: -scrollAmount,
         behavior: "smooth",
       });
     }
     if (direction === "right") {
       moreprojectsRef.current.scrollBy({
-        left: 500,
+        left: scrollAmount,
         behavior: "smooth",
       });
     }

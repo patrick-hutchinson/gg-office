@@ -3,10 +3,12 @@
   grid-template-columns: 1fr;
   gap: var(--margin);
   margin-top: var(--margin);
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 ul.listview {
-  margin-bottom: 200px;
+  margin-bottom: calc(20vw * (4 / 5));
 }
 
 ul.listview li.project,
@@ -56,6 +58,11 @@ ul.infotitles .year {
   aspect-ratio: 4 / 5;
 }
 
+.preview-wrapper-inner {
+  width: 20vw;
+  aspect-ratio: 4 / 5;
+}
+
 .project {
   position: relative;
   transition: color 0.3s ease-in-out;
@@ -101,50 +108,40 @@ ul.infotitles .year {
 
 /* Phones in Landscape Mode */
 @media (max-width: 575.98px) {
-  .projectwrapper {
-    grid-template-columns: 2fr 0fr;
-    gap: 0px;
-  }
-
   ul.listview .categories {
     display: none;
   }
 
   ul.listview li.project,
   ul.infotitles {
-    grid-template-columns: 3fr auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min-content;
+    gap: var(--margin);
+    align-items: center;
   }
 }
 
 /* Small Devices (Phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
-  .projectwrapper {
-    grid-template-columns: 2fr 0fr;
-    gap: 0px;
-  }
   ul.listview .categories {
     display: none;
   }
 
   ul.listview li.project,
   ul.infotitles {
-    grid-template-columns: 3fr auto;
+    grid-template-columns: minmax(0, 1fr) min-content;
   }
 }
 
 /* Medium Devices (Tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .projectwrapper {
-    grid-template-columns: 2fr 0fr;
-    gap: 0px;
-  }
   ul.listview .categories {
     display: none;
   }
 
   ul.listview li.project,
   ul.infotitles {
-    grid-template-columns: 3fr auto;
+    grid-template-columns: 1fr auto;
   }
 }
 

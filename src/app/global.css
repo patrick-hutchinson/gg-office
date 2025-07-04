@@ -210,7 +210,7 @@ mux-player {
   --captions-button: none;
   --airplay-button: none;
   --pip-button: none;
-  /* --fullscreen-button: none; */
+  --fullscreen-button: none;
   --cast-button: none;
   --playback-rate-button: none;
   --volume-range: none;
@@ -218,6 +218,11 @@ mux-player {
   --time-display: none;
   --duration-display: none;
   --rendition-menu-button: none;
+  pointer-events: none !important;
+}
+
+media-control-bar[part~="bottom"] {
+  pointer-events: none !important;
 }
 
 @keyframes glowing {

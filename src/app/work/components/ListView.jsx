@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import styles from "./styles/ListView.module.css";
 
+import ScrollText from "../.././../assets/components/ScrollText";
+
 import RenderMedia from "../../../assets/utils/RenderMedia";
 import Loading from "../../../assets/components/Loading/Loading";
 
@@ -68,8 +70,6 @@ export default function ListView({ work, selectedFilters, activeView }) {
 
     const el = mediaRefs.current[project.thumbnail._id];
 
-    console.log("project_id:", project.thumbnail._id);
-
     if (el) el.style.visibility = "visible";
 
     requestAnimationFrame(updatePosition);
@@ -113,6 +113,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
           <div
             key={index}
             ref={setMediaRef(project.thumbnail._id)}
+            className={styles["preview-wrapper-inner"]}
             style={{
               visibility: "hidden",
               position: "absolute",
@@ -142,7 +143,9 @@ export default function ListView({ work, selectedFilters, activeView }) {
               project.slug && (
                 <Link href={`/work/${project.slug.current}`} key={index}>
                   <li className={styles.project} onMouseEnter={(e) => showMedia(project)} onMouseLeave={hideMedia}>
-                    <div className={styles.name}>{project.name}</div>
+                    <div className={styles.name}>
+                      <ScrollText string={project.name} />
+                    </div>
                     <Categories project={project} />
                     <div className={styles.year}>{project.year}</div>
                   </li>

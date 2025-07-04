@@ -5,6 +5,8 @@
   display: grid;
   gap: var(--margin);
   margin-bottom: var(--margin);
+  display: flex;
+  align-items: flex-start;
 }
 .galleryRow img,
 .galleryRow video {

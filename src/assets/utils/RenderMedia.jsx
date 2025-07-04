@@ -13,12 +13,6 @@ const RenderMedia = React.memo(({ medium }) => {
 
   if (!medium) return null; // Handle early return
 
-  useEffect(() => {
-    console.log("remount!");
-  }, []);
-
-  //Render
-
   // Handle Sanity Image
   if (medium.type === "image") {
     return (
@@ -87,5 +81,7 @@ const RenderMedia = React.memo(({ medium }) => {
     );
   }
 });
+
+RenderMedia.displayName = "RenderMedia";
 
 export default RenderMedia;
