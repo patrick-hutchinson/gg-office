@@ -9,10 +9,6 @@ import { useEffect, useState } from "react";
 export default function RenderMedia({ medium }) {
   let [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    console.log(isLoaded, "isLoded");
-  }, [isLoaded]);
-
   if (!medium) return; // Handle early return
 
   //Render
