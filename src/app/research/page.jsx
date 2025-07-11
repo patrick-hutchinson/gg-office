@@ -24,7 +24,7 @@ export default function Research() {
 
   let Images = () => {
     useEffect(() => {
-      new Rellax(".rellax");
+      isMobile ? 0 : new Rellax(".rellax");
     }, []);
 
     return (
@@ -64,6 +64,7 @@ export default function Research() {
     if (!lenis) return;
 
     const handleScroll = () => {
+      console.log("scrolling");
       const yValues = imagesRef.current.map((el) => {
         if (!el) return 0;
 

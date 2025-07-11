@@ -134,7 +134,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
         <ul className={`${styles.listview} ${activeView === "List View" ? "visible" : "hidden"}`}>
           <ul className={styles.infotitles}>
             <li className={styles.name}>Name</li>
-            <li className={styles.category}>Category</li>
+            {!isMobile && <li className={styles.category}>Category</li>}
             <li className={styles.year}>Year</li>
           </ul>
           {work.map((project, index) => {

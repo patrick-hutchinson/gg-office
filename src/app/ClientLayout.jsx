@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { ReactLenis, useLenis } from "@studio-freight/react-lenis";
 import { motion } from "framer-motion";
@@ -9,10 +9,10 @@ import Header from "../../src/assets/components/Header/Header";
 import Footer from "../../src/assets/components/Footer";
 import OpeningPage from "../../src/assets/components/OpeningPage/OpeningPage";
 
-import { GlobalStateProvider } from "../assets/context/GlobalStateContext";
-import { GlobalDataProvider } from "../assets/context/GlobalDataContext";
+import { GlobalStateContext } from "../assets/context/GlobalStateContext";
 
 export default function ClientLayout({ children }) {
+  const { isMobile } = useContext(GlobalStateContext);
   const pathname = usePathname();
   const lenis = useLenis();
 
@@ -80,39 +80,32 @@ export default function ClientLayout({ children }) {
   };
 
   return (
-    <ReactLenis root smooth={false}>
-      <GlobalStateProvider>
-        <GlobalDataProvider>
-          <div
-            onClick={() => showOpening && setShowOpening(false)}
-            onWheel={() => showOpening && setShowOpening(false)}
-          >
-            <motion.div
-              id="opening"
-              initial={false}
-              animate={showOpening ? "inView" : "outOfView"}
-              variants={openingVariants}
-              onAnimationComplete={handleAnimationComplete}
-            >
-              <OpeningPage ref={openingRef} />
-            </motion.div>
-            <motion.div
-              id="content"
-              ref={contentRef}
-              initial={false}
-              animate={showOpening ? "outOfView" : "inView"}
-              variants={contentVariants}
-              onAnimationComplete={handleAnimationComplete}
-            >
-              <Header location={pathname} setShowOpening={setShowOpening} />
+    <ReactLenis root smooth={true}>
+      <div onClick={() => showOpening && setShowOpening(false)} onWheel={() => showOpening && setShowOpening(false)}>
+        <motion.div
+          id="opening"
+          initial={false}
+          animate={showOpening ? "inView" : "outOfView"}
+          variants={openingVariants}
+          onAnimationComplete={handleAnimationComplete}
+        >
+          <OpeningPage ref={openingRef} />
+        </motion.div>
+        <motion.div
+          id="content"
+          ref={contentRef}
+          initial={false}
+          animate={showOpening ? "outOfView" : "inView"}
+          variants={contentVariants}
+          onAnimationComplete={handleAnimationComplete}
+        >
+          <Header location={pathname} setShowOpening={setShowOpening} />
 
-              <div id="root">{children}</div>
+          <div id="root">{children}</div>
 
-              <Footer />
-            </motion.div>
-          </div>
-        </GlobalDataProvider>
-      </GlobalStateProvider>
+          <Footer />
+        </motion.div>
+      </div>
     </ReactLenis>
   );
 }

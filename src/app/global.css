@@ -102,10 +102,12 @@ body {
 #content {
   padding: var(--margin);
   overflow: visible;
+  min-height: 100vh;
 }
 
 main {
   min-height: calc(100vh - 100px);
+  padding-bottom: 30px;
 }
 
 section {
