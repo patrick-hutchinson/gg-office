@@ -1,8 +1,9 @@
-preload iamges, especially in list view hover;
-Preload with given width and size to avoid layout shift
+Laggy Safari Interaction on Home Page
 
-filtering causes image to reload/component to rerender
+Multiply and Image distribution on Research Page
 
-Also switching between pages
+Research Page layout on mobile
 
-Resize: Menu Bar
+Image file names on download
+
+Dark/Light mode

@@ -5,4 +5,8 @@
 
   font-size: var(--font-size-100);
   line-height: var(--line-height-100);
+  padding-top: var(--margin);
+
+  position: absolute;
+  bottom: 10px;
 }
