@@ -79,33 +79,39 @@ export default function ClientLayout({ children }) {
     },
   };
 
-  return (
+  const content = (
+    <div onClick={() => showOpening && setShowOpening(false)} onWheel={() => showOpening && setShowOpening(false)}>
+      <motion.div
+        id="opening"
+        initial={false}
+        animate={showOpening ? "inView" : "outOfView"}
+        variants={openingVariants}
+        onAnimationComplete={handleAnimationComplete}
+      >
+        <OpeningPage ref={openingRef} />
+      </motion.div>
+      <motion.div
+        id="content"
+        ref={contentRef}
+        initial={false}
+        animate={showOpening ? "outOfView" : "inView"}
+        variants={contentVariants}
+        onAnimationComplete={handleAnimationComplete}
+      >
+        <Header location={pathname} setShowOpening={setShowOpening} />
+
+        <div id="root">{children}</div>
+
+        <Footer />
+      </motion.div>
+    </div>
+  );
+
+  return isMobile ? (
+    content
+  ) : (
     <ReactLenis root smooth={true}>
-      <div onClick={() => showOpening && setShowOpening(false)} onWheel={() => showOpening && setShowOpening(false)}>
-        <motion.div
-          id="opening"
-          initial={false}
-          animate={showOpening ? "inView" : "outOfView"}
-          variants={openingVariants}
-          onAnimationComplete={handleAnimationComplete}
-        >
-          <OpeningPage ref={openingRef} />
-        </motion.div>
-        <motion.div
-          id="content"
-          ref={contentRef}
-          initial={false}
-          animate={showOpening ? "outOfView" : "inView"}
-          variants={contentVariants}
-          onAnimationComplete={handleAnimationComplete}
-        >
-          <Header location={pathname} setShowOpening={setShowOpening} />
-
-          <div id="root">{children}</div>
-
-          <Footer />
-        </motion.div>
-      </div>
+      {content}
     </ReactLenis>
   );
 }
