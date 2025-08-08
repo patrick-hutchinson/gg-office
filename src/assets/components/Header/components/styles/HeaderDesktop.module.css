@@ -14,12 +14,17 @@
 }
 
 .navigation li {
-  margin-right: 30px;
+  margin-right: 25px;
 }
 
 .headerDesktop p {
   font-size: var(--font-size-100);
   line-height: var(--line-height-100);
+}
+
+.switchTheme {
+  font-size: var(--font-size-200);
+  cursor: pointer;
 }
 
 @keyframes glowing {

@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: unset;
+  gap: 10px;
 }
 
 .projectInfo-specifics {
@@ -10,8 +11,9 @@
   justify-content: space-between;
 }
 .categories-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
 }
 .categories {

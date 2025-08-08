@@ -27,7 +27,7 @@ export default function Project({ slug }) {
         <RenderMedia medium={project.coverimage} />
         <ProjectInfo project={project} />
         {project.imagegallery && <ImageGallery project={project} />}
-        {project.creditsInhouse && project.creditsClient && <Credits project={project} />}
+        {(project.creditsInhouse || project.creditsClient) && <Credits project={project} />}
         <MoreProjects work={work} />
       </div>
     </main>

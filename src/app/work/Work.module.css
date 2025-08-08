@@ -1,8 +1,8 @@
 .viewwrapper {
   display: flex;
   flex-direction: row;
-  font-size: var(--font-size-100);
-  line-height: var(--line-height-100);
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
   margin-right: 30px;
 }
 .viewwrapper li {
@@ -11,7 +11,12 @@
 .options-wrapper {
   display: flex;
   flex-direction: row;
-  font-size: var(--font-size-100);
-  line-height: var(--line-height-100);
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
   margin-bottom: calc(var(--margin) * 2);
+}
+
+.toggleOptions {
+  font-size: var(--font-size-200);
+  line-height: var(--line-height-200);
 }

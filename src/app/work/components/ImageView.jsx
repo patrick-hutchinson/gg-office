@@ -38,7 +38,7 @@ export default function ImageView({ work, selectedFilters, activeView }) {
 
               <div className={`${styles["project-details-outer"]}`}>
                 <div className={styles["project-name"]}>{project.name}</div>
-                <Categories project={project} />
+                {/* <Categories project={project} /> */}
                 <div className={styles["project-year"]}>{project.year}</div>
                 <div className={`${styles["project-details-inner"]}`}>
                   <div className={`${styles["project-details"]}`}></div>

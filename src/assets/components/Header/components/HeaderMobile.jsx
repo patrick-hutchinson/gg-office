@@ -17,7 +17,7 @@ export default function HeaderMobile({ location }) {
   return (
     <ul className={`${styles.headerMobile}`}>
       <li className={`${styles.button} button ${location.includes("gg–office") ? "active" : ""}`}>
-        <Link href="/">GG–OFFICE</Link>
+        <Link href="/">GG—OFFICE</Link>
       </li>
 
       <li className={`${styles.button} button`} onClick={expandMenu}>
@@ -50,13 +50,18 @@ export default function HeaderMobile({ location }) {
           >
             <Link href="/research">Research</Link>
           </li>
+          <li className={`${styles.button} button active`}>
+            <Link href="https://www.gg-rugs.com" target="_blank">
+              RUGS
+            </Link>
+          </li>
           <li
             className={`${styles.button} button active`}
             onClick={() => {
               handleMenuClick();
             }}
           >
-            <Link href="/contact">About</Link>
+            <Link href="/contact">Contact</Link>
           </li>
         </div>
       )}

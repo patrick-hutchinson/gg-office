@@ -8,5 +8,8 @@
   padding-top: var(--margin);
 
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 10px;
 }

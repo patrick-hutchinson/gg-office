@@ -104,24 +104,24 @@ export default function About() {
     );
   };
 
-  const Clients = () => {
-    const clients = about[0].clients || [];
+  // const Clients = () => {
+  //   const clients = about[0].clients || [];
 
-    return (
-      <section>
-        <h5>Clients</h5>
-        {clients.map((client, index) => {
-          const isLast = index === clients.length - 1;
-          return (
-            <span key={index}>
-              {client}
-              {!isLast && ",\u00A0"}{" "}
-            </span>
-          );
-        })}
-      </section>
-    );
-  };
+  //   return (
+  //     <section>
+  //       <h5>Clients</h5>
+  //       {clients.map((client, index) => {
+  //         const isLast = index === clients.length - 1;
+  //         return (
+  //           <span key={index}>
+  //             {client}
+  //             {!isLast && ",\u00A0"}{" "}
+  //           </span>
+  //         );
+  //       })}
+  //     </section>
+  //   );
+  // };
 
   const Internships = () => {
     const internships = about[0].internship || [];
@@ -159,7 +159,7 @@ export default function About() {
         <div>
           <Biography />
           <Services />
-          <Clients />
+          {/* <Clients /> */}
           <Internships />
         </div>
       </main>

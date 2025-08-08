@@ -16,15 +16,12 @@
 
 .imageview .project {
   aspect-ratio: 4 / 5;
+  position: relative;
 }
 
 .imageview .project img,
 .imageview .project video {
   width: 100%;
-}
-
-.imageview .project {
-  position: relative;
 }
 
 .imageview .project:hover:before {
@@ -43,6 +40,11 @@
 
 .shadow:after {
   filter: blur(20px);
+}
+
+.project-name {
+  font-size: var(--font-size-300);
+  line-height: 1;
 }
 
 @keyframes animate {

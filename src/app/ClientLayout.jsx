@@ -110,7 +110,15 @@ export default function ClientLayout({ children }) {
   return isMobile ? (
     content
   ) : (
-    <ReactLenis root smooth={true}>
+    <ReactLenis
+      root
+      options={{
+        smooth: false, // no smooth on wheel
+        smoothTouch: false, // no smooth on touch
+        lerp: 1, // 1 means no interpolation
+        duration: 0, // instantly scroll to target
+      }}
+    >
       {content}
     </ReactLenis>
   );

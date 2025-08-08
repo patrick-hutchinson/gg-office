@@ -39,7 +39,7 @@
   --font-size-200: 16px;
   --font-size-300: 22px;
   --font-size-400: 28px;
-  --font-size-500: 68px;
+  --font-size-500: 42px;
 
   --line-height-100: 18px;
   --line-height-200: 18px;
@@ -50,8 +50,8 @@
   --font-weight-text: Founders;
   --font-weight-medium: FoundersMedium;
 
-  --text-color: #eaeaea;
-  --background-color: #000000;
+  --text-color: #000000;
+  --background-color: #eaeaea;
 
   --margin: 15px;
 
