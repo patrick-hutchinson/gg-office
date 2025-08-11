@@ -50,7 +50,7 @@ export default function HeaderDesktop({ location, setShowOpening }) {
       <div className={styles["switchTheme"]} onClick={handleThemeSwitch}>
         Switch
       </div>
-      <p>Independent graphic and motion agency based in Sicily</p>
+      <p className={styles["tagline"]}>Independent graphic and motion agency based in Sicily</p>
     </div>
   );
 }

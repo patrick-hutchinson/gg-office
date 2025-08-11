@@ -9,7 +9,7 @@ import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { GlobalStateContext } from "../../context/GlobalStateContext";
 import { AnimationContext } from "../../context/AnimationContext";
 
-const OpeningPage = forwardRef((props, openingRef, showOpening) => {
+const OpeningPage = forwardRef((props, openingRef) => {
   OpeningPage.displayName = "OpeningPage";
 
   const { isMobile } = useContext(GlobalStateContext);
@@ -33,9 +33,10 @@ const OpeningPage = forwardRef((props, openingRef, showOpening) => {
       if (!columnElement) return;
 
       const rect = columnElement.getBoundingClientRect();
-      console.log(rect.height, "height", rect.top, "top");
+
+      // 15 is the element's top offset, here hardcoded. Ideally replace with getComputed
       const relY = (y - 15) / rect.height;
-      console.log(relY, "relY");
+
       const clamped = Math.min(1, Math.max(0, relY));
       const top = clamped * 100;
       const bottom = 100 - top;
