@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext, useRef } from "react";
 
 import Rellax from "rellax";
-import { useLenis } from "@studio-freight/react-lenis";
+
 import Loading from "../../assets/components/Loading/Loading";
 
 import RenderMedia from "../../assets/components/RenderMedia";
@@ -19,8 +19,6 @@ export default function Research() {
   const imagesRef = useRef([]);
 
   const containerRef = useRef(undefined);
-
-  const lenis = useLenis();
 
   let Images = () => {
     useEffect(() => {
@@ -60,45 +58,34 @@ export default function Research() {
     );
   };
 
-  useEffect(() => {
-    if (!lenis) return;
+  const handleScroll = () => {
+    const yValues = imagesRef.current.map((el) => {
+      if (!el) return 0;
 
-    const handleScroll = () => {
-      console.log("scrolling");
-      const yValues = imagesRef.current.map((el) => {
-        if (!el) return 0;
+      const transform = el.style.transform;
+      const offsetTop = el.offsetTop;
+      const height = el.offsetHeight;
 
-        const transform = el.style.transform;
-        const offsetTop = el.offsetTop;
-        const height = el.offsetHeight;
+      let translateY = 0;
 
-        let translateY = 0;
+      if (transform?.includes("translate3d")) {
+        const match = transform.match(/translate3d\(\s*([-0-9.]+)px,\s*([-0-9.]+)px,\s*([-0-9.]+)px\)/);
 
-        if (transform?.includes("translate3d")) {
-          const match = transform.match(/translate3d\(\s*([-0-9.]+)px,\s*([-0-9.]+)px,\s*([-0-9.]+)px\)/);
-
-          if (match) {
-            const [, , y] = match.map(parseFloat);
-            translateY = y;
-          }
+        if (match) {
+          const [, , y] = match.map(parseFloat);
+          translateY = y;
         }
-
-        return offsetTop + height + translateY;
-      });
-
-      const maxVisualBottom = Math.max(...yValues);
-
-      if (containerRef.current) {
-        containerRef.current.style.minHeight = `${maxVisualBottom}px`;
       }
-    };
 
-    lenis.on("scroll", handleScroll);
+      return offsetTop + height + translateY;
+    });
 
-    return () => {
-      lenis.off("scroll", handleScroll);
-    };
-  }, [lenis]);
+    const maxVisualBottom = Math.max(...yValues);
+
+    if (containerRef.current) {
+      containerRef.current.style.minHeight = `${maxVisualBottom}px`;
+    }
+  };
 
   if (!research) return <Loading />;
 

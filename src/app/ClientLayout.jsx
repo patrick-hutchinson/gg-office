@@ -27,7 +27,7 @@ export default function ClientLayout({ children }) {
 
   useEffect(() => {
     console.log(contentRef.current.scrollTop);
-    contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    contentRef.current.scrollTop = 0;
   }, [showOpening]);
 
   const handleAnimationComplete = () => {
