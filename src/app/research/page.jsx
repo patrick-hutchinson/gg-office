@@ -6,7 +6,7 @@ import Rellax from "rellax";
 import { useLenis } from "@studio-freight/react-lenis";
 import Loading from "../../assets/components/Loading/Loading";
 
-import RenderMedia from "../../assets/utils/RenderMedia";
+import RenderMedia from "../../assets/components/RenderMedia";
 
 import styles from "./styles/Research.module.css";
 import { GlobalDataContext } from "../../assets/context/GlobalDataContext";

@@ -9,14 +9,7 @@
   -webkit-backdrop-filter: blur(12px);
   z-index: 5;
 
-  /* width: calc(100% + calc(var(--margin) * 2)); */
-
-  /* padding: var(--margin); */
-
-  /* margin-bottom: var(--margin); */
-  /* margin-top: var(--margin); */
-  margin-bottom: 20px;
-  padding: 10px;
+  padding: 15px;
   margin: -15px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }

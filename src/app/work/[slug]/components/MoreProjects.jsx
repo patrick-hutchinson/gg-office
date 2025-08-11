@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import styles from "./styles/MoreProjects.module.css";
 
-import RenderMedia from "../../../../assets/utils/RenderMedia";
+import RenderMedia from "../../../../assets/components/RenderMedia";
 
 export default function MoreProjects({ work }) {
   const moreprojectsRef = useRef(null);

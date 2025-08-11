@@ -7,7 +7,7 @@ import styles from "./styles/ListView.module.css";
 
 import ScrollText from "../.././../assets/components/ScrollText";
 
-import RenderMedia from "../../../assets/utils/RenderMedia";
+import RenderMedia from "../../../assets/components/RenderMedia";
 import Loading from "../../../assets/components/Loading/Loading";
 
 import { useLenis } from "@studio-freight/react-lenis";

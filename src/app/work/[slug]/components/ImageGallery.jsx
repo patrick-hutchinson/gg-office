@@ -1,6 +1,6 @@
 import styles from "./styles/ImageGallery.module.css";
 
-import RenderMedia from "../../../../assets/utils/RenderMedia";
+import RenderMedia from "../../../../assets/components/RenderMedia";
 
 export default function ImageGallery({ project }) {
   let Images = () => {

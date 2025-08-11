@@ -1,7 +1,7 @@
 import styles from "./styles/ImageView.module.css"; // Updated import for CSS modules
 import Link from "next/link";
 
-import RenderMedia from "../../../assets/utils/RenderMedia";
+import RenderMedia from "../../../assets/components/RenderMedia";
 import Loading from "../../../assets/components/Loading/Loading";
 
 export default function ImageView({ work, selectedFilters, activeView }) {
