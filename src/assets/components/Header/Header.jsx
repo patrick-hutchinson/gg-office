@@ -14,8 +14,6 @@ import HeaderMobile from "./components/HeaderMobile";
 export default function Header({ location, setShowOpening }) {
   const { isMobile } = useContext(GlobalStateContext);
 
-  useEffect(() => {}, [location]);
-
   return (
     <header className={styles.header}>
       {isMobile ? (

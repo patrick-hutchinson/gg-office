@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
 import sanityClient from "/src/client.js";
 
 export const GlobalDataContext = createContext();
@@ -13,7 +13,6 @@ export const GlobalDataProvider = ({ children }) => {
   const [selectedFilters, setSelectedFilters] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-
   const [research, setResearch] = useState();
 
   useEffect(() => {
@@ -21,92 +20,92 @@ export const GlobalDataProvider = ({ children }) => {
     sanityClient
       .fetch(
         `*[_type == "project"]{
-    name,
-   coverimage {
-  "type": select(
-    defined(image) => "image",
-    defined(video) => "video"
-  ),
-  "url": select(
-    defined(image.asset) => image.asset->url,
-    defined(video) => null
-  ),
-  "lqip": select(
-    defined(image.asset) => image.asset->metadata.lqip,
-    defined(video) => null
-  ),
-  "playbackId": select(
-    defined(video.asset) => video.asset->playbackId,
-    defined(image) => null
-  ),
-    "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
-  "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
-  "assetId": select(
-    defined(video.asset) => video.asset->assetId,
-    defined(image) => null
-  ),
-  "status": select(
-    defined(video.asset) => video.asset->status,
-    defined(image) => null
-  ),
-  "_id": select(
-    defined(video.asset) => video.asset->_id,
-    defined(image.asset) => image.asset->_id
-  )
-},
-    year,
-    description,
-imagegallery[]{
-  "type": select(defined(image) => "image", defined(video) => "video"),
-  "_id": select(
-    defined(image.asset) => image.asset->_id,
-    defined(video.asset) => video.asset->_id,
-    true => null
-  ),
-  "url": select(defined(image.asset) => image.asset->url, true => null),
-  "lqip": select(defined(image.asset) => image.asset->metadata.lqip, true => null),
-  "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
-  "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
-  "status": select(defined(video.asset) => video.asset->status, true => null),
-  "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
-  "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null)
-},
-    filtering[]->{title},
-    creditsInhouse,
-    creditsClient,
-    slug,
-    gridStructure,
-thumbnail {
-  "type": type,
-  "url": select(
-    type == "image" && defined(image.asset) => image.asset->url,
-    true => null
-  ),
-  "lqip": select(
-    type == "image" && defined(image.asset) => image.asset->metadata.lqip,
-    true => null
-  ),
-  "playbackId": select(
-    type == "video" && defined(video.asset) => video.asset->playbackId,
-    true => null
-  ),
-  "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
-  "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
-  "assetId": select(
-    type == "video" && defined(video.asset) => video.asset->assetId,
-    true => null
-  ),
-  "status": select(
-    type == "video" && defined(video.asset) => video.asset->status,
-    true => null
-  ),
-  "_id": select(
-    type == "video" && defined(video.asset) => video.asset->_id,
-    type == "image" && defined(image.asset) => image.asset->_id,
-    true => null
-  )
-}
-  }`
+          name,
+          coverimage {
+            "type": select(
+              defined(image) => "image",
+              defined(video) => "video"
+            ),
+            "url": select(
+              defined(image.asset) => image.asset->url,
+              defined(video) => null
+            ),
+            "lqip": select(
+              defined(image.asset) => image.asset->metadata.lqip,
+              defined(video) => null
+            ),
+            "playbackId": select(
+              defined(video.asset) => video.asset->playbackId,
+              defined(image) => null
+            ),
+            "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
+            "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
+            "assetId": select(
+              defined(video.asset) => video.asset->assetId,
+              defined(image) => null
+            ),
+            "status": select(
+              defined(video.asset) => video.asset->status,
+              defined(image) => null
+            ),
+            "_id": select(
+              defined(video.asset) => video.asset->_id,
+              defined(image.asset) => image.asset->_id
+            )
+          },
+          year,
+          description,
+          imagegallery[]{
+            "type": select(defined(image) => "image", defined(video) => "video"),
+            "_id": select(
+              defined(image.asset) => image.asset->_id,
+              defined(video.asset) => video.asset->_id,
+              true => null
+            ),
+            "url": select(defined(image.asset) => image.asset->url, true => null),
+            "lqip": select(defined(image.asset) => image.asset->metadata.lqip, true => null),
+            "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
+            "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
+            "status": select(defined(video.asset) => video.asset->status, true => null),
+            "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
+            "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null)
+          },
+          filtering[]->{title},
+          creditsInhouse,
+          creditsClient,
+          slug,
+          gridStructure,
+          thumbnail {
+            "type": type,
+            "url": select(
+              type == "image" && defined(image.asset) => image.asset->url,
+              true => null
+            ),
+            "lqip": select(
+              type == "image" && defined(image.asset) => image.asset->metadata.lqip,
+              true => null
+            ),
+            "playbackId": select(
+              type == "video" && defined(video.asset) => video.asset->playbackId,
+              true => null
+            ),
+            "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
+            "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
+            "assetId": select(
+              type == "video" && defined(video.asset) => video.asset->assetId,
+              true => null
+            ),
+            "status": select(
+              type == "video" && defined(video.asset) => video.asset->status,
+              true => null
+            ),
+            "_id": select(
+              type == "video" && defined(video.asset) => video.asset->_id,
+              type == "image" && defined(image.asset) => image.asset->_id,
+              true => null
+            )
+          }
+        }`
       )
       .then((data) => {
         setWork(data);
@@ -119,8 +118,8 @@ thumbnail {
     sanityClient
       .fetch(
         `*[_type=="filters"]{
-      title,
-  }`
+          title,
+        }`
       )
       .then((data) => {
         const fetchedFilters = data.map((filter) => filter.title);
@@ -148,20 +147,20 @@ thumbnail {
       .fetch(
         `*[_type=="research"]{
           imagegallery[]{
-  "type": select(defined(image) => "image", defined(video) => "video"),
-  "_id": select(
-    defined(image.asset) => image.asset->_id,
-    defined(video.asset) => video.asset->_id,
-    true => null
-  ),
-  "url": select(defined(image.asset) => image.asset->url, true => null),
-  "lqip": select(defined(image.asset) => image.asset->metadata.lqip, true => null),
-  "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
-  "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
-  "status": select(defined(video.asset) => video.asset->status, true => null),
-  "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
-  "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null)
-},
+            "type": select(defined(image) => "image", defined(video) => "video"),
+            "_id": select(
+              defined(image.asset) => image.asset->_id,
+              defined(video.asset) => video.asset->_id,
+              true => null
+            ),
+            "url": select(defined(image.asset) => image.asset->url, true => null),
+            "lqip": select(defined(image.asset) => image.asset->metadata.lqip, true => null),
+            "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
+            "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
+            "status": select(defined(video.asset) => video.asset->status, true => null),
+            "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
+            "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null)
+          },
         }`
       )
       .then((data) => setResearch(data))
@@ -183,11 +182,20 @@ thumbnail {
       .catch(console.error);
   }, []);
 
-  return (
-    <GlobalDataContext.Provider
-      value={{ work, about, contact, filters, research, selectedFilters, setSelectedFilters, isLoading, error }}
-    >
-      {children}
-    </GlobalDataContext.Provider>
+  const value = useMemo(
+    () => ({
+      work,
+      about,
+      contact,
+      filters,
+      research,
+      selectedFilters,
+      setSelectedFilters,
+      isLoading,
+      error,
+    }),
+    [work, about, contact, filters, research, selectedFilters, isLoading, error]
   );
+
+  return <GlobalDataContext.Provider value={value}>{children}</GlobalDataContext.Provider>;
 };

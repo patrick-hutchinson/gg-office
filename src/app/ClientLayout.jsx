@@ -22,11 +22,12 @@ export default function ClientLayout({ children }) {
   const [showOpening, setShowOpening] = useState(isHome);
 
   useEffect(() => {
-    contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    if (showOpening) disableScroll();
   }, [showOpening]);
 
   useEffect(() => {
-    if (showOpening) disableScroll();
+    console.log(contentRef.current.scrollTop);
+    contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
   }, [showOpening]);
 
   const handleAnimationComplete = () => {

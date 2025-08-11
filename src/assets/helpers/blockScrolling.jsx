@@ -18,10 +18,13 @@ const supportsPassive = (() => {
       Object.defineProperty({}, "passive", {
         get() {
           passiveSupported = true;
+          return true;
         },
       })
     );
-  } catch (_) {}
+  } catch (_) {
+    // ignore errors
+  }
   return passiveSupported;
 })();
 
@@ -32,7 +35,6 @@ export const disableScroll = () => {
   window.addEventListener("wheel", preventDefault, options);
   window.addEventListener("touchmove", preventDefault, options);
   window.addEventListener("keydown", preventDefaultForScrollKeys, false);
-  console.log("scroll disabled!");
 };
 
 export const enableScroll = () => {
@@ -40,5 +42,4 @@ export const enableScroll = () => {
   window.removeEventListener("wheel", preventDefault, options);
   window.removeEventListener("touchmove", preventDefault, options);
   window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
-  console.log("scroll enabled!");
 };

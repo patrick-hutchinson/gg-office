@@ -33,7 +33,7 @@ export default function MoreProjects({ work }) {
         {work.map((project, index) => {
           return (
             project.slug && (
-              <Link href={`/work/${project.slug.current}`} key={index}>
+              <Link href={`/work/${project.slug.current}`} key={project.slug.current}>
                 {project.thumbnail && <RenderMedia medium={project.thumbnail} />}
               </Link>
             )

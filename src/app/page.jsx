@@ -1,8 +1,6 @@
 "use client";
 
-import { useContext } from "react";
-
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import ImageView from "./work/components/ImageView";
 import ListView from "./work/components/ListView";
@@ -12,12 +10,11 @@ import Loading from "../../src/assets/components/Loading/Loading";
 import { GlobalDataContext } from "../../src/assets/context/GlobalDataContext";
 
 export default function Work() {
-  const { work } = useContext(GlobalDataContext);
   const { filters, selectedFilters, setSelectedFilters } = useContext(GlobalDataContext);
 
   let [activeView, setActiveView] = useState("Image View");
 
-  if (!work || !filters || !selectedFilters) return <Loading />;
+  if (!filters || !selectedFilters) return <Loading />;
 
   return (
     <main>
@@ -29,8 +26,8 @@ export default function Work() {
         setSelectedFilters={setSelectedFilters}
       />
 
-      <ImageView selectedFilters={selectedFilters} work={work} activeView={activeView} />
-      <ListView selectedFilters={selectedFilters} work={work} activeView={activeView} />
+      <ImageView selectedFilters={selectedFilters} activeView={activeView} />
+      <ListView selectedFilters={selectedFilters} activeView={activeView} />
     </main>
   );
 }

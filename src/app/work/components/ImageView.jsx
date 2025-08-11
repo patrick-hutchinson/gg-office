@@ -1,28 +1,20 @@
+import { useEffect, useContext } from "react";
+
 import styles from "./styles/ImageView.module.css"; // Updated import for CSS modules
 import Link from "next/link";
 
 import RenderMedia from "../../../assets/components/RenderMedia";
 import Loading from "../../../assets/components/Loading/Loading";
 
-export default function ImageView({ work, selectedFilters, activeView }) {
+import { GlobalDataContext } from "../../../assets/context/GlobalDataContext";
+
+export default function ImageView({ selectedFilters, activeView }) {
   // Helper function to determine if a project should be rendered
+  const { work } = useContext(GlobalDataContext);
+
   const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
 
   if (!work) return <Loading />; // Early return if there's no data
-
-  let Categories = ({ project }) => {
-    return (
-      <ul className={styles["project-categories"]}>
-        {project.filtering.map((filter, index) => {
-          return (
-            <li className={`${styles.category}`} key={index}>
-              {filter.title}
-            </li>
-          );
-        })}
-      </ul>
-    );
-  };
 
   return (
     <div className={`${styles.imageview} ${activeView === "Image View" ? "visible" : "hidden"}`}>
@@ -31,7 +23,7 @@ export default function ImageView({ work, selectedFilters, activeView }) {
 
         return (
           project.slug && (
-            <Link className={styles.project} href={`/work/${project.slug.current}`} key={index}>
+            <Link className={styles.project} href={`/work/${project.slug.current}`} key={project.slug.current}>
               <div className={`${styles["project-front"]}`}>
                 {project.thumbnail && <RenderMedia medium={project.thumbnail} />}
               </div>

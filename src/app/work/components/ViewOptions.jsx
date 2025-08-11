@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "../Work.module.css";
 
@@ -29,7 +29,7 @@ export default function ViewOptions({ activeView, setActiveView, filters, select
   function handleView(target) {
     setActiveView(target.textContent);
 
-    target.classList.add("active");
+    // target.classList.add("active");
   }
 
   return (

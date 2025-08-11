@@ -10,11 +10,11 @@ import ScrollText from "../.././../assets/components/ScrollText";
 import RenderMedia from "../../../assets/components/RenderMedia";
 import Loading from "../../../assets/components/Loading/Loading";
 
-import { useLenis } from "@studio-freight/react-lenis";
-
 import { GlobalStateContext } from "../../../assets/context/GlobalStateContext";
+import { GlobalDataContext } from "../../../assets/context/GlobalDataContext";
 
-export default function ListView({ work, selectedFilters, activeView }) {
+export default function ListView({ selectedFilters, activeView }) {
+  const { work } = useContext(GlobalDataContext);
   const { isMobile } = useContext(GlobalStateContext);
 
   const mediaRefs = useRef({});
@@ -23,20 +23,6 @@ export default function ListView({ work, selectedFilters, activeView }) {
   const cursorRef = useRef({ x: 0, y: 0 });
   const scrollYRef = useRef(0);
   const animationFrameRef = useRef(null);
-
-  const lenis = useLenis();
-
-  useEffect(() => {
-    if (!lenis) return;
-
-    const updateScroll = ({ scroll }) => {
-      scrollYRef.current = scroll;
-      updatePosition();
-    };
-
-    lenis.on("scroll", updateScroll);
-    return () => lenis.off("scroll", updateScroll);
-  }, [lenis]);
 
   const updatePosition = () => {
     if (previewWrapperRef.current) {
@@ -111,7 +97,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
       >
         {work.map((project, index) => (
           <div
-            key={index}
+            key={project.slug.current}
             ref={setMediaRef(project.thumbnail._id)}
             className={styles["preview-wrapper-inner"]}
             style={{
@@ -141,7 +127,7 @@ export default function ListView({ work, selectedFilters, activeView }) {
             if (!projectMatchesFilter(project)) return null;
             return (
               project.slug && (
-                <Link href={`/work/${project.slug.current}`} key={index}>
+                <Link href={`/work/${project.slug.current}`} key={project.slug.current}>
                   <li className={styles.project} onMouseEnter={(e) => showMedia(project)} onMouseLeave={hideMedia}>
                     <div className={styles.name}>
                       <ScrollText string={project.name} />
