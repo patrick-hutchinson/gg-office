@@ -14,18 +14,20 @@ export default function About() {
   const { about } = useContext(GlobalDataContext);
   const AlienContainerRef = useRef(null);
 
-  const offset = isMobile ? { right: 100, left: 10 } : { right: 300, left: 100 };
+  const offset = isMobile
+    ? { right: 200, left: 10, bottom: 300, top: 10 }
+    : { right: 300, left: 100, bottom: 300, top: 100 };
 
   // Function to position and handle hover effect for a specific alien
   const positionAlien = (alien) => {
     // Set the initial random position when the alien is created
-    alien.style.left = `${Math.floor(Math.random() * (window.innerWidth - offset.right)) + offset.left}px`;
-    alien.style.top = `${Math.floor(Math.random() * (window.innerHeight - offset.right)) + offset.left}px`;
+    alien.style.left = `${Math.floor(Math.random() * (window.innerWidth - offset.right)) + offset.top}px`;
+    alien.style.top = `${Math.floor(Math.random() * (window.innerHeight - offset.bottom)) + offset.top}px`;
 
     // Add the hover effect to move the alien on mouseenter
     alien.addEventListener("mouseenter", () => {
-      const randomLeft = Math.floor(Math.random() * (window.innerWidth - offset.right)) + offset.left;
-      const randomTop = Math.floor(Math.random() * (window.innerHeight - offset.right)) + offset.left;
+      const randomLeft = Math.floor(Math.random() * (window.innerWidth - offset.right)) + offset.top;
+      const randomTop = Math.floor(Math.random() * (window.innerHeight - offset.bottom)) + offset.top;
       alien.style.left = `${randomLeft}px`;
       alien.style.top = `${randomTop}px`;
     });
@@ -56,7 +58,7 @@ export default function About() {
     // If not, create the alien wrapper and set its inner HTML
     const wrapper = document.createElement("div");
     wrapper.className = `${styles["alien-wrapper"]}`;
-    wrapper.innerHTML = `<div class="${styles.alien}">${about[0].emoji}</div><span>${intern}</span>`;
+    wrapper.innerHTML = `<div class="${styles.alien}">${about[0].emoji}</div><div class="button active ${styles["name"]}">${intern}</div>`;
 
     // Append to the container and apply positioning/hover effects
     AlienContainerRef.current.appendChild(wrapper);
@@ -104,25 +106,6 @@ export default function About() {
     );
   };
 
-  // const Clients = () => {
-  //   const clients = about[0].clients || [];
-
-  //   return (
-  //     <section>
-  //       <h5>Clients</h5>
-  //       {clients.map((client, index) => {
-  //         const isLast = index === clients.length - 1;
-  //         return (
-  //           <span key={index}>
-  //             {client}
-  //             {!isLast && ",\u00A0"}{" "}
-  //           </span>
-  //         );
-  //       })}
-  //     </section>
-  //   );
-  // };
-
   const Internships = () => {
     const internships = about[0].internship || [];
 
@@ -147,11 +130,11 @@ export default function About() {
       <div className={`${styles["alien-container"]}`} ref={AlienContainerRef}>
         <div className={`${styles["alien-wrapper"]}`}>
           <div className={`${styles.alien}`}>{about[0].emoji}</div>
-          <span>Enrico</span>
+          <div className={`button active ${styles["name"]}`}>Enrico</div>
         </div>
         <div className={`${styles["alien-wrapper"]}`}>
           <div className={`${styles.alien}`}>{about[0].emoji}</div>
-          <span>Francesca</span>
+          <div className={`button active ${styles["name"]}`}>Francesca</div>
         </div>
       </div>
       <main className={`${styles.about}`}>
@@ -159,7 +142,7 @@ export default function About() {
         <div>
           <Biography />
           <Services />
-          {/* <Clients /> */}
+
           <Internships />
         </div>
       </main>

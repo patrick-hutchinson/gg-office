@@ -10,11 +10,14 @@ import Header from "../../src/assets/components/Header/Header";
 import Footer from "../../src/assets/components/Footer";
 import OpeningPage from "../../src/assets/components/OpeningPage/OpeningPage";
 
+import { RefContext } from "../assets/context/RefContext";
+
 export default function ClientLayout({ children }) {
+  const { container } = useContext(RefContext);
   const pathname = usePathname();
 
   const openingRef = useRef(null);
-  const contentRef = useRef(null);
+  // const contentRef = useRef(null);
 
   const isHome = pathname === "/";
 
@@ -26,8 +29,7 @@ export default function ClientLayout({ children }) {
   }, [showOpening]);
 
   useEffect(() => {
-    console.log(contentRef.current.scrollTop);
-    contentRef.current.scrollTop = 0;
+    container.current.scrollTop = 0;
   }, [showOpening]);
 
   const handleAnimationComplete = () => {
@@ -73,11 +75,11 @@ export default function ClientLayout({ children }) {
         variants={openingVariants}
         onAnimationComplete={handleAnimationComplete}
       >
-        <OpeningPage ref={openingRef} showOpening={showOpening} />
+        <OpeningPage ref={openingRef} />
       </motion.div>
       <motion.div
         id="content"
-        ref={contentRef}
+        ref={container}
         initial={false}
         animate={showOpening ? "outOfView" : "inView"}
         variants={contentVariants}

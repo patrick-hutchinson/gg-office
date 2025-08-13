@@ -1,39 +1,40 @@
 .container {
+  height: calc(100vh - 110px);
+  width: 100%;
+  border: 2px solid blue;
+  overflow: hidden;
+}
+
+.container-inner {
+  align-content: center;
+  align-items: center;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex: 1 0 0px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 70px;
+  height: 100%;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
 }
 
-.image-container {
+.column {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  place-items: center;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  gap: 70px;
+  position: relative;
+  flex-direction: column;
   will-change: transform;
-
-  flex: 0 0 calc(33.3333% - var(--margin));
-  max-width: calc(33.3333% - var(--margin));
-  mix-blend-mode: difference;
-  padding: 4%;
 }
 
-@media (max-width: 575.98px) {
-  .image-container {
-    flex: 1 1 calc(50% - var(--margin));
-    max-width: calc(50% - var(--margin));
-    padding: 2%;
-  }
-}
-
-/* Small Devices (Phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .image-container {
-    flex: 1 1 calc(50% - var(--margin));
-    max-width: calc(50% - var(--margin));
-    padding: 3%;
-  }
-}
-
-/* Medium Devices (Tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-}
-
-/* Desktop */
-@media (min-width: 991.98px) {
+.media-container {
 }

@@ -1,8 +1,9 @@
 import { useRef, useEffect } from "react";
 
-const ScrollText = ({ string }) => {
+const ScrollText = ({ string, activeView }) => {
   const containerRef = useRef();
   const textRef = useRef();
+  const pauseTimeout = useRef(null); // to store timeout ID
 
   useEffect(() => {
     const container = containerRef.current;
@@ -11,33 +12,47 @@ const ScrollText = ({ string }) => {
 
     const overflowAmount = text.scrollWidth - container.clientWidth;
     if (overflowAmount <= 0) {
-      // No overflow, reset scrollLeft to 0 and do nothing
       container.scrollLeft = 0;
       return;
     }
 
     let scrollPos = 0;
     let direction = 1; // 1 = forward, -1 = backward
-    const speed = 1;
+    const speed = 0.5;
     const interval = 20;
+    let isPaused = false;
 
     const scroll = () => {
+      if (isPaused) return;
+
       scrollPos += direction * speed;
 
       if (scrollPos >= overflowAmount) {
         scrollPos = overflowAmount;
-        direction = -1;
+        isPaused = true;
+        pauseTimeout.current = setTimeout(() => {
+          direction = -1;
+          isPaused = false;
+        }, 1000);
       } else if (scrollPos <= 0) {
         scrollPos = 0;
-        direction = 1;
+        isPaused = true;
+        pauseTimeout.current = setTimeout(() => {
+          direction = 1;
+          isPaused = false;
+        }, 1000);
       }
 
       container.scrollLeft = scrollPos;
     };
 
     const scrollInterval = setInterval(scroll, interval);
-    return () => clearInterval(scrollInterval);
-  }, [string]); // rerun if string changes
+
+    return () => {
+      clearInterval(scrollInterval);
+      if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+    };
+  }, [activeView, string]); // Added string to dependency to reset on text change
 
   return (
     <div

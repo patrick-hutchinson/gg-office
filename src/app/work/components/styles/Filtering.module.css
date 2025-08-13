@@ -29,7 +29,7 @@ ul.filtering {
     display: unset;
   }
   ul.filtering li {
-    display: inline;
+    display: inline-block;
   }
 }
 

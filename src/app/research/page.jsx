@@ -1,97 +1,97 @@
 "use client";
 
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
-import Rellax from "rellax";
+import { motion, useScroll, useMotionValue, useMotionValueEvent, wrap } from "framer-motion";
 
-import Loading from "../../assets/components/Loading/Loading";
+import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
 
+import styles from "./styles/research.module.css";
 import RenderMedia from "../../assets/components/RenderMedia";
 
-import styles from "./styles/Research.module.css";
-import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
-import { GlobalStateContext } from "../../assets/context/GlobalStateContext";
-
-export default function Research() {
+export default function Gallery() {
   const { research } = useContext(GlobalDataContext);
-  const { isMobile } = useContext(GlobalStateContext);
 
-  const imagesRef = useRef([]);
+  const columnCount = 3;
 
-  const containerRef = useRef(undefined);
+  if (!research) return;
 
-  let Images = () => {
+  const Column = ({ columnNumber }) => {
+    const mediaRefs = useRef([]);
+    const virtualScroll = useMotionValue(0);
+
+    // Store the height of each column to determine where the reset breakpoint for each column is
+    const [totalHeight, setTotalHeight] = useState(0);
+
+    // Calculate the totalHeight by adding all media-container heights + accumalated gap
     useEffect(() => {
-      isMobile ? 0 : new Rellax(".rellax");
+      if (!mediaRefs.current) return;
+
+      let sum = 0;
+      mediaRefs.current.forEach((medium) => {
+        sum += medium.getBoundingClientRect().height;
+      });
+
+      const gap = mediaRefs.current.length * 70;
+
+      // Add the height of the images (sum) to the gap and divide by 2, since we loop once the next image appears
+      setTotalHeight((sum + gap) / 2);
     }, []);
 
+    useEffect(() => {
+      console.log(`totalheight for column ${columnNumber} is ${totalHeight}`);
+    }, [totalHeight]);
+
+    //Capture and transform virtual scroll
+    useEffect(() => {
+      const handleWheel = (e) => {
+        const current = virtualScroll.get();
+        let newY = current + e.deltaY;
+
+        // Wrap the scroll value once totalHeight is reached
+        newY = wrap(-totalHeight, 0, newY);
+
+        virtualScroll.set(newY);
+      };
+
+      window.addEventListener("wheel", handleWheel);
+      return () => window.removeEventListener("wheel", handleWheel);
+    }, [virtualScroll, totalHeight]);
+
+    // Duplicate the array by concatenation (A duplicated column is needed for the infinite scroll to be seemless)
+    const items = research[0].imagegallery
+      .slice(0, 32)
+      .filter((_, index) => index % columnCount === columnNumber)
+      .sort((a, b) => {
+        if (a.type === "image" && b.type !== "image") return -1; // a comes first
+        if (a.type !== "image" && b.type === "image") return 1; // b comes first
+        return 0; // keep relative order otherwise
+      });
+    const duplicatedItems = [...items, ...items];
+
     return (
-      <div className={`${styles["container"]}`}>
-        {research[0].imagegallery.map((image, index) => {
-          const randomSpeed = Math.random() * 3 - 6;
-          const randomX = isMobile ? 0 : Math.random() * 50;
-          const randomY = isMobile ? 0 : Math.random() * 200 - 100;
-
-          let isLeft = index % 3 === 0;
-          let isRight = index % 3 === 2;
-
-          const translateY = index < 4 ? `${randomY}px` : "0px";
-          const translateX = isLeft ? `${randomX}px` : isRight ? `-${randomX}px` : "0px";
-
-          return (
-            <div
-              className={`${styles["image-container"]} rellax`}
-              data-rellax-speed={randomSpeed}
-              key={index}
-              style={{
-                transform: `translateY(${translateY}) translateX(${translateX})`,
-              }}
-              ref={(el) => {
-                if (el) imagesRef.current[index] = el;
-              }}
-            >
-              <RenderMedia medium={image} />
-            </div>
-          );
-        })}
-      </div>
+      <motion.div className={styles["column"]} style={{ translateY: virtualScroll }}>
+        {duplicatedItems.map((medium, index) => (
+          <div
+            key={index}
+            ref={(el) => (mediaRefs.current[index] = el)}
+            className={styles["media-container"]}
+            style={{ width: "300px" }}
+          >
+            <RenderMedia medium={medium} />
+          </div>
+        ))}
+      </motion.div>
     );
   };
 
-  const handleScroll = () => {
-    const yValues = imagesRef.current.map((el) => {
-      if (!el) return 0;
-
-      const transform = el.style.transform;
-      const offsetTop = el.offsetTop;
-      const height = el.offsetHeight;
-
-      let translateY = 0;
-
-      if (transform?.includes("translate3d")) {
-        const match = transform.match(/translate3d\(\s*([-0-9.]+)px,\s*([-0-9.]+)px,\s*([-0-9.]+)px\)/);
-
-        if (match) {
-          const [, , y] = match.map(parseFloat);
-          translateY = y;
-        }
-      }
-
-      return offsetTop + height + translateY;
-    });
-
-    const maxVisualBottom = Math.max(...yValues);
-
-    if (containerRef.current) {
-      containerRef.current.style.minHeight = `${maxVisualBottom}px`;
-    }
-  };
-
-  if (!research) return <Loading />;
-
   return (
-    <div ref={containerRef} className={styles["research-container"]}>
-      <Images />
+    <div className={styles["container"]}>
+      <div className={styles["container-inner"]}>
+        {Array.from({ length: columnCount }, (column, index) => (
+          <Column key={index} columnNumber={index} />
+        ))}
+      </div>
     </div>
   );
 }

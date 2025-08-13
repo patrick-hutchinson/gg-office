@@ -51,7 +51,11 @@ export const GlobalDataProvider = ({ children }) => {
             "_id": select(
               defined(video.asset) => video.asset->_id,
               defined(image.asset) => image.asset->_id
-            )
+            ),
+"aspect_ratio": select(
+      defined(video.asset) => video.asset->data.aspect_ratio,
+      defined(image) => null
+    )
           },
           year,
           description,
@@ -68,7 +72,11 @@ export const GlobalDataProvider = ({ children }) => {
             "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
             "status": select(defined(video.asset) => video.asset->status, true => null),
             "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
-            "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null)
+            "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null),
+            "aspect_ratio": select(
+      defined(video.asset) => video.asset->data.aspect_ratio,
+      defined(image) => null
+    )
           },
           filtering[]->{title},
           creditsInhouse,
@@ -103,7 +111,11 @@ export const GlobalDataProvider = ({ children }) => {
               type == "video" && defined(video.asset) => video.asset->_id,
               type == "image" && defined(image.asset) => image.asset->_id,
               true => null
-            )
+            ),
+            "aspect_ratio": select(
+      defined(video.asset) => video.asset->data.aspect_ratio,
+      defined(image) => null
+    )
           }
         }`
       )
@@ -159,7 +171,11 @@ export const GlobalDataProvider = ({ children }) => {
             "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
             "status": select(defined(video.asset) => video.asset->status, true => null),
             "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
-            "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null)
+            "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null),
+            "aspect_ratio": select(
+      defined(video.asset) => video.asset->data.aspect_ratio,
+      defined(image) => null
+    )
           },
         }`
       )

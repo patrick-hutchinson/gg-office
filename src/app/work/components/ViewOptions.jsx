@@ -38,7 +38,7 @@ export default function ViewOptions({ activeView, setActiveView, filters, select
         <Views />
 
         <button className={`${styles.toggleOptions} button`} onClick={() => setShowFiltering(!showFiltering)}>
-          {showFiltering ? "Less Options" : "More Options"}
+          {showFiltering ? "Hide Filters" : "Filters"}
         </button>
       </div>
 

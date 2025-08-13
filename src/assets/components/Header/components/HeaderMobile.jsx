@@ -1,6 +1,8 @@
 import styles from "./styles/HeaderMobile.module.css";
 import Link from "next/link";
 
+import MobileMenu from "./MobileMenu";
+
 import { useState } from "react";
 
 export default function HeaderMobile({ location }) {
@@ -10,61 +12,17 @@ export default function HeaderMobile({ location }) {
     setShowMenu(!showMenu);
   }
 
-  function handleMenuClick() {
-    setShowMenu(false);
-  }
-
   return (
     <ul className={`${styles.headerMobile}`}>
       <li className={`${styles.button} button ${location.includes("gg–office") ? "active" : ""}`}>
         <Link href="/">GG—OFFICE</Link>
       </li>
 
-      <li className={`${styles.button} button`} onClick={expandMenu}>
-        menu
+      <li className={`${styles.button} button ${showMenu ? "active" : ""}`} onClick={expandMenu}>
+        MENU
       </li>
 
-      {showMenu && (
-        <div className={`${styles.expandMenu}`}>
-          <li
-            className={`${styles.button} button active`}
-            onClick={() => {
-              handleMenuClick();
-            }}
-          >
-            <Link href="/">Work</Link>
-          </li>
-          <li
-            className={`${styles.button} button active`}
-            onClick={() => {
-              handleMenuClick();
-            }}
-          >
-            <Link href="/about">About</Link>
-          </li>
-          <li
-            className={`${styles.button} button active`}
-            onClick={() => {
-              handleMenuClick();
-            }}
-          >
-            <Link href="/research">Research</Link>
-          </li>
-          <li className={`${styles.button} button active`}>
-            <Link href="https://www.gg-rugs.com" target="_blank">
-              RUGS
-            </Link>
-          </li>
-          <li
-            className={`${styles.button} button active`}
-            onClick={() => {
-              handleMenuClick();
-            }}
-          >
-            <Link href="/contact">Contact</Link>
-          </li>
-        </div>
-      )}
+      {showMenu && <MobileMenu location={location} setShowMenu={setShowMenu} />}
     </ul>
   );
 }

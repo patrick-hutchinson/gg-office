@@ -18,8 +18,10 @@ const RenderMedia = React.memo(({ medium }) => {
 
   // Handle Sanity Image
   if (medium.type === "image") {
+    console.log("width:", medium.width);
+
     return (
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <div style={{ position: "relative", width: "100%", height: "100%", aspectRatio: medium.width / medium.height }}>
         <Image
           unoptimized
           src={medium.url}
@@ -40,49 +42,54 @@ const RenderMedia = React.memo(({ medium }) => {
       return <p>Video is processing, please wait!</p>;
     }
 
+    if (!medium?.aspect_ratio) return;
+
+    const [aspectWidth, aspectHeight] = medium.aspect_ratio?.split(":");
+
     return (
-      <div ref={videoRef} style={{ position: "relative", width: "100%", height: "100%" }}>
-        <>
-          {!isLoaded && (
-            <Image
-              src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}
-              fill
-              alt="placeholder image"
-              unoptimized
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                opacity: isLoaded ? 0 : 1,
-                zIndex: 1,
-                filter: "blur(3px)",
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          )}
-          {isInView && (
-            <MuxPlayer
-              playbackId={medium.playbackId}
-              autoPlay
-              controls={false}
-              loop
-              preload="auto"
-              muted
-              playsInline
-              fill
-              style={{
-                position: "relative",
-                opacity: 1,
-                zIndex: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-              onLoadedMetadata={() => setIsLoaded(true)}
-            />
-          )}
-        </>
+      <div
+        ref={videoRef}
+        style={{ position: "relative", width: "100%", height: "100%", aspectRatio: aspectWidth / aspectHeight }}
+      >
+        {!isLoaded && (
+          <Image
+            src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}
+            fill
+            alt="placeholder image"
+            unoptimized
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              opacity: isLoaded ? 0 : 1,
+              zIndex: 1,
+              filter: "blur(3px)",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        )}
+        {isInView && (
+          <MuxPlayer
+            playbackId={medium.playbackId}
+            autoPlay
+            controls={false}
+            loop
+            preload="auto"
+            muted
+            playsInline
+            fill
+            style={{
+              position: "relative",
+              opacity: 1,
+              zIndex: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+            onLoadedMetadata={() => setIsLoaded(true)}
+          />
+        )}
       </div>
     );
   }

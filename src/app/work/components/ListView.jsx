@@ -14,8 +14,8 @@ import { GlobalStateContext } from "../../../assets/context/GlobalStateContext";
 import { GlobalDataContext } from "../../../assets/context/GlobalDataContext";
 
 export default function ListView({ selectedFilters, activeView }) {
-  const { work } = useContext(GlobalDataContext);
   const { isMobile } = useContext(GlobalStateContext);
+  const { work } = useContext(GlobalDataContext);
 
   const mediaRefs = useRef({});
 
@@ -23,6 +23,21 @@ export default function ListView({ selectedFilters, activeView }) {
   const cursorRef = useRef({ x: 0, y: 0 });
   const scrollYRef = useRef(0);
   const animationFrameRef = useRef(null);
+
+  useEffect(() => {
+    const el = document.querySelector("#content");
+
+    const handleScroll = (e) => {
+      console.log(el.scrollTop); // distance scrolled from the top
+      scrollYRef.current = el.scrollTop;
+    };
+
+    el.addEventListener("scroll", handleScroll);
+
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const updatePosition = () => {
     if (previewWrapperRef.current) {
@@ -97,7 +112,7 @@ export default function ListView({ selectedFilters, activeView }) {
       >
         {work.map((project, index) => (
           <div
-            key={project.slug.current}
+            key={index}
             ref={setMediaRef(project.thumbnail._id)}
             className={styles["preview-wrapper-inner"]}
             style={{
@@ -127,10 +142,10 @@ export default function ListView({ selectedFilters, activeView }) {
             if (!projectMatchesFilter(project)) return null;
             return (
               project.slug && (
-                <Link href={`/work/${project.slug.current}`} key={project.slug.current}>
+                <Link href={`/work/${project.slug.current}`} key={index}>
                   <li className={styles.project} onMouseEnter={(e) => showMedia(project)} onMouseLeave={hideMedia}>
                     <div className={styles.name}>
-                      <ScrollText string={project.name} />
+                      <ScrollText string={project.name} activeView={activeView} />
                     </div>
                     <Categories project={project} />
                     <div className={styles.year}>{project.year}</div>

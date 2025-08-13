@@ -25,4 +25,8 @@
   .wrapper {
     height: calc(100dvh - 30px);
   }
+
+  .column {
+    grid-template-rows: 0% 100%;
+  }
 }

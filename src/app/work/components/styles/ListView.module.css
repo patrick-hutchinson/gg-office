@@ -119,6 +119,10 @@ ul.infotitles .year {
     gap: var(--margin);
     align-items: center;
   }
+
+  ul.listview {
+    margin-bottom: 0;
+  }
 }
 
 /* Small Devices (Phones, 576px and up) */

@@ -9,6 +9,7 @@
   z-index: 5;
   padding-bottom: 5px;
   width: 100%;
+  font-size: var(--font-size-300);
 }
 
 .expandMenu {
@@ -22,26 +23,14 @@
   justify-content: center; /* Centers content vertically */
   align-items: center; /* Centers content horizontally */
   text-align: center;
-  gap: 30px;
-  top: -10px;
-  left: -10px;
+  gap: 20px;
+  top: -15px;
+  left: -15px;
   background: var(--background-color);
-  background: black;
+  color: var(--font-color);
 }
 
 .expandMenu li {
   font-size: var(--font-size-400);
   line-height: var(--line-height-400);
 }
-
-/* @keyframes glowing {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-} */

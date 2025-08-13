@@ -3,7 +3,7 @@
   flex-direction: row;
   font-size: var(--font-size-200);
   line-height: var(--line-height-200);
-  margin-right: 30px;
+  /* margin-right: 30px; */
 }
 .viewwrapper li {
   margin-right: 10px;
