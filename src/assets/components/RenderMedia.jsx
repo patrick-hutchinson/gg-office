@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
@@ -9,10 +9,13 @@ import { useInView } from "framer-motion";
 
 import { useEffect, useState } from "react";
 
+import { GlobalStateContext } from "../context/GlobalStateContext";
+
 const RenderMedia = React.memo(({ medium }) => {
   let [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef(null);
   const isInView = useInView(videoRef, { once: true, margin: "0px 0px -100px 0px" });
+  const { isMobile } = useContext(GlobalStateContext);
 
   if (!medium) return null; // Handle early return
 
@@ -28,7 +31,7 @@ const RenderMedia = React.memo(({ medium }) => {
           placeholder="blur"
           blurDataURL={medium.lqip}
           style={{ width: "100%", height: "auto" }}
-          onClick={(e) => e.currentTarget.requestFullscreen()}
+          onClick={(e) => (isMobile ? e.currentTarget.webkitEnterFullscreen : e.currentTarget.requestFullscreen())}
         />
       </div>
     );

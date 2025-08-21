@@ -226,10 +226,16 @@ mux-player {
 
 /* control-bar bottom */
 
+
 mux-player::part(control-bar){
   opacity: 1 !important;
   --gradient-steps: none !important
 }
+
+/* mux-player::part(control-bar):hover{
+  opacity: 1 !important;
+
+} */
 
 @keyframes glowing {
   0% {
