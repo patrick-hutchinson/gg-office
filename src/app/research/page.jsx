@@ -7,7 +7,7 @@ import { motion, useScroll, useMotionValue, useMotionValueEvent, wrap, useSpring
 import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
 import { GlobalStateContext } from "../../assets/context/GlobalStateContext";
 
-import styles from "./styles/research.module.css";
+import styles from "./styles/Research.module.css";
 import RenderMedia from "../../assets/components/RenderMedia";
 
 import Loading from "../../assets/components/Loading/Loading";
