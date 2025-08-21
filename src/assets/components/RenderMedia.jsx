@@ -42,7 +42,7 @@ const RenderMedia = React.memo(({ medium }) => {
 
     if (!medium?.aspect_ratio) return;
 
-    const [aspectWidth, aspectHeight] = medium.aspect_ratio?.split(":");
+    const [aspectWidth, aspectHeight] = medium.aspect_ratio.split(":");
 
     return (
       <div
