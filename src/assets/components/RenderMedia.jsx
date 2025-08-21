@@ -18,12 +18,9 @@ const RenderMedia = React.memo(({ medium }) => {
 
   // Handle Sanity Image
   if (medium.type === "image") {
-    console.log("width:", medium.width);
-
     return (
       <div style={{ position: "relative", width: "100%", height: "100%", aspectRatio: medium.width / medium.height }}>
         <Image
-          unoptimized
           src={medium.url}
           alt="image"
           width={100}
@@ -31,6 +28,7 @@ const RenderMedia = React.memo(({ medium }) => {
           placeholder="blur"
           blurDataURL={medium.lqip}
           style={{ width: "100%", height: "auto" }}
+          onClick={(e) => e.currentTarget.requestFullscreen()}
         />
       </div>
     );
@@ -53,10 +51,9 @@ const RenderMedia = React.memo(({ medium }) => {
       >
         {!isLoaded && (
           <Image
-            src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=20`}
+            src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=50`}
             fill
             alt="placeholder image"
-            unoptimized
             style={{
               position: "absolute",
               top: 0,
@@ -75,7 +72,7 @@ const RenderMedia = React.memo(({ medium }) => {
             autoPlay
             controls={false}
             loop
-            preload="auto"
+            preload="metadata"
             muted
             playsInline
             fill
@@ -87,7 +84,7 @@ const RenderMedia = React.memo(({ medium }) => {
               height: "100%",
               objectFit: "cover",
             }}
-            onLoadedMetadata={() => setIsLoaded(true)}
+            onLoadedData={() => setIsLoaded(true)}
           />
         )}
       </div>

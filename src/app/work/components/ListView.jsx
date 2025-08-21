@@ -28,7 +28,6 @@ export default function ListView({ selectedFilters, activeView }) {
     const el = document.querySelector("#content");
 
     const handleScroll = (e) => {
-      console.log(el.scrollTop); // distance scrolled from the top
       scrollYRef.current = el.scrollTop;
     };
 

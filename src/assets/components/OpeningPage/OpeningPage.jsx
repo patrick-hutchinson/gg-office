@@ -12,7 +12,7 @@ import { AnimationContext } from "../../context/AnimationContext";
 const OpeningPage = forwardRef((props, openingRef) => {
   OpeningPage.displayName = "OpeningPage";
 
-  const { isMobile } = useContext(GlobalStateContext);
+  const { isMobile, isSafari } = useContext(GlobalStateContext);
   const { isDarkMode } = useContext(AnimationContext);
 
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
@@ -23,8 +23,8 @@ const OpeningPage = forwardRef((props, openingRef) => {
     const mouseY = useMotionValue(lastY.current[index] ? lastY.current[index] : 180);
 
     const smoothMouseY = useSpring(mouseY, {
-      stiffness: 100,
-      damping: 20,
+      stiffness: isSafari ? 180 : 100,
+      damping: isSafari ? 50 : 20,
       mass: 1,
     });
 

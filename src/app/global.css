@@ -213,7 +213,7 @@ mux-player {
   --captions-button: none;
   --airplay-button: none;
   --pip-button: none;
-  --fullscreen-button: none;
+  --fullscreen-button: block;
   --cast-button: none;
   --playback-rate-button: none;
   --volume-range: none;
@@ -221,11 +221,14 @@ mux-player {
   --time-display: none;
   --duration-display: none;
   --rendition-menu-button: none;
-  pointer-events: none !important;
+  /* pointer-events: none !important; */
 }
 
-media-control-bar[part~="bottom"] {
-  pointer-events: none !important;
+/* control-bar bottom */
+
+mux-player::part(control-bar){
+  opacity: 1 !important;
+  --gradient-steps: none !important
 }
 
 @keyframes glowing {

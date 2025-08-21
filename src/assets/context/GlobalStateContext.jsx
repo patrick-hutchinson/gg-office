@@ -7,6 +7,7 @@ export const GlobalStateContext = createContext();
 
 export const GlobalStateProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isSafari, setIsSafari] = useState(false);
 
   // Detect if the screen is mobile size
   useEffect(() => {
@@ -21,5 +22,12 @@ export const GlobalStateProvider = ({ children }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return <GlobalStateContext.Provider value={{ isMobile }}>{children}</GlobalStateContext.Provider>;
+  useEffect(() => {
+    const safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    setIsSafari(safari);
+  }, []);
+
+  useEffect(() => {}, []);
+
+  return <GlobalStateContext.Provider value={{ isMobile, isSafari }}>{children}</GlobalStateContext.Provider>;
 };

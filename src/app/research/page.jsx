@@ -1,20 +1,25 @@
 "use client";
 
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef, useContext, useMemo } from "react";
 
-import { motion, useScroll, useMotionValue, useMotionValueEvent, wrap } from "framer-motion";
+import { motion, useScroll, useMotionValue, useMotionValueEvent, wrap, useSpring } from "framer-motion";
 
 import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
+import { GlobalStateContext } from "../../assets/context/GlobalStateContext";
 
 import styles from "./styles/research.module.css";
 import RenderMedia from "../../assets/components/RenderMedia";
 
+import Loading from "../../assets/components/Loading/Loading";
+
 export default function Gallery() {
+  const { isMobile } = useContext(GlobalStateContext);
   const { research } = useContext(GlobalDataContext);
 
-  const columnCount = 3;
+  if (!research) return <Loading />;
 
-  if (!research) return;
+  // Variable declaration
+  const columnCount = isMobile ? 2 : 3;
 
   const Column = ({ columnNumber }) => {
     const mediaRefs = useRef([]);
@@ -38,15 +43,11 @@ export default function Gallery() {
       setTotalHeight((sum + gap) / 2);
     }, []);
 
-    useEffect(() => {
-      console.log(`totalheight for column ${columnNumber} is ${totalHeight}`);
-    }, [totalHeight]);
-
     //Capture and transform virtual scroll
     useEffect(() => {
       const handleWheel = (e) => {
         const current = virtualScroll.get();
-        let newY = current + e.deltaY;
+        let newY = current - e.deltaY;
 
         // Wrap the scroll value once totalHeight is reached
         newY = wrap(-totalHeight, 0, newY);
@@ -59,28 +60,43 @@ export default function Gallery() {
     }, [virtualScroll, totalHeight]);
 
     // Duplicate the array by concatenation (A duplicated column is needed for the infinite scroll to be seemless)
-    const items = research[0].imagegallery
-      .slice(0, 32)
-      .filter((_, index) => index % columnCount === columnNumber)
-      .sort((a, b) => {
-        if (a.type === "image" && b.type !== "image") return -1; // a comes first
-        if (a.type !== "image" && b.type === "image") return 1; // b comes first
-        return 0; // keep relative order otherwise
+    // Also, add images to the Beginning and end of each array to allow for a seemless switch
+    const items = research[0].imagegallery.filter((_, index) => index % columnCount === columnNumber);
+
+    const images = items.filter((item) => item.type === "image");
+
+    // take first 3 images for the start, next 2 images for the end
+    const startImages = images.slice(0, 3);
+    const endImages = images.slice(3, 6);
+    const middleItems = [...items].filter((item) => !startImages.includes(item) && !endImages.includes(item));
+
+    const rearrangedItems = [...startImages, ...middleItems, ...endImages];
+
+    // Generate random widths only once per mount
+    const widths = useMemo(() => {
+      return rearrangedItems.map(() => {
+        return Math.random() * (400 - 200) + 200; // px between 270 and 320
       });
-    const duplicatedItems = [...items, ...items];
+    }, [rearrangedItems.length]); // depend on length, not items array
+
+    // Duplicate items
+    const duplicatedItems = [...rearrangedItems, ...rearrangedItems];
 
     return (
       <motion.div className={styles["column"]} style={{ translateY: virtualScroll }}>
-        {duplicatedItems.map((medium, index) => (
-          <div
-            key={index}
-            ref={(el) => (mediaRefs.current[index] = el)}
-            className={styles["media-container"]}
-            style={{ width: "300px" }}
-          >
-            <RenderMedia medium={medium} />
-          </div>
-        ))}
+        {duplicatedItems.map((medium, index) => {
+          const width = widths[index % rearrangedItems.length]; // match original's width
+          return (
+            <div
+              key={index}
+              ref={(el) => (mediaRefs.current[index] = el)}
+              className={styles["media-container"]}
+              style={{ width: `${width}px` }}
+            >
+              <RenderMedia medium={medium} />
+            </div>
+          );
+        })}
       </motion.div>
     );
   };
