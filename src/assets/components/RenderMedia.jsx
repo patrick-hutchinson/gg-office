@@ -1,23 +1,22 @@
 "use client";
 
-import React, { useRef, useContext } from "react";
+import React, { useRef, useState } from "react";
 
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
 
 import { useInView } from "framer-motion";
 
-import { useEffect, useState } from "react";
-
-import { GlobalStateContext } from "../context/GlobalStateContext";
-
-const RenderMedia = React.memo(({ medium }) => {
-  let [isLoaded, setIsLoaded] = useState(false);
+const Media = React.memo(({ medium, setOpen }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef(null);
   const isInView = useInView(videoRef, { once: true, margin: "0px 0px -100px 0px" });
-  const { isMobile } = useContext(GlobalStateContext);
 
   if (!medium) return null; // Handle early return
+
+  const handleFullscreen = () => {
+    setOpen(true);
+  };
 
   // Handle Sanity Image
   if (medium.type === "image") {
@@ -31,7 +30,7 @@ const RenderMedia = React.memo(({ medium }) => {
           placeholder="blur"
           blurDataURL={medium.lqip}
           style={{ width: "100%", height: "auto" }}
-          onClick={(e) => (isMobile ? e.currentTarget.webkitEnterFullscreen : e.currentTarget.requestFullscreen())}
+          onClick={(e) => handleFullscreen(e)}
         />
       </div>
     );
@@ -62,6 +61,7 @@ const RenderMedia = React.memo(({ medium }) => {
               top: 0,
               left: 0,
               opacity: isLoaded ? 0 : 1,
+
               zIndex: 1,
               filter: "blur(3px)",
               width: "100%",
@@ -95,6 +95,35 @@ const RenderMedia = React.memo(({ medium }) => {
   }
 });
 
-RenderMedia.displayName = "RenderMedia";
+export const FullscreenPreview = ({ open, children }) => {
+  if (!open) return null;
+  return (
+    <div
+      style={{
+        position: "fixed",
 
-export default RenderMedia;
+        zIndex: 9999,
+        width: "100vw",
+        height: "100vh",
+        top: "0",
+        background: "#000",
+        left: "0",
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default function RenderMedia({ medium }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Media medium={medium} setOpen={setOpen} />
+      <FullscreenPreview open={open}>
+        <Media />
+      </FullscreenPreview>
+    </>
+  );
+}
