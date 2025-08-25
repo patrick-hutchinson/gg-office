@@ -1,7 +1,7 @@
 "use client";
 
-import RenderMedia from "../../../assets/components/RenderMedia";
-import Loading from "../../../assets/components/Loading/Loading";
+import RenderMedia from "@/components/RenderMedia";
+import Loading from "@/components/Loading/Loading";
 
 import styles from "./styles/Project.module.css";
 import { useContext } from "react";

@@ -10,6 +10,10 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "incremental": true,
     "esModuleInterop": true,
     "plugins": [{"name": "next"}]

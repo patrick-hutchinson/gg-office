@@ -94,21 +94,26 @@ body {
 
 #opening,
 #content {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+}
+
+#opening {
+  position: fixed;
   height: 100vh;
 }
 
 #content {
+  position: fixed;
+  height: auto;
+
   padding: 0px var(--margin);
-  overflow-y: scroll;
+  overflow-y: visible;
 }
 
 main {
   min-height: calc(100vh);
-  /* padding-bottom: 30px; */
 }
 
 section {
@@ -226,10 +231,10 @@ mux-player {
 
 /* control-bar bottom */
 
-
-mux-player::part(control-bar){
+mux-player::part(control-bar) {
   opacity: 1 !important;
   --gradient-steps: none !important
+;
 }
 
 /* mux-player::part(control-bar):hover{

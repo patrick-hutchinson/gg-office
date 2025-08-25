@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 
-import { GlobalStateContext } from "/src/assets/context/GlobalStateContext";
+import { GlobalStateContext } from "@/context/GlobalStateContext";
 
 import { useEffect } from "react";
 

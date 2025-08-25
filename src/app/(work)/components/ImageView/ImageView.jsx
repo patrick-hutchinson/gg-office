@@ -1,12 +1,12 @@
 import { useEffect, useContext } from "react";
 
-import styles from "./styles/ImageView.module.css"; // Updated import for CSS modules
+import styles from "./ImageView.module.css"; // Updated import for CSS modules
 import Link from "next/link";
 
-import RenderMedia from "../../../assets/components/RenderMedia";
-import Loading from "../../../assets/components/Loading/Loading";
+import Loading from "@/components/Loading/Loading";
+import RenderMedia from "@/components/RenderMedia";
 
-import { GlobalDataContext } from "../../../assets/context/GlobalDataContext";
+import { GlobalDataContext } from "../../../../context/GlobalDataContext";
 
 export default function ImageView({ selectedFilters, activeView }) {
   // Helper function to determine if a project should be rendered

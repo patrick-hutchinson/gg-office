@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./styles/Filtering.module.css";
+import styles from "./Filtering.module.css";
 
 export default function Filtering({ filterArray, selectedFilters, setSelectedFilters }) {
   let [allSelected, setAllSelected] = useState(true); // Track if "All" is selected

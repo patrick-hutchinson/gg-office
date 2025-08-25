@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./styles/Contact.module.css";
-import Loading from "../../assets/components/Loading/Loading";
-import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
+import Loading from "@/components/Loading/Loading";
+import { GlobalDataContext } from "@/context/GlobalDataContext";
 import React, { useContext } from "react";
 
 export default function Contact() {

@@ -4,13 +4,13 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
-import { enableScroll, disableScroll } from "../assets/helpers/blockScrolling";
+import { enableScroll, disableScroll } from "../../helpers/blockScrolling";
 
-import Header from "../../src/assets/components/Header/Header";
-import Footer from "../../src/assets/components/Footer";
-import OpeningPage from "../../src/assets/components/OpeningPage/OpeningPage";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer";
+import OpeningPage from "@/components/OpeningPage/OpeningPage";
 
-import { RefContext } from "../assets/context/RefContext";
+import { RefContext } from "../../context/RefContext";
 
 export default function ClientLayout({ children }) {
   const { container } = useContext(RefContext);

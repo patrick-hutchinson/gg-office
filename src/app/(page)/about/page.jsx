@@ -3,10 +3,10 @@
 import { useContext, useEffect, useRef } from "react";
 
 import styles from "./styles/About.module.css";
-import Loading from "../../../src/assets/components/Loading/Loading";
-import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
+import Loading from "@/components/Loading/Loading";
+import { GlobalDataContext } from "@/context/GlobalDataContext";
 
-import { GlobalStateContext } from "../../assets/context/GlobalStateContext";
+import { GlobalStateContext } from "@/context/GlobalStateContext";
 
 export default function About() {
   const { isMobile } = useContext(GlobalStateContext);

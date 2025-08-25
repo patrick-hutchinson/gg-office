@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import styles from "./styles/HeaderDesktop.module.css";
 import Link from "next/link";
 
-import { AnimationContext } from "/src/assets/context/AnimationContext";
+import { AnimationContext } from "@/context/AnimationContext";
 
 export default function HeaderDesktop({ location, setShowOpening }) {
   const { isDarkMode, setIsDarkMode } = useContext(AnimationContext);

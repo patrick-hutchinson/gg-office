@@ -1,14 +1,13 @@
-import ClientLayout from "./ClientLayout.jsx";
-import "./global.css"; // or './index.css'
+import "../global.css"; // or './index.css'
 
 export const metadata = {
   title: "GG-OFFICE",
 };
 
-import { GlobalStateProvider } from "../assets/context/GlobalStateContext";
-import { GlobalDataProvider } from "../assets/context/GlobalDataContext";
-import { AnimationProvider } from "../assets/context/AnimationContext";
-import { RefProvider } from "../assets/context/RefContext";
+import { GlobalStateProvider } from "../context/GlobalStateContext";
+import { GlobalDataProvider } from "../context/GlobalDataContext";
+import { AnimationProvider } from "../context/AnimationContext";
+import { RefProvider } from "../context/RefContext";
 
 export default function RootLayout({ children }) {
   return (
@@ -17,9 +16,7 @@ export default function RootLayout({ children }) {
         <RefProvider>
           <AnimationProvider>
             <GlobalDataProvider>
-              <GlobalStateProvider>
-                <ClientLayout>{children}</ClientLayout>
-              </GlobalStateProvider>
+              <GlobalStateProvider>{children}</GlobalStateProvider>
             </GlobalDataProvider>
           </AnimationProvider>
         </RefProvider>

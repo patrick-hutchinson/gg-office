@@ -2,12 +2,12 @@
 
 import { useContext, useEffect, useState } from "react";
 
-import ImageView from "./work/components/ImageView";
-import ListView from "./work/components/ListView";
+import ImageView from "./components/ImageView/ImageView";
+import ListView from "./components/ListView/ListView";
 
-import ViewOptions from "./work/components/ViewOptions";
-import Loading from "../../src/assets/components/Loading/Loading";
-import { GlobalDataContext } from "../../src/assets/context/GlobalDataContext";
+import ViewOptions from "./components/ViewOptions/ViewOptions";
+import Loading from "@/components/Loading/Loading";
+import { GlobalDataContext } from "@/context/GlobalDataContext";
 
 export default function Work() {
   const { filters, selectedFilters, setSelectedFilters } = useContext(GlobalDataContext);

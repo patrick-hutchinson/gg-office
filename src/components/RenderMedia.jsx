@@ -15,6 +15,7 @@ const Media = React.memo(({ medium, setOpen }) => {
   if (!medium) return null; // Handle early return
 
   const handleFullscreen = () => {
+    console.log("handling fullscreen!");
     setOpen(true);
   };
 
@@ -25,6 +26,7 @@ const Media = React.memo(({ medium, setOpen }) => {
         <Image
           src={medium.url}
           alt="image"
+          unoptimized
           width={100}
           height={100}
           placeholder="blur"
@@ -55,6 +57,7 @@ const Media = React.memo(({ medium, setOpen }) => {
           <Image
             src={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg?width=50`}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
             alt="placeholder image"
             style={{
               position: "absolute",
@@ -106,7 +109,6 @@ export const FullscreenPreview = ({ open, children }) => {
         width: "100vw",
         height: "100vh",
         top: "0",
-        background: "#000",
         left: "0",
       }}
     >

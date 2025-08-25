@@ -3,15 +3,15 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import Link from "next/link";
 
-import styles from "./styles/ListView.module.css";
+import styles from "./ListView.module.css";
 
-import ScrollText from "../.././../assets/components/ScrollText";
+import ScrollText from "@/components/ScrollText";
 
-import RenderMedia from "../../../assets/components/RenderMedia";
-import Loading from "../../../assets/components/Loading/Loading";
+import RenderMedia from "@/components/RenderMedia";
+import Loading from "@/components/Loading/Loading";
 
-import { GlobalStateContext } from "../../../assets/context/GlobalStateContext";
-import { GlobalDataContext } from "../../../assets/context/GlobalDataContext";
+import { GlobalStateContext } from "../../../../context/GlobalStateContext";
+import { GlobalDataContext } from "../../../../context/GlobalDataContext";
 
 export default function ListView({ selectedFilters, activeView }) {
   const { isMobile } = useContext(GlobalStateContext);

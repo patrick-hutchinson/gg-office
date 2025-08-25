@@ -4,13 +4,13 @@ import { useState, useEffect, useRef, useContext, useMemo } from "react";
 
 import { motion, useScroll, useMotionValue, useMotionValueEvent, wrap, useSpring } from "framer-motion";
 
-import { GlobalDataContext } from "../../assets/context/GlobalDataContext";
-import { GlobalStateContext } from "../../assets/context/GlobalStateContext";
+import { GlobalDataContext } from "@/context/GlobalDataContext";
+import { GlobalStateContext } from "@/context/GlobalStateContext";
 
 import styles from "./styles/Research.module.css";
-import RenderMedia from "../../assets/components/RenderMedia";
+import RenderMedia from "@/components/RenderMedia";
 
-import Loading from "../../assets/components/Loading/Loading";
+import Loading from "@/components/Loading/Loading";
 
 export default function Gallery() {
   const { isMobile } = useContext(GlobalStateContext);
