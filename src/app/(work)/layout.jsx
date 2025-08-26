@@ -23,11 +23,6 @@ export default function ClientLayout({ children }) {
 
   const isHome = pathname === "/";
 
-  //Show the Opening if the user starts on the Home/Work page
-  useEffect(() => {
-    setShowOpening(isHome);
-  }, []);
-
   useEffect(() => {
     if (showOpening) disableScroll();
   }, [showOpening]);
@@ -67,17 +62,19 @@ export default function ClientLayout({ children }) {
   };
 
   const handleOpening = () => {
+    console.log("handling opening!");
     if (showOpening) setShowOpening(false);
   };
 
   return (
-    <div onClick={() => handleOpening()} onWheel={() => handleOpening()}>
+    <div onWheel={() => handleOpening()}>
       <motion.div
         id="opening"
         initial={false}
         animate={showOpening ? "inView" : "outOfView"}
         variants={openingVariants}
         onAnimationComplete={handleAnimationComplete}
+        onClick={() => handleOpening()}
       >
         <OpeningPage ref={openingRef} />
       </motion.div>
