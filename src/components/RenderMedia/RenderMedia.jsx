@@ -140,6 +140,8 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   );
 };
 
+RenderMedia.displayName = "RenderMedia";
+
 export default function RenderMedia({ medium, enableFullscreen }) {
   const [open, setOpen] = useState(false);
 
