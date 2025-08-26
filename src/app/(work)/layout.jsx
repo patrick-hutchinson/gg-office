@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, optimizedAppearDataAttribute } from "framer-motion";
 
 import { enableScroll, disableScroll } from "../../helpers/blockScrolling";
 
@@ -14,6 +14,7 @@ import { RefContext } from "@/context/RefContext";
 import { StateContext } from "@/context/StateContext";
 
 export default function ClientLayout({ children }) {
+  const [hideOpening, setHideOpening] = useState(false);
   const { container } = useContext(RefContext);
   const { showOpening, setShowOpening } = useContext(StateContext);
   const pathname = usePathname();
@@ -34,8 +35,10 @@ export default function ClientLayout({ children }) {
   const handleAnimationComplete = () => {
     if (showOpening) {
       disableScroll();
+      setHideOpening(true);
     } else {
       enableScroll();
+      setHideOpening(false);
     }
   };
 

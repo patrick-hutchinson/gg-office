@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import styles from "./styles/About.module.css";
 import Loading from "@/components/Loading/Loading";
@@ -30,6 +30,7 @@ export default function About() {
       const randomTop = Math.floor(Math.random() * (window.innerHeight - offset.bottom)) + offset.top;
       alien.style.left = `${randomLeft}px`;
       alien.style.top = `${randomTop}px`;
+      console.log("alien hovered/clicked");
     });
   };
 
@@ -47,11 +48,13 @@ export default function About() {
   function handleInternClick(intern) {
     // Check if the alien with the same intern name already exists
     const existingAlien = Array.from(
-      AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} span`)
+      AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} div`)
     ).find((span) => span.textContent === intern);
 
     // If an alien with the same name exists, return early
     if (existingAlien) {
+      // remove the wrapper (go up to the alien-wrapper div)
+      existingAlien.closest(`.${styles["alien-wrapper"]}`).remove();
       return;
     }
 
@@ -108,14 +111,31 @@ export default function About() {
 
   const Internships = () => {
     const internships = about[0].internship || [];
+    const [activeInterns, setActiveInterns] = useState([]);
+
+    const toggleIntern = (intern) => {
+      setActiveInterns(
+        (prev) =>
+          prev.includes(intern)
+            ? prev.filter((i) => i !== intern) // remove if already active
+            : [...prev, intern] // add if not active
+      );
+      handleInternClick(intern);
+    };
 
     return (
       <section className="internships">
         <h5>Internships</h5>
         {internships.map((intern, index) => {
           const isLast = index === internships.length - 1;
+          const isActive = activeInterns.includes(intern);
+
           return (
-            <span onClick={() => handleInternClick(intern)} className={`${styles.intern} button`} key={index}>
+            <span
+              onClick={() => toggleIntern(intern)}
+              className={`${styles.intern} ${isActive ? "active" : ""} button`}
+              key={index}
+            >
               {intern}
               {!isLast && ",\u00A0"}
             </span>
