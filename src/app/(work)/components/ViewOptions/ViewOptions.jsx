@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import styles from "../../work.module.css";
 
-import Filtering from "../filtering/Filtering";
+import Filtering from "../Filtering/Filtering";
 
 export default function ViewOptions({ activeView, setActiveView, filters, selectedFilters, setSelectedFilters }) {
   let views = ["Image View", "List View"];
