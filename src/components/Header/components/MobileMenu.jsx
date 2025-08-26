@@ -1,3 +1,8 @@
+import { usePathname } from "next/navigation";
+import { useContext } from "react";
+
+import { AnimationContext } from "@/context/AnimationContext";
+
 import styles from "./styles/HeaderMobile.module.css";
 import Link from "next/link";
 
@@ -6,14 +11,27 @@ const MobileMenu = ({ location, setShowMenu }) => {
     setShowMenu(false);
   }
 
+  const pathname = usePathname();
+
+  const { isDarkMode, setIsDarkMode } = useContext(AnimationContext);
+
+  function handleThemeSwitch() {
+    var root = document.querySelector(":root");
+    if (isDarkMode) {
+      root.style.setProperty("--text-color", "#000000");
+      root.style.setProperty("--background-color", "#eaeaea");
+
+      setIsDarkMode(false);
+    } else {
+      root.style.setProperty("--text-color", "#eaeaea");
+      root.style.setProperty("--background-color", "#000000");
+      setIsDarkMode(true);
+    }
+  }
+
   return (
     <div className={`${styles.expandMenu}`}>
-      <li
-        className={`${styles.button} button ${location.includes("work") ? "active" : ""}`}
-        onClick={() => {
-          handleMenuClick();
-        }}
-      >
+      <li className={`${styles.button} button ${pathname === "/" ? "active" : ""}`} onClick={handleMenuClick}>
         <Link href="/">Work</Link>
       </li>
       <li
@@ -45,6 +63,12 @@ const MobileMenu = ({ location, setShowMenu }) => {
       >
         <Link href="/contact">Contact</Link>
       </li>
+
+      <br />
+      <br />
+      <div className={styles["switchTheme"]} onClick={handleThemeSwitch}>
+        Switch
+      </div>
     </div>
   );
 };
