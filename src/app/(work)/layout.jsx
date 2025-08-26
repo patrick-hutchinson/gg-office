@@ -91,11 +91,8 @@ export default function ClientLayout({ children }) {
       >
         <Header location={pathname} setShowOpening={setShowOpening} />
 
-        <div id="root">
-          {children}
-
-          <Footer />
-        </div>
+        <div id="root">{children}</div>
+        <Footer />
       </motion.div>
     </div>
   );

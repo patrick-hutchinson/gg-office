@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useContext, useMemo } from "react";
 
-import { motion, useScroll, useMotionValue, useMotionValueEvent, wrap, useSpring } from "framer-motion";
+import { motion, useMotionValue, wrap } from "framer-motion";
 
 import { DataContext } from "@/context/DataContext";
 import { StateContext } from "@/context/StateContext";
@@ -79,6 +79,13 @@ export default function Gallery() {
       });
     }, [rearrangedItems.length]); // depend on length, not items array
 
+    // Generate random left values only once per mount
+    const leftValues = useMemo(() => {
+      return rearrangedItems.map(() => {
+        return Math.random() * 400 - 200; // px between -200 and 200
+      });
+    }, [rearrangedItems.length]); // depend on length, not items array
+
     // Duplicate items
     const duplicatedItems = [...rearrangedItems, ...rearrangedItems];
 
@@ -86,12 +93,13 @@ export default function Gallery() {
       <motion.div className={styles["column"]} style={{ translateY: virtualScroll }}>
         {duplicatedItems.map((medium, index) => {
           const width = widths[index % rearrangedItems.length]; // match original's width
+          const left = leftValues[index % rearrangedItems.length]; // match original's width
           return (
             <div
               key={index}
               ref={(el) => (mediaRefs.current[index] = el)}
               className={styles["media-container"]}
-              style={{ width: `${width}px` }}
+              style={{ width: `${width}px`, left: `${left}px`, position: "relative" }}
             >
               <RenderMedia medium={medium} enableFullscreen={true} />
             </div>
