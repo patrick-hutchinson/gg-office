@@ -31,6 +31,10 @@ main.about {
   white-space: nowrap;
 }
 
+.service {
+  display: inline-block;
+}
+
 .alien-wrapper .alien {
   font-size: 200px;
   line-height: 0.7;
@@ -82,6 +86,7 @@ main.about {
   }
   main.about {
     grid-template-columns: 1fr;
+    display: unset;
   }
 
   .alien-wrapper .alien {

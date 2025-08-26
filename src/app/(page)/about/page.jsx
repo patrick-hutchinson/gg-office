@@ -99,9 +99,9 @@ export default function About() {
           const isLast = index === services.length - 1;
 
           return (
-            <span key={index}>
+            <span key={index} className={styles["service"]}>
               {service}
-              {!isLast && ",\u00A0"}{" "}
+              {!isLast && ",\u00A0"}
             </span>
           );
         })}
@@ -158,12 +158,10 @@ export default function About() {
         </div>
       </div>
       <main className={`about ${styles.about}`}>
-        <div>
-          <Biography />
-          <Services />
+        <Biography />
+        <Services />
 
-          <Internships />
-        </div>
+        <Internships />
       </main>
     </>
   );
