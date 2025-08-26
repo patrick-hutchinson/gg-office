@@ -1,0 +1,49 @@
+.fullscreen-preview-outer {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: var(--margin);
+  backdrop-filter: blur(20px);
+}
+.fullscreen-preview-inner {
+  position: relative;
+
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+
+  background: pink;
+}
+
+.close-button {
+  position: absolute;
+  top: var(--margin);
+  right: var(--margin);
+}
+
+.fullscreen-preview img,
+.fullscreen-preview video {
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 100vh;
+
+  background-size: contain;
+}
+
+.fullscreen-button {
+  z-index: 100;
+  position: absolute;
+  bottom: calc(var(--margin) / 1.5);
+  right: var(--margin);
+  width: 20px;
+  height: auto;
+}

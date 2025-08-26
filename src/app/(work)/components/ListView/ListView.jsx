@@ -7,15 +7,15 @@ import styles from "./ListView.module.css";
 
 import ScrollText from "@/components/ScrollText";
 
-import RenderMedia from "@/components/RenderMedia";
+import RenderMedia from "@/components/RenderMedia/RenderMedia";
 import Loading from "@/components/Loading/Loading";
 
-import { GlobalStateContext } from "../../../../context/GlobalStateContext";
-import { GlobalDataContext } from "../../../../context/GlobalDataContext";
+import { StateContext } from "../../../../context/StateContext";
+import { DataContext } from "../../../../context/DataContext";
 
 export default function ListView({ selectedFilters, activeView }) {
-  const { isMobile } = useContext(GlobalStateContext);
-  const { work } = useContext(GlobalDataContext);
+  const { isMobile } = useContext(StateContext);
+  const { work } = useContext(DataContext);
 
   const mediaRefs = useRef({});
 
@@ -121,7 +121,7 @@ export default function ListView({ selectedFilters, activeView }) {
               left: 0,
             }}
           >
-            <RenderMedia medium={project.thumbnail} />
+            <RenderMedia medium={project.thumbnail} enableFullscreen={false} />
           </div>
         ))}
       </div>

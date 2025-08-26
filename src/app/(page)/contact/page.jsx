@@ -2,11 +2,11 @@
 
 import styles from "./styles/Contact.module.css";
 import Loading from "@/components/Loading/Loading";
-import { GlobalDataContext } from "@/context/GlobalDataContext";
+import { DataContext } from "@/context/DataContext";
 import React, { useContext } from "react";
 
 export default function Contact() {
-  const { contact } = useContext(GlobalDataContext);
+  const { contact } = useContext(DataContext);
 
   if (!contact) return <Loading />;
 
@@ -48,7 +48,7 @@ export default function Contact() {
   };
 
   return (
-    <main className={`${styles.contact}`}>
+    <main className={`contact ${styles.contact}`}>
       <div></div>
       <div>
         <Email />

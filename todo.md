@@ -5,5 +5,3 @@ Research Page
 Add Dark/Light Mode on mobile
 
 Hide Opening Container (opacity 0) when not in view, bleeds through header on mobile
-
-x scroll with trackpag sometimes doesn't work in "view more" gallery

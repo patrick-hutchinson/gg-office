@@ -6,13 +6,13 @@ import styles from "./styles/OpeningPage.module.css";
 
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 
-import { GlobalStateContext } from "../../context/GlobalStateContext";
+import { StateContext } from "../../context/StateContext";
 import { AnimationContext } from "../../context/AnimationContext";
 
 const OpeningPage = forwardRef((props, openingRef) => {
   OpeningPage.displayName = "OpeningPage";
 
-  const { isMobile, isSafari } = useContext(GlobalStateContext);
+  const { isMobile, isSafari } = useContext(StateContext);
   const { isDarkMode } = useContext(AnimationContext);
 
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];

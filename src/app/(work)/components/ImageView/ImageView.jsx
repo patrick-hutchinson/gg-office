@@ -4,13 +4,13 @@ import styles from "./ImageView.module.css"; // Updated import for CSS modules
 import Link from "next/link";
 
 import Loading from "@/components/Loading/Loading";
-import RenderMedia from "@/components/RenderMedia";
+import RenderMedia from "@/components/RenderMedia/RenderMedia";
 
-import { GlobalDataContext } from "../../../../context/GlobalDataContext";
+import { DataContext } from "../../../../context/DataContext";
 
 export default function ImageView({ selectedFilters, activeView }) {
   // Helper function to determine if a project should be rendered
-  const { work } = useContext(GlobalDataContext);
+  const { work } = useContext(DataContext);
 
   const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
 
@@ -25,7 +25,7 @@ export default function ImageView({ selectedFilters, activeView }) {
           project.slug && (
             <Link className={styles.project} href={`/work/${project.slug.current}`} key={project.slug.current}>
               <div className={`${styles["project-front"]}`}>
-                {project.thumbnail && <RenderMedia medium={project.thumbnail} />}
+                {project.thumbnail && <RenderMedia medium={project.thumbnail} enableFullscreen={false} />}
               </div>
 
               <div className={`${styles["project-details-outer"]}`}>

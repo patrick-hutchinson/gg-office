@@ -1,6 +1,6 @@
 import styles from "./styles/ImageGallery.module.css";
 
-import RenderMedia from "../../../../assets/components/RenderMedia";
+import RenderMedia from "@/components/RenderMedia/RenderMedia";
 
 export default function ImageGallery({ project }) {
   let Images = () => {
@@ -19,7 +19,7 @@ export default function ImageGallery({ project }) {
         return (
           <div key={rowIndex} className={styles.galleryRow} style={rowStyles}>
             {rowImages.map((image, imgIndex) => {
-              return <RenderMedia medium={image} key={imgIndex} />;
+              return <RenderMedia medium={image} key={imgIndex} enableFullscreen={true} />;
             })}
           </div>
         );

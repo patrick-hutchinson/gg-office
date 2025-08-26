@@ -3,9 +3,9 @@
 import { createContext, useState, useEffect, useMemo } from "react";
 import sanityClient from "/src/client.js";
 
-export const GlobalDataContext = createContext();
+export const DataContext = createContext();
 
-export const GlobalDataProvider = ({ children }) => {
+export const DataProvider = ({ children }) => {
   const [work, setWork] = useState(null);
   const [about, setAbout] = useState(null);
   const [contact, setContact] = useState(null);
@@ -213,5 +213,5 @@ export const GlobalDataProvider = ({ children }) => {
     [work, about, contact, filters, research, selectedFilters, isLoading, error]
   );
 
-  return <GlobalDataContext.Provider value={value}>{children}</GlobalDataContext.Provider>;
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };

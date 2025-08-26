@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 
-import { GlobalStateContext } from "@/context/GlobalStateContext";
+import { StateContext } from "@/context/StateContext";
 
 import { useEffect } from "react";
 
@@ -12,7 +12,7 @@ import HeaderDesktop from "./components/HeaderDesktop";
 import HeaderMobile from "./components/HeaderMobile";
 
 export default function Header({ location, setShowOpening }) {
-  const { isMobile } = useContext(GlobalStateContext);
+  const { isMobile } = useContext(StateContext);
 
   return (
     <header className={styles.header}>

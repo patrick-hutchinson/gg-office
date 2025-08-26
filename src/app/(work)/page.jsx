@@ -7,10 +7,10 @@ import ListView from "./components/ListView/ListView";
 
 import ViewOptions from "./components/ViewOptions/ViewOptions";
 import Loading from "@/components/Loading/Loading";
-import { GlobalDataContext } from "@/context/GlobalDataContext";
+import { DataContext } from "@/context/DataContext";
 
 export default function Work() {
-  const { filters, selectedFilters, setSelectedFilters } = useContext(GlobalDataContext);
+  const { filters, selectedFilters, setSelectedFilters } = useContext(DataContext);
 
   let [activeView, setActiveView] = useState("Image View");
 

@@ -4,8 +4,8 @@ export const metadata = {
   title: "GG-OFFICE",
 };
 
-import { GlobalStateProvider } from "../context/GlobalStateContext";
-import { GlobalDataProvider } from "../context/GlobalDataContext";
+import { StateProvider } from "../context/StateContext";
+import { DataProvider } from "../context/DataContext";
 import { AnimationProvider } from "../context/AnimationContext";
 import { RefProvider } from "../context/RefContext";
 
@@ -15,9 +15,12 @@ export default function RootLayout({ children }) {
       <body>
         <RefProvider>
           <AnimationProvider>
-            <GlobalDataProvider>
-              <GlobalStateProvider>{children}</GlobalStateProvider>
-            </GlobalDataProvider>
+            <DataProvider>
+              <StateProvider>
+                {children}
+                <div id="fullscreen-root"></div>
+              </StateProvider>
+            </DataProvider>
           </AnimationProvider>
         </RefProvider>
       </body>

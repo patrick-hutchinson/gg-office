@@ -10,10 +10,12 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer";
 import OpeningPage from "@/components/OpeningPage/OpeningPage";
 
-import { RefContext } from "../../context/RefContext";
+import { RefContext } from "@/context/RefContext";
+import { StateContext } from "@/context/StateContext";
 
 export default function ClientLayout({ children }) {
   const { container } = useContext(RefContext);
+  const { showOpening, setShowOpening } = useContext(StateContext);
   const pathname = usePathname();
 
   const openingRef = useRef(null);
@@ -22,7 +24,9 @@ export default function ClientLayout({ children }) {
   const isHome = pathname === "/";
 
   //Show the Opening if the user starts on the Home/Work page
-  const [showOpening, setShowOpening] = useState(isHome);
+  useEffect(() => {
+    setShowOpening(isHome);
+  }, []);
 
   useEffect(() => {
     if (showOpening) disableScroll();
@@ -87,9 +91,11 @@ export default function ClientLayout({ children }) {
       >
         <Header location={pathname} setShowOpening={setShowOpening} />
 
-        <div id="root">{children}</div>
+        <div id="root">
+          {children}
 
-        <Footer />
+          <Footer />
+        </div>
       </motion.div>
     </div>
   );

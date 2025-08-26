@@ -4,19 +4,19 @@ import { useContext, useEffect, useRef } from "react";
 
 import styles from "./styles/About.module.css";
 import Loading from "@/components/Loading/Loading";
-import { GlobalDataContext } from "@/context/GlobalDataContext";
+import { DataContext } from "@/context/DataContext";
 
-import { GlobalStateContext } from "@/context/GlobalStateContext";
+import { StateContext } from "@/context/StateContext";
 
 export default function About() {
-  const { isMobile } = useContext(GlobalStateContext);
+  const { isMobile } = useContext(StateContext);
 
-  const { about } = useContext(GlobalDataContext);
+  const { about } = useContext(DataContext);
   const AlienContainerRef = useRef(null);
 
   const offset = isMobile
     ? { right: 200, left: 10, bottom: 300, top: 10 }
-    : { right: 300, left: 100, bottom: 300, top: 100 };
+    : { right: 300, left: 100, bottom: 400, top: 100 };
 
   // Function to position and handle hover effect for a specific alien
   const positionAlien = (alien) => {
@@ -137,8 +137,7 @@ export default function About() {
           <div className={`button active ${styles["name"]}`}>Francesca</div>
         </div>
       </div>
-      <main className={`${styles.about}`}>
-        <div />
+      <main className={`about ${styles.about}`}>
         <div>
           <Biography />
           <Services />

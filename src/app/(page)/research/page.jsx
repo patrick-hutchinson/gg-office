@@ -4,17 +4,17 @@ import { useState, useEffect, useRef, useContext, useMemo } from "react";
 
 import { motion, useScroll, useMotionValue, useMotionValueEvent, wrap, useSpring } from "framer-motion";
 
-import { GlobalDataContext } from "@/context/GlobalDataContext";
-import { GlobalStateContext } from "@/context/GlobalStateContext";
+import { DataContext } from "@/context/DataContext";
+import { StateContext } from "@/context/StateContext";
 
 import styles from "./styles/Research.module.css";
-import RenderMedia from "@/components/RenderMedia";
+import RenderMedia from "@/components/RenderMedia/RenderMedia";
 
 import Loading from "@/components/Loading/Loading";
 
 export default function Gallery() {
-  const { isMobile } = useContext(GlobalStateContext);
-  const { research } = useContext(GlobalDataContext);
+  const { isMobile } = useContext(StateContext);
+  const { research } = useContext(DataContext);
 
   if (!research) return <Loading />;
 
@@ -93,7 +93,7 @@ export default function Gallery() {
               className={styles["media-container"]}
               style={{ width: `${width}px` }}
             >
-              <RenderMedia medium={medium} />
+              <RenderMedia medium={medium} enableFullscreen={true} />
             </div>
           );
         })}
@@ -102,12 +102,14 @@ export default function Gallery() {
   };
 
   return (
-    <div className={styles["container"]}>
-      <div className={styles["container-inner"]}>
-        {Array.from({ length: columnCount }, (column, index) => (
-          <Column key={index} columnNumber={index} />
-        ))}
+    <main className="research">
+      <div className={styles["container"]}>
+        <div className={styles["container-inner"]}>
+          {Array.from({ length: columnCount }, (column, index) => (
+            <Column key={index} columnNumber={index} />
+          ))}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

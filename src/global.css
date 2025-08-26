@@ -97,23 +97,20 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-}
-
-#opening {
   position: fixed;
   height: 100vh;
 }
 
 #content {
-  position: fixed;
-  height: auto;
+  overflow-y: scroll;
+}
 
+#root {
   padding: 0px var(--margin);
-  overflow-y: visible;
+  min-height: calc(100vh - 80px - 48px);
 }
 
 main {
-  min-height: calc(100vh);
 }
 
 section {
@@ -218,7 +215,7 @@ mux-player {
   --captions-button: none;
   --airplay-button: none;
   --pip-button: none;
-  --fullscreen-button: block;
+  --fullscreen-button: none;
   --cast-button: none;
   --playback-rate-button: none;
   --volume-range: none;
@@ -226,7 +223,7 @@ mux-player {
   --time-display: none;
   --duration-display: none;
   --rendition-menu-button: none;
-  /* pointer-events: none !important; */
+  pointer-events: none !important;
 }
 
 /* control-bar bottom */
@@ -237,10 +234,17 @@ mux-player::part(control-bar) {
 ;
 }
 
-/* mux-player::part(control-bar):hover{
-  opacity: 1 !important;
+footer {
+  position: relative;
+}
 
-} */
+#content footer {
+  position: relative;
+}
+
+.icon {
+  /* fill: #fff; */
+}
 
 @keyframes glowing {
   0% {

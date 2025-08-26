@@ -45,11 +45,11 @@
 
 .panButton {
   position: relative;
-  background: var(--background-color);
-  border-radius: 50%;
-  padding: calc(var(--margin) / 1.5);
-  width: 40px;
+  width: 34px;
   height: auto;
+}
+.panButton path {
+  fill: var(--text-color);
 }
 .panButton:first-child {
   left: 20px;

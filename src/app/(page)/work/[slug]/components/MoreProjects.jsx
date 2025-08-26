@@ -5,9 +5,10 @@ import Link from "next/link";
 
 import styles from "./styles/MoreProjects.module.css";
 
-import RenderMedia from "../../../../assets/components/RenderMedia";
+import RenderMedia from "@/components/RenderMedia/RenderMedia";
+import Icon from "@/components/Icon";
 
-export default function MoreProjects({ work }) {
+export default function MoreProjects({ work, currentProject }) {
   const moreprojectsRef = useRef(null);
 
   function handlePan(direction) {
@@ -27,14 +28,18 @@ export default function MoreProjects({ work }) {
     }
   }
 
+  const currentIndex = work.findIndex((project) => project.slug.current === currentProject.slug.current);
+
+  const rearrangedWork = [...work.slice(currentIndex + 1), ...work.slice(0, currentIndex), work[currentIndex]];
+
   let ProjectList = (
     <div className={styles["moreprojects-wrapper"]}>
       <div className={styles["moreprojects"]} ref={moreprojectsRef}>
-        {work.map((project, index) => {
+        {rearrangedWork.map((project, index) => {
           return (
             project.slug && (
               <Link href={`/work/${project.slug.current}`} key={index}>
-                {project.thumbnail && <RenderMedia medium={project.thumbnail} />}
+                {project.thumbnail && <RenderMedia medium={project.thumbnail} enableFullscreen={false} />}
               </Link>
             )
           );
@@ -42,11 +47,11 @@ export default function MoreProjects({ work }) {
       </div>
 
       <div className={`${styles["navigation-wrapper"]}`}>
-        <div className={`${styles.panButton}`} onClick={() => handlePan("left")}>
-          <img src="/assets/images/arrow-left.svg" alt="arrow-left" />
+        <div className={`${styles.panButton} button active`} onClick={() => handlePan("left")}>
+          <Icon path={"/assets/images/arrow-left.svg"} />
         </div>
-        <div className={`${styles.panButton}`} onClick={() => handlePan("right")}>
-          <img src="/assets/images/arrow-right.svg" alt="arrow-left" />
+        <div className={`${styles.panButton} button active`} onClick={() => handlePan("right")}>
+          <Icon path={"/assets/images/arrow-right.svg"} />
         </div>
       </div>
     </div>

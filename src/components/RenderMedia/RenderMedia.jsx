@@ -1,13 +1,18 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
 
+import Icon from "@/components/Icon";
+
 import { useInView } from "framer-motion";
 
-const Media = React.memo(({ medium, setOpen }) => {
+import styles from "./RenderMedia.module.css";
+
+const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef(null);
   const isInView = useInView(videoRef, { once: true, margin: "0px 0px -100px 0px" });
@@ -23,6 +28,11 @@ const Media = React.memo(({ medium, setOpen }) => {
   if (medium.type === "image") {
     return (
       <div style={{ position: "relative", width: "100%", height: "100%", aspectRatio: medium.width / medium.height }}>
+        {/* {enableFullscreen && (
+          <div className={`button ${styles["fullscreen-button"]}`} onClick={(e) => handleFullscreen(e)}>
+            <Icon path="/assets/icons/fullscreen-icon.svg" />
+          </div>
+        )} */}
         <Image
           src={medium.url}
           alt="image"
@@ -32,7 +42,10 @@ const Media = React.memo(({ medium, setOpen }) => {
           placeholder="blur"
           blurDataURL={medium.lqip}
           style={{ width: "100%", height: "auto" }}
-          onClick={(e) => handleFullscreen(e)}
+          onClick={(e) => {
+            if (!enableFullscreen) return; // exit if fullscreen is disabled
+            handleFullscreen(e);
+          }}
         />
       </div>
     );
@@ -52,6 +65,10 @@ const Media = React.memo(({ medium, setOpen }) => {
       <div
         ref={videoRef}
         style={{ position: "relative", width: "100%", height: "100%", aspectRatio: aspectWidth / aspectHeight }}
+        onClick={(e) => {
+          if (!enableFullscreen) return; // exit if fullscreen is disabled
+          handleFullscreen(e);
+        }}
       >
         {!isLoaded && (
           <Image
@@ -98,33 +115,39 @@ const Media = React.memo(({ medium, setOpen }) => {
   }
 });
 
-export const FullscreenPreview = ({ open, children }) => {
-  if (!open) return null;
-  return (
-    <div
-      style={{
-        position: "fixed",
+export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-        zIndex: 9999,
-        width: "100vw",
-        height: "100vh",
-        top: "0",
-        left: "0",
-      }}
-    >
-      {children}
-    </div>
+  if (!open) return null;
+
+  return createPortal(
+    <div className={styles["fullscreen-preview-outer"]}>
+      <div
+        className={`${styles["close-button"]} button`}
+        onClick={() => {
+          handleClose();
+        }}
+      >
+        CLOSE
+      </div>
+      <div className={styles["fullscreen-preview-inner"]} style={{ aspectRatio: medium.width / medium.height }}>
+        {children}
+      </div>
+    </div>,
+    document.getElementById("fullscreen-root") // portal target
   );
 };
 
-export default function RenderMedia({ medium }) {
+export default function RenderMedia({ medium, enableFullscreen }) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Media medium={medium} setOpen={setOpen} />
-      <FullscreenPreview open={open}>
-        <Media />
+      <Media medium={medium} setOpen={setOpen} enableFullscreen={enableFullscreen} />
+      <FullscreenPreview medium={medium} open={open} setOpen={setOpen}>
+        <Media medium={medium} enableFullscreen={false} />
       </FullscreenPreview>
     </>
   );

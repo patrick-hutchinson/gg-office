@@ -8,6 +8,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ProjectPage({ params }) {
-  return <Project slug={params.slug} />;
+export default async function ProjectPage({ params }) {
+  return (
+    <main className="project">
+      <Project slug={params.slug} />
+    </main>
+  );
 }

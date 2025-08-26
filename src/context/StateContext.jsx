@@ -1,13 +1,14 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, use } from "react";
 
 // Create the context
-export const GlobalStateContext = createContext();
+export const StateContext = createContext();
 
-export const GlobalStateProvider = ({ children }) => {
+export const StateProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isSafari, setIsSafari] = useState(false);
+  const [showOpening, setShowOpening] = useState(true);
 
   // Detect if the screen is mobile size
   useEffect(() => {
@@ -29,5 +30,9 @@ export const GlobalStateProvider = ({ children }) => {
 
   useEffect(() => {}, []);
 
-  return <GlobalStateContext.Provider value={{ isMobile, isSafari }}>{children}</GlobalStateContext.Provider>;
+  return (
+    <StateContext.Provider value={{ isMobile, isSafari, showOpening, setShowOpening }}>
+      {children}
+    </StateContext.Provider>
+  );
 };
