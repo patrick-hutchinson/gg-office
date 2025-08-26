@@ -115,6 +115,8 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
   }
 });
 
+Media.displayName = "Media";
+
 export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   const handleClose = () => {
     setOpen(false);
@@ -140,8 +142,6 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   );
 };
 
-RenderMedia.displayName = "RenderMedia";
-
 export default function RenderMedia({ medium, enableFullscreen }) {
   const [open, setOpen] = useState(false);
 
@@ -154,3 +154,5 @@ export default function RenderMedia({ medium, enableFullscreen }) {
     </>
   );
 }
+
+RenderMedia.displayName = "RenderMedia";
