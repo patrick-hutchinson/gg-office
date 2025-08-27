@@ -26,20 +26,6 @@
   width: 100%;
 }
 
-.imageview .project:hover:before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background: var(--gradient-shadow);
-  background-size: 400%;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  z-index: -1;
-  animation: animate 60s linear infinite;
-  filter: blur(10px) saturate(2);
-}
-
 .shadow:after {
   filter: blur(20px);
 }
@@ -89,10 +75,6 @@
   transition: opacity 0s ease;
   z-index: 2;
 }
-.imageview .project:hover .project-details-outer {
-  opacity: 1;
-  background: var(--background-color);
-}
 
 @keyframes boxshadowanimate {
   0% {
@@ -121,15 +103,39 @@
   opacity: 0;
   mix-blend-mode: multiply;
 }
-.project:hover .project-details-inner {
-  opacity: 1;
-}
+
 .project-details {
   position: absolute;
   width: 100%;
   height: 100%;
   inset: 0;
   margin: 0;
+}
+
+/* Wrap :hover events in a media query to prvent browsers emulate it on tap for mobile */
+@media (hover: hover) and (pointer: fine) {
+  .project:hover .project-details-inner {
+    opacity: 1;
+  }
+
+  .imageview .project:hover .project-details-outer {
+    opacity: 1;
+    background: var(--background-color);
+  }
+
+  .imageview .project:hover:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background: var(--gradient-shadow);
+    background-size: 400%;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    z-index: -1;
+    animation: animate 60s linear infinite;
+    filter: blur(10px) saturate(2);
+  }
 }
 
 @media (max-width: 575.98px) {

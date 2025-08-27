@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { motion, optimizedAppearDataAttribute } from "framer-motion";
 
@@ -14,7 +14,6 @@ import { RefContext } from "@/context/RefContext";
 import { StateContext } from "@/context/StateContext";
 
 export default function ClientLayout({ children }) {
-  const [hideOpening, setHideOpening] = useState(false);
   const { container } = useContext(RefContext);
   const { showOpening, setShowOpening } = useContext(StateContext);
   const pathname = usePathname();
@@ -35,10 +34,8 @@ export default function ClientLayout({ children }) {
   const handleAnimationComplete = () => {
     if (showOpening) {
       disableScroll();
-      setHideOpening(true);
     } else {
       enableScroll();
-      setHideOpening(false);
     }
   };
 

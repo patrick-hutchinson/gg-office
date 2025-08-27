@@ -52,7 +52,7 @@ const MobileMenu = ({ location, setShowMenu }) => {
       </li>
       <li className={`${styles.button} button`}>
         <Link href="https://www.gg-rugs.com" target="_blank">
-          RUGS
+          Rugs
         </Link>
       </li>
       <li

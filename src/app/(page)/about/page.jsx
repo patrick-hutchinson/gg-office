@@ -30,7 +30,13 @@ export default function About() {
       const randomTop = Math.floor(Math.random() * (window.innerHeight - offset.bottom)) + offset.top;
       alien.style.left = `${randomLeft}px`;
       alien.style.top = `${randomTop}px`;
-      console.log("alien hovered/clicked");
+    });
+
+    alien.addEventListener("click", () => {
+      const randomLeft = Math.floor(Math.random() * (window.innerWidth - offset.right)) + offset.top;
+      const randomTop = Math.floor(Math.random() * (window.innerHeight - offset.bottom)) + offset.top;
+      alien.style.left = `${randomLeft}px`;
+      alien.style.top = `${randomTop}px`;
     });
   };
 
@@ -158,10 +164,12 @@ export default function About() {
         </div>
       </div>
       <main className={`about ${styles.about}`}>
-        <Biography />
-        <Services />
+        <div>
+          <Biography />
+          <Services />
 
-        <Internships />
+          <Internships />
+        </div>
       </main>
     </>
   );
