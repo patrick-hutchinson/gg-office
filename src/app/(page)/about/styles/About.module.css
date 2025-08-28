@@ -4,6 +4,10 @@ main.about {
   gap: var(--margin);
   font-size: var(--font-size-300);
   line-height: var(--line-height-300);
+
+  position: relative;
+  top: -80px;
+  z-index: -1;
 }
 
 .intern {
@@ -87,6 +91,11 @@ main.about {
   main.about {
     grid-template-columns: 1fr;
     display: unset;
+
+    position: relative;
+    top: unset;
+    z-index: unset;
+    height: 100vh;
   }
 
   .alien-wrapper .alien {

@@ -16,6 +16,16 @@ export const research = defineType({
           fields: [
             {name: 'image', type: 'image', hidden: ({parent}) => !!parent?.video},
             {name: 'video', type: 'mux.video', hidden: ({parent}) => !!parent?.image},
+            {
+              name: 'size',
+              title: 'Media Size',
+              type: 'string',
+              options: {
+                list: ['S', 'M', 'L', 'XL'],
+                layout: 'radio',
+                direction: 'horizontal',
+              },
+            },
           ],
           preview: {
             select: {

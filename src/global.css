@@ -92,6 +92,10 @@ body {
   padding: 0;
 }
 
+.ss01 {
+  font-feature-settings: "case";
+}
+
 #opening,
 #content {
   top: 0;
@@ -105,9 +109,17 @@ body {
   overflow-y: scroll;
 }
 
+/* #content header {
+  position: sticky !important;
+} */
+
 #root {
   padding: 0px var(--margin);
   min-height: calc(100vh - 80px - 48px);
+}
+
+.emdash-cap {
+  font-feature-settings: "case";
 }
 
 main {

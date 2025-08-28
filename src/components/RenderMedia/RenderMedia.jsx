@@ -27,7 +27,15 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
   // Handle Sanity Image
   if (medium.type === "image") {
     return (
-      <div style={{ position: "relative", width: "100%", height: "100%", aspectRatio: medium.width / medium.height }}>
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          aspectRatio: medium.width / medium.height,
+          cursor: enableFullscreen ? "pointer" : "default",
+        }}
+      >
         {/* {enableFullscreen && (
           <div className={`button ${styles["fullscreen-button"]}`} onClick={(e) => handleFullscreen(e)}>
             <Icon path="/assets/icons/fullscreen-icon.svg" />
@@ -64,7 +72,13 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
     return (
       <div
         ref={videoRef}
-        style={{ position: "relative", width: "100%", height: "100%", aspectRatio: aspectWidth / aspectHeight }}
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          aspectRatio: aspectWidth / aspectHeight,
+          cursor: enableFullscreen ? "pointer" : "default",
+        }}
         onClick={(e) => {
           if (!enableFullscreen) return; // exit if fullscreen is disabled
           handleFullscreen(e);
@@ -84,6 +98,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
 
               zIndex: 1,
               filter: "blur(3px)",
+
               width: "100%",
               height: "100%",
             }}
@@ -95,7 +110,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
             autoPlay
             controls={false}
             loop
-            preload="metadata"
+            preload="auto"
             muted
             playsInline
             fill
@@ -125,7 +140,7 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   if (!open) return null;
 
   return createPortal(
-    <div className={styles["fullscreen-preview-outer"]}>
+    <div className={styles["fullscreen-preview-outer"]} onClick={() => handleClose()}>
       <div
         className={`${styles["close-button"]} button`}
         onClick={() => {

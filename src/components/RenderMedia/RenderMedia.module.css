@@ -19,8 +19,8 @@
   max-height: 100vh;
   width: auto;
   height: auto;
-
-  background: pink;
+  display: flex;
+  align-self: center;
 }
 
 .close-button {

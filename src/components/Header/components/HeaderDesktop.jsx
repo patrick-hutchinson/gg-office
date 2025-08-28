@@ -5,8 +5,12 @@ import Link from "next/link";
 
 import { AnimationContext } from "@/context/AnimationContext";
 
-export default function HeaderDesktop({ location, setShowOpening }) {
+import { StateContext } from "@/context/StateContext";
+
+export default function HeaderDesktop({ location }) {
   const { isDarkMode, setIsDarkMode } = useContext(AnimationContext);
+
+  const { showOpening, setShowOpening } = useContext(StateContext);
 
   function handleThemeSwitch() {
     var root = document.querySelector(":root");
@@ -25,10 +29,16 @@ export default function HeaderDesktop({ location, setShowOpening }) {
     <div className={`${styles.headerDesktop}`}>
       <nav>
         <ul className={`${styles.navigation}`}>
-          <li className={`button`} onClick={() => setShowOpening(true)}>
+          <li
+            className={`button ${location === "/" && showOpening ? "active" : ""}`}
+            onClick={() => setShowOpening(true)}
+          >
             <Link href="/">GG—OFFICE</Link>
           </li>
-          <li className={`button ${location === "/" ? "active" : ""}`} onClick={() => setShowOpening(false)}>
+          <li
+            className={`button ${location === "/" && !showOpening ? "active" : ""}`}
+            onClick={() => setShowOpening(false)}
+          >
             <Link href="/">Work</Link>
           </li>
           <li className={`button ${location.includes("about") ? "active" : ""}`}>
@@ -39,7 +49,7 @@ export default function HeaderDesktop({ location, setShowOpening }) {
           </li>
           <li className={`button`}>
             <Link href="https://www.gg-rugs.com" target="_blank">
-              RUGS
+              Rugs
             </Link>
           </li>
           <li className={`button ${location.includes("contact") ? "active" : ""}`}>
@@ -47,10 +57,14 @@ export default function HeaderDesktop({ location, setShowOpening }) {
           </li>
         </ul>
       </nav>
-      <div className={styles["switchTheme"]} onClick={handleThemeSwitch}>
-        Switch
+
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <p className={styles["tagline"]}>Independent graphic and motion agency based in Sicily</p>
+        {/* <br />
+        <div className={styles["switchTheme"]} onClick={handleThemeSwitch}>
+          Switch
+        </div> */}
       </div>
-      <p className={styles["tagline"]}>Independent graphic and motion agency based in Sicily</p>
     </div>
   );
 }

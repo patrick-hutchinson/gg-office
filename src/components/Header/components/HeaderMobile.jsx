@@ -3,9 +3,13 @@ import Link from "next/link";
 
 import MobileMenu from "./MobileMenu";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-export default function HeaderMobile({ location, setShowOpening }) {
+import { StateContext } from "@/context/StateContext";
+
+export default function HeaderMobile({ location }) {
+  const { showOpening, setShowOpening } = useContext(StateContext);
+
   let [showMenu, setShowMenu] = useState(false);
 
   function expandMenu() {
