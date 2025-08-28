@@ -27,44 +27,40 @@ export default function HeaderDesktop({ location }) {
   }
   return (
     <div className={`${styles.headerDesktop}`}>
-      <nav>
-        <ul className={`${styles.navigation}`}>
-          <li
-            className={`button ${location === "/" && showOpening ? "active" : ""}`}
-            onClick={() => setShowOpening(true)}
-          >
-            <Link href="/">GG—OFFICE</Link>
-          </li>
-          <li
-            className={`button ${location === "/" && !showOpening ? "active" : ""}`}
-            onClick={() => setShowOpening(false)}
-          >
-            <Link href="/">Work</Link>
-          </li>
-          <li className={`button ${location.includes("about") ? "active" : ""}`}>
-            <Link href="/about">About</Link>
-          </li>
-          <li className={`button ${location.includes("research") ? "active" : ""}`}>
-            <Link href="/research">Research</Link>
-          </li>
-          <li className={`button`}>
-            <Link href="https://www.gg-rugs.com" target="_blank">
-              Rugs
-            </Link>
-          </li>
-          <li className={`button ${location.includes("contact") ? "active" : ""}`}>
-            <Link href="/contact">Contact</Link>
-          </li>
-        </ul>
-      </nav>
+      <ul className={`${styles.navigation}`}>
+        <li
+          className={`button ${location === "/" && showOpening ? "active" : ""}`}
+          onClick={() => setShowOpening(true)}
+        >
+          <Link href="/">GG—OFFICE</Link>
+        </li>
+        <li
+          className={`button ${location === "/" && !showOpening ? "active" : ""}`}
+          onClick={() => setShowOpening(false)}
+        >
+          <Link href="/">Work</Link>
+        </li>
+        <li className={`button ${location.includes("about") ? "active" : ""}`}>
+          <Link href="/about">About</Link>
+        </li>
+        <li className={`button ${location.includes("research") ? "active" : ""}`}>
+          <Link href="/research">Research</Link>
+        </li>
+        <li className={`button`}>
+          <Link href="https://www.gg-rugs.com" target="_blank">
+            Rugs
+          </Link>
+        </li>
+        <li className={`button ${location.includes("contact") ? "active" : ""}`}>
+          <Link href="/contact">Contact</Link>
+        </li>
+      </ul>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <p className={styles["tagline"]}>Independent graphic and motion agency based in Sicily</p>
-        {/* <br />
-        <div className={styles["switchTheme"]} onClick={handleThemeSwitch}>
-          Switch
-        </div> */}
-      </div>
+      <span className={`${styles["switchTheme"]} button`} onClick={handleThemeSwitch}>
+        Switch
+      </span>
+
+      <p className={styles["tagline"]}>Independent graphic and motion agency based in Sicily</p>
     </div>
   );
 }

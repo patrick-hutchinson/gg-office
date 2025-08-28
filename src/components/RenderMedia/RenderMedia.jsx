@@ -114,6 +114,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
             loop
             // poster={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg`}
             preload="metadata"
+            as="video"
             muted
             playsInline
             fill

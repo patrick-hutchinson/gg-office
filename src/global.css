@@ -252,6 +252,7 @@ mux-player {
   --duration-display: none;
   --rendition-menu-button: none;
   --gradient-shadow: none;
+  --media-loading-indicator-display: none;
   pointer-events: none !important;
 }
 

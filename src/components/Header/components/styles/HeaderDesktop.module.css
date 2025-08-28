@@ -1,33 +1,40 @@
 .headerDesktop {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: calc((100% - calc(var(--margin) * 3)) / 4) calc((100% - calc(var(--margin) * 3)) / 4) auto 1fr; /* 4 columns */
+  gap: var(--margin);
   width: 100%;
+  align-items: center; /* vertically center items */
 }
+
+/* Navigation spans the first two columns */
+/* Navigation spans the first two columns */
 .navigation {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start; /* don't stretch items across the whole container */
+  gap: 25px; /* spacing between items */
   font-size: var(--font-size-300);
   line-height: var(--line-height-300);
   white-space: nowrap;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
-.navigation li {
-  margin-right: 25px;
-}
-
-.headerDesktop p {
-  font-size: var(--font-size-100);
-  line-height: var(--line-height-100);
-}
-
+/* Theme switch in column 3 */
 .switchTheme {
   font-size: var(--font-size-200);
   cursor: pointer;
-  display: flex;
-  align-self: flex-end;
-  flex-direction: row;
+  grid-column: 3;
+  align-items: center;
+}
+
+/* Tagline in column 4 */
+.headerDesktop p {
+  font-size: var(--font-size-100);
+  line-height: var(--line-height-100);
+  grid-column: 4;
+  align-self: center;
+  text-align: right;
 }
 
 @keyframes glowing {
@@ -42,8 +49,12 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1250px) {
   .tagline {
     display: none;
+  }
+  .headerDesktop {
+    display: flex;
+    justify-content: space-between;
   }
 }
