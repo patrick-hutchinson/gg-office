@@ -124,6 +124,7 @@ header {
   width: 100%;
   position: fixed;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 #root {
@@ -312,11 +313,11 @@ footer {
   #content {
     position: unset;
     height: unset;
-    overflow: unset;
+    overflow-y: unset;
   }
 
   #content.no-scroll {
-    overflow: hidden !important;
+    overflow-y: hidden !important;
     height: 100vh !important;
     position: fixed !important;
   }
