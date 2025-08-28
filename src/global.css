@@ -126,10 +126,6 @@ header {
   height: 100vh;
 }
 
-#content {
-  overflow-y: scroll;
-}
-
 #root {
   position: relative;
 
@@ -276,10 +272,6 @@ footer {
   position: relative;
 }
 
-.icon {
-  /* fill: #fff; */
-}
-
 @keyframes glowing {
   0% {
     background-position: 0% 50%;
@@ -317,10 +309,17 @@ footer {
     --line-height-500: calc(var(--font-size-500) / 1.25);
   }
 
-  /* #content {
-    position: relative;
-    height: auto;
-  } */
+  #content {
+    position: unset;
+    height: unset;
+    overflow: unset;
+  }
+
+  #content.no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
+    position: fixed !important;
+  }
 }
 
 /* Small Devices (Phones, 576px and up) */

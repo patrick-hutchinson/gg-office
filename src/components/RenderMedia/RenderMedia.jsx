@@ -98,8 +98,8 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
               opacity: isLoaded ? 0 : 1,
 
               zIndex: 1,
-              filter: "blur(10px)",
-              transform: "scale(2)",
+              filter: "blur(30px)",
+              transform: "scale(1.4)",
 
               width: "100%",
               height: "100%",

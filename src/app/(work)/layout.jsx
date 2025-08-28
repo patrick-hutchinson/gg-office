@@ -16,6 +16,7 @@ import { StateContext } from "@/context/StateContext";
 export default function ClientLayout({ children }) {
   const { container } = useContext(RefContext);
   const { showOpening, setShowOpening } = useContext(StateContext);
+  const { isMobile } = useContext(StateContext);
   const pathname = usePathname();
 
   const openingRef = useRef(null);
@@ -34,8 +35,10 @@ export default function ClientLayout({ children }) {
   const handleAnimationComplete = () => {
     if (showOpening) {
       disableScroll();
+      isMobile && container.current.classList.add("no-scroll");
     } else {
       enableScroll();
+      isMobile && container.current.classList.remove("no-scroll");
     }
   };
 
@@ -80,6 +83,8 @@ export default function ClientLayout({ children }) {
       </motion.div>
       <motion.div
         id="content"
+        // className={isMobile && showOpening ? "no-scroll" : ""}
+        className={isMobile && "no-scroll"}
         ref={container}
         initial={false}
         animate={showOpening ? "outOfView" : "inView"}
