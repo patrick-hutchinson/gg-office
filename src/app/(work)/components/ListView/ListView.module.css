@@ -55,12 +55,12 @@ ul.infotitles .year {
 .preview-wrapper {
   position: absolute;
   width: 20vw;
-  aspect-ratio: 4 / 5;
+  /* aspect-ratio: 4 / 5; */
 }
 
 .preview-wrapper-inner {
   width: 20vw;
-  aspect-ratio: 4 / 5;
+  /* aspect-ratio: 4 / 5; */
 }
 
 .project {

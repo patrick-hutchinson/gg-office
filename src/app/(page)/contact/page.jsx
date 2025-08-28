@@ -25,7 +25,9 @@ export default function Contact() {
     return (
       <section>
         <h5>Address</h5>
-        <div>{contact[0].address}</div>
+        <a href={contact[0].googleMapsLink} target="_blank">
+          <span className="button">{contact[0].address}</span>
+        </a>
       </section>
     );
   };

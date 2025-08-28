@@ -86,7 +86,7 @@ main.about {
     transform-origin: center;
   }
   .name {
-    color: #fff;
+    color: #000;
   }
   main.about {
     grid-template-columns: 1fr;

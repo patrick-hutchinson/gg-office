@@ -147,7 +147,8 @@ export const DataProvider = ({ children }) => {
         `*[_type=="contact"]{
           email,
           address,
-          socials
+          socials,
+          googleMapsLink
         }`
       )
       .then((data) => setContact(data))

@@ -122,9 +122,6 @@ body {
   font-feature-settings: "case";
 }
 
-main {
-}
-
 section {
   margin-top: calc(var(--margin) * 2);
   margin-bottom: calc(var(--margin) * 2);
@@ -235,6 +232,7 @@ mux-player {
   --time-display: none;
   --duration-display: none;
   --rendition-menu-button: none;
+  --gradient-shadow: none;
   pointer-events: none !important;
 }
 
@@ -244,6 +242,10 @@ mux-player::part(control-bar) {
   opacity: 1 !important;
   --gradient-steps: none !important
 ;
+}
+
+mux-player .mux-spinner {
+  display: none !important;
 }
 
 footer {
@@ -289,7 +291,7 @@ footer {
     --font-size-500: 50px;
 
     --line-height-100: 14px;
-    --line-height-200: 18px;
+    --line-height-200: 20px;
     --line-height-300: 24px;
     --line-height-400: calc(var(--font-size-400) / 1.25);
     --line-height-500: calc(var(--font-size-500) / 1.25);
@@ -303,10 +305,6 @@ footer {
 
 /* Small Devices (Phones, 576px and up) */
 @media (max-width: 767.98px) {
-  main {
-    /* padding-bottom: 100px; */
-  }
-
   .button:hover::before {
     opacity: 0;
     transform: scale(1) translateZ(0);

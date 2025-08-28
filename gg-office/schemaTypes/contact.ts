@@ -6,6 +6,7 @@ export const contact = defineType({
   type: 'document',
   fields: [
     defineField({name: 'title', title: 'Title', type: 'string'}),
+
     defineField({
       name: 'email',
       title: 'Email',
@@ -17,6 +18,7 @@ export const contact = defineType({
       title: 'Address',
       type: 'string', // You can leave this as is unless a more structured address format is needed
     }),
+    defineField({name: 'googleMapsLink', title: 'Google Maps Link', type: 'string'}),
     defineField({
       name: 'socials',
       title: 'Socials',
