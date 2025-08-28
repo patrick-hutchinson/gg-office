@@ -78,6 +78,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           height: "100%",
           aspectRatio: aspectWidth / aspectHeight,
           cursor: enableFullscreen ? "pointer" : "default",
+          overflow: "hidden",
         }}
         onClick={(e) => {
           if (!enableFullscreen) return; // exit if fullscreen is disabled
@@ -97,7 +98,8 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
               opacity: isLoaded ? 0 : 1,
 
               zIndex: 1,
-              filter: "blur(3px)",
+              filter: "blur(10px)",
+              transform: "scale(2)",
 
               width: "100%",
               height: "100%",

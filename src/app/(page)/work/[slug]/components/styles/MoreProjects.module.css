@@ -68,5 +68,6 @@
     min-height: unset;
     width: auto;
     min-width: unset;
+    margin-right: calc(var(--margin) / 2);
   }
 }

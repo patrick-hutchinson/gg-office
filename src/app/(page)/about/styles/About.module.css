@@ -93,9 +93,14 @@ main.about {
     display: unset;
 
     position: relative;
-    top: unset;
+    /* top: unset; */
     z-index: unset;
-    height: 100vh;
+    /* height: 100vh; */
+    margin-bottom: 100px;
+  }
+
+  .internships {
+    /* margin-bottom: 100px; */
   }
 
   .alien-wrapper .alien {

@@ -22,12 +22,12 @@ export default function Project({ slug }) {
   if (!project) return <p>Project not found.</p>;
 
   return (
-    <div className={styles["project-container"]}>
+    <main className={styles["project-container"]}>
       <RenderMedia medium={project.coverimage} enableFullscreen={true} />
       <ProjectInfo project={project} />
       {project.imagegallery && <ImageGallery project={project} />}
       {(project.creditsInhouse || project.creditsClient) && <Credits project={project} />}
       <MoreProjects work={work} currentProject={project} />
-    </div>
+    </main>
   );
 }

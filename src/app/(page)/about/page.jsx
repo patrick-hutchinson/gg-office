@@ -130,7 +130,7 @@ export default function About() {
     };
 
     return (
-      <section className="internships">
+      <section className={styles["internships"]}>
         <h5>Internships</h5>
         {internships.map((intern, index) => {
           const isLast = index === internships.length - 1;
