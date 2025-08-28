@@ -67,7 +67,7 @@ export default function ClientLayout({ children }) {
   };
 
   return (
-    <div onWheel={() => handleOpening()}>
+    <div onWheel={() => handleOpening()} onTouchStart={() => handleOpening()}>
       <motion.div
         id="opening"
         initial={false}

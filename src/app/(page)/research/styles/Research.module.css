@@ -1,5 +1,5 @@
 .container {
-  height: calc(100vh - 80px - 48px);
+  height: calc(100vh - 48px);
   width: 100%;
   /* border: 2px solid blue; */
   overflow: hidden;

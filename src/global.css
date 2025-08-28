@@ -55,8 +55,6 @@
 
   --margin: 15px;
 
-  --header-height: 30px;
-
   --transition-duration: 0.5s;
 
   --gradient-shadow: linear-gradient(
@@ -92,6 +90,28 @@ body {
   padding: 0;
 }
 
+header {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  top: 0px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 5;
+
+  padding: 15px var(--margin);
+  margin-bottom: 25px;
+
+  width: calc(100vw);
+}
+
+#content header {
+  position: sticky;
+}
+
 .ss01 {
   font-feature-settings: "case";
 }
@@ -109,13 +129,11 @@ body {
   overflow-y: scroll;
 }
 
-/* #content header {
-  position: sticky !important;
-} */
-
 #root {
+  position: relative;
+
   padding: 0px var(--margin);
-  min-height: calc(100vh - 80px - 48px);
+  min-height: calc(100vh - 48px);
 }
 
 .emdash-cap {

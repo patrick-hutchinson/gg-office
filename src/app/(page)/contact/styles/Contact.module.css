@@ -1,10 +1,12 @@
 .contact {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--margin);
 
   font-size: var(--font-size-300);
   line-height: var(--line-height-300);
+  top: 80px;
 }
 
 .contact section {
