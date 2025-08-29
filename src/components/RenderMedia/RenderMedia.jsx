@@ -82,6 +82,8 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           aspectRatio: aspectWidth / aspectHeight,
           cursor: "pointer",
           overflow: "hidden",
+          // maxHeight: "100vh",
+          // maxWidth: "100vw",
         }}
         onClick={(e) => {
           if (!enableFullscreen) return; // exit if fullscreen is disabled
@@ -140,27 +142,31 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
 Media.displayName = "Media";
 
 export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = () => setOpen(false);
 
-  if (!open) return null;
+  if (!open || !medium) return null;
+
+  // Compute media type and aspect ratio dynamically
+  const mediaType = medium?.aspect_ratio ? "video" : "image";
+  let mediaAspectRatio;
+
+  if (mediaType === "video" && medium.aspect_ratio) {
+    const [aspectWidth, aspectHeight] = medium.aspect_ratio.split(":").map(Number);
+    mediaAspectRatio = aspectWidth / aspectHeight;
+  } else {
+    mediaAspectRatio = medium.width / medium.height;
+  }
 
   return createPortal(
-    <div className={styles["fullscreen-preview-outer"]} onClick={() => handleClose()}>
-      <div
-        className={`${styles["close-button"]} button`}
-        onClick={() => {
-          handleClose();
-        }}
-      >
+    <div className={styles["fullscreen-preview-outer"]} onClick={handleClose}>
+      <div className={`${styles["close-button"]} button`} onClick={handleClose}>
         CLOSE
       </div>
-      <div className={styles["fullscreen-preview-inner"]} style={{ aspectRatio: medium.width / medium.height }}>
+      <div className={styles["fullscreen-preview-inner"]} style={{ aspectRatio: mediaAspectRatio }}>
         {children}
       </div>
     </div>,
-    document.getElementById("fullscreen-root") // portal target
+    document.getElementById("fullscreen-root")
   );
 };
 
