@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 
 import styles from "./styles/MoreProjects.module.css";
@@ -10,6 +10,36 @@ import Icon from "@/components/Icon";
 
 export default function MoreProjects({ work, currentProject }) {
   const moreprojectsRef = useRef(null);
+
+  const mouseDownRef = useRef(false);
+
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e) => {
+    mouseDownRef.current = true;
+    setIsDragging(false); // reset
+    setStartX(e.pageX - moreprojectsRef.current.offsetLeft);
+    setScrollLeft(moreprojectsRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    mouseDownRef.current = false;
+    setIsDragging(false);
+  };
+  const handleMouseUp = (e) => {
+    mouseDownRef.current = false;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!mouseDownRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - moreprojectsRef.current.offsetLeft;
+    const walk = x - startX;
+    if (Math.abs(walk) > 5) setIsDragging(true); // detect drag
+    moreprojectsRef.current.scrollLeft = scrollLeft - walk;
+  };
 
   function handlePan(direction) {
     const scrollAmount = window.innerWidth * 0.9;
@@ -34,11 +64,26 @@ export default function MoreProjects({ work, currentProject }) {
 
   let ProjectList = (
     <div className={styles["moreprojects-wrapper"]}>
-      <div className={styles["moreprojects"]} ref={moreprojectsRef}>
+      <div
+        className={styles["moreprojects"]}
+        ref={moreprojectsRef}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        style={{ overflowX: "scroll", cursor: isDragging ? "grabbing" : "grab" }}
+      >
         {rearrangedWork.map((project, index) => {
           return (
             project.slug && (
-              <Link href={`/work/${project.slug.current}`} key={index}>
+              <Link
+                href={`/work/${project.slug.current}`}
+                key={index}
+                onClick={(e) => {
+                  if (isDragging) e.preventDefault(); // cancel click if it was a drag
+                }}
+                onDragStart={(e) => e.preventDefault()}
+              >
                 {project.thumbnail && <RenderMedia medium={project.thumbnail} enableFullscreen={false} />}
               </Link>
             )

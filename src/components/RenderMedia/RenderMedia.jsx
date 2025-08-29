@@ -33,7 +33,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           width: "100%",
           height: "100%",
           aspectRatio: medium.width / medium.height,
-          cursor: enableFullscreen ? "pointer" : "default",
+          cursor: "pointer",
         }}
       >
         {/* {enableFullscreen && (
@@ -47,6 +47,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           unoptimized
           width={100}
           height={100}
+          draggable={false}
           placeholder="blur"
           blurDataURL={medium.lqip}
           style={{ width: "100%", height: "auto" }}
@@ -77,7 +78,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           width: "100%",
           height: "100%",
           aspectRatio: aspectWidth / aspectHeight,
-          cursor: enableFullscreen ? "pointer" : "default",
+          cursor: "pointer",
           overflow: "hidden",
         }}
         onClick={(e) => {
