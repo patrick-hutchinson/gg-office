@@ -1,14 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import Link from "next/link";
 
 import styles from "./styles/MoreProjects.module.css";
 
 import RenderMedia from "@/components/RenderMedia/RenderMedia";
 import Icon from "@/components/Icon";
+import { StateContext } from "@/context/StateContext";
 
 export default function MoreProjects({ work, currentProject }) {
+  const { isMobile } = useContext(StateContext);
   const moreprojectsRef = useRef(null);
 
   const mouseDownRef = useRef(false);
@@ -18,6 +20,8 @@ export default function MoreProjects({ work, currentProject }) {
   const [scrollLeft, setScrollLeft] = useState(0);
 
   const handleMouseDown = (e) => {
+    if (isMobile) return;
+
     mouseDownRef.current = true;
     setIsDragging(false); // reset
     setStartX(e.pageX - moreprojectsRef.current.offsetLeft);
@@ -25,14 +29,21 @@ export default function MoreProjects({ work, currentProject }) {
   };
 
   const handleMouseLeave = () => {
+    if (isMobile) return;
+
     mouseDownRef.current = false;
     setIsDragging(false);
   };
+
   const handleMouseUp = (e) => {
+    if (isMobile) return;
+
     mouseDownRef.current = false;
   };
 
   const handleMouseMove = (e) => {
+    if (isMobile) return;
+
     if (!mouseDownRef.current) return;
     e.preventDefault();
     const x = e.pageX - moreprojectsRef.current.offsetLeft;
@@ -71,7 +82,6 @@ export default function MoreProjects({ work, currentProject }) {
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        style={{ overflowX: "scroll", cursor: isDragging ? "grabbing" : "grab" }}
       >
         {rearrangedWork.map((project, index) => {
           return (
@@ -80,9 +90,9 @@ export default function MoreProjects({ work, currentProject }) {
                 href={`/work/${project.slug.current}`}
                 key={index}
                 onClick={(e) => {
-                  if (isDragging) e.preventDefault(); // cancel click if it was a drag
+                  if (isDragging && !isMobile) e.preventDefault(); // cancel click if it was a drag
                 }}
-                onDragStart={(e) => e.preventDefault()}
+                onDragStart={!isMobile ? (e) => e.preventDefault() : undefined}
               >
                 {project.thumbnail && <RenderMedia medium={project.thumbnail} enableFullscreen={false} />}
               </Link>

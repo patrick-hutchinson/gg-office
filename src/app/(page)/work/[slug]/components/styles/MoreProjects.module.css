@@ -42,12 +42,14 @@
   justify-content: space-between;
   top: 50%;
   transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .panButton {
   position: relative;
   width: 34px;
   height: auto;
+  pointer-events: all;
 }
 .panButton path {
   fill: var(--text-color);
