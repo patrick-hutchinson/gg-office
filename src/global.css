@@ -250,7 +250,10 @@ mux-player {
   --rendition-menu-button: none;
   --gradient-shadow: none;
   --media-loading-indicator-display: none;
+  --media-background-color: var(--background-color);
   pointer-events: none !important;
+  background-color: #fff !important;
+  background: #fff !important;
 }
 
 /* control-bar bottom */

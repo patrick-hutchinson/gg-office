@@ -90,7 +90,7 @@ main.about {
   }
   main.about {
     grid-template-columns: 1fr;
-    display: unset;
+    /* display: unset; */
 
     position: relative;
     /* top: unset; */
