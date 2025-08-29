@@ -79,7 +79,7 @@ export default function ClientLayout({ children }) {
         onAnimationComplete={handleAnimationComplete}
         onClick={() => handleOpening()}
       >
-        <OpeningPage ref={openingRef} />
+        <OpeningPage ref={openingRef} showOpening={showOpening} />
       </motion.div>
       <motion.div
         id="content"

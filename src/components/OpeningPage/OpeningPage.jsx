@@ -9,7 +9,7 @@ import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { StateContext } from "../../context/StateContext";
 import { AnimationContext } from "../../context/AnimationContext";
 
-const OpeningPage = forwardRef((props, openingRef) => {
+const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
   OpeningPage.displayName = "OpeningPage";
 
   const { isMobile, isSafari } = useContext(StateContext);
@@ -68,15 +68,24 @@ const OpeningPage = forwardRef((props, openingRef) => {
   const MobileOpening = ({ index, letter }) => {
     return (
       <motion.div
+        style={{ willChange: "transform" }}
         ref={(el) => (columnsRef.current[index] = el)}
         className={styles.column}
-        animate={{ gridTemplateRows: ["0% 100", "100% 0%", "0% 100%"] }}
-        transition={{
-          duration: 2.1,
-          ease: "easeInOut",
-          repeat: Infinity,
-          delay: index / 5,
-        }}
+        animate={
+          showOpening
+            ? { gridTemplateRows: ["0% 100%", "100% 0%", "0% 100%"] } // scrolling animation
+            : { gridTemplateRows: ["0% 100%"] } // pause at start
+        }
+        transition={
+          showOpening
+            ? {
+                duration: 2.1,
+                ease: "easeInOut",
+                repeat: Infinity,
+                delay: index / 5,
+              }
+            : {}
+        }
       >
         {[...Array(2)].map((_, i) => (
           <img

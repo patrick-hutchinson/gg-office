@@ -3,10 +3,11 @@ import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const ScrollText = ({ string, activeView }) => {
+  const [ready, setReady] = useState(false);
   const containerRef = useRef();
   const textRef = useRef();
 
-  const [overflow, setOverflow] = useState(0);
+  const overflowRef = useRef(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -19,14 +20,9 @@ const ScrollText = ({ string, activeView }) => {
       return;
     }
 
-    console.log(overflowAmount, "overflow");
-    setOverflow(overflowAmount);
+    overflowRef.current = overflowAmount;
+    setReady(true); // trigger re-render so Framer Motion picks up the updated value
   }, [activeView, string]); // Added string to dependency to reset on text change
-
-  // const scrollVariants = {
-  //   initial: { transform: `translateX(0px)` },
-  //   animate: { transform: `translateX(${-overflow}px)` },
-  // };
 
   return (
     <div
@@ -41,14 +37,15 @@ const ScrollText = ({ string, activeView }) => {
       <motion.div
         className="scroll-text"
         ref={textRef}
-        style={{
-          display: "inline-block",
-          transform: `translateX(${-overflow}px)`,
-        }}
+        style={{ display: "inline-block", willChange: "transform" }}
         initial="initial"
-        animate={{ x: [0, -overflow, 0] }} // move right -> left -> right
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} // 2s each way
-        // variants={scrollVariants}
+        animate={{ x: [0, -overflowRef.current, -overflowRef.current, 0] }} // extra frame for pause at end
+        transition={{
+          duration: overflowRef.current / 10 + 4, // total duration including pauses
+          times: [0, 0.45, 0.55, 1], // first 45% scrolls, 10% pause, last 45% scrolls back
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
         {string}
       </motion.div>
