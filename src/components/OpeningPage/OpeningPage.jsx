@@ -47,7 +47,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
       <motion.div
         ref={(el) => (columnsRef.current[index] = el)}
         className={styles.column}
-        style={{ gridTemplateRows }}
+        style={{ gridTemplateRows, willChange: "transform" }}
         onMouseMove={(e) => {
           mouseY.set(e.clientY);
           lastY.current[index] = e.clientY;
