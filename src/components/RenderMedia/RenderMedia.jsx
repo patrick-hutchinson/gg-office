@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { createPortal } from "react-dom";
 
 import Image from "next/image";
@@ -11,8 +11,10 @@ import Icon from "@/components/Icon";
 import { useInView } from "framer-motion";
 
 import styles from "./RenderMedia.module.css";
+import { StateContext } from "@/context/StateContext";
 
 const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
+  const { isMobile } = useContext(StateContext);
   const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef(null);
   const isInView = useInView(videoRef, { once: true, margin: "0px 0px -100px 0px" });
@@ -99,7 +101,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
               opacity: isLoaded ? 0 : 1,
 
               zIndex: 1,
-              filter: "blur(30px)",
+              filter: isMobile ? "blur(10px)" : "blur(30px)",
               transform: "scale(1.4)",
 
               width: "100%",

@@ -84,7 +84,7 @@ export default function ClientLayout({ children }) {
       <motion.div
         id="content"
         // className={isMobile && showOpening ? "no-scroll" : ""}
-        className={isMobile && "no-scroll"}
+        className={isMobile ? "no-scroll" : ""}
         ref={container}
         initial={false}
         animate={showOpening ? "outOfView" : "inView"}

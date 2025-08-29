@@ -1,9 +1,12 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+
+import { motion } from "framer-motion";
 
 const ScrollText = ({ string, activeView }) => {
   const containerRef = useRef();
   const textRef = useRef();
-  const pauseTimeout = useRef(null); // to store timeout ID
+
+  const [overflow, setOverflow] = useState(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -16,43 +19,14 @@ const ScrollText = ({ string, activeView }) => {
       return;
     }
 
-    let scrollPos = 0;
-    let direction = 1; // 1 = forward, -1 = backward
-    const speed = 0.5;
-    const interval = 20;
-    let isPaused = false;
-
-    const scroll = () => {
-      if (isPaused) return;
-
-      scrollPos += direction * speed;
-
-      if (scrollPos >= overflowAmount) {
-        scrollPos = overflowAmount;
-        isPaused = true;
-        pauseTimeout.current = setTimeout(() => {
-          direction = -1;
-          isPaused = false;
-        }, 1000);
-      } else if (scrollPos <= 0) {
-        scrollPos = 0;
-        isPaused = true;
-        pauseTimeout.current = setTimeout(() => {
-          direction = 1;
-          isPaused = false;
-        }, 1000);
-      }
-
-      container.scrollLeft = scrollPos;
-    };
-
-    const scrollInterval = setInterval(scroll, interval);
-
-    return () => {
-      clearInterval(scrollInterval);
-      if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
-    };
+    console.log(overflowAmount, "overflow");
+    setOverflow(overflowAmount);
   }, [activeView, string]); // Added string to dependency to reset on text change
+
+  // const scrollVariants = {
+  //   initial: { transform: `translateX(0px)` },
+  //   animate: { transform: `translateX(${-overflow}px)` },
+  // };
 
   return (
     <div
@@ -64,15 +38,20 @@ const ScrollText = ({ string, activeView }) => {
         width: "100%",
       }}
     >
-      <div
+      <motion.div
         className="scroll-text"
         ref={textRef}
         style={{
           display: "inline-block",
+          transform: `translateX(${-overflow}px)`,
         }}
+        initial="initial"
+        animate={{ x: [0, -overflow, 0] }} // move right -> left -> right
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} // 2s each way
+        // variants={scrollVariants}
       >
         {string}
-      </div>
+      </motion.div>
     </div>
   );
 };
