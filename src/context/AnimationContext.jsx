@@ -13,7 +13,8 @@ export const AnimationProvider = ({ children }) => {
       if (node.nodeType === Node.TEXT_NODE) {
         const replaced = (node.nodeValue || "")
           .replace(/GG—RUGS/g, 'GG<span class="emdash-cap">—</span>RUGS')
-          .replace(/GG—OFFICE/g, 'GG<span class="emdash-cap">—</span>OFFICE');
+          .replace(/GG—OFFICE/g, 'GG<span class="emdash-cap">—</span>OFFICE')
+          .replace(/2021—/g, '2021<span class="emdash-cap">—</span>');
         if (replaced !== node.nodeValue) {
           const span = document.createElement("span");
           span.innerHTML = replaced;
