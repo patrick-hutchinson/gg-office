@@ -32,8 +32,10 @@ export const AnimationProvider = ({ children }) => {
   useEffect(() => {
     if (pathname === "/research") {
       document.body.style.overflow = "hidden";
+      // document.querySelector("footer").style.position = "fixed";
     } else {
       document.body.style.overflow = "";
+      // document.querySelector("footer").style.position = "unset";
     }
   }, [pathname]);
 

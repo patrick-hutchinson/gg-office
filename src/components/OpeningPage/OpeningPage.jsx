@@ -66,15 +66,17 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
   };
 
   const MobileOpening = ({ index, letter }) => {
+    const currentRows = columnsRef.current[index]
+      ? getComputedStyle(columnsRef.current[index]).gridTemplateRows
+      : "50% 50%";
+
     return (
       <motion.div
         style={{ willChange: "transform" }}
         ref={(el) => (columnsRef.current[index] = el)}
         className={styles.column}
         animate={
-          showOpening
-            ? { gridTemplateRows: ["0% 100%", "100% 0%", "0% 100%"] } // scrolling animation
-            : { gridTemplateRows: ["0% 100%"] } // pause at start
+          showOpening ? { gridTemplateRows: ["0% 100%", "100% 0%", "0% 100%"] } : { gridTemplateRows: currentRows }
         }
         transition={
           showOpening
@@ -84,7 +86,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
                 repeat: Infinity,
                 delay: index / 5,
               }
-            : {}
+            : { duration: 0, ease: "easeInOut", repeat: Infinity, delay: 0 }
         }
       >
         {[...Array(2)].map((_, i) => (
