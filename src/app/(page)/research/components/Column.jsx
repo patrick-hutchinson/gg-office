@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext, useMemo } from "react";
 
-import { motion, useMotionValue, wrap } from "framer-motion";
+import { animate, motion, useMotionValue, wrap } from "framer-motion";
 
 import RenderMedia from "@/components/RenderMedia/RenderMedia";
 
@@ -45,14 +45,19 @@ export default function Column({ columnNumber, columnCount }) {
     const handleTouchMove = (e) => {
       const current = virtualScroll.get();
       const deltaY = startY - e.touches[0].clientY;
-      let newY = current - deltaY;
+      let newY = current - deltaY * 10;
 
-      // Wrap the scroll value once totalHeight is reached
       newY = wrap(-totalHeight, 0, newY);
 
-      virtualScroll.set(newY);
+      // instead of set(), animate toward newY with easing
+      animate(virtualScroll, newY, {
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+        mass: 0.5,
+      });
 
-      startY = e.touches[0].clientY; // update so movement feels continuous
+      startY = e.touches[0].clientY;
     };
 
     window.addEventListener("touchstart", handleTouchStart);
