@@ -1,12 +1,14 @@
 "use client";
 
 import { createContext, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // Create the context
 export const AnimationContext = createContext();
 
 export const AnimationProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     function walk(node) {
@@ -26,6 +28,14 @@ export const AnimationProvider = ({ children }) => {
     }
     walk(document.body);
   }, []);
+
+  useEffect(() => {
+    if (pathname === "/research") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [pathname]);
 
   return <AnimationContext.Provider value={{ isDarkMode, setIsDarkMode }}>{children}</AnimationContext.Provider>;
 };
