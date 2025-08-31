@@ -1,3 +1,13 @@
+.research,
+.research * {
+  pointer-events: none;
+}
+
+.scroll-dummy-inner,
+.scroll-dummy {
+  pointer-events: all !important;
+}
+
 .container {
   height: calc(100vh - 48px);
   width: 100%;

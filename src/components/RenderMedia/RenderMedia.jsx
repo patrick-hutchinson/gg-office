@@ -104,7 +104,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
 
               zIndex: 1,
               filter: isMobile ? "blur(10px)" : "blur(30px)",
-              transform: "scale(1.4)",
+              transform: isMobile ? "scale(1.7 )" : "scale(1.8)",
 
               width: "100%",
               height: "100%",

@@ -9,7 +9,7 @@ import { StateContext } from "@/context/StateContext";
 
 import styles from "../styles/Research.module.css";
 
-export default function Column({ columnNumber, columnCount }) {
+export default function Column({ columnNumber, columnCount, mobileScroll }) {
   const mediaRefs = useRef([]);
   const virtualScroll = useMotionValue(0);
 
@@ -34,43 +34,25 @@ export default function Column({ columnNumber, columnCount }) {
     setTotalHeight((sum + gap) / 2);
   }, []);
 
-  //Capture and transform virtual scroll
+  // Mobile virtualScroll
   useEffect(() => {
-    let startY = 0;
+    if (!totalHeight) return; // wait until totalHeight is measured
 
-    const handleTouchStart = (e) => {
-      startY = e.touches[0].clientY;
-    };
+    const current = virtualScroll.get() || 0;
 
-    const handleTouchMove = (e) => {
-      const current = virtualScroll.get();
-      const deltaY = startY - e.touches[0].clientY;
-      let newY = current - deltaY * 10;
+    // Apply resistance factor (e.g. 0.5 halves the sensitivity)
+    const resistance = 0.5;
+    let newY = current - mobileScroll * resistance;
 
-      newY = wrap(-totalHeight, 0, newY);
+    newY = wrap(-totalHeight, 0, newY);
 
-      // instead of set(), animate toward newY with easing
-      animate(virtualScroll, newY, {
-        type: "spring",
-        stiffness: 80,
-        damping: 20,
-        mass: 0.5,
-      });
+    virtualScroll.set(newY);
+  }, [mobileScroll, totalHeight, virtualScroll]);
 
-      startY = e.touches[0].clientY;
-    };
-
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchmove", handleTouchMove);
-
-    return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, [virtualScroll, totalHeight]);
-
+  // Desktop virtualScroll
   useEffect(() => {
     const handleWheel = (e) => {
+      console.log(e.deltaY, "deltaY");
       const current = virtualScroll.get();
       let newY = current - e.deltaY;
 
