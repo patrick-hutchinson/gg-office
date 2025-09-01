@@ -32,7 +32,7 @@ export default function Column({ columnNumber, columnCount }) {
     setTotalHeight((sum + gap) / 2);
   }, []);
 
-  // Handle scrolling on mobile, listening directly to mobileDeltaY changes
+  // Compute Virtual Scroll Value on Desktop, using the computed deltaY value
   useMotionValueEvent(mobileDeltaY, "change", (deltaY) => {
     if (!totalHeight) return;
 
@@ -45,7 +45,7 @@ export default function Column({ columnNumber, columnCount }) {
     virtualScroll.set(wrap(-totalHeight, 0, newY));
   });
 
-  // Desktop wheel remains unchanged
+  // Compute Virtual Scroll Value on Desktop
   useEffect(() => {
     const handleWheel = (e) => {
       if (!totalHeight) return;
@@ -70,6 +70,7 @@ export default function Column({ columnNumber, columnCount }) {
       velocity.current = 0; // reset velocity on new drag
     };
 
+    // This function computes a deltaY value based on touchstart, move and end
     const handleTouchMove = (e) => {
       if (!isDragging.current) return;
 
