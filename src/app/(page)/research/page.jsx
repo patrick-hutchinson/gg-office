@@ -38,7 +38,7 @@ export default function Gallery() {
 
   return (
     <main className={`research ${styles["research"]}`}>
-      <div className={styles["container"]} style={{ pointerEvents: isMobile ? "none" : "all" }}>
+      <div className={styles["container"]}>
         <div className={styles["container-inner"]}>
           {Array.from({ length: columnCount }, (_, index) => (
             <Column key={index} columnNumber={index} columnCount={columnCount} mobileDeltaY={mobileDeltaY} />
