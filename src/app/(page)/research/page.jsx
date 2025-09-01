@@ -28,6 +28,8 @@ export default function Gallery() {
     const delta = e.target.scrollTop - lastScrollY.current;
     mobileDeltaY.set(delta); // update motion value directly
     lastScrollY.current = e.target.scrollTop;
+
+    console.log(mobileDeltaY.current, "current");
   };
 
   if (!research) return <Loading />;
@@ -36,18 +38,7 @@ export default function Gallery() {
 
   return (
     <main className={`research ${styles["research"]}`}>
-      {isMobile && (
-        <motion.div
-          className={styles["scroll-dummy"]}
-          style={{ position: "fixed", height: "100vh", width: "100vw", overflowY: "scroll", top: 0, left: 0 }}
-          ref={scrollDummy}
-          onScroll={handleScroll}
-        >
-          <div className={styles["scroll-dummy-inner"]} style={{ position: "relative", height: 10000 }} />
-        </motion.div>
-      )}
-
-      <div className={styles["container"]} style={{ pointerEvents: isMobile ? "hidden" : "all" }}>
+      <div className={styles["container"]} style={{ pointerEvents: isMobile ? "none" : "all" }}>
         <div className={styles["container-inner"]}>
           {Array.from({ length: columnCount }, (_, index) => (
             <Column key={index} columnNumber={index} columnCount={columnCount} mobileDeltaY={mobileDeltaY} />

@@ -7,16 +7,19 @@ import { StateContext } from "@/context/StateContext";
 
 import styles from "../styles/Research.module.css";
 
-export default function Column({ columnNumber, columnCount, mobileDeltaY }) {
+export default function Column({ columnNumber, columnCount }) {
   const mediaRefs = useRef([]);
   const virtualScroll = useMotionValue(0);
 
   const { research } = useContext(DataContext);
+
   const { isMobile } = useContext(StateContext);
+
+  const mobileDeltaY = useMotionValue(0); // motion value instead of state
 
   const [totalHeight, setTotalHeight] = useState(0);
 
-  // Compute totalHeight once
+  // Compute the totalHeight of the column once
   useEffect(() => {
     if (!mediaRefs.current) return;
 
@@ -29,7 +32,7 @@ export default function Column({ columnNumber, columnCount, mobileDeltaY }) {
     setTotalHeight((sum + gap) / 2);
   }, []);
 
-  // Listen directly to mobileDeltaY changes
+  // Handle scrolling on mobile, listening directly to mobileDeltaY changes
   useMotionValueEvent(mobileDeltaY, "change", (deltaY) => {
     if (!totalHeight) return;
 
@@ -46,6 +49,7 @@ export default function Column({ columnNumber, columnCount, mobileDeltaY }) {
   useEffect(() => {
     const handleWheel = (e) => {
       if (!totalHeight) return;
+
       const current = virtualScroll.get();
       const newY = columnNumber % 2 ? current - e.deltaY : current + e.deltaY;
       virtualScroll.set(wrap(-totalHeight, 0, newY));
@@ -54,6 +58,65 @@ export default function Column({ columnNumber, columnCount, mobileDeltaY }) {
     window.addEventListener("wheel", handleWheel);
     return () => window.removeEventListener("wheel", handleWheel);
   }, [virtualScroll, totalHeight]);
+
+  useEffect(() => {
+    const lastY = { current: 0 };
+    const velocity = { current: 0 };
+    const isDragging = { current: false };
+
+    const handleTouchStart = (e) => {
+      lastY.current = e.touches[0].clientY;
+      isDragging.current = true;
+      velocity.current = 0; // reset velocity on new drag
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging.current) return;
+
+      const currentY = e.touches[0].clientY;
+      const deltaY = currentY - lastY.current;
+
+      // Update motion value like scroll
+      mobileDeltaY.set(deltaY);
+
+      // Store velocity for inertia
+      velocity.current = deltaY;
+
+      lastY.current = currentY;
+    };
+
+    const handleTouchEnd = () => {
+      isDragging.current = false;
+
+      // Apply momentum/inertia
+      let v = velocity.current;
+
+      const decay = () => {
+        if (Math.abs(v) < 0.1) return; // stop when velocity is low
+
+        mobileDeltaY.set(v); // apply delta for this frame
+        v *= 0.95; // decay factor for natural slowdown
+
+        requestAnimationFrame(decay);
+      };
+
+      requestAnimationFrame(decay);
+    };
+
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
+
+  useMotionValueEvent(mobileDeltaY, "change", (value) => {
+    console.log("mobileDeltaY changed:", value);
+  });
 
   // Prepare images and layout as before
   const items = research[0].imagegallery.filter((_, index) => index % columnCount === columnNumber);
@@ -91,7 +154,7 @@ export default function Column({ columnNumber, columnCount, mobileDeltaY }) {
   const duplicatedItems = [...rearrangedItems, ...rearrangedItems];
 
   return (
-    <motion.div className={styles["column"]} style={{ translateY: virtualScroll }}>
+    <motion.div className={styles["column"]} style={{ y: virtualScroll }}>
       {duplicatedItems.map((medium, index) => {
         const width = widths[index % rearrangedItems.length];
         const left = leftValues[index % rearrangedItems.length];
@@ -100,7 +163,11 @@ export default function Column({ columnNumber, columnCount, mobileDeltaY }) {
             key={index}
             ref={(el) => (mediaRefs.current[index] = el)}
             className={styles["media-container"]}
-            style={{ width: `${width}px`, left: `${left}px`, position: "relative" }}
+            style={{
+              width: `${width}px`,
+              left: `${left}px`,
+              position: "relative",
+            }}
           >
             <RenderMedia medium={medium} enableFullscreen />
           </div>

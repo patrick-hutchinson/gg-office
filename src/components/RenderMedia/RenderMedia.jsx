@@ -30,6 +30,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
   if (medium.type === "image") {
     return (
       <div
+        className={styles["media-container"]}
         style={{
           position: "relative",
           width: "100%",
@@ -52,7 +53,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           draggable={false}
           placeholder="blur"
           blurDataURL={medium.lqip}
-          style={{ width: "100%", height: "auto" }}
+          style={{ width: "100%", height: "auto", touchAction: "manipulation" }}
           onClick={(e) => {
             if (!enableFullscreen) return; // exit if fullscreen is disabled
             handleFullscreen(e);
@@ -82,8 +83,6 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           aspectRatio: aspectWidth / aspectHeight,
           cursor: "pointer",
           overflow: "hidden",
-          // maxHeight: "100vh",
-          // maxWidth: "100vw",
         }}
         onClick={(e) => {
           if (!enableFullscreen) return; // exit if fullscreen is disabled
