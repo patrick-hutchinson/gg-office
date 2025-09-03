@@ -182,11 +182,11 @@ p {
 }
 
 a {
-  color: var(--text-color);
+  color: var(--text-color) !important;
   text-decoration: none;
 }
 a:visited {
-  color: var(--text-color);
+  color: var(--text-color) !important;
 }
 
 .hidden {
@@ -252,8 +252,8 @@ mux-player {
   --media-background-color: var(--background-color);
   --media-background-color: transparent;
   pointer-events: none !important;
-  background-color: #fff !important;
-  background: #fff !important;
+  background-color: var(--background-color) !important;
+  background: var(--background-color) !important;
 }
 
 /* control-bar bottom */

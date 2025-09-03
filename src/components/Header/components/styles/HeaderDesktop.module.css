@@ -4,6 +4,7 @@
   gap: var(--margin);
   width: 100%;
   align-items: center; /* vertically center items */
+  height: fit-content;
 }
 
 /* Navigation spans the first two columns */

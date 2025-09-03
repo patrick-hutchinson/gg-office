@@ -26,12 +26,24 @@ export default function ClientLayout({ children }) {
 
   const isHome = pathname === "/";
 
+  // useEffect(() => {
+  //   container.current.scrollTo({
+  //     top: 0,
+  //     left: 0,
+  //   });
+  // }, [showOpening]);
+
   useEffect(() => {
     if (showOpening) disableScroll();
   }, [showOpening]);
 
   useEffect(() => {
     container.current.scrollTop = 0;
+    container.current.scrollTo({
+      top: 0,
+      left: 0,
+    });
+    console.log(container.current.scrollTop, "scrolltop");
   }, [showOpening]);
 
   const handleAnimationComplete = () => {

@@ -15,13 +15,13 @@ export default function HeaderDesktop({ location }) {
   function handleThemeSwitch() {
     var root = document.querySelector(":root");
     if (isDarkMode) {
-      root.style.setProperty("--text-color", "#000000");
+      root.style.setProperty("--text-color", "#000");
       root.style.setProperty("--background-color", "#fff");
 
       setIsDarkMode(false);
     } else {
       root.style.setProperty("--text-color", "#fff");
-      root.style.setProperty("--background-color", "#000000");
+      root.style.setProperty("--background-color", "#000");
       setIsDarkMode(true);
     }
   }
