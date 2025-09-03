@@ -166,7 +166,7 @@ export default function Column({ columnNumber, columnCount }) {
             className={styles["media-container"]}
             style={{
               width: `${width}px`,
-              left: `${left}px`,
+              // left: `${left}px`,
               position: "relative",
             }}
           >
