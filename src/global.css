@@ -106,6 +106,7 @@ header {
   margin-bottom: 25px;
 
   width: calc(100vw);
+  height: fit-content;
 }
 
 #content header {
