@@ -130,7 +130,7 @@ export const project = defineType({
         }),
         defineField({
           name: 'clientdirectors',
-          title: 'Client Director/s',
+          title: 'Project Manager/s',
           type: 'array',
           of: [{type: 'string'}],
           options: {
