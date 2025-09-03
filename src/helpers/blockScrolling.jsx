@@ -43,5 +43,6 @@ export const enableScroll = () => {
   window.removeEventListener("wheel", preventDefault, options);
   window.removeEventListener("touchmove", preventDefault, options);
   window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
+
   console.log("enabling scroll!");
 };

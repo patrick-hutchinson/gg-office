@@ -16,50 +16,33 @@ import { AnimationContext } from "@/context/AnimationContext";
 
 export default function ClientLayout({ children }) {
   const { container } = useContext(RefContext);
-  const { showOpening, setShowOpening } = useContext(StateContext);
+
+  const [showOpening, setShowOpening] = useState(true);
   const { isMobile } = useContext(StateContext);
   const { pathChanged } = useContext(AnimationContext);
   const pathname = usePathname();
 
   const openingRef = useRef(null);
-  // const contentRef = useRef(null);
 
   const isHome = pathname === "/";
-
-  // useEffect(() => {
-  //   container.current.scrollTo({
-  //     top: 0,
-  //     left: 0,
-  //   });
-  // }, [showOpening]);
 
   useEffect(() => {
     if (showOpening) disableScroll();
   }, [showOpening]);
 
-  useEffect(() => {
-    container.current.scrollTop = 0;
-    container.current.scrollTo({
-      top: 0,
-      left: 0,
-    });
-    console.log(container.current.scrollTop, "scrolltop");
-  }, [showOpening]);
-
   const handleAnimationComplete = () => {
     if (showOpening) {
       disableScroll();
-      isMobile && container.current.classList.add("no-scroll");
+      container.current.classList.add("no-scroll");
     } else {
       enableScroll();
-      isMobile && container.current.classList.remove("no-scroll");
+      container.current.classList.remove("no-scroll");
     }
   };
 
   useEffect(() => {
-    console.log(pathChanged, "pathHasChanged");
     if (pathChanged && !showOpening) {
-      isMobile && container.current.classList.remove("no-scroll");
+      container.current.classList.remove("no-scroll");
     }
   }, [pathChanged]);
 
@@ -85,8 +68,11 @@ export default function ClientLayout({ children }) {
     },
   };
 
+  const handleScroll = (e) => {
+    e.preventDefault();
+  };
+
   const handleOpening = () => {
-    console.log("handling opening!");
     if (showOpening) setShowOpening(false);
   };
 
@@ -104,14 +90,17 @@ export default function ClientLayout({ children }) {
       </motion.div>
       <motion.div
         id="content"
-        className={isMobile ? "no-scroll" : ""}
+        className={"no-scroll"}
         ref={container}
         initial={false}
         animate={showOpening ? "outOfView" : "inView"}
         variants={contentVariants}
         onAnimationComplete={handleAnimationComplete}
+        onScroll={(e) => {
+          handleScroll(e);
+        }}
       >
-        <Header location={pathname} setShowOpening={setShowOpening} />
+        <Header location={pathname} showOpening={showOpening} setShowOpening={setShowOpening} />
 
         <div id="root">{children}</div>
         <Footer />

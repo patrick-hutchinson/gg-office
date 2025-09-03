@@ -7,10 +7,10 @@ import { AnimationContext } from "@/context/AnimationContext";
 
 import { StateContext } from "@/context/StateContext";
 
-export default function HeaderDesktop({ location }) {
+export default function HeaderDesktop({ location, showOpening, setShowOpening }) {
   const { isDarkMode, setIsDarkMode } = useContext(AnimationContext);
 
-  const { showOpening, setShowOpening } = useContext(StateContext);
+  // const { showOpening, setShowOpening } = useContext(StateContext);
 
   function handleThemeSwitch() {
     var root = document.querySelector(":root");

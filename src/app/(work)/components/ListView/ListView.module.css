@@ -13,6 +13,7 @@ ul.listview {
 
 ul.listview a {
   cursor: none;
+  color: var(--text-color);
 }
 
 ul.listview li.project,
