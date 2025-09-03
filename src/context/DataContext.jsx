@@ -170,7 +170,8 @@ export const DataProvider = ({ children }) => {
             "aspect_ratio": select(
       defined(video.asset) => video.asset->data.aspect_ratio,
       defined(image) => null
-    )
+    ),
+    "size": size
           },
         }`
       )

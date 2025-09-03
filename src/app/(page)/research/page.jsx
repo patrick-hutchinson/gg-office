@@ -24,15 +24,17 @@ export default function Gallery() {
     lastScrollY.current = el.scrollTop;
   }, []);
 
-  const handleScroll = (e) => {
-    const delta = e.target.scrollTop - lastScrollY.current;
-    mobileDeltaY.set(delta); // update motion value directly
-    lastScrollY.current = e.target.scrollTop;
+  // const handleScroll = (e) => {
+  //   const delta = e.target.scrollTop - lastScrollY.current;
+  //   mobileDeltaY.set(delta); // update motion value directly
+  //   lastScrollY.current = e.target.scrollTop;
 
-    console.log(mobileDeltaY.current, "current");
-  };
+  //   console.log(mobileDeltaY.current, "current");
+  // };
 
   if (!research) return <Loading />;
+
+  console.log(research, "research");
 
   const columnCount = isMobile ? 2 : 3;
 

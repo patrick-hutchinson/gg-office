@@ -165,7 +165,7 @@ export default function Column({ columnNumber, columnCount }) {
             ref={(el) => (mediaRefs.current[index] = el)}
             className={styles["media-container"]}
             style={{
-              width: `${width}px`,
+              width: `80%`,
               // left: `${left}px`,
               position: "relative",
             }}

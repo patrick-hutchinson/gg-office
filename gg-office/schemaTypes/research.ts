@@ -21,7 +21,7 @@ export const research = defineType({
               title: 'Media Size',
               type: 'string',
               options: {
-                list: ['S', 'M', 'L', 'XL'],
+                list: ['S', 'M', 'L'],
                 layout: 'radio',
                 direction: 'horizontal',
               },
