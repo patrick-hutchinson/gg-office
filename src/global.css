@@ -43,7 +43,7 @@
 
   --line-height-100: 18px;
   --line-height-200: 18px;
-  --line-height-300: 25px;
+  --line-height-300: 28px;
   --line-height-400: calc(var(--font-size-400) / 1.25);
   --line-height-500: calc(var(--font-size-500) / 1.25);
 
@@ -251,6 +251,7 @@ mux-player {
   --gradient-shadow: none;
   --media-loading-indicator-display: none;
   --media-background-color: var(--background-color);
+  --media-background-color: transparent;
   pointer-events: none !important;
   background-color: #fff !important;
   background: #fff !important;
