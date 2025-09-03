@@ -56,7 +56,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
   }
 
   // Handle Mux Video
-  if (medium.type === "video") {
+  if (medium.type === "video" && !medium.isStatic) {
     if (medium.status !== "ready") {
       return <p>Video is processing, please wait!</p>;
     }
@@ -127,6 +127,40 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
             onLoadedData={() => setIsLoaded(true)}
           />
         )}
+      </div>
+    );
+  }
+
+  if (medium.type === "video" && medium.isStatic) {
+    return (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+
+          cursor: "pointer",
+          overflow: "hidden",
+          maxHeight: "100vh",
+          maxWidth: "100vw",
+        }}
+      >
+        <video
+          playsInline
+          autoPlay
+          loop
+          muted
+          style={{
+            position: "relative",
+            opacity: 1,
+            zIndex: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        >
+          <source type="video/mp4" src={medium.url} />
+        </video>
       </div>
     );
   }

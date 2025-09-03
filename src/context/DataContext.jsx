@@ -21,42 +21,36 @@ export const DataProvider = ({ children }) => {
       .fetch(
         `*[_type == "project"]{
           name,
-          coverimage {
-            "type": select(
-              defined(image) => "image",
-              defined(video) => "video"
-            ),
-            "url": select(
-              defined(image.asset) => image.asset->url,
-              defined(video) => null
-            ),
-            "lqip": select(
-              defined(image.asset) => image.asset->metadata.lqip,
-              defined(video) => null
-            ),
-            "playbackId": select(
-              defined(video.asset) => video.asset->playbackId,
-              defined(image) => null
-            ),
-            "width": select(defined(image.asset) => image.asset->metadata.dimensions.width, true => null),
-            "height": select(defined(image.asset) => image.asset->metadata.dimensions.height, true => null),
-            "assetId": select(
-              defined(video.asset) => video.asset->assetId,
-              defined(image) => null
-            ),
-            "status": select(
-              defined(video.asset) => video.asset->status,
-              defined(image) => null
-            ),
-            "_id": select(
-              defined(video.asset) => video.asset->_id,
-              defined(image.asset) => image.asset->_id
-            ),
-"aspect_ratio": select(
-      defined(video.asset) => video.asset->data.aspect_ratio,
-      defined(image) => null
-    )
-          },
+           coverimage {
+      "type": select(
+        defined(image) => "image",
+        defined(video) => "video"
+      ),
+      "url": select(
+        defined(image.asset) => image.asset->url,
+        defined(video.asset) => video.asset->url
+      ),
+      "lqip": select(
+        defined(image.asset) => image.asset->metadata.lqip,
+        true => null
+      ),
+      "width": select(
+        defined(image.asset) => image.asset->metadata.dimensions.width,
+        true => null
+      ),
+      "height": select(
+        defined(image.asset) => image.asset->metadata.dimensions.height,
+        true => null
+      ),
+      "_id": select(
+        defined(video.asset) => video.asset->_id,
+        defined(image.asset) => image.asset->_id
+      ),
+     "isStatic": select(
+  defined(video.asset) => true,
+  true => false
+)
+    },
           year,
           description,
           imagegallery[]{

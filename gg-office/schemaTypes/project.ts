@@ -25,12 +25,6 @@ export const project = defineType({
           type: 'image',
           hidden: ({parent}) => !!parent?.video,
         }),
-        // defineField({
-        //   name: 'video',
-        //   title: 'Video',
-        //   type: 'mux.video',
-        //   hidden: ({parent}) => !!parent?.image,
-        // }),
         defineField({
           name: 'video',
           title: 'Video',

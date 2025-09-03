@@ -16,11 +16,11 @@ export default function HeaderDesktop({ location }) {
     var root = document.querySelector(":root");
     if (isDarkMode) {
       root.style.setProperty("--text-color", "#000000");
-      root.style.setProperty("--background-color", "#eaeaea");
+      root.style.setProperty("--background-color", "#fff");
 
       setIsDarkMode(false);
     } else {
-      root.style.setProperty("--text-color", "#eaeaea");
+      root.style.setProperty("--text-color", "#fff");
       root.style.setProperty("--background-color", "#000000");
       setIsDarkMode(true);
     }
