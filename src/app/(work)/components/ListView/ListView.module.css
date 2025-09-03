@@ -37,6 +37,10 @@ ul.listview li.project .name {
   grid-column-end: 3;
 }
 
+ul.infotitles .name {
+  font-size: var(--font-size-100);
+}
+
 ul.infotitles .categories,
 ul.listview .categories {
   display: flex;
