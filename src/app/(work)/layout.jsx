@@ -12,11 +12,13 @@ import OpeningPage from "@/components/OpeningPage/OpeningPage";
 
 import { RefContext } from "@/context/RefContext";
 import { StateContext } from "@/context/StateContext";
+import { AnimationContext } from "@/context/AnimationContext";
 
 export default function ClientLayout({ children }) {
   const { container } = useContext(RefContext);
   const { showOpening, setShowOpening } = useContext(StateContext);
   const { isMobile } = useContext(StateContext);
+  const { pathChanged } = useContext(AnimationContext);
   const pathname = usePathname();
 
   const openingRef = useRef(null);
@@ -41,6 +43,13 @@ export default function ClientLayout({ children }) {
       isMobile && container.current.classList.remove("no-scroll");
     }
   };
+
+  useEffect(() => {
+    console.log(pathChanged, "pathHasChanged");
+    if (pathChanged && !showOpening) {
+      isMobile && container.current.classList.remove("no-scroll");
+    }
+  }, [pathChanged]);
 
   const openingVariants = {
     inView: {
@@ -83,7 +92,6 @@ export default function ClientLayout({ children }) {
       </motion.div>
       <motion.div
         id="content"
-        // className={isMobile && showOpening ? "no-scroll" : ""}
         className={isMobile ? "no-scroll" : ""}
         ref={container}
         initial={false}
