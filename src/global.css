@@ -324,6 +324,14 @@ footer {
     height: 100vh !important;
     position: fixed !important;
   }
+
+  .is-safari .wrapper {
+    height: calc(100dvh - 30px);
+  }
+
+  .wrapper {
+    height: calc(100dvh - 60px);
+  }
 }
 
 /* Small Devices (Phones, 576px and up) */

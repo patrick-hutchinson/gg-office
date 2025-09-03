@@ -102,7 +102,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
   };
 
   return (
-    <div className={styles.wrapper} ref={openingRef}>
+    <div className={`${styles.wrapper} wrapper`} ref={openingRef}>
       {letters.map((letter, index) =>
         isMobile ? (
           <MobileOpening key={index} letter={letter} index={index} />

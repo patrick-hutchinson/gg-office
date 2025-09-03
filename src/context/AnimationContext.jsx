@@ -26,6 +26,14 @@ export const AnimationProvider = ({ children }) => {
   }, [pathname]);
 
   useEffect(() => {
+    if (/^((?!chrome|crios|fxios|android).)*safari/i.test(navigator.userAgent)) {
+      document.documentElement.classList.add("is-safari");
+    } else {
+      document.documentElement.classList.add("is-not-safari");
+    }
+  }, []);
+
+  useEffect(() => {
     function walk(node) {
       if (node.nodeType === Node.TEXT_NODE) {
         const replaced = (node.nodeValue || "")
