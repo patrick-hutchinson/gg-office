@@ -6,8 +6,6 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
 
-import Icon from "@/components/Icon";
-
 import { useInView } from "framer-motion";
 
 import styles from "./RenderMedia.module.css";
@@ -30,7 +28,6 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
   if (medium.type === "image") {
     return (
       <div
-        className={styles["media-container"]}
         style={{
           position: "relative",
           width: "100%",
@@ -39,11 +36,6 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           cursor: "pointer",
         }}
       >
-        {/* {enableFullscreen && (
-          <div className={`button ${styles["fullscreen-button"]}`} onClick={(e) => handleFullscreen(e)}>
-            <Icon path="/assets/icons/fullscreen-icon.svg" />
-          </div>
-        )} */}
         <Image
           src={medium.url}
           alt="image"
@@ -53,7 +45,7 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           draggable={false}
           placeholder="blur"
           blurDataURL={medium.lqip}
-          style={{ width: "100%", height: "auto", touchAction: "manipulation" }}
+          style={{ width: "100%", height: "auto" }}
           onClick={(e) => {
             if (!enableFullscreen) return; // exit if fullscreen is disabled
             handleFullscreen(e);
@@ -83,6 +75,8 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           aspectRatio: aspectWidth / aspectHeight,
           cursor: "pointer",
           overflow: "hidden",
+          // maxHeight: "100vh",
+          // maxWidth: "100vw",
         }}
         onClick={(e) => {
           if (!enableFullscreen) return; // exit if fullscreen is disabled

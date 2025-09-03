@@ -11,6 +11,10 @@ ul.listview {
   margin-bottom: calc(30vw * (4 / 5));
 }
 
+ul.listview a {
+  cursor: none;
+}
+
 ul.listview li.project,
 ul.infotitles {
   display: grid;

@@ -22,13 +22,13 @@ export default function ListView({ selectedFilters, activeView }) {
   const previewWrapperRef = useRef(null);
   const cursorRef = useRef({ x: 0, y: 0 });
   const scrollYRef = useRef(0);
-  const animationFrameRef = useRef(null);
 
   useEffect(() => {
     const el = document.querySelector("#content");
 
     const handleScroll = (e) => {
       scrollYRef.current = el.scrollTop;
+      console.log(scrollYRef.current);
     };
 
     el.addEventListener("scroll", handleScroll);
@@ -38,23 +38,33 @@ export default function ListView({ selectedFilters, activeView }) {
     };
   }, []);
 
+  // Update ImagePreview Position every frame
+  useEffect(() => {
+    let animationFrame;
+
+    const tick = () => {
+      updatePosition();
+      animationFrame = requestAnimationFrame(tick);
+    };
+
+    animationFrame = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
   const updatePosition = () => {
     if (previewWrapperRef.current) {
-      const x = cursorRef.current.x;
-      const y = cursorRef.current.y + scrollYRef.current;
+      let imageWidth = previewWrapperRef.current?.getBoundingClientRect().width;
+      let imageHeight = previewWrapperRef.current?.getBoundingClientRect().width;
+      const x = cursorRef.current.x - imageWidth / 2;
+      const y = cursorRef.current.y + scrollYRef.current - imageHeight / 2 - 100;
+
       previewWrapperRef.current.style.transform = `translate(${x}px, ${y}px)`;
     }
   };
 
   const handleMouseMove = (e) => {
     cursorRef.current = { x: e.clientX, y: e.clientY };
-
-    if (!animationFrameRef.current) {
-      animationFrameRef.current = requestAnimationFrame(() => {
-        updatePosition();
-        animationFrameRef.current = null;
-      });
-    }
   };
 
   const setMediaRef = (id) => (el) => {

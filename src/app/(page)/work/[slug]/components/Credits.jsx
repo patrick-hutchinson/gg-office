@@ -22,7 +22,7 @@ export default function Credits({ project }) {
               ({ key, title }) =>
                 project.creditsInhouse[key] && (
                   <li className={`${styles.credit}`} key={key}>
-                    {title}: <br />
+                    {title} <br />
                     {project.creditsInhouse[key].join(", ")}
                     <br />
                     <br />
@@ -36,7 +36,7 @@ export default function Credits({ project }) {
               ({ key, title }) =>
                 project.creditsClient[key] && (
                   <li className={`${styles.credit}`} key={key}>
-                    {title}: <br />
+                    {title} <br />
                     {project.creditsClient[key].join(", ")}
                     <br />
                     <br />
