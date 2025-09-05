@@ -34,6 +34,8 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
           height: "100%",
           aspectRatio: medium.width / medium.height,
           cursor: "pointer",
+          // display: "flex",
+          // justifyContent: "space-around",
         }}
       >
         <Image
@@ -104,29 +106,48 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
             }}
           />
         )}
-        {isInView && (
-          <MuxPlayer
-            playbackId={medium.playbackId}
-            autoPlay
-            controls={false}
-            loop
-            // poster={`https://image.mux.com/${medium.playbackId}/thumbnail.jpg`}
-            preload="metadata"
-            as="video"
-            muted
-            playsInline
-            fill
-            style={{
-              position: "relative",
-              opacity: 1,
-              zIndex: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-            onLoadedData={() => setIsLoaded(true)}
-          />
-        )}
+        {isInView &&
+          (medium.static_renditions?.files?.find((f) => f.name === "high.mp4") ? (
+            // Use the static MP4 if available
+            <MuxPlayer
+              src={`https://stream.mux.com/${medium.playbackId}/high.mp4`}
+              autoPlay
+              controls={false}
+              loop
+              muted
+              playsInline
+              fill
+              style={{
+                position: "relative",
+                opacity: 1,
+                zIndex: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+              onLoadedData={() => setIsLoaded(true)}
+            />
+          ) : (
+            // Otherwise use the playbackId to get the full Mux streaming player
+            <MuxPlayer
+              playbackId={medium.playbackId}
+              autoPlay
+              controls={false}
+              loop
+              muted
+              playsInline
+              fill
+              style={{
+                position: "relative",
+                opacity: 1,
+                zIndex: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+              onLoadedData={() => setIsLoaded(true)}
+            />
+          ))}
       </div>
     );
   }

@@ -52,7 +52,7 @@ export default function ClientLayout({ children }) {
       transition: { transform: { duration: isHome ? 1 : 0, ease: "easeInOut" } },
     },
     outOfView: {
-      transform: "translateY(calc(-100vh + 45px))",
+      transform: "translateY(calc(-100vh + 55px))",
       transition: { transform: { duration: 1, ease: "easeInOut" } },
     },
   };
@@ -60,7 +60,7 @@ export default function ClientLayout({ children }) {
   const contentVariants = {
     outOfView: {
       transition: { transform: { duration: isHome ? 1 : 0, ease: "easeInOut" } },
-      transform: "translateY(calc(100vh - 45px))",
+      transform: "translateY(calc(100vh - 55px))",
     },
     inView: {
       transition: { transform: { duration: 1, ease: "easeInOut" } },

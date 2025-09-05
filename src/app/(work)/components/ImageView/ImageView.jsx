@@ -21,6 +21,16 @@ export default function ImageView({ selectedFilters, activeView }) {
       {work.map((project, index) => {
         if (!projectMatchesFilter(project)) return null; // Early return if project should not render
 
+        if (project.thumbnail?.static_renditions) {
+          console.log(project.thumbnail.static_renditions);
+          console.log(project.thumbnail);
+
+          const baseUrl = `https://stream.mux.com/${project.thumbnail.playbackId}/`;
+          const highUrl = `${baseUrl}high.mp4`;
+
+          console.log(highUrl);
+        }
+
         return (
           project.slug && (
             <Link className={styles.project} href={`/work/${project.slug.current}`} key={project.slug.current}>

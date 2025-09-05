@@ -1,6 +1,6 @@
 .wrapper {
   position: fixed;
-  height: calc(100dvh - 65px);
+  height: calc(100dvh - 70px);
   display: flex;
   flex-direction: row; /* Stack the rows vertically */
   justify-content: space-between; /* Space out the rows */

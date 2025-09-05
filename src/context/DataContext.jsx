@@ -83,6 +83,13 @@ export const DataProvider = ({ children }) => {
               type == "image" && defined(image.asset) => image.asset->url,
               true => null
             ),
+            "static_renditions": select(
+  defined(video.asset) => video.asset->data.static_renditions{
+    ready,
+    files[]{ name, url }
+  },
+  true => null
+),
             "lqip": select(
               type == "image" && defined(image.asset) => image.asset->metadata.lqip,
               true => null
