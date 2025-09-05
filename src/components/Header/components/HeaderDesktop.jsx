@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import styles from "./styles/HeaderDesktop.module.css";
 import Link from "next/link";
@@ -17,7 +17,6 @@ export default function HeaderDesktop({ location, showOpening, setShowOpening })
     if (isDarkMode) {
       root.style.setProperty("--text-color", "#000");
       root.style.setProperty("--background-color", "#fff");
-
       setIsDarkMode(false);
     } else {
       root.style.setProperty("--text-color", "#fff");

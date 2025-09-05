@@ -34,3 +34,9 @@
   flex-direction: column;
   will-change: transform;
 }
+
+@media (max-width: 575.98px) {
+  .container-inner {
+    gap: 20px;
+  }
+}

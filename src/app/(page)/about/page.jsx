@@ -52,7 +52,6 @@ export default function About() {
   }, [about]);
 
   function handleInternClick(intern) {
-    console.log("clicked an intern");
     // Check if the alien with the same intern name already exists
     const existingAlien = Array.from(
       AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} div`)
