@@ -24,7 +24,7 @@
   height: inherit;
   display: grid;
   grid-template-rows: 165px 1fr;
-  filter: invert(0.92);
+  /* filter: invert(0.92); */
   transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform;

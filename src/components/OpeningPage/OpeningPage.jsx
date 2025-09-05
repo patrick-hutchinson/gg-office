@@ -49,6 +49,9 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
     });
 
     if (!mounted) return null;
+    if (!theme) return null;
+
+    console.log(theme, "theme");
 
     return (
       <motion.div
@@ -65,7 +68,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
             key={i}
             src={`/assets/images/GOODGAME/${letter}.png`}
             alt={letter}
-            style={{ filter: theme === "dark" ? "none" : "invert(1)" }}
+            style={{ filter: theme === "dark" ? "invert(1)" : "invert(0)" }}
           />
         ))}
       </motion.div>
@@ -101,7 +104,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
             key={i}
             src={`/assets/images/GOODGAME/${letter}.png`}
             alt={letter}
-            style={{ filter: theme === "dark" ? "none" : "invert(1)" }}
+            style={{ filter: theme === "dark" ? "invert(1)" : "invert(0)" }}
           />
         ))}
       </motion.div>

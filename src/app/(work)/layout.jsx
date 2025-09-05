@@ -3,12 +3,16 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+
 import dynamic from "next/dynamic";
+
 import { enableScroll, disableScroll } from "../../helpers/blockScrolling";
 
-const Header = dynamic(() => import("@/components/Header/Header"), { ssr: false });
+import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer";
-import OpeningPage from "@/components/OpeningPage/OpeningPage";
+// import OpeningPage from "@/components/OpeningPage/OpeningPage";
+
+const OpeningPage = dynamic(() => import("@/components/OpeningPage/OpeningPage"), { ssr: false });
 
 import { AnimationContext } from "@/context/AnimationContext";
 
