@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
-import { motion, optimizedAppearDataAttribute } from "framer-motion";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { enableScroll, disableScroll } from "../../helpers/blockScrolling";
 
@@ -10,15 +10,12 @@ const Header = dynamic(() => import("@/components/Header/Header"), { ssr: false 
 import Footer from "@/components/Footer";
 import OpeningPage from "@/components/OpeningPage/OpeningPage";
 
-import { RefContext } from "@/context/RefContext";
-import { StateContext } from "@/context/StateContext";
 import { AnimationContext } from "@/context/AnimationContext";
 
 export default function ClientLayout({ children }) {
-  const { container } = useContext(RefContext);
+  const container = useRef(null);
 
   const [showOpening, setShowOpening] = useState(true);
-  const { isMobile } = useContext(StateContext);
   const { pathChanged } = useContext(AnimationContext);
   const pathname = usePathname();
 

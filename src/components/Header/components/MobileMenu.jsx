@@ -1,5 +1,7 @@
 import { usePathname } from "next/navigation";
 
+import { useState, useEffect } from "react";
+
 import { useTheme } from "next-themes";
 
 import styles from "./styles/HeaderMobile.module.css";
