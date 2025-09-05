@@ -1,33 +1,28 @@
 import { usePathname } from "next/navigation";
-import { useContext } from "react";
 
-import { AnimationContext } from "@/context/AnimationContext";
+import { useTheme } from "next-themes";
 
 import styles from "./styles/HeaderMobile.module.css";
 import Link from "next/link";
 
 const MobileMenu = ({ location, setShowMenu }) => {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   function handleMenuClick() {
     setShowMenu(false);
   }
 
-  const pathname = usePathname();
-
-  const { isDarkMode, setIsDarkMode } = useContext(AnimationContext);
-
   function handleThemeSwitch() {
-    var root = document.querySelector(":root");
-    if (isDarkMode) {
-      root.style.setProperty("--text-color", "#000");
-      root.style.setProperty("--background-color", "#fff");
-
-      setIsDarkMode(false);
-    } else {
-      root.style.setProperty("--text-color", "#fff");
-      root.style.setProperty("--background-color", "#000");
-      setIsDarkMode(true);
-    }
+    setTheme(theme === "light" ? "dark" : "light");
   }
+
+  if (!mounted) return;
 
   return (
     <div className={`${styles.expandMenu}`}>

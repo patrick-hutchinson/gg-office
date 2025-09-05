@@ -12,20 +12,24 @@ import { DataProvider } from "../context/DataContext";
 import { AnimationProvider } from "../context/AnimationContext";
 import { RefProvider } from "../context/RefContext";
 
+import { ThemeProvider } from "next-themes";
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <RefProvider>
-          <AnimationProvider>
-            <DataProvider>
-              <StateProvider>
-                {children}
-                <div id="fullscreen-root"></div>
-              </StateProvider>
-            </DataProvider>
-          </AnimationProvider>
-        </RefProvider>
+        <ThemeProvider>
+          <RefProvider>
+            <AnimationProvider>
+              <DataProvider>
+                <StateProvider>
+                  {children}
+                  <div id="fullscreen-root"></div>
+                </StateProvider>
+              </DataProvider>
+            </AnimationProvider>
+          </RefProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

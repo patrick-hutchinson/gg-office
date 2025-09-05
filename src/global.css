@@ -50,8 +50,8 @@
   --font-weight-text: Founders;
   --font-weight-medium: FoundersMedium;
 
-  --text-color: #000;
-  --background-color: #fff;
+  --foreground: #000;
+  --background: #fff;
 
   --margin: 15px;
 
@@ -71,10 +71,10 @@
   );
 }
 
-/* [data-theme="dark"] {
-  --background-color: #000;
-  --text-color: #fff;
-} */
+[data-theme="dark"] {
+  --background: black;
+  --foreground: white;
+}
 
 html {
   overflow: visible;
@@ -82,8 +82,8 @@ html {
 }
 body {
   font-family: var(--font-weight-text);
-  background: var(--background-color) !important;
-  color: var(--text-color) !important;
+  background: var(--background) !important;
+  color: var(--foreground) !important;
 
   font-size: var(--font-size-200);
   line-height: var(--line-height-200);
@@ -199,11 +199,11 @@ p {
 }
 
 a {
-  color: var(--text-color) !important;
+  color: var(--foreground) !important;
   text-decoration: none;
 }
 a:visited {
-  color: var(--text-color) !important;
+  color: var(--foreground) !important;
 }
 
 .hidden {
@@ -213,7 +213,7 @@ a:visited {
 button {
   background: transparent;
   border: 0;
-  color: var(--text-color) !important;
+  color: var(--foreground) !important;
   padding: 0;
   margin: 0;
 }
@@ -266,11 +266,11 @@ mux-player {
   --rendition-menu-button: none;
   --gradient-shadow: none;
   --media-loading-indicator-display: none;
-  --media-background-color: var(--background-color);
+  --media-background-color: var(--background);
   --media-background-color: transparent;
   pointer-events: none !important;
-  background-color: var(--background-color) !important;
-  background: var(--background-color) !important;
+  background-color: var(--background) !important;
+  background: var(--background) !important;
 }
 
 /* control-bar bottom */

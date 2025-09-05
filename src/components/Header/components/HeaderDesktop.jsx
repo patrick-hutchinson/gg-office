@@ -2,27 +2,18 @@ import { useState, useContext, useEffect } from "react";
 
 import styles from "./styles/HeaderDesktop.module.css";
 import Link from "next/link";
-
+import { useTheme } from "next-themes";
 import { AnimationContext } from "@/context/AnimationContext";
 
 import { StateContext } from "@/context/StateContext";
 
 export default function HeaderDesktop({ location, showOpening, setShowOpening }) {
-  const { isDarkMode, setIsDarkMode } = useContext(AnimationContext);
+  const { theme, setTheme } = useTheme();
 
   // const { showOpening, setShowOpening } = useContext(StateContext);
 
   function handleThemeSwitch() {
-    var root = document.querySelector(":root");
-    if (isDarkMode) {
-      root.style.setProperty("--text-color", "#000");
-      root.style.setProperty("--background-color", "#fff");
-      setIsDarkMode(false);
-    } else {
-      root.style.setProperty("--text-color", "#fff");
-      root.style.setProperty("--background-color", "#000");
-      setIsDarkMode(true);
-    }
+    setTheme(theme === "light" ? "dark" : "light");
   }
   return (
     <div className={`${styles.headerDesktop}`}>

@@ -2,10 +2,11 @@
 
 import { useContext, useEffect } from "react";
 import { usePathname } from "next/navigation";
-
+import dynamic from "next/dynamic";
 import { StateContext } from "@/context/StateContext";
 
-import Header from "@/components/Header/Header";
+// import Header from "@/components/Header/Header";
+const Header = dynamic(() => import("@/components/Header/Header"), { ssr: false });
 import Footer from "@/components/Footer";
 
 export default function PageLayout({ children }) {

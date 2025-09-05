@@ -52,7 +52,7 @@
   pointer-events: all;
 }
 .panButton path {
-  fill: var(--text-color);
+  fill: var(--foreground);
 }
 .panButton:first-child {
   left: 20px;

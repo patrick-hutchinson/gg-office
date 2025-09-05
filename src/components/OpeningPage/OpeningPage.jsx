@@ -7,13 +7,18 @@ import styles from "./styles/OpeningPage.module.css";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 
 import { StateContext } from "../../context/StateContext";
-import { AnimationContext } from "../../context/AnimationContext";
+import { useTheme } from "next-themes";
 
 const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
   OpeningPage.displayName = "OpeningPage";
 
   const { isMobile, isSafari } = useContext(StateContext);
-  const { isDarkMode } = useContext(AnimationContext);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
   let columnsRef = useRef([]);
@@ -43,6 +48,8 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
       return `${top}% ${bottom}%`;
     });
 
+    if (!mounted) return null;
+
     return (
       <motion.div
         ref={(el) => (columnsRef.current[index] = el)}
@@ -58,7 +65,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
             key={i}
             src={`/assets/images/GOODGAME/${letter}.png`}
             alt={letter}
-            style={{ filter: isDarkMode ? "none" : "invert(1)" }}
+            style={{ filter: theme === "dark" ? "none" : "invert(1)" }}
           />
         ))}
       </motion.div>
@@ -94,7 +101,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
             key={i}
             src={`/assets/images/GOODGAME/${letter}.png`}
             alt={letter}
-            style={{ filter: isDarkMode ? "none" : "invert(1)" }}
+            style={{ filter: theme === "dark" ? "none" : "invert(1)" }}
           />
         ))}
       </motion.div>

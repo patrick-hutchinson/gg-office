@@ -9,7 +9,7 @@
 .project-front {
   width: 100%;
   height: 100%;
-  background: var(--background-color);
+  background: var(--background);
   justify-content: center; /* Horizontally center */
   align-items: center;
 }
@@ -97,7 +97,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--background-color);
+  background: var(--background);
   filter: blur(40px);
   opacity: 0;
   mix-blend-mode: multiply;
@@ -119,7 +119,7 @@
 
   .imageview .project:hover .project-details-outer {
     opacity: 1;
-    background: var(--background-color);
+    background: var(--background);
   }
 
   .imageview .project:hover:before {

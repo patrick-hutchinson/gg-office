@@ -3,10 +3,10 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { motion, optimizedAppearDataAttribute } from "framer-motion";
-
+import dynamic from "next/dynamic";
 import { enableScroll, disableScroll } from "../../helpers/blockScrolling";
 
-import Header from "@/components/Header/Header";
+const Header = dynamic(() => import("@/components/Header/Header"), { ssr: false });
 import Footer from "@/components/Footer";
 import OpeningPage from "@/components/OpeningPage/OpeningPage";
 

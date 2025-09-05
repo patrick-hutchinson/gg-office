@@ -3,11 +3,12 @@
 import { createContext, useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
+import { useTheme } from "next-themes";
+
 // Create the context
 export const AnimationContext = createContext();
 
 export const AnimationProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const pathname = usePathname();
   const previousPathRef = useRef(null);
 
@@ -62,7 +63,5 @@ export const AnimationProvider = ({ children }) => {
     }
   }, [pathname]);
 
-  return (
-    <AnimationContext.Provider value={{ isDarkMode, setIsDarkMode, pathChanged }}>{children}</AnimationContext.Provider>
-  );
+  return <AnimationContext.Provider value={{ pathChanged }}>{children}</AnimationContext.Provider>;
 };
