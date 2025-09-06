@@ -36,7 +36,7 @@ export default function HeaderDesktop({ location, showOpening, setShowOpening })
         <li className={`button ${location.includes("research") ? "active" : ""}`}>
           <Link href="/research">Research</Link>
         </li>
-        <li className={`button`}>
+        <li className={`button external-button`}>
           <Link href="https://www.gg-rugs.com" target="_blank">
             Rugs
           </Link>

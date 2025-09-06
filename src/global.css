@@ -247,6 +247,12 @@ button {
   transform-origin: center;
 }
 
+.external-button,
+.external-button *,
+.external-button::before {
+  cursor: alias !important;
+}
+
 mux-player {
   --play-button: none;
   --live-button: none;
