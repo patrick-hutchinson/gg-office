@@ -19,18 +19,22 @@ export default function ImageView({ selectedFilters, activeView }) {
   return (
     <div className={`${styles.imageview} ${activeView === "Image View" ? "visible" : "hidden"}`}>
       {work.map((project, index) => {
-        if (!projectMatchesFilter(project)) return null; // Early return if project should not render
+        // if (!projectMatchesFilter(project)) return null; // Early return if project should not render
 
-        if (project.thumbnail?.static_renditions) {
-          const baseUrl = `https://stream.mux.com/${project.thumbnail.playbackId}/`;
-          const highUrl = `${baseUrl}high.mp4`;
+        // if (project.thumbnail?.static_renditions) {
+        //   const baseUrl = `https://stream.mux.com/${project.thumbnail.playbackId}/`;
+        //   const highUrl = `${baseUrl}high.mp4`;
 
-          console.log(highUrl);
-        }
+        //   console.log(highUrl);
+        // }
 
         return (
           project.slug && (
-            <Link className={styles.project} href={`/work/${project.slug.current}`} key={project.slug.current}>
+            <Link
+              className={`${styles.project} ${projectMatchesFilter(project) ? "" : styles.hidden}`}
+              href={`/work/${project.slug.current}`}
+              key={project.slug.current}
+            >
               <div className={`${styles["project-front"]}`}>
                 {project.thumbnail && <RenderMedia medium={project.thumbnail} enableFullscreen={false} />}
               </div>
