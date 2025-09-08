@@ -6,8 +6,11 @@ main.about {
   line-height: var(--line-height-300);
 
   position: relative;
-  margin-top: 80px;
+  /* margin-top: 80px; */
   /* z-index: -1; */
+}
+.text-container {
+  margin-top: 80px;
 }
 
 .intern {

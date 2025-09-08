@@ -165,7 +165,7 @@ export default function About() {
       </div>
       <main className={`about ${styles.about}`}>
         <div></div>
-        <div>
+        <div className={styles["text-container"]}>
           <Biography />
           <Services />
 
