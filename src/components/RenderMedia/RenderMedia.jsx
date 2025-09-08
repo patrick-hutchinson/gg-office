@@ -205,12 +205,19 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
     mediaAspectRatio = medium.width / medium.height;
   }
 
+  console.log(mediaAspectRatio, "ratio");
+
+  const style =
+    mediaAspectRatio > 1
+      ? { width: "100%", height: "auto", aspectRatio: mediaAspectRatio } // landscape → fit to width
+      : { width: "auto", height: "100%", aspectRatio: mediaAspectRatio }; // portrait → fit to height
+
   return createPortal(
     <div className={styles["fullscreen-preview-outer"]} onClick={handleClose}>
       <div className={`${styles["close-button"]} button`} onClick={handleClose}>
         CLOSE
       </div>
-      <div className={styles["fullscreen-preview-inner"]} style={{ aspectRatio: mediaAspectRatio }}>
+      <div className={styles["fullscreen-preview-inner"]} style={style}>
         {children}
       </div>
     </div>,
