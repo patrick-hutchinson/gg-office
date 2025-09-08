@@ -165,6 +165,7 @@ export default function ListView({ selectedFilters, activeView }) {
           })}
         </ul>
       </div>
+      {!isMobile && <div style={{ position: "relative", width: "100%", height: "calc(20vw * (4 / 5))" }}></div>}
       {!isMobile && <ImagePreview />}
     </>
   );

@@ -113,7 +113,7 @@ export default function MoreProjects({ work, currentProject }) {
   );
   return (
     <section>
-      <h3 style={{ marginBottom: "var(--margin)" }}>More Projects</h3>
+      <h2 style={{ marginBottom: "var(--margin)" }}>More Projects</h2>
       {ProjectList}
     </section>
   );

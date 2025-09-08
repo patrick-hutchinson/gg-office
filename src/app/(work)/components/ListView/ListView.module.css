@@ -8,7 +8,7 @@
 }
 
 ul.listview {
-  margin-bottom: calc(15vw * (4 / 5));
+  /* margin-bottom: calc(15vw * (4 / 5)); */
 }
 
 ul.listview a {
@@ -72,7 +72,6 @@ ul.infotitles .year {
 .preview-wrapper {
   position: absolute;
   width: 20vw;
-  /* aspect-ratio: 4 / 5; */
 }
 
 .preview-wrapper-inner {

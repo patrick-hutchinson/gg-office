@@ -176,10 +176,10 @@ h1 {
   margin-bottom: calc(var(--font-size-500) / 4);
 }
 h2 {
-  font-size: var(--font-size-400);
-  line-height: var(--line-height-400);
+  font-size: var(--font-size-300);
+  line-height: var(--line-height-300);
 
-  margin-bottom: calc(var(--font-size-500) / 4);
+  margin-bottom: calc(var(--font-size-400) / 4);
 }
 h5 {
   font-size: var(--font-size-100);
