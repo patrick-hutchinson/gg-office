@@ -346,12 +346,8 @@ footer {
     height: 100vh !important;
   }
 
-  .is-safari .wrapper {
-    height: calc(100dvh - 30px);
-  }
-
   .wrapper {
-    height: calc(100dvh - 60px);
+    height: calc(100dvh - 30px) !important;
   }
 }
 

@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-
+import { StateContext } from "@/context/StateContext";
 import dynamic from "next/dynamic";
 
 import { enableScroll, disableScroll } from "../../helpers/blockScrolling";
@@ -17,6 +17,7 @@ const OpeningPage = dynamic(() => import("@/components/OpeningPage/OpeningPage")
 import { AnimationContext } from "@/context/AnimationContext";
 
 export default function ClientLayout({ children }) {
+  const { isMobile } = useContext(StateContext);
   const container = useRef(null);
 
   const [showOpening, setShowOpening] = useState(true);
@@ -53,7 +54,7 @@ export default function ClientLayout({ children }) {
       transition: { transform: { duration: isHome ? 1 : 0, ease: "easeInOut" } },
     },
     outOfView: {
-      transform: "translateY(calc(-100vh + 55px))",
+      transform: isMobile ? "translateY(calc(-100dvh))" : "translateY(calc(-100vh + 55px))",
       transition: { transform: { duration: 1, ease: "easeInOut" } },
     },
   };
@@ -61,7 +62,7 @@ export default function ClientLayout({ children }) {
   const contentVariants = {
     outOfView: {
       transition: { transform: { duration: isHome ? 1 : 0, ease: "easeInOut" } },
-      transform: "translateY(calc(100vh - 55px))",
+      transform: isMobile ? "translateY(calc(100dvh))" : "translateY(calc(100vh - 55px))",
     },
     inView: {
       transition: { transform: { duration: 1, ease: "easeInOut" } },
