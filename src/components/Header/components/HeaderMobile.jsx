@@ -3,13 +3,9 @@ import Link from "next/link";
 
 import MobileMenu from "./MobileMenu";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 
-import { StateContext } from "@/context/StateContext";
-
-export default function HeaderMobile({ location }) {
-  const { showOpening, setShowOpening } = useContext(StateContext);
-
+export default function HeaderMobile({ location, showOpening, setShowOpening }) {
   let [showMenu, setShowMenu] = useState(false);
 
   function expandMenu() {
@@ -20,7 +16,10 @@ export default function HeaderMobile({ location }) {
     <ul className={`${styles.headerMobile}`}>
       <li
         className={`${styles.button} button ${location.includes("gg–office") ? "active" : ""}`}
-        onClick={() => setShowOpening(true)}
+        onClick={() => {
+          setShowOpening(true);
+          setShowMenu(false); // close menu
+        }}
       >
         <Link href="/">GG—OFFICE</Link>
       </li>

@@ -13,7 +13,7 @@ export default function Header({ location, showOpening, setShowOpening }) {
   return (
     <header>
       {isMobile ? (
-        <HeaderMobile location={location} />
+        <HeaderMobile location={location} showOpening={showOpening} setShowOpening={setShowOpening} />
       ) : (
         <HeaderDesktop location={location} showOpening={showOpening} setShowOpening={setShowOpening} />
       )}
