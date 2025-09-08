@@ -13,11 +13,15 @@ export default function PageLayout({ children }) {
   const pathname = usePathname();
   const { setShowOpening } = useContext(StateContext);
 
+  const isResearch = pathname === "/research";
+
+  console.log(isResearch, "isResearxcxh");
+
   return (
     <div>
       <Header location={pathname} setShowOpening={setShowOpening} />
       <div id="root">{children}</div>
-      <Footer />
+      {!isResearch && <Footer />}
     </div>
   );
 }
