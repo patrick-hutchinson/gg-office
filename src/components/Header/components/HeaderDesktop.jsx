@@ -10,8 +10,6 @@ import { StateContext } from "@/context/StateContext";
 export default function HeaderDesktop({ location, showOpening, setShowOpening }) {
   const { theme, setTheme } = useTheme();
 
-  // const { showOpening, setShowOpening } = useContext(StateContext);
-
   function handleThemeSwitch() {
     setTheme(theme === "light" ? "dark" : "light");
   }

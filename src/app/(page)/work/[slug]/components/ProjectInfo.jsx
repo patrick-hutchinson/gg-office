@@ -18,7 +18,7 @@ export default function ProjectInfo({ project }) {
   return (
     <section className={`${styles.projectInfo}`}>
       <h1>{project.name}</h1>
-      <div className={`${styles["project-specifics"]}`}>
+      <div>
         <div className={`${styles["categories-wrapper"]}`}>
           <div>{project.year}</div>
         </div>

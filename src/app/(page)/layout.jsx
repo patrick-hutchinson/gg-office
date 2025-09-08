@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function PageLayout({ children }) {
   const pathname = usePathname();
-  const { setShowOpening } = useContext(StateContext);
+  const { showOpening, setShowOpening } = useContext(StateContext);
 
   const isResearch = pathname === "/research";
 
@@ -19,7 +19,7 @@ export default function PageLayout({ children }) {
 
   return (
     <div>
-      <Header location={pathname} setShowOpening={setShowOpening} />
+      <Header location={pathname} showOpening={showOpening} setShowOpening={setShowOpening} />
       <div id="root">{children}</div>
       {!isResearch && <Footer />}
     </div>

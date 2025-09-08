@@ -20,7 +20,8 @@ export default function ClientLayout({ children }) {
   const { isMobile } = useContext(StateContext);
   const container = useRef(null);
 
-  const [showOpening, setShowOpening] = useState(true);
+  const { showOpening, setShowOpening } = useContext(StateContext);
+
   const { pathChanged } = useContext(AnimationContext);
   const pathname = usePathname();
 

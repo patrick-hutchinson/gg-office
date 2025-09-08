@@ -28,7 +28,7 @@ export default function HeaderMobile({ location, showOpening, setShowOpening }) 
         MENU
       </li>
 
-      {showMenu && <MobileMenu location={location} setShowMenu={setShowMenu} />}
+      {showMenu && <MobileMenu location={location} setShowMenu={setShowMenu} setShowOpening={setShowOpening} />}
     </ul>
   );
 }

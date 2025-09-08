@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 import styles from "./styles/HeaderMobile.module.css";
 import Link from "next/link";
 
-const MobileMenu = ({ location, setShowMenu }) => {
+const MobileMenu = ({ location, setShowMenu, setShowOpening }) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
@@ -28,7 +28,13 @@ const MobileMenu = ({ location, setShowMenu }) => {
 
   return (
     <div className={`${styles.expandMenu}`}>
-      <li className={`${styles.button} button ${pathname === "/" ? "active" : ""}`} onClick={handleMenuClick}>
+      <li
+        className={`${styles.button} button ${pathname === "/" ? "active" : ""}`}
+        onClick={() => {
+          handleMenuClick();
+          setShowOpening(false);
+        }}
+      >
         <Link href="/">Work</Link>
       </li>
       <li
