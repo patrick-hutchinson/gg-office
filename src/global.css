@@ -154,6 +154,9 @@ header {
   font-feature-settings: "case";
 }
 
+section:first-of-type {
+  margin-top: 0;
+}
 section {
   margin-top: calc(var(--margin) * 2);
   margin-bottom: calc(var(--margin) * 2);

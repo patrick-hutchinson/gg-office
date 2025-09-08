@@ -13,3 +13,9 @@
   width: 100%;
   padding: 15px var(--margin);
 }
+
+@media (max-width: 767.98px) {
+  .footer p:last-of-type {
+    text-align: right;
+  }
+}
