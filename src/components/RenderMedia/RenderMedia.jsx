@@ -207,17 +207,29 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
 
   console.log(mediaAspectRatio, "ratio");
 
-  const style =
-    mediaAspectRatio > 1
-      ? { width: "100%", height: "auto", aspectRatio: mediaAspectRatio } // landscape → fit to width
-      : { width: "auto", height: "100%", aspectRatio: mediaAspectRatio }; // portrait → fit to height
+  const getMediaStyle = (mediaAspectRatio) => {
+    if (mediaAspectRatio > 1) {
+      // landscape → fit to width
+      return { width: "100%", height: "auto", aspectRatio: mediaAspectRatio };
+    } else if (mediaAspectRatio < 1) {
+      // portrait → fit to height
+      return { width: "auto", height: "100%", aspectRatio: mediaAspectRatio };
+    } else {
+      // square → decide based on viewport
+      if (window.innerHeight > window.innerWidth) {
+        return { width: "100%", height: "auto", aspectRatio: mediaAspectRatio };
+      } else {
+        return { width: "auto", height: "100%", aspectRatio: mediaAspectRatio };
+      }
+    }
+  };
 
   return createPortal(
     <div className={styles["fullscreen-preview-outer"]} onClick={handleClose}>
       <div className={`${styles["close-button"]} button`} onClick={handleClose}>
         CLOSE
       </div>
-      <div className={styles["fullscreen-preview-inner"]} style={style}>
+      <div className={styles["fullscreen-preview-inner"]} style={getMediaStyle(mediaAspectRatio)}>
         {children}
       </div>
     </div>,
