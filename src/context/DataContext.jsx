@@ -19,8 +19,10 @@ export const DataProvider = ({ children }) => {
     setIsLoading(true);
     sanityClient
       .fetch(
-        `*[_type == "project"]{
+        `*[_type == "project"]
+         | order(defined(sortNumber) desc, sortOrder asc, _createdAt desc){
           name,
+          sortOrder,
            coverimage {
       "type": select(
         defined(image) => "image",

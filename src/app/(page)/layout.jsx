@@ -15,8 +15,6 @@ export default function PageLayout({ children }) {
 
   const isResearch = pathname === "/research";
 
-  console.log(isResearch, "isResearxcxh");
-
   return (
     <div>
       <Header location={pathname} showOpening={showOpening} setShowOpening={setShowOpening} />

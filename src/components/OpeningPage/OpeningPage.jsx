@@ -51,8 +51,6 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
     if (!mounted) return null;
     if (!theme) return null;
 
-    console.log(theme, "theme");
-
     return (
       <motion.div
         ref={(el) => (columnsRef.current[index] = el)}

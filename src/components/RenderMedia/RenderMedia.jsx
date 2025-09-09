@@ -20,7 +20,6 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
   if (!medium) return null; // Handle early return
 
   const handleFullscreen = () => {
-    console.log("handling fullscreen!");
     setOpen(true);
   };
 
@@ -204,8 +203,6 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   } else {
     mediaAspectRatio = medium.width / medium.height;
   }
-
-  console.log(mediaAspectRatio, "ratio");
 
   const getMediaStyle = (mediaAspectRatio) => {
     if (mediaAspectRatio > 1) {

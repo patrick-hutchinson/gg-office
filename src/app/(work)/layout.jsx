@@ -10,7 +10,6 @@ import { enableScroll, disableScroll } from "../../helpers/blockScrolling";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer";
-// import OpeningPage from "@/components/OpeningPage/OpeningPage";
 
 const OpeningPage = dynamic(() => import("@/components/OpeningPage/OpeningPage"), { ssr: false });
 
@@ -46,6 +45,9 @@ export default function ClientLayout({ children }) {
   useEffect(() => {
     if (pathChanged && !showOpening) {
       container.current.classList.remove("no-scroll");
+    }
+    if (pathChanged && showOpening) {
+      if (isMobile) container.current.scrollTop = 0;
     }
   }, [pathChanged]);
 

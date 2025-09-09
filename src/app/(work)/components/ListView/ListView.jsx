@@ -28,7 +28,6 @@ export default function ListView({ selectedFilters, activeView }) {
 
     const handleScroll = (e) => {
       scrollYRef.current = el.scrollTop;
-      console.log(scrollYRef.current);
     };
 
     el.addEventListener("scroll", handleScroll);

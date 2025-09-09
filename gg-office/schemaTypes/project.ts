@@ -7,7 +7,13 @@ export const project = defineType({
   type: 'document',
   fields: [
     defineField({name: 'name', title: 'Name', type: 'string'}),
-
+    defineField({
+      name: 'sortOrder',
+      title: 'Sort Order',
+      type: 'number',
+      description: 'Lower numbers show first',
+      validation: (Rule) => Rule.min(1),
+    }),
     defineField({
       name: 'thumbnail',
       title: 'Thumbnail',
