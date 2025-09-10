@@ -5,5 +5,5 @@ main.project-container {
 }
 
 main.project-container section:first-of-type {
-  margin-top: calc(var(--margin) * 2);
+  margin-top: calc(var(--margin));
 }
