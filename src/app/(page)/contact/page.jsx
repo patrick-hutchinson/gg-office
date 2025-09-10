@@ -52,7 +52,7 @@ export default function Contact() {
   return (
     <main className={`contact ${styles.contact}`}>
       <div></div>
-      <div>
+      <div style={{ marginTop: "43px" }}>
         <Email />
         <Address />
         <Socials />
