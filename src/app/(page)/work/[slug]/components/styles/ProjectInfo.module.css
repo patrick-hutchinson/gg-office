@@ -5,10 +5,6 @@
   gap: var(--margin);
 }
 
-.projectInfo * {
-  width: 100%;
-}
-
 .projectInfo-specifics {
   display: flex;
   flex-direction: column;

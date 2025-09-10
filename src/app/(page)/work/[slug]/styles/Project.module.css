@@ -3,3 +3,7 @@ main.project-container {
   top: 80px;
   margin-bottom: 100px;
 }
+
+main.project-container section:first-of-type {
+  margin-top: calc(var(--margin) * 2);
+}
