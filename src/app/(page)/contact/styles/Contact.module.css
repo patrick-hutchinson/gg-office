@@ -1,4 +1,4 @@
-.contact {
+main.contact {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6,7 +6,9 @@
 
   font-size: var(--font-size-300);
   line-height: var(--line-height-300);
-  top: 80px;
+}
+.text-container {
+  margin-top: 80px;
 }
 
 .contact section {
@@ -14,8 +16,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .contact {
-    display: inline-block;
+  main.contact {
+    /* display: inline-block; */
     grid-template-columns: 1fr;
   }
 }

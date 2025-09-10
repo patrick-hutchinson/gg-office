@@ -7,6 +7,7 @@ export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [isSafari, setIsSafari] = useState(false);
   const [showOpening, setShowOpening] = useState(true);
 

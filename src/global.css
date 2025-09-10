@@ -365,6 +365,10 @@ footer {
     opacity: 1 !important;
     transform: scale(1) translateZ(0);
   }
+
+  .wrapper {
+    height: calc(100dvh - 30px) !important;
+  }
 }
 
 /* Medium Devices (Tablets, 768px and up) */

@@ -1,16 +1,14 @@
 main.about {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--margin);
+
   font-size: var(--font-size-300);
   line-height: var(--line-height-300);
-
-  position: relative;
-  /* margin-top: 80px; */
-  /* z-index: -1; */
 }
 .text-container {
-  margin-top: 102px;
+  margin-top: 80px;
 }
 
 .intern {
@@ -88,6 +86,7 @@ main.about {
     transform: translateZ(0);
     transform-origin: center;
   }
+
   .name {
     color: #000;
   }

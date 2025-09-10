@@ -10,6 +10,8 @@ export default function Contact() {
 
   if (!contact) return <Loading />;
 
+  console.log(contact, "contact");
+
   let Email = () => {
     return (
       <section>
@@ -52,7 +54,7 @@ export default function Contact() {
   return (
     <main className={`contact ${styles.contact}`}>
       <div></div>
-      <div style={{ marginTop: "43px" }}>
+      <div className={styles["text-container"]}>
         <Email />
         <Address />
         <Socials />
