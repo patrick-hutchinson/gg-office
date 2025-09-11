@@ -207,25 +207,13 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   const deviceAspectRatio = window.innerWidth / window.innerHeight;
 
   const getMediaStyle = (mediaAspectRatio) => {
-    if (mediaAspectRatio > 1) {
-      // landscape → fit to width
-      return { width: "100%", height: "auto", aspectRatio: mediaAspectRatio };
-    } else if (mediaAspectRatio < 1) {
-      if (deviceAspectRatio > mediaAspectRatio) {
-        // Device is wider → fit width
-        return { width: "auto", height: "100%", aspectRatio: mediaAspectRatio };
-      } else {
-        // Device is taller → fit height
-        return { width: "100%", height: "auto", aspectRatio: mediaAspectRatio };
-      }
-    } else if (mediaAspectRatio === 1) {
-      // square → decide based on viewport
-      if (window.innerHeight > window.innerWidth) {
-        return { width: "100%", height: "auto", aspectRatio: mediaAspectRatio };
-      } else {
-        return { width: "auto", height: "100%", aspectRatio: mediaAspectRatio };
-      }
-    }
+    const fitWidth = mediaAspectRatio > deviceAspectRatio;
+
+    return {
+      width: fitWidth ? "100%" : "auto",
+      height: fitWidth ? "auto" : "100%",
+      aspectRatio: mediaAspectRatio,
+    };
   };
 
   return createPortal(
