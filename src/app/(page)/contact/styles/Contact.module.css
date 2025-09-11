@@ -8,7 +8,7 @@ main.contact {
   line-height: var(--line-height-300);
 }
 .text-container {
-  margin-top: 80px;
+  margin-top: calc(80px + (2 * var(--font-size-100)) + 10px);
 }
 
 .contact section {
