@@ -9,6 +9,7 @@ export const StateProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [isSafari, setIsSafari] = useState(false);
+  const [deviceDimensions, setDeviceDimensions] = useState({ width: 0, height: 0 });
   const [showOpening, setShowOpening] = useState(true);
 
   // Detect if the screen is mobile size
@@ -16,6 +17,7 @@ export const StateProvider = ({ children }) => {
     const handleResize = () => {
       const newIsMobile = window.innerWidth < 768; // Calculate the new value
       setIsMobile(newIsMobile); // Update the state
+      setDeviceDimensions({ width: window.innerWidth, height: window.innerHeight });
     };
 
     handleResize(); // Check on initial render
@@ -32,7 +34,7 @@ export const StateProvider = ({ children }) => {
   useEffect(() => {}, []);
 
   return (
-    <StateContext.Provider value={{ isMobile, isSafari, showOpening, setShowOpening }}>
+    <StateContext.Provider value={{ isMobile, isSafari, showOpening, setShowOpening, deviceDimensions }}>
       {children}
     </StateContext.Provider>
   );

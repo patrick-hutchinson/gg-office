@@ -11,7 +11,7 @@ import { useInView } from "framer-motion";
 import styles from "./RenderMedia.module.css";
 import { StateContext } from "@/context/StateContext";
 
-const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
+const Media = React.memo(({ medium, setOpen, enableFullscreen, deviceDimensions }) => {
   const { isMobile } = useContext(StateContext);
   const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef(null);
@@ -189,6 +189,8 @@ const Media = React.memo(({ medium, setOpen, enableFullscreen }) => {
 Media.displayName = "Media";
 
 export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
+  const { deviceDimensions } = useContext(StateContext);
+  console.log(deviceDimensions, "deviceDimensions");
   const handleClose = () => setOpen(false);
 
   if (!open || !medium) return null;
@@ -204,7 +206,7 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
     mediaAspectRatio = medium.width / medium.height;
   }
 
-  const deviceAspectRatio = window.innerWidth / window.innerHeight;
+  const deviceAspectRatio = deviceDimensions.width / deviceDimensions.height;
 
   const getMediaStyle = (mediaAspectRatio) => {
     const fitWidth = mediaAspectRatio > deviceAspectRatio;
@@ -229,7 +231,7 @@ export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   );
 };
 
-export default function RenderMedia({ medium, enableFullscreen }) {
+export default function RenderMedia({ medium, enableFullscreen, deviceDimensions }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -249,7 +251,7 @@ export default function RenderMedia({ medium, enableFullscreen }) {
   return (
     <>
       <Media medium={medium} setOpen={setOpen} enableFullscreen={enableFullscreen} />
-      <FullscreenPreview medium={medium} open={open} setOpen={setOpen}>
+      <FullscreenPreview medium={medium} open={open} setOpen={setOpen} deviceDimensions={deviceDimensions}>
         <Media medium={medium} enableFullscreen={false} />
       </FullscreenPreview>
     </>
