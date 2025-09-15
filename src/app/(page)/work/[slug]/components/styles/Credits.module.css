@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: unset;
   gap: var(--margin);
+  margin-top: 0;
 }
 
 /* Phones in Landscape Mode */
