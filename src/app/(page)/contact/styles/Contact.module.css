@@ -20,4 +20,8 @@ main.contact {
     /* display: inline-block; */
     grid-template-columns: 1fr;
   }
+
+  .text-container {
+    margin-top: calc(75px + 2 * (var(--font-size-100)));
+  }
 }

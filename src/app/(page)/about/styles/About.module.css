@@ -101,6 +101,10 @@ main.about {
     margin-bottom: 100px;
   }
 
+  .text-container {
+    margin-top: calc(75px + 2 * (var(--font-size-100)));
+  }
+
   .alien-wrapper .alien {
     font-size: 120px;
     height: 160px;
