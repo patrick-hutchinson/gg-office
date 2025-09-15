@@ -11,7 +11,7 @@
   bottom: 0px;
   left: 0px;
   width: 100%;
-  padding: 15px var(--margin);
+  padding: var(--margin);
 }
 
 @media (max-width: 767.98px) {

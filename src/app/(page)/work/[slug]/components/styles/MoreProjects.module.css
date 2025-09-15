@@ -1,3 +1,7 @@
+.more-projects {
+  margin-bottom: var(--margin);
+}
+
 .moreprojects-wrapper {
   height: 400px;
   position: relative;

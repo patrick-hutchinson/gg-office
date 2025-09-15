@@ -112,7 +112,7 @@ export default function MoreProjects({ work, currentProject }) {
     </div>
   );
   return (
-    <section>
+    <section className={styles["more-projects"]}>
       <h2 style={{ marginBottom: "var(--margin)" }}>More Projects</h2>
       {ProjectList}
     </section>

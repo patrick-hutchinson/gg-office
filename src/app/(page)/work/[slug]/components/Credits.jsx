@@ -19,13 +19,13 @@ export default function Credits({ project }) {
         <ul className={styles["credits-inhouse"]}>
           {project.creditsInhouse &&
             creditsMapping.map(
-              ({ key, title }) =>
+              ({ key, title }, index) =>
                 project.creditsInhouse[key] && (
                   <li className={`${styles.credit}`} key={key}>
                     {title} <br />
                     {project.creditsInhouse[key].join(", ")}
                     <br />
-                    <br />
+                    {index !== creditsMapping.length - 1 && <br />}
                   </li>
                 )
             )}
