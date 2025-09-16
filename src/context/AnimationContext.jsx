@@ -51,7 +51,7 @@ export const AnimationProvider = ({ children }) => {
       }
     }
     walk(document.body);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname === "/research") {
