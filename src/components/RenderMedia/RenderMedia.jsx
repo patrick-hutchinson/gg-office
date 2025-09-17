@@ -190,7 +190,7 @@ Media.displayName = "Media";
 
 export const FullscreenPreview = ({ open, medium, children, setOpen }) => {
   const { deviceDimensions } = useContext(StateContext);
-  console.log(deviceDimensions, "deviceDimensions");
+
   const handleClose = () => setOpen(false);
 
   if (!open || !medium) return null;

@@ -19,7 +19,6 @@ export default function ImageView({ selectedFilters, activeView }) {
   return (
     <div className={`${styles.imageview} ${activeView === "Image View" ? "visible" : "hidden"}`}>
       {work.map((project, index) => {
-        console.log(project.sortNumber);
         return (
           project.slug && (
             <Link

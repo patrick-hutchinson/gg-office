@@ -26,8 +26,6 @@ export default function Gallery() {
 
   if (!research) return <Loading />;
 
-  console.log(research, "research");
-
   const columnCount = isMobile ? 2 : 3;
 
   return (

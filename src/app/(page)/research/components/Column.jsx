@@ -115,10 +115,6 @@ export default function Column({ columnNumber, columnCount }) {
     };
   }, []);
 
-  useMotionValueEvent(mobileDeltaY, "change", (value) => {
-    console.log("mobileDeltaY changed:", value);
-  });
-
   // Prepare images and layout as before
   const items = research[0].imagegallery.filter((_, index) => index % columnCount === columnNumber);
   const images = items.filter((item) => item.type === "image");

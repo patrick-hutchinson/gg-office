@@ -10,8 +10,6 @@ export default function Contact() {
 
   if (!contact) return <Loading />;
 
-  console.log(contact, "contact");
-
   let Email = () => {
     return (
       <section>

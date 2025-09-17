@@ -16,7 +16,6 @@ export const AnimationProvider = ({ children }) => {
 
   useEffect(() => {
     if (pathname === "/" && previousPathRef.current && previousPathRef.current !== "/") {
-      console.log("Navigated from a different route to /");
       // Do whatever you need here
       setPathChanged(true);
     } else {
