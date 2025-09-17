@@ -20,7 +20,7 @@ export default function HeaderDesktop({ location, showOpening, setShowOpening })
           className={`button ${location === "/" && showOpening ? "active" : ""}`}
           onClick={() => setShowOpening(true)}
         >
-          <Link href="/">GG—OFFICE</Link>
+          <Link href="/">GG−OFFICE</Link>
         </li>
         <li
           className={`button ${location === "/" && !showOpening ? "active" : ""}`}

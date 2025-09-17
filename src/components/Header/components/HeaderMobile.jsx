@@ -21,7 +21,7 @@ export default function HeaderMobile({ location, showOpening, setShowOpening }) 
           setShowMenu(false); // close menu
         }}
       >
-        <Link href="/">GG—OFFICE</Link>
+        <Link href="/">GG−OFFICE</Link>
       </li>
 
       <li className={`${styles.button} button ${showMenu ? "active" : ""}`} onClick={expandMenu}>
