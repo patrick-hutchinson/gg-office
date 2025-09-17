@@ -2,6 +2,7 @@ import "../global.css"; // or './index.css'
 
 export const metadata = {
   title: "GG-OFFICE",
+  description: "GG–OFFICE IS AN INDEPENDENT GRAPHIC AND MOTION AGENCY BASED IN SICILY.",
   icons: {
     icon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👽</text></svg>",
   },
