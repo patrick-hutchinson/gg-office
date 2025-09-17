@@ -4,7 +4,7 @@ export const metadata = {
   title: "GG-OFFICE",
   description: "GG–OFFICE IS AN INDEPENDENT GRAPHIC AND MOTION AGENCY BASED IN SICILY.",
   icons: {
-    icon: "/icons/favicon.svg",
+    icon: "/assets/icons/favicon.svg",
   },
 };
 
