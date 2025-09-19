@@ -43,5 +43,13 @@ export const AnimationProvider = ({ children }) => {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    if (pathname === "/") {
+      document.querySelector("#content").style.overflowX = "hidden";
+      document.querySelector("#content").style.width = "100vw";
+      // document.querySelector("footer").style.position = "fixed";
+    }
+  }, [pathname]);
+
   return <AnimationContext.Provider value={{ pathChanged }}>{children}</AnimationContext.Provider>;
 };
