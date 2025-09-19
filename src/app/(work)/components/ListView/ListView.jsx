@@ -53,10 +53,19 @@ export default function ListView({ selectedFilters, activeView }) {
 
   const updatePosition = () => {
     if (previewWrapperRef.current) {
-      let imageWidth = previewWrapperRef.current?.getBoundingClientRect().width;
-      let imageHeight = previewWrapperRef.current?.getBoundingClientRect().width;
+      const imageWidth = previewWrapperRef.current.getBoundingClientRect().width;
+      const imageHeight = previewWrapperRef.current.getBoundingClientRect().width; // 👈 careful: you probably meant height here?
+
       const x = cursorRef.current.x - imageWidth / 2;
-      const y = cursorRef.current.y + scrollYRef.current - imageHeight / 2 - 100;
+      let y = cursorRef.current.y + scrollYRef.current - imageHeight / 2 - 100;
+
+      // clamp against the projectwrapper bottom
+      const wrapper = document.querySelector(`.${styles.projectwrapper}`);
+      if (wrapper) {
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const maxY = wrapperRect.bottom + scrollYRef.current - imageHeight;
+        y = Math.min(y, maxY);
+      }
 
       previewWrapperRef.current.style.transform = `translate(${x}px, ${y}px)`;
     }
@@ -128,6 +137,7 @@ export default function ListView({ selectedFilters, activeView }) {
               position: "absolute",
               top: 0,
               left: 0,
+              pointerEvents: "none",
             }}
           >
             <RenderMedia medium={project.thumbnail} enableFullscreen={false} />
