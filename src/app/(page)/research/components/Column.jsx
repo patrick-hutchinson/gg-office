@@ -153,8 +153,6 @@ export default function Column({ columnNumber, columnCount }) {
   return (
     <motion.div className={styles["column"]} style={{ y: virtualScroll }}>
       {duplicatedItems.map((medium, index) => {
-        const width = widths[index % rearrangedItems.length];
-        const left = leftValues[index % rearrangedItems.length];
         return (
           <div
             key={index}
@@ -162,7 +160,6 @@ export default function Column({ columnNumber, columnCount }) {
             className={styles["media-container"]}
             style={{
               width: `80%`,
-              // left: `${left}px`,
               position: "relative",
             }}
           >

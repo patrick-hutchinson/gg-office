@@ -170,6 +170,42 @@ export const project = defineType({
             layout: 'tags',
           },
         }),
+        defineField({
+          name: 'additionalCredits',
+          title: 'Additional credits',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'role',
+                  title: 'Role',
+                  type: 'string',
+                },
+                {
+                  name: 'people',
+                  title: 'People',
+                  type: 'array',
+                  of: [{type: 'string'}],
+                  options: {layout: 'tags'},
+                },
+              ],
+              preview: {
+                select: {
+                  title: 'role',
+                  people: 'people',
+                },
+                prepare({title, people}) {
+                  return {
+                    title,
+                    subtitle: people?.join(', '),
+                  }
+                },
+              },
+            },
+          ],
+        }),
       ],
     }),
     defineField({
@@ -239,6 +275,42 @@ export const project = defineType({
           options: {
             layout: 'tags',
           },
+        }),
+        defineField({
+          name: 'additionalCredits',
+          title: 'Additional credits',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'role',
+                  title: 'Role',
+                  type: 'string',
+                },
+                {
+                  name: 'people',
+                  title: 'People',
+                  type: 'array',
+                  of: [{type: 'string'}],
+                  options: {layout: 'tags'},
+                },
+              ],
+              preview: {
+                select: {
+                  title: 'role',
+                  people: 'people',
+                },
+                prepare({title, people}) {
+                  return {
+                    title,
+                    subtitle: people?.join(', '),
+                  }
+                },
+              },
+            },
+          ],
         }),
       ],
     }),

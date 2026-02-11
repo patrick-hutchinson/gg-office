@@ -1,6 +1,7 @@
 import styles from "./styles/Credits.module.css";
 
 export default function Credits({ project }) {
+  console.log(project);
   const creditsMapping = [
     { key: "clients", title: "Client" },
     { key: "directors", title: "Direction" },
@@ -23,26 +24,46 @@ export default function Credits({ project }) {
                 project.creditsInhouse[key] && (
                   <li className={`${styles.credit}`} key={key}>
                     {title} <br />
-                    {project.creditsInhouse[key].join(", ")}
+                    {project.creditsInhouse[key].map((person, i) => (
+                      <div key={i}>{person}</div>
+                    ))}
                     <br />
                     {index !== creditsMapping.length - 1 && <br />}
                   </li>
-                )
+                ),
             )}
+          {project.creditsInhouse.additionalCredits.map((credit) => (
+            <li className={`${styles.credit}`} key={credit._id}>
+              {credit.role} <br />
+              {credit.people.map((person) => (
+                <div>{person}</div>
+              ))}
+            </li>
+          ))}
         </ul>
         <ul className={styles["credits-client"]}>
           {project.creditsClient &&
             creditsMapping.map(
-              ({ key, title }) =>
+              ({ key, title }, index) =>
                 project.creditsClient[key] && (
                   <li className={`${styles.credit}`} key={key}>
                     {title} <br />
-                    {project.creditsClient[key].join(", ")}
+                    {project.creditsClient[key].map((person, i) => (
+                      <div key={i}>{person}</div>
+                    ))}
                     <br />
-                    <br />
+                    {index !== creditsMapping.length - 1 && <br />}
                   </li>
-                )
+                ),
             )}
+          {project.creditsClient.additionalCredits.map((credit) => (
+            <li className={`${styles.credit}`} key={credit._id}>
+              {credit.role} <br />
+              {credit.people.map((person) => (
+                <div>{person}</div>
+              ))}
+            </li>
+          ))}
         </ul>
       </div>
     </section>
