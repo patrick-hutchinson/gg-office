@@ -124,29 +124,29 @@ export default function Column({ columnNumber, columnCount }) {
   const middleItems = [...items].filter((item) => !startImages.includes(item) && !endImages.includes(item));
   const rearrangedItems = [...startImages, ...middleItems, ...endImages];
 
-  const widths = useMemo(() => {
-    const vw = window.innerWidth;
-    const { min, max } = isMobile ? { min: vw * 0.25, max: vw * 0.4 } : { min: vw * 0.15, max: vw * 0.25 };
-    return rearrangedItems.map(() => Math.random() * (max - min) + min);
-  }, [rearrangedItems.length, isMobile]);
+  // const widths = useMemo(() => {
+  //   const vw = window.innerWidth;
+  //   const { min, max } = isMobile ? { min: vw * 0.25, max: vw * 0.4 } : { min: vw * 0.15, max: vw * 0.25 };
+  //   return rearrangedItems.map(() => Math.random() * (max - min) + min);
+  // }, [rearrangedItems.length, isMobile]);
 
-  const leftValues = useMemo(() => {
-    const leftValueRanges = isMobile
-      ? [
-          { min: 0, max: 50 },
-          { min: -50, max: 0 },
-        ]
-      : [
-          { min: 0, max: 100 },
-          { min: -100, max: 100 },
-          { min: -100, max: 0 },
-        ];
+  // const leftValues = useMemo(() => {
+  //   const leftValueRanges = isMobile
+  //     ? [
+  //         { min: 0, max: 50 },
+  //         { min: -50, max: 0 },
+  //       ]
+  //     : [
+  //         { min: 0, max: 100 },
+  //         { min: -100, max: 100 },
+  //         { min: -100, max: 0 },
+  //       ];
 
-    return rearrangedItems.map(() => {
-      const { min, max } = leftValueRanges[columnNumber];
-      return Math.random() * (max - min) + min;
-    });
-  }, [rearrangedItems.length, columnNumber]);
+  //   return rearrangedItems.map(() => {
+  //     const { min, max } = leftValueRanges[columnNumber];
+  //     return Math.random() * (max - min) + min;
+  //   });
+  // }, [rearrangedItems.length, columnNumber]);
 
   const duplicatedItems = [...rearrangedItems, ...rearrangedItems];
 

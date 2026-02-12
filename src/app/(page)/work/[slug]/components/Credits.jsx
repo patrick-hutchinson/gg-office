@@ -35,8 +35,8 @@ export default function Credits({ project }) {
           {project.creditsInhouse?.additionalCredits.map((credit) => (
             <li className={`${styles.credit}`} key={credit._id}>
               {credit.role} <br />
-              {credit.people.map((person) => (
-                <div>{person}</div>
+              {credit.people.map((person, index) => (
+                <div key={index}>{person}</div>
               ))}
             </li>
           ))}
