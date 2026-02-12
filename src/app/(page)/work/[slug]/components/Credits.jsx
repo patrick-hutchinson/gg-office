@@ -32,7 +32,7 @@ export default function Credits({ project }) {
                   </li>
                 ),
             )}
-          {project.creditsInhouse.additionalCredits.map((credit) => (
+          {project.creditsInhouse?.additionalCredits.map((credit) => (
             <li className={`${styles.credit}`} key={credit._id}>
               {credit.role} <br />
               {credit.people.map((person) => (
@@ -56,11 +56,11 @@ export default function Credits({ project }) {
                   </li>
                 ),
             )}
-          {project.creditsClient.additionalCredits.map((credit) => (
+          {project.creditsClient?.additionalCredits.map((credit) => (
             <li className={`${styles.credit}`} key={credit._id}>
               {credit.role} <br />
-              {credit.people.map((person) => (
-                <div>{person}</div>
+              {credit.people.map((person, i) => (
+                <div key={i}>{person}</div>
               ))}
             </li>
           ))}
