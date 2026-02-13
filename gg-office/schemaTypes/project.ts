@@ -135,42 +135,6 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'clientdirectors',
-          title: 'Project Manager/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'designers',
-          title: 'Designer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'artists3D',
-          title: '3D Artist/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'photographers',
-          title: 'Photographer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
           name: 'additionalCredits',
           title: 'Additional credits',
           type: 'array',
@@ -205,6 +169,42 @@ export const project = defineType({
               },
             },
           ],
+        }),
+        defineField({
+          name: 'clientdirectors',
+          title: 'Project Manager/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'designers',
+          title: 'Designer/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'artists3D',
+          title: '3D Artist/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'photographers',
+          title: 'Photographer/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
         }),
       ],
     }),
@@ -241,42 +241,6 @@ export const project = defineType({
           },
         }),
         defineField({
-          name: 'clientdirectors',
-          title: 'Client Director/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'designers',
-          title: 'Designer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'artists3D',
-          title: '3D Artist/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'photographers',
-          title: 'Photographer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
           name: 'additionalCredits',
           title: 'Additional credits',
           type: 'array',
@@ -311,6 +275,42 @@ export const project = defineType({
               },
             },
           ],
+        }),
+        defineField({
+          name: 'clientdirectors',
+          title: 'Client Director/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'designers',
+          title: 'Designer/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'artists3D',
+          title: '3D Artist/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
+        }),
+        defineField({
+          name: 'photographers',
+          title: 'Photographer/s',
+          type: 'array',
+          of: [{type: 'string'}],
+          options: {
+            layout: 'tags',
+          },
         }),
       ],
     }),

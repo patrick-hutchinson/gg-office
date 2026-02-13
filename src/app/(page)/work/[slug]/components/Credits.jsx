@@ -1,4 +1,5 @@
 import styles from "./styles/Credits.module.css";
+import React from "react";
 
 export default function Credits({ project }) {
   console.log(project);
@@ -12,6 +13,8 @@ export default function Credits({ project }) {
     { key: "photographers", title: "Photography" },
   ];
 
+  const INSERT_AFTER = "creativedirectors";
+
   return (
     <section className={styles["credits-wrapper"]}>
       <h2>Credits</h2>
@@ -19,51 +22,81 @@ export default function Credits({ project }) {
       <div className={styles["credits-wrapper"]}>
         <ul className={styles["credits-inhouse"]}>
           {project.creditsInhouse &&
-            creditsMapping.map(
-              ({ key, title }, index) =>
-                project.creditsInhouse[key] && (
-                  <li className={`${styles.credit}`} key={key}>
-                    {title} <br />
+            creditsMapping.map(({ key, title }, index) => (
+              <React.Fragment key={key}>
+                {project.creditsInhouse[key] && (
+                  <li className={styles.credit}>
+                    {title}
+                    <br />
                     {project.creditsInhouse[key].map((person, i) => (
                       <div key={i}>{person}</div>
                     ))}
-                    <br />
-                    {index !== creditsMapping.length - 1 && <br />}
+                    {index !== creditsMapping.length - 1 && (
+                      <>
+                        <br />
+                        <br />
+                      </>
+                    )}
                   </li>
-                ),
-            )}
-          {project.creditsInhouse?.additionalCredits?.map((credit) => (
-            <li className={`${styles.credit}`} key={credit._id}>
-              {credit.role} <br />
-              {credit.people.map((person, index) => (
-                <div key={index}>{person}</div>
-              ))}
-            </li>
-          ))}
+                )}
+
+                {key === INSERT_AFTER &&
+                  project.creditsInhouse?.additionalCredits?.map((credit, index) => (
+                    <li className={styles.credit} key={credit._id}>
+                      {credit.role}
+                      <br />
+                      {credit.people.map((person, i) => (
+                        <div key={i}>{person}</div>
+                      ))}
+                      {index !== creditsMapping.length - 1 && (
+                        <>
+                          <br />
+                          <br />
+                        </>
+                      )}
+                    </li>
+                  ))}
+              </React.Fragment>
+            ))}
         </ul>
         <ul className={styles["credits-client"]}>
           {project.creditsClient &&
-            creditsMapping.map(
-              ({ key, title }, index) =>
-                project.creditsClient[key] && (
-                  <li className={`${styles.credit}`} key={key}>
-                    {title} <br />
+            creditsMapping.map(({ key, title }, index) => (
+              <React.Fragment key={key}>
+                {project.creditsClient[key] && (
+                  <li className={styles.credit}>
+                    {title}
+                    <br />
                     {project.creditsClient[key].map((person, i) => (
                       <div key={i}>{person}</div>
                     ))}
-                    <br />
-                    {index !== creditsMapping.length - 1 && <br />}
+                    {index !== creditsMapping.length - 1 && (
+                      <>
+                        <br />
+                        <br />
+                      </>
+                    )}
                   </li>
-                ),
-            )}
-          {project.creditsClient?.additionalCredits?.map((credit) => (
-            <li className={`${styles.credit}`} key={credit._id}>
-              {credit.role} <br />
-              {credit.people.map((person, i) => (
-                <div key={i}>{person}</div>
-              ))}
-            </li>
-          ))}
+                )}
+
+                {key === INSERT_AFTER &&
+                  project.creditsClient?.additionalCredits?.map((credit, index) => (
+                    <li className={styles.credit} key={credit._id}>
+                      {credit.role}
+                      <br />
+                      {credit.people.map((person, i) => (
+                        <div key={i}>{person}</div>
+                      ))}
+                      {index !== creditsMapping.length - 1 && (
+                        <>
+                          <br />
+                          <br />
+                        </>
+                      )}
+                    </li>
+                  ))}
+              </React.Fragment>
+            ))}
         </ul>
       </div>
     </section>
