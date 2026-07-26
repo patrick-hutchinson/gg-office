@@ -101,8 +101,7 @@ export const DataProvider = ({ children, initialSite }) => {
     )
           },
           filtering[]->{title},
-          creditsInhouse,
-          creditsClient,
+          credits,
           slug,
           gridStructure,
           thumbnail {

@@ -10,7 +10,8 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
-    "apply-project-order-ranks": "node scripts/applyProjectOrderRanks.js"
+    "apply-project-order-ranks": "node scripts/applyProjectOrderRanks.js",
+    "migrate-project-credits": "node scripts/migrateProjectCredits.js"
   },
   "keywords": [
     "sanity"

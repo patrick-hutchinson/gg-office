@@ -26,7 +26,7 @@ export default function Project({ slug }) {
       <RenderMedia medium={project.coverimage} enableFullscreen={true} />
       <ProjectInfo project={project} />
       {project.imagegallery && <ImageGallery project={project} />}
-      {(project.creditsInhouse || project.creditsClient) && <Credits project={project} />}
+      {project.credits?.length > 0 && <Credits project={project} />}
       <MoreProjects work={work} currentProject={project} />
     </main>
   );

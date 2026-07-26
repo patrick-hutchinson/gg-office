@@ -10,8 +10,7 @@ section.credits-wrapper {
   margin-bottom: calc(var(--margin) * 3);
 }
 
-.credits-inhouse,
-.credits-client {
+.credits {
   display: flex;
   flex-direction: column;
   gap: 2lh;

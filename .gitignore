@@ -26,3 +26,9 @@ dist-ssr
 .next
 
 dist
+
+# Sanity dataset exports
+backup/
+backups/
+*.tar.gz
+

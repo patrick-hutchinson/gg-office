@@ -115,206 +115,34 @@ export const project = defineType({
       },
     }),
     defineField({
-      name: 'creditsInhouse',
-      title: 'Credits (GG-OFFICE)',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'directors',
-          title: 'Director/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'creativedirectors',
-          title: 'Creative Director/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'additionalCredits',
-          title: 'Additional credits',
-          type: 'array',
-          of: [
-            {
-              type: 'object',
-              fields: [
-                {
-                  name: 'role',
-                  title: 'Role',
-                  type: 'string',
-                },
-                {
-                  name: 'people',
-                  title: 'People',
-                  type: 'array',
-                  of: [{type: 'string'}],
-                  options: {layout: 'tags'},
-                },
-              ],
-              preview: {
-                select: {
-                  title: 'role',
-                  people: 'people',
-                },
-                prepare({title, people}) {
-                  return {
-                    title,
-                    subtitle: people?.join(', '),
-                  }
-                },
-              },
-            },
+      name: 'credits',
+      title: 'Credits',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({name: 'role', title: 'Role', type: 'string'}),
+            defineField({
+              name: 'entries',
+              title: 'Entries',
+              type: 'array',
+              of: [{type: 'string', name: 'entry'}],
+            }),
           ],
-        }),
-        defineField({
-          name: 'clientdirectors',
-          title: 'Project Manager/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'designers',
-          title: 'Designer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'artists3D',
-          title: '3D Artist/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'photographers',
-          title: 'Photographer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-      ],
-    }),
-    defineField({
-      name: 'creditsClient',
-      title: 'Credits (Client)',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'clients',
-          title: 'Client/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'directors',
-          title: 'Director/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'creativedirectors',
-          title: 'Creative Director/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'additionalCredits',
-          title: 'Additional credits',
-          type: 'array',
-          of: [
-            {
-              type: 'object',
-              fields: [
-                {
-                  name: 'role',
-                  title: 'Role',
-                  type: 'string',
-                },
-                {
-                  name: 'people',
-                  title: 'People',
-                  type: 'array',
-                  of: [{type: 'string'}],
-                  options: {layout: 'tags'},
-                },
-              ],
-              preview: {
-                select: {
-                  title: 'role',
-                  people: 'people',
-                },
-                prepare({title, people}) {
-                  return {
-                    title,
-                    subtitle: people?.join(', '),
-                  }
-                },
-              },
+          preview: {
+            select: {
+              title: 'role',
+              entries: 'entries',
             },
-          ],
-        }),
-        defineField({
-          name: 'clientdirectors',
-          title: 'Client Director/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
+            prepare({title, entries}) {
+              return {
+                title,
+                subtitle: entries?.join(', '),
+              }
+            },
           },
-        }),
-        defineField({
-          name: 'designers',
-          title: 'Designer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'artists3D',
-          title: '3D Artist/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'photographers',
-          title: 'Photographer/s',
-          type: 'array',
-          of: [{type: 'string'}],
-          options: {
-            layout: 'tags',
-          },
-        }),
+        },
       ],
     }),
     defineField({
