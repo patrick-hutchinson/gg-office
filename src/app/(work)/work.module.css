@@ -13,7 +13,7 @@
   flex-direction: row;
   font-size: var(--font-size-200);
   line-height: var(--line-height-200);
-  margin-bottom: calc(var(--margin) * 2);
+  margin-bottom: calc(var(--margin));
   height: 100%;
 }
 

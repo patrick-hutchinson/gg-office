@@ -50,30 +50,23 @@
   --font-weight-text: Founders;
   --font-weight-medium: FoundersMedium;
 
-  --foreground: #000;
-  --background: #fff;
+  --foreground-light: #000;
+  --background-light: #fff;
+  --foreground-dark: #fff;
+  --background-dark: #000;
+  --foreground: var(--foreground-light);
+  --background: var(--background-light);
 
   --margin: 15px;
 
   --transition-duration: 0.5s;
 
-  --gradient-shadow: linear-gradient(
-    45deg,
-    #002bff,
-    #ff00c8,
-    #8601be,
-    #002bff,
-    #ff00c8,
-    #8601be,
-    #002bff,
-    #ff00c8,
-    #8601be
-  );
+  --gradient-shadow: linear-gradient(45deg, #002bff, #ff00c8, #8601be, #002bff, #ff00c8, #8601be, #002bff, #ff00c8, #8601be);
 }
 
 [data-theme="dark"] {
-  --background: black;
-  --foreground: white;
+  --background: var(--background-dark);
+  --foreground: var(--foreground-dark);
 }
 
 html {
@@ -110,8 +103,8 @@ header {
   -webkit-backdrop-filter: blur(12px);
   z-index: 5;
 
-  padding: 15px var(--margin);
-  margin-bottom: 25px;
+  padding: var(--margin);
+  margin-bottom: calc(var(--margin) * 2);
 
   width: calc(100vw);
   height: fit-content;
@@ -188,8 +181,8 @@ h2 {
 }
 h5 {
   font-size: var(--font-size-100);
-
-  margin: 6px 0px;
+  line-height: 1;
+  margin: 0px 0px var(--margin) 0px;
 }
 
 ul {

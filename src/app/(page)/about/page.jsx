@@ -53,9 +53,9 @@ export default function About() {
 
   function handleInternClick(intern) {
     // Check if the alien with the same intern name already exists
-    const existingAlien = Array.from(
-      AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} div`)
-    ).find((span) => span.textContent === intern);
+    const existingAlien = Array.from(AlienContainerRef.current.querySelectorAll(`.${styles["alien-wrapper"]} div`)).find(
+      (span) => span.textContent === intern,
+    );
 
     // If an alien with the same name exists, return early
     if (existingAlien) {
@@ -83,7 +83,7 @@ export default function About() {
 
     return (
       <section>
-        <h5>Biography</h5>
+        <h5 className={styles.sectionTitle}>Biography</h5>
         {bioBlocks.map((block, index) => (
           <div key={index}>
             {block.children.map((child, index) => (
@@ -100,7 +100,7 @@ export default function About() {
 
     return (
       <section>
-        <h5>Services</h5>
+        <h5 className={styles.sectionTitle}>Services</h5>
         {services.map((service, index) => {
           const isLast = index === services.length - 1;
 
@@ -124,14 +124,14 @@ export default function About() {
         (prev) =>
           prev.includes(intern)
             ? prev.filter((i) => i !== intern) // remove if already active
-            : [...prev, intern] // add if not active
+            : [...prev, intern], // add if not active
       );
       handleInternClick(intern);
     };
 
     return (
       <section className={styles["internships"]}>
-        <h5>Internships</h5>
+        <h5 className={styles.sectionTitle}>Internships</h5>
         {internships.map((intern, index) => {
           const isLast = index === internships.length - 1;
           const isActive = activeInterns.includes(intern);

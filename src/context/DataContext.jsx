@@ -2,10 +2,12 @@
 
 import { createContext, useState, useEffect, useMemo } from "react";
 import sanityClient from "/src/client.js";
+import { resolveSite } from "@/lib/sanity/site";
 
 export const DataContext = createContext();
 
-export const DataProvider = ({ children }) => {
+export const DataProvider = ({ children, initialSite }) => {
+  const [site, setSite] = useState(resolveSite(initialSite));
   const [work, setWork] = useState(null);
   const [about, setAbout] = useState(null);
   const [contact, setContact] = useState(null);
@@ -16,12 +18,36 @@ export const DataProvider = ({ children }) => {
   const [research, setResearch] = useState();
 
   useEffect(() => {
+    sanityClient
+      .fetch(
+        `coalesce(*[_id == "site" && _type == "site"][0], *[_type=="site"][0]){
+          title,
+          owner,
+          description,
+          themeColorsLight,
+          themeColorsDark,
+          defaultTheme,
+          favicon{
+            asset->{
+              url
+            }
+          },
+          email,
+          phone
+        }`
+      )
+      .then((data) => setSite(resolveSite(data)))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
     setIsLoading(true);
     sanityClient
       .fetch(
         `*[_type == "project"]
-         | order(defined(sortNumber) desc, sortOrder asc, _createdAt desc){
+         | order(defined(orderRank) desc, orderRank asc, defined(sortNumber) desc, sortOrder asc, _createdAt desc){
           name,
+          orderRank,
           sortOrder,
            coverimage {
       "type": select(
@@ -205,6 +231,7 @@ export const DataProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
+      site,
       work,
       about,
       contact,
@@ -215,7 +242,7 @@ export const DataProvider = ({ children }) => {
       isLoading,
       error,
     }),
-    [work, about, contact, filters, research, selectedFilters, isLoading, error]
+    [site, work, about, contact, filters, research, selectedFilters, isLoading, error]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

@@ -1,6 +1,6 @@
 main.project-container {
   position: relative;
-  margin-top: calc(80px + (2 * var(--font-size-100)) + 20px);
+  margin-top: calc(58px + (2 * var(--margin)));
   /* margin-bottom: 100px; */
 }
 

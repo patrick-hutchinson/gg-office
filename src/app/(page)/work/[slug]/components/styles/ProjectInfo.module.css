@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: unset;
   gap: var(--margin);
+  margin-bottom: var(--margin);
 }
 
 .projectInfo-specifics {
