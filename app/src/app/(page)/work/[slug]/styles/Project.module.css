@@ -1,0 +1,9 @@
+main.project-container {
+  position: relative;
+  margin-top: calc(58px + (2 * var(--margin)));
+  /* margin-bottom: 100px; */
+}
+
+main.project-container section:first-of-type {
+  margin-top: calc(var(--margin));
+}
