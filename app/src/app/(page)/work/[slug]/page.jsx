@@ -1,5 +1,5 @@
 import Project from "./Project";
-import sanityClient from "/src/client";
+import sanityClient from "@/client";
 
 export async function generateStaticParams() {
   const projects = await sanityClient.fetch(`*[_type=="project"]{ slug }`);

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState, useEffect, useMemo } from "react";
-import sanityClient from "/src/client.js";
+import sanityClient from "@/client.js";
 import { resolveSite } from "@/lib/sanity/site";
 
 export const DataContext = createContext();
