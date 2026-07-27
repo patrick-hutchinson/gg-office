@@ -8,6 +8,7 @@ import ListView from "./components/ListView/ListView";
 import ViewOptions from "./components/ViewOptions/ViewOptions";
 import Loading from "@/components/Loading/Loading";
 import { DataContext } from "@/context/DataContext";
+import SanityPreviewFallback, { hasSanityValue } from "@/components/SanityPreviewFallback";
 
 export default function Work() {
   const { filters, selectedFilters, setSelectedFilters } = useContext(DataContext);
@@ -18,13 +19,17 @@ export default function Work() {
 
   return (
     <main>
-      <ViewOptions
-        activeView={activeView}
-        setActiveView={setActiveView}
-        filters={filters}
-        selectedFilters={selectedFilters}
-        setSelectedFilters={setSelectedFilters}
-      />
+      {hasSanityValue(filters) ? (
+        <ViewOptions
+          activeView={activeView}
+          setActiveView={setActiveView}
+          filters={filters}
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
+        />
+      ) : (
+        <SanityPreviewFallback fieldTitle="filters" />
+      )}
 
       <ImageView selectedFilters={selectedFilters} activeView={activeView} />
       <ListView selectedFilters={selectedFilters} activeView={activeView} />

@@ -7,6 +7,7 @@ import styles from "./styles/Research.module.css";
 import Loading from "@/components/Loading/Loading";
 import Column from "./components/Column";
 import { motion, useMotionValue } from "framer-motion";
+import SanityPreviewFallback, { hasSanityValue } from "@/components/SanityPreviewFallback";
 
 export default function Gallery() {
   const { isMobile } = useContext(StateContext);
@@ -27,14 +28,19 @@ export default function Gallery() {
   if (!research) return <Loading />;
 
   const columnCount = isMobile ? 2 : 3;
+  const imagegallery = research?.[0]?.imagegallery;
 
   return (
     <main className={`research ${styles["research"]}`}>
       <div className={styles["container"]}>
         <div className={styles["container-inner"]}>
-          {Array.from({ length: columnCount }, (_, index) => (
-            <Column key={index} columnNumber={index} columnCount={columnCount} mobileDeltaY={mobileDeltaY} />
-          ))}
+          {hasSanityValue(imagegallery) ? (
+            Array.from({ length: columnCount }, (_, index) => (
+              <Column key={index} columnNumber={index} columnCount={columnCount} mobileDeltaY={mobileDeltaY} />
+            ))
+          ) : (
+            <SanityPreviewFallback fieldTitle="research image gallery" />
+          )}
         </div>
       </div>
     </main>

@@ -45,10 +45,9 @@ export const DataProvider = ({ children, initialSite }) => {
     sanityClient
       .fetch(
         `*[_type == "project"]
-         | order(defined(orderRank) desc, orderRank asc, defined(sortNumber) desc, sortOrder asc, _createdAt desc){
+         | order(orderRank asc, _createdAt desc){
           name,
           orderRank,
-          sortOrder,
            coverimage {
       "type": select(
         defined(image) => "image",
@@ -95,6 +94,13 @@ export const DataProvider = ({ children, initialSite }) => {
             "status": select(defined(video.asset) => video.asset->status, true => null),
             "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
             "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null),
+            "static_renditions": select(
+              defined(video.asset) => video.asset->data.static_renditions{
+                ready,
+                files[]{ name, url }
+              },
+              true => null
+            ),
             "aspect_ratio": select(
       defined(video.asset) => video.asset->data.aspect_ratio,
       defined(image) => null
@@ -162,7 +168,7 @@ export const DataProvider = ({ children, initialSite }) => {
         }`
       )
       .then((data) => {
-        const fetchedFilters = data.map((filter) => filter.title);
+        const fetchedFilters = data.map((filter) => filter.title).filter(Boolean);
         setFilters(fetchedFilters);
         setSelectedFilters(fetchedFilters);
       })
@@ -201,6 +207,13 @@ export const DataProvider = ({ children, initialSite }) => {
             "status": select(defined(video.asset) => video.asset->status, true => null),
             "assetId": select(defined(video.asset) => video.asset->assetId, true => null),
             "playbackId": select(defined(video.asset) => video.asset->playbackId, true => null),
+            "static_renditions": select(
+              defined(video.asset) => video.asset->data.static_renditions{
+                ready,
+                files[]{ name, url }
+              },
+              true => null
+            ),
             "aspect_ratio": select(
       defined(video.asset) => video.asset->data.aspect_ratio,
       defined(image) => null

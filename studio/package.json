@@ -10,27 +10,29 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
-    "apply-project-order-ranks": "node scripts/applyProjectOrderRanks.js",
     "migrate-project-credits": "node scripts/migrateProjectCredits.js"
+  },
+  "engines": {
+    "node": ">=22.12"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/orderable-document-list": "^1.4.0",
-    "@sanity/vision": "^4.22.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sanity": "^4.22.0",
-    "sanity-plugin-mux-input": "^2.9.0",
-    "styled-components": "^6.1.18"
+    "@sanity/orderable-document-list": "^2.0.17",
+    "@sanity/vision": "^6.6.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sanity": "^6.6.0",
+    "sanity-plugin-mux-input": "^5.0.6",
+    "styled-components": "^6.4.4"
   },
   "devDependencies": {
-    "@sanity/eslint-config-studio": "^4.0.0",
-    "@types/react": "^18.0.25",
-    "eslint": "^8.6.0",
-    "prettier": "^3.0.2",
-    "typescript": "^5.1.6"
+    "@sanity/eslint-config-studio": "^6.0.0",
+    "@types/react": "^19.2.17",
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.3"
   },
   "prettier": {
     "semi": false,

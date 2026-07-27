@@ -7,8 +7,9 @@ import styles from "./ListView.module.css";
 
 import ScrollText from "@/components/ScrollText";
 
-import RenderMedia from "@/components/RenderMedia/RenderMedia";
+import Media from "@/components/Media/Media";
 import Loading from "@/components/Loading/Loading";
+import SanityPreviewFallback, { hasSanityValue, isSanityPreviewEnvironment } from "@/components/SanityPreviewFallback";
 
 import { StateContext } from "../../../../context/StateContext";
 import { DataContext } from "../../../../context/DataContext";
@@ -86,7 +87,7 @@ export default function ListView({ selectedFilters, activeView }) {
       if (ref) ref.style.visibility = "hidden";
     });
 
-    const el = mediaRefs.current[project.thumbnail._id];
+    const el = mediaRefs.current[project.thumbnail?._id || project.slug?.current || project.name];
 
     if (el) el.style.visibility = "visible";
 
@@ -101,15 +102,22 @@ export default function ListView({ selectedFilters, activeView }) {
     requestAnimationFrame(updatePosition);
   };
 
-  const projectMatchesFilter = (project) => project.filtering.some((filter) => selectedFilters.includes(filter.title));
+  const projectMatchesFilter = (project) => {
+    const filtering = Array.isArray(project.filtering) ? project.filtering : [];
+    if (filtering.length === 0) return isSanityPreviewEnvironment;
+    return filtering.some((filter) => selectedFilters.includes(filter.title));
+  };
 
   if (!work) return <Loading />;
 
   const Categories = ({ project }) => {
-    const categoryText = project.filtering.map((f) => f.title).join(", ");
+    const filters = Array.isArray(project.filtering) ? project.filtering.filter((filter) => hasSanityValue(filter?.title)) : [];
+    const categoryText = filters.map((f) => f.title).join(", ");
     return (
       <div className={styles.categories}>
-        <div className={styles["categories-inner"]}>{categoryText}</div>
+        <div className={styles["categories-inner"]}>
+          {hasSanityValue(categoryText) ? categoryText : <SanityPreviewFallback fieldTitle="project filtering" />}
+        </div>
       </div>
     );
   };
@@ -130,7 +138,7 @@ export default function ListView({ selectedFilters, activeView }) {
         {work.map((project, index) => (
           <div
             key={index}
-            ref={setMediaRef(project.thumbnail._id)}
+            ref={setMediaRef(project.thumbnail?._id || project.slug?.current || project.name || index)}
             className={styles["preview-wrapper-inner"]}
             style={{
               visibility: "hidden",
@@ -140,7 +148,7 @@ export default function ListView({ selectedFilters, activeView }) {
               pointerEvents: "none",
             }}
           >
-            <RenderMedia medium={project.thumbnail} enableFullscreen={false} />
+            <Media medium={project.thumbnail} enableFullscreen={false} fieldTitle="project thumbnail" />
           </div>
         ))}
       </div>
@@ -159,14 +167,20 @@ export default function ListView({ selectedFilters, activeView }) {
           {work.map((project, index) => {
             if (!projectMatchesFilter(project)) return null;
             return (
-              project.slug && (
-                <Link href={`/work/${project.slug.current}`} key={index}>
+              (project.slug || isSanityPreviewEnvironment) && (
+                <Link href={project.slug?.current ? `/work/${project.slug.current}` : "#"} key={index}>
                   <li className={styles.project} onMouseEnter={(e) => showMedia(project)} onMouseLeave={hideMedia}>
                     <div className={styles.name}>
-                      <ScrollText string={project.name} activeView={activeView} />
+                      {hasSanityValue(project.name) ? (
+                        <ScrollText string={project.name} activeView={activeView} />
+                      ) : (
+                        <SanityPreviewFallback fieldTitle="project name" />
+                      )}
                     </div>
                     <Categories project={project} />
-                    <div className={styles.year}>{project.year}</div>
+                    <div className={styles.year}>
+                      {hasSanityValue(project.year) ? project.year : <SanityPreviewFallback fieldTitle="project year" />}
+                    </div>
                   </li>
                 </Link>
               )

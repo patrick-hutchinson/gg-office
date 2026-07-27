@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useContext, useMemo } from "react";
 import { motion, useMotionValue, wrap, useMotionValueEvent } from "framer-motion";
 
-import RenderMedia from "@/components/RenderMedia/RenderMedia";
+import Media from "@/components/Media/Media";
 import { DataContext } from "@/context/DataContext";
 import { StateContext } from "@/context/StateContext";
+import SanityPreviewFallback, { hasSanityValue } from "@/components/SanityPreviewFallback";
 
 import styles from "../styles/Research.module.css";
 
@@ -114,7 +115,10 @@ export default function Column({ columnNumber, columnCount }) {
   }, []);
 
   // Prepare images and layout as before
-  const items = research[0].imagegallery.filter((_, index) => index % columnCount === columnNumber);
+  const imagegallery = research?.[0]?.imagegallery;
+  if (!hasSanityValue(imagegallery)) return <SanityPreviewFallback fieldTitle="research image gallery" />;
+
+  const items = imagegallery.filter((_, index) => index % columnCount === columnNumber);
   const images = items.filter((item) => item.type === "image");
 
   const startImages = images.slice(0, 3);
@@ -137,7 +141,7 @@ export default function Column({ columnNumber, columnCount }) {
               position: "relative",
             }}
           >
-            <RenderMedia medium={medium} enableFullscreen />
+            <Media medium={medium} enableFullscreen fieldTitle="research media item" />
           </div>
         );
       })}

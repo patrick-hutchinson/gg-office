@@ -1,6 +1,6 @@
 "use client";
 
-import RenderMedia from "@/components/RenderMedia/RenderMedia";
+import Media from "@/components/Media/Media";
 import Loading from "@/components/Loading/Loading";
 
 import styles from "./styles/Project.module.css";
@@ -23,10 +23,10 @@ export default function Project({ slug }) {
 
   return (
     <main className={styles["project-container"]}>
-      <RenderMedia medium={project.coverimage} enableFullscreen={true} />
+      <Media medium={project.coverimage} enableFullscreen={true} fieldTitle="cover image" />
       <ProjectInfo project={project} />
-      {project.imagegallery && <ImageGallery project={project} />}
-      {project.credits?.length > 0 && <Credits project={project} />}
+      <ImageGallery project={project} />
+      <Credits project={project} />
       <MoreProjects work={work} currentProject={project} />
     </main>
   );
