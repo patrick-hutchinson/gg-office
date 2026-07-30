@@ -9,14 +9,14 @@ import ImageCompose from "./components/Image/ImageCompose";
 import VideoCompose from "./components/Video/VideoCompose";
 import styles from "./Media.module.css";
 
-const RawMedia = ({ className, medium, eager = false, paused, showPlaceholder = true, fieldTitle }) => {
+const RawMedia = ({ className, medium, eager = false, paused, showPlaceholder = true, fieldTitle, aspectRatio }) => {
   if (!medium || (!medium.url && !medium.playbackId)) {
     return <SanityPreviewFallback fieldTitle={fieldTitle || "media"} />;
   }
 
   switch (medium.type) {
     case "image":
-      return <ImageCompose medium={medium} className={className} eager={eager} />;
+      return <ImageCompose medium={medium} className={className} eager={eager} aspectRatio={aspectRatio} />;
     case "video":
       if (medium.status && medium.status !== "ready") return <p>Video is processing, please wait!</p>;
       if (!medium.aspect_ratio && !medium.url) {
@@ -30,6 +30,7 @@ const RawMedia = ({ className, medium, eager = false, paused, showPlaceholder = 
           eager={eager}
           paused={paused}
           showPlaceholder={showPlaceholder}
+          aspectRatio={aspectRatio}
         />
       );
     default:
@@ -94,6 +95,7 @@ const Media = ({
   showPlaceholder = true,
   enableFullscreen = false,
   fieldTitle,
+  aspectRatio,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -114,6 +116,7 @@ const Media = ({
       paused={paused}
       showPlaceholder={showPlaceholder}
       fieldTitle={fieldTitle}
+      aspectRatio={aspectRatio}
     />
   );
 
@@ -132,6 +135,7 @@ const Media = ({
           paused={paused}
           showPlaceholder={showPlaceholder}
           fieldTitle={fieldTitle}
+          aspectRatio={aspectRatio}
         />
       </FullscreenPreview>
     </>

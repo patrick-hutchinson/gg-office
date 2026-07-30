@@ -95,7 +95,13 @@ export default function MoreProjects({ work, currentProject }) {
                 }}
                 onDragStart={!isMobile ? (e) => e.preventDefault() : undefined}
               >
-                <Media medium={project?.thumbnail} enableFullscreen={false} fieldTitle="project thumbnail" />
+                <Media
+                  className={styles.moreProjectMedia}
+                  medium={project?.thumbnail}
+                  enableFullscreen={false}
+                  fieldTitle="project thumbnail"
+                  aspectRatio="4 / 5"
+                />
               </Link>
             )
           );

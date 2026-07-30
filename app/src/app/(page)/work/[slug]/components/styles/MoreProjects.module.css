@@ -18,24 +18,28 @@
 
 .moreprojects a {
   height: 100%;
-  width: 400px;
+  width: 320px;
   display: flex;
   align-items: center;
-  min-width: fit-content;
-  height: 400px;
+  flex: 0 0 320px;
   min-height: 400px;
   margin-right: var(--margin);
-  /* aspect-ratio: 4 / 5; */
+  aspect-ratio: 4 / 5;
   cursor: pointer !important;
 }
 
-.moreprojects img,
-.moreprojects video {
-  width: auto;
-  height: auto;
-  /* max-width: 300px; */
-  max-height: 100%;
-  /* margin-right: var(--margin); */
+.moreProjectMedia {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.moreProjectMedia img,
+.moreProjectMedia video,
+.moreProjectMedia mux-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .navigation-wrapper {
@@ -73,8 +77,8 @@
   .moreprojects a {
     height: 100%;
     min-height: unset;
-    width: auto;
-    min-width: unset;
+    width: 160px;
+    flex-basis: 160px;
     margin-right: calc(var(--margin) / 2);
   }
 }

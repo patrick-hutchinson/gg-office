@@ -8,7 +8,7 @@ import Placeholder from "../Placeholder";
 
 import styles from "../../Media.module.css";
 
-const VideoFrame = ({ medium, className, eager = false, paused, showPlaceholder = true }) => {
+const VideoFrame = ({ medium, className, eager = false, paused, showPlaceholder = true, aspectRatio }) => {
   const videoRef = useRef(null);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,7 +18,7 @@ const VideoFrame = ({ medium, className, eager = false, paused, showPlaceholder 
   // Calculate the media's width upon loading
 
   const [aspectWidth, aspectHeight] = (medium.aspect_ratio || "16:9").split(":").map(Number);
-  const aspectRatio = aspectWidth / aspectHeight;
+  const resolvedAspectRatio = aspectRatio || aspectWidth / aspectHeight;
   const containerClassName = [styles.mediaContainer, className].filter(Boolean).join(" ");
 
   const playerState = { eager, isLoaded, setIsLoaded, isInView: eager || isInView };
@@ -27,8 +27,8 @@ const VideoFrame = ({ medium, className, eager = false, paused, showPlaceholder 
 
   return (
     <div className={containerClassName}>
-      <div ref={videoRef} className={styles.videoPlayer} style={{ aspectRatio: aspectRatio }}>
-        {showPlaceholder ? <Placeholder medium={medium} aspectRatio={aspectRatio} isLoaded={isLoaded} /> : null}
+      <div ref={videoRef} className={styles.videoPlayer} style={{ aspectRatio: resolvedAspectRatio }}>
+        {showPlaceholder ? <Placeholder medium={medium} aspectRatio={resolvedAspectRatio} isLoaded={isLoaded} /> : null}
         <Video medium={medium} playerState={playerState} playerControls={controlledPlayerControls} />
       </div>
     </div>
