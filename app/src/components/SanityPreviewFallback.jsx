@@ -13,7 +13,7 @@ const hasPortableTextValue = (blocks) =>
       : true
   );
 
-export const isSanityPreviewEnvironment = process.env.NEXT_PUBLIC_VERCEL_ENV === "preview";
+export const isSanityPreviewEnvironment = process.env.NEXT_PUBLIC_VERCEL_ENV !== "production";
 
 export const hasSanityValue = (value) => {
   if (Array.isArray(value)) {

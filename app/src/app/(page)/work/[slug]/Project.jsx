@@ -18,7 +18,7 @@ export default function Project({ slug }) {
 
   if (!work) return <Loading />;
 
-  const project = work.find((project) => project.slug.current === slug);
+  const project = work.find((project) => project.slug?.current === slug);
   if (!project) return <p>Project not found.</p>;
 
   return (
