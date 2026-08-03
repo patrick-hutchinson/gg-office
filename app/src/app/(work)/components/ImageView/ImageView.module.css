@@ -13,6 +13,9 @@
 .project-front {
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
   background: var(--background);
   justify-content: center; /* Horizontally center */
   align-items: center;
@@ -22,11 +25,14 @@
   position: relative;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .imageview .project img,
 .imageview .project video {
   width: 100%;
+  max-width: 100%;
 }
 
 .shadow:after {

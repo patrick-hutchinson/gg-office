@@ -53,4 +53,7 @@ section.credits-wrapper {
 
 /* Desktop */
 @media (min-width: 991.98px) {
+  section.credits-wrapper h2 {
+    transform: translateY(-10px);
+  }
 }

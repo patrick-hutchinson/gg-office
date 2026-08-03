@@ -9,11 +9,13 @@
   margin-bottom: var(--margin);
   display: flex;
   align-items: flex-start;
+  min-width: 0;
 }
-.galleryRow img,
-.galleryRow video {
-  width: 100%;
-  height: auto;
+
+.galleryRow > * {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 0;
 }
 
 @media (max-width: 767.98px) {

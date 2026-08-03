@@ -72,10 +72,16 @@ ul.infotitles .year {
 .preview-wrapper {
   position: absolute;
   width: 20vw;
+  max-width: 20vw;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .preview-wrapper-inner {
   width: 20vw;
+  max-width: 20vw;
+  min-width: 0;
+  overflow: hidden;
   /* aspect-ratio: 4 / 5; */
 }
 
