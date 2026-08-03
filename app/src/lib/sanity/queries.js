@@ -78,6 +78,7 @@ export const projectsQuery = `*[_type == "project"]
   },
   filtering[]->{title},
   credits,
+  creditsClient,
   slug,
   gridStructure,
   thumbnail {

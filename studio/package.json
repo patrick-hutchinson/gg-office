@@ -10,7 +10,8 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
-    "migrate-project-credits": "node scripts/migrateProjectCredits.js"
+    "migrate-project-credits": "node scripts/migrateProjectCredits.js",
+    "split-project-client-credits": "node scripts/splitProjectClientCredits.js"
   },
   "engines": {
     "node": ">=22.12"
