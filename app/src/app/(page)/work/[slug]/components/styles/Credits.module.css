@@ -20,7 +20,7 @@ section.credits-wrapper {
 .credits-client {
   display: flex;
   flex-direction: column;
-  gap: 2lh;
+  gap: 1lh;
 }
 
 /* Phones in Landscape Mode */
