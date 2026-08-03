@@ -1,12 +1,14 @@
 import Project from "./Project";
-import sanityClient from "@/client";
+import { sanityServerClient } from "@/lib/sanity/serverClient";
 
 export async function generateStaticParams() {
-  const projects = await sanityClient.fetch(`*[_type=="project"]{ slug }`);
+  const projects = await sanityServerClient.fetch(`*[_type=="project"]{ slug }`);
 
-  return projects.map((project) => ({
-    slug: project.slug.current,
-  }));
+  return projects
+    .filter((project) => project.slug?.current)
+    .map((project) => ({
+      slug: project.slug.current,
+    }));
 }
 
 export default async function ProjectPage({ params }) {

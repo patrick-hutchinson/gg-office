@@ -1,7 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV || process.env.NODE_ENV || "development",
+  },
   images: {
-    domains: ["cdn.sanity.io", "image.mux.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+      {
+        protocol: "https",
+        hostname: "image.mux.com",
+      },
+    ],
   },
   webpack(config) {
     config.module.rules.push({

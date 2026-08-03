@@ -10,7 +10,14 @@ section.credits-wrapper {
   margin-bottom: calc(var(--margin) * 3);
 }
 
-.credits {
+.credits-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--margin);
+}
+
+.credits-inhouse,
+.credits-client {
   display: flex;
   flex-direction: column;
   gap: 2lh;
@@ -22,6 +29,10 @@ section.credits-wrapper {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
   }
+
+  .credits-columns {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Small Devices (Phones, 576px and up) */
@@ -29,6 +40,10 @@ section.credits-wrapper {
   .credits-wrapper {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+  }
+
+  .credits-columns {
+    grid-template-columns: 1fr;
   }
 }
 

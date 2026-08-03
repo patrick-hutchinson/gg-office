@@ -1,14 +1,15 @@
 import styles from "./styles/ImageGallery.module.css";
 
-import RenderMedia from "@/components/RenderMedia/RenderMedia";
+import Media from "@/components/Media/Media";
+import SanityPreviewFallback, { hasSanityValue } from "@/components/SanityPreviewFallback";
 
 export default function ImageGallery({ project }) {
   let Images = () => {
     let index = 0; // Initialize the index for slicing images
+    const gridStructure = hasSanityValue(project.gridStructure) ? project.gridStructure : [project.imagegallery.length];
 
     return (
-      project.gridStructure &&
-      project.gridStructure.map((columnsInRow, rowIndex) => {
+      gridStructure.map((columnsInRow, rowIndex) => {
         const rowImages = project.imagegallery.slice(index, index + columnsInRow); // Slice the images for each row
         index += columnsInRow; // Update the index for the next row
 
@@ -19,7 +20,7 @@ export default function ImageGallery({ project }) {
         return (
           <div key={rowIndex} className={styles.galleryRow} style={rowStyles}>
             {rowImages.map((image, imgIndex) => {
-              return <RenderMedia medium={image} key={imgIndex} enableFullscreen={true} />;
+              return <Media medium={image} key={imgIndex} enableFullscreen={true} fieldTitle="image gallery item" />;
             })}
           </div>
         );
@@ -28,8 +29,12 @@ export default function ImageGallery({ project }) {
   };
 
   let ErrorMessage = () => {
-    return <div>No Images have been added to this project yet.</div>;
+    return <SanityPreviewFallback fieldTitle="image gallery" />;
   };
 
-  return <section className={styles.imagegallery}>{project.imagegallery ? <Images /> : <ErrorMessage />}</section>;
+  return (
+    <section className={styles.imagegallery}>
+      {hasSanityValue(project.imagegallery) ? <Images /> : <ErrorMessage />}
+    </section>
+  );
 }

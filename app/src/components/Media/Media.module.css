@@ -1,3 +1,29 @@
+.mediaContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.videoPlayer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.fullscreenTrigger {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  display: block;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
 .fullscreen-preview-outer {
   width: 100dvw;
   height: 100dvh;
@@ -12,15 +38,13 @@
   padding: var(--margin);
   backdrop-filter: blur(20px);
 }
+
 .fullscreen-preview-inner {
   position: relative;
-
   max-width: 100%;
   max-height: 100%;
-
   display: flex;
   align-self: center;
-
   min-width: 0;
   min-height: 0;
 }
@@ -31,29 +55,7 @@
   right: var(--margin);
 }
 
-.fullscreen-preview img,
-.fullscreen-preview video {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-
-  background-size: contain;
-}
-
-.fullscreen-button {
-  z-index: 100;
-  position: absolute;
-  bottom: calc(var(--margin) / 1.5);
-  right: var(--margin);
-  width: 20px;
-  height: auto;
-}
-
 .fullscreen-preview-inner div {
   display: flex;
   justify-content: space-around;
-}
-
-@media (max-width: 575.98px) {
 }

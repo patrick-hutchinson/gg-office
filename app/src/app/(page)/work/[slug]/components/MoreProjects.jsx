@@ -5,9 +5,10 @@ import Link from "next/link";
 
 import styles from "./styles/MoreProjects.module.css";
 
-import RenderMedia from "@/components/RenderMedia/RenderMedia";
+import Media from "@/components/Media/Media";
 import Icon from "@/components/Icon";
 import { StateContext } from "@/context/StateContext";
+import { isSanityPreviewEnvironment } from "@/components/SanityPreviewFallback";
 
 export default function MoreProjects({ work, currentProject }) {
   const { isMobile } = useContext(StateContext);
@@ -69,7 +70,7 @@ export default function MoreProjects({ work, currentProject }) {
     }
   }
 
-  const currentIndex = work.findIndex((project) => project.slug.current === currentProject.slug.current);
+  const currentIndex = work.findIndex((project) => project.slug?.current === currentProject.slug?.current);
 
   const rearrangedWork = [...work.slice(currentIndex + 1), ...work.slice(0, currentIndex), work[currentIndex]];
 
@@ -85,16 +86,22 @@ export default function MoreProjects({ work, currentProject }) {
       >
         {rearrangedWork.map((project, index) => {
           return (
-            project.slug && (
+            (project?.slug || isSanityPreviewEnvironment) && (
               <Link
-                href={`/work/${project.slug.current}`}
+                href={project?.slug?.current ? `/work/${project.slug.current}` : "#"}
                 key={index}
                 onClick={(e) => {
                   if (isDragging && !isMobile) e.preventDefault(); // cancel click if it was a drag
                 }}
                 onDragStart={!isMobile ? (e) => e.preventDefault() : undefined}
               >
-                {project.thumbnail && <RenderMedia medium={project.thumbnail} enableFullscreen={false} />}
+                <Media
+                  className={styles.moreProjectMedia}
+                  medium={project?.thumbnail}
+                  enableFullscreen={false}
+                  fieldTitle="project thumbnail"
+                  aspectRatio="4 / 5"
+                />
               </Link>
             )
           );

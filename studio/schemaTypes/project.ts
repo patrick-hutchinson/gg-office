@@ -2,6 +2,43 @@ import {defineField, defineType} from 'sanity'
 import {orderRankField, orderRankOrdering} from '@sanity/orderable-document-list'
 import {thumbnail} from './types/thumbnail'
 
+const creditFields = [
+  defineField({name: 'role', title: 'Role', type: 'string'}),
+  defineField({
+    name: 'entries',
+    title: 'Entries',
+    type: 'array',
+    of: [{type: 'string', name: 'entry'}],
+  }),
+]
+
+const creditPreview = {
+  select: {
+    title: 'role',
+    entries: 'entries',
+  },
+  prepare({title, entries}) {
+    return {
+      title,
+      subtitle: entries?.join(', '),
+    }
+  },
+}
+
+const creditArrayField = ({name, title}) =>
+  defineField({
+    name,
+    title,
+    type: 'array',
+    of: [
+      {
+        type: 'object',
+        fields: creditFields,
+        preview: creditPreview,
+      },
+    ],
+  })
+
 export const project = defineType({
   name: 'project',
   title: 'Project',
@@ -10,13 +47,6 @@ export const project = defineType({
   fields: [
     orderRankField({type: 'project', newItemPosition: 'after'}),
     defineField({name: 'name', title: 'Name', type: 'string'}),
-    defineField({
-      name: 'sortOrder',
-      title: 'Sort Order',
-      type: 'number',
-      description: 'Lower numbers show first',
-      validation: (Rule) => Rule.min(1),
-    }),
     defineField({
       name: 'thumbnail',
       title: 'Thumbnail',
@@ -114,37 +144,8 @@ export const project = defineType({
         layout: 'tags',
       },
     }),
-    defineField({
-      name: 'credits',
-      title: 'Credits',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({name: 'role', title: 'Role', type: 'string'}),
-            defineField({
-              name: 'entries',
-              title: 'Entries',
-              type: 'array',
-              of: [{type: 'string', name: 'entry'}],
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'role',
-              entries: 'entries',
-            },
-            prepare({title, entries}) {
-              return {
-                title,
-                subtitle: entries?.join(', '),
-              }
-            },
-          },
-        },
-      ],
-    }),
+    creditArrayField({name: 'credits', title: 'Inhouse Credits'}),
+    creditArrayField({name: 'creditsClient', title: 'Client Credits'}),
     defineField({
       name: 'slug',
       title: 'URL',

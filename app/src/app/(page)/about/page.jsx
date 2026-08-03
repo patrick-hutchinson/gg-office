@@ -7,6 +7,7 @@ import Loading from "@/components/Loading/Loading";
 import { DataContext } from "@/context/DataContext";
 
 import { StateContext } from "@/context/StateContext";
+import SanityPreviewFallback, { hasSanityValue } from "@/components/SanityPreviewFallback";
 
 export default function About() {
   const { isMobile } = useContext(StateContext);
@@ -67,7 +68,7 @@ export default function About() {
     // If not, create the alien wrapper and set its inner HTML
     const wrapper = document.createElement("div");
     wrapper.className = `${styles["alien-wrapper"]}`;
-    wrapper.innerHTML = `<div class="${styles.alien}">${about[0].emoji}</div><div class="button active ${styles["name"]}">${intern}</div>`;
+    wrapper.innerHTML = `<div class="${styles.alien}">${aboutData.emoji || ""}</div><div class="button active ${styles["name"]}">${intern}</div>`;
 
     // Append to the container and apply positioning/hover effects
     AlienContainerRef.current.appendChild(wrapper);
@@ -76,32 +77,38 @@ export default function About() {
 
   // Early return if about data is undefined or empty
   if (!about) return <Loading />;
+  const aboutData = about?.[0] || {};
 
   // Since about is an array, we access the first item (about[0])
   const Biography = () => {
-    const bioBlocks = about[0].biography || [];
+    const bioBlocks = aboutData.biography || [];
 
     return (
       <section>
         <h5 className={styles.sectionTitle}>Biography</h5>
-        {bioBlocks.map((block, index) => (
-          <div key={index}>
-            {block.children.map((child, index) => (
-              <p key={index}>{child.text}</p>
-            ))}
-          </div>
-        ))}
+        {hasSanityValue(bioBlocks) ? (
+          bioBlocks.map((block, index) => (
+            <div key={index}>
+              {block.children?.map((child, index) => (
+                <p key={index}>{child.text}</p>
+              ))}
+            </div>
+          ))
+        ) : (
+          <SanityPreviewFallback fieldTitle="about biography" />
+        )}
       </section>
     );
   };
 
   const Services = () => {
-    const services = about[0].service || [];
+    const services = aboutData.service || [];
 
     return (
       <section>
         <h5 className={styles.sectionTitle}>Services</h5>
-        {services.map((service, index) => {
+        {hasSanityValue(services) ? (
+          services.map((service, index) => {
           const isLast = index === services.length - 1;
 
           return (
@@ -110,13 +117,16 @@ export default function About() {
               {!isLast && ",\u00A0"}
             </span>
           );
-        })}
+          })
+        ) : (
+          <SanityPreviewFallback fieldTitle="about services" />
+        )}
       </section>
     );
   };
 
   const Internships = () => {
-    const internships = about[0].internship || [];
+    const internships = aboutData.internship || [];
     const [activeInterns, setActiveInterns] = useState([]);
 
     const toggleIntern = (intern) => {
@@ -132,7 +142,8 @@ export default function About() {
     return (
       <section className={styles["internships"]}>
         <h5 className={styles.sectionTitle}>Internships</h5>
-        {internships.map((intern, index) => {
+        {hasSanityValue(internships) ? (
+          internships.map((intern, index) => {
           const isLast = index === internships.length - 1;
           const isActive = activeInterns.includes(intern);
 
@@ -146,7 +157,10 @@ export default function About() {
               {!isLast && ",\u00A0"}
             </span>
           );
-        })}
+          })
+        ) : (
+          <SanityPreviewFallback fieldTitle="about internships" />
+        )}
       </section>
     );
   };
@@ -155,11 +169,15 @@ export default function About() {
     <>
       <div className={`${styles["alien-container"]}`} ref={AlienContainerRef}>
         <div className={`${styles["alien-wrapper"]}`}>
-          <div className={`${styles.alien}`}>{about[0].emoji}</div>
+          <div className={`${styles.alien}`}>
+            {aboutData.emoji || <SanityPreviewFallback fieldTitle="about emoji" />}
+          </div>
           <div className={`button active ${styles["name"]}`}>Enrico</div>
         </div>
         <div className={`${styles["alien-wrapper"]}`}>
-          <div className={`${styles.alien}`}>{about[0].emoji}</div>
+          <div className={`${styles.alien}`}>
+            {aboutData.emoji || <SanityPreviewFallback fieldTitle="about emoji" />}
+          </div>
           <div className={`button active ${styles["name"]}`}>Francesca</div>
         </div>
       </div>
