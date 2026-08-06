@@ -148,7 +148,14 @@ export default function ListView({ selectedFilters, activeView }) {
               pointerEvents: "none",
             }}
           >
-            <Media medium={project.thumbnail} enableFullscreen={false} fieldTitle="project thumbnail" />
+            <Media
+              medium={project.thumbnail}
+              eager
+              paused={false}
+              enableFullscreen={false}
+              fieldTitle="project thumbnail"
+              aspectRatio={4 / 5}
+            />
           </div>
         ))}
       </div>

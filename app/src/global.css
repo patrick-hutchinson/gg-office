@@ -72,7 +72,10 @@
 html {
   overflow: visible;
   height: 100%;
+  background: var(--background) !important;
+  color: var(--foreground) !important;
 }
+
 body {
   font-family: var(--font-weight-text);
   background: var(--background) !important;

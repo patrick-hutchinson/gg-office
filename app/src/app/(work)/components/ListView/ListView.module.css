@@ -74,15 +74,17 @@ ul.infotitles .year {
   width: 20vw;
   max-width: 20vw;
   min-width: 0;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
+  z-index: 4;
 }
 
 .preview-wrapper-inner {
   width: 20vw;
   max-width: 20vw;
   min-width: 0;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  /* aspect-ratio: 4 / 5; */
 }
 
 .project {
