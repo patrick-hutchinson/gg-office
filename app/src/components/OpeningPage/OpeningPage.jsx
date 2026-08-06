@@ -11,7 +11,7 @@ import { useTheme } from "next-themes";
 
 const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   OpeningPage.displayName = "OpeningPage";
 
   const { isMobile, isSafari } = useContext(StateContext);
@@ -23,6 +23,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
   const letters = ["G", "O", "O", "D", "G", "A", "M", "E"];
   let columnsRef = useRef([]);
   let lastY = useRef([]);
+  const letterFilter = resolvedTheme === "dark" ? "invert(1)" : "invert(0)";
 
   const DesktopOpening = ({ letter, index }) => {
     const mouseY = useMotionValue(lastY.current[index] ? lastY.current[index] : 180);
@@ -49,7 +50,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
     });
 
     if (!mounted) return null;
-    if (!theme) return null;
+    if (!resolvedTheme) return null;
 
     return (
       <motion.div
@@ -66,7 +67,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
             key={i}
             src={`/assets/images/GOODGAME/${letter}.png`}
             alt={letter}
-            style={{ filter: theme === "dark" ? "invert(1)" : "invert(0)" }}
+            style={{ filter: letterFilter }}
           />
         ))}
       </motion.div>
@@ -74,6 +75,9 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
   };
 
   const MobileOpening = ({ index, letter }) => {
+    if (!mounted) return null;
+    if (!resolvedTheme) return null;
+
     const currentRows = columnsRef.current[index]
       ? getComputedStyle(columnsRef.current[index]).gridTemplateRows
       : "50% 50%";
@@ -102,7 +106,7 @@ const OpeningPage = forwardRef(({ showOpening }, openingRef) => {
             key={i}
             src={`/assets/images/GOODGAME/${letter}.png`}
             alt={letter}
-            style={{ filter: theme === "dark" ? "invert(1)" : "invert(0)" }}
+            style={{ filter: letterFilter }}
           />
         ))}
       </motion.div>
